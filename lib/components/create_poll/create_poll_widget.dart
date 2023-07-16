@@ -1,7 +1,10 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -772,8 +775,33 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                       0.0, 10.0, 0.0, 0.0),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
-                                                  context
-                                                      .pushNamed('createPost');
+                                                  await UserPostsRecord
+                                                      .collection
+                                                      .doc()
+                                                      .set(
+                                                          createUserPostsRecordData(
+                                                        postUser:
+                                                            currentUserReference,
+                                                        postTitle: '',
+                                                        timePosted:
+                                                            getCurrentTimestamp,
+                                                        postOwner: true,
+                                                        postPoll: _model
+                                                            .textController1
+                                                            .text,
+                                                        postAnswer1: _model
+                                                            .textController2
+                                                            .text,
+                                                        postAnswer2: _model
+                                                            .textController3
+                                                            .text,
+                                                        postAnswer3: _model
+                                                            .textController4
+                                                            .text,
+                                                        postAnswer4: _model
+                                                            .textController5
+                                                            .text,
+                                                      ));
 
                                                   context.pushNamed(
                                                     'homePage',
@@ -792,7 +820,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                 },
                                                 text: 'Create Post',
                                                 options: FFButtonOptions(
-                                                  width: 59.0,
+                                                  width: 0.0,
                                                   height: 50.0,
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(

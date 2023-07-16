@@ -134,83 +134,98 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                                                         AutovalidateMode.always,
                                                     child: Stack(
                                                       children: [
-                                                        Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          10.0,
-                                                                          50.0,
-                                                                          10.0,
-                                                                          0.0),
-                                                                  child:
-                                                                      Container(
-                                                                    width: MediaQuery.sizeOf(context)
-                                                                            .width *
-                                                                        0.9,
-                                                                    height:
-                                                                        185.0,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: Color(
-                                                                          0x00FFFFFF),
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              10.0),
-                                                                      border:
-                                                                          Border
-                                                                              .all(
+                                                        Container(
+                                                          width:
+                                                              MediaQuery.sizeOf(
+                                                                          context)
+                                                                      .width *
+                                                                  1.0,
+                                                          height: 230.0,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: Color(
+                                                                0x00FFFFFF),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        20.0),
+                                                          ),
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            50.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.88,
+                                                                      height:
+                                                                          170.0,
+                                                                      decoration:
+                                                                          BoxDecoration(
                                                                         color: Color(
-                                                                            0x6E811081),
-                                                                        width:
-                                                                            4.0,
+                                                                            0x34262D34),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(20.0),
+                                                                      ),
+                                                                      child:
+                                                                          Column(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        children: [
+                                                                          Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.center,
+                                                                            children: [
+                                                                              Container(
+                                                                                width: MediaQuery.sizeOf(context).width * 0.84,
+                                                                                height: 150.0,
+                                                                                decoration: BoxDecoration(
+                                                                                  color: Color(0x00FFFFFF),
+                                                                                ),
+                                                                                child: Text(
+                                                                                  postDetailsUserPostsRecord.postPoll,
+                                                                                  textAlign: TextAlign.center,
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        fontFamily: 'Urbanist',
+                                                                                        fontSize: 30.0,
+                                                                                        fontWeight: FontWeight.bold,
+                                                                                      ),
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ],
                                                                       ),
                                                                     ),
-                                                                    child: Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .center,
-                                                                      children: [
-                                                                        Column(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          children: [
-                                                                            Text(
-                                                                              postDetailsUserPostsRecord.postPoll,
-                                                                              textAlign: TextAlign.center,
-                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                    fontFamily: 'Urbanist',
-                                                                                    fontSize: 30.0,
-                                                                                    fontWeight: FontWeight.bold,
-                                                                                  ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ],
-                                                                    ),
                                                                   ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ],
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
                                                       ],
                                                     ),

@@ -14,6 +14,7 @@ import 'schema/dogs_record.dart';
 import 'schema/friends_record.dart';
 import 'schema/chats_record.dart';
 import 'schema/chat_messages_record.dart';
+import 'schema/votes_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -30,6 +31,7 @@ export 'schema/dogs_record.dart';
 export 'schema/friends_record.dart';
 export 'schema/chats_record.dart';
 export 'schema/chat_messages_record.dart';
+export 'schema/votes_record.dart';
 
 /// Functions to query UserPostsRecords (as a Stream and as a Future).
 Future<int> queryUserPostsRecordCount({
@@ -359,6 +361,43 @@ Future<List<ChatMessagesRecord>> queryChatMessagesRecordOnce({
     queryCollectionOnce(
       ChatMessagesRecord.collection,
       ChatMessagesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query VotesRecords (as a Stream and as a Future).
+Future<int> queryVotesRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      VotesRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<VotesRecord>> queryVotesRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      VotesRecord.collection,
+      VotesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<VotesRecord>> queryVotesRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      VotesRecord.collection,
+      VotesRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
