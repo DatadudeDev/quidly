@@ -571,7 +571,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                           0.95,
                                       height:
                                           MediaQuery.sizeOf(context).height *
-                                              0.4,
+                                              0.3,
                                       decoration: BoxDecoration(
                                         gradient: LinearGradient(
                                           colors: [
@@ -590,235 +590,298 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                       ),
                                       child: Stack(
                                         children: [
-                                          Container(
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                1.0,
-                                            decoration: BoxDecoration(
-                                              color: Color(0x00FFFFFF),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                            ),
-                                            child: Stack(
-                                              children: [
-                                                Stack(
+                                          Stack(
+                                            children: [
+                                              Container(
+                                                width:
+                                                    MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        0.95,
+                                                height:
+                                                    MediaQuery.sizeOf(context)
+                                                            .height *
+                                                        0.22,
+                                                decoration: BoxDecoration(
+                                                  color: Color(0x00FFFFFF),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20.0),
+                                                ),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
                                                   children: [
-                                                    Container(
-                                                      width: MediaQuery.sizeOf(
-                                                                  context)
-                                                              .width *
-                                                          0.95,
-                                                      height: MediaQuery.sizeOf(
-                                                                  context)
-                                                              .height *
-                                                          0.22,
-                                                      decoration: BoxDecoration(
-                                                        color:
-                                                            Color(0x00FFFFFF),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20.0),
-                                                      ),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Align(
-                                                                alignment:
-                                                                    AlignmentDirectional(
+                                                    Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  0.0, 0.0),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        8.0,
                                                                         0.0,
                                                                         0.0),
-                                                                child: Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child:
-                                                                      Container(
-                                                                    width: MediaQuery.sizeOf(context)
-                                                                            .width *
-                                                                        0.9,
-                                                                    height: MediaQuery.sizeOf(context)
-                                                                            .height *
-                                                                        0.21,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: Color(
-                                                                          0x00FFFFFF),
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              20.0),
-                                                                      border:
-                                                                          Border
-                                                                              .all(
-                                                                        color: Color(
-                                                                            0x6E811081),
-                                                                        width:
+                                                            child: Container(
+                                                              width: MediaQuery
+                                                                          .sizeOf(
+                                                                              context)
+                                                                      .width *
+                                                                  0.9,
+                                                              height: MediaQuery
+                                                                          .sizeOf(
+                                                                              context)
+                                                                      .height *
+                                                                  0.21,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Color(
+                                                                    0x00FFFFFF),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20.0),
+                                                                border:
+                                                                    Border.all(
+                                                                  color: Color(
+                                                                      0x6E811081),
+                                                                  width: 5.0,
+                                                                ),
+                                                              ),
+                                                              child: Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
                                                                             5.0,
-                                                                      ),
-                                                                    ),
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          5.0,
-                                                                          5.0,
-                                                                          5.0,
-                                                                          5.0),
-                                                                      child:
-                                                                          Column(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.center,
-                                                                        children: [
-                                                                          Row(
+                                                                            5.0,
+                                                                            5.0,
+                                                                            5.0),
+                                                                child: Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Container(
+                                                                          width:
+                                                                              MediaQuery.sizeOf(context).width * 0.85,
+                                                                          height:
+                                                                              155.0,
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            color:
+                                                                                Color(0x00FFFFFF),
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(20.0),
+                                                                          ),
+                                                                          child:
+                                                                              Column(
                                                                             mainAxisSize:
                                                                                 MainAxisSize.max,
                                                                             mainAxisAlignment:
                                                                                 MainAxisAlignment.center,
                                                                             children: [
-                                                                              Container(
-                                                                                width: MediaQuery.sizeOf(context).width * 0.85,
-                                                                                height: 155.0,
-                                                                                decoration: BoxDecoration(
-                                                                                  color: Color(0x00FFFFFF),
-                                                                                  borderRadius: BorderRadius.circular(20.0),
-                                                                                ),
-                                                                                child: Text(
-                                                                                  socialFeedUserPostsRecord.postPoll.maybeHandleOverflow(maxChars: 100),
-                                                                                  textAlign: TextAlign.center,
-                                                                                  maxLines: 5,
-                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                        fontFamily: 'Urbanist',
-                                                                                        fontSize: 30.0,
-                                                                                        fontWeight: FontWeight.bold,
-                                                                                      ),
-                                                                                ),
+                                                                              Text(
+                                                                                socialFeedUserPostsRecord.postPoll.maybeHandleOverflow(maxChars: 100),
+                                                                                textAlign: TextAlign.center,
+                                                                                maxLines: 5,
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Urbanist',
+                                                                                      fontSize: 30.0,
+                                                                                      fontWeight: FontWeight.bold,
+                                                                                    ),
                                                                               ),
                                                                             ],
                                                                           ),
-                                                                        ],
-                                                                      ),
+                                                                        ),
+                                                                      ],
                                                                     ),
-                                                                  ),
+                                                                  ],
                                                                 ),
                                                               ),
-                                                            ],
+                                                            ),
                                                           ),
-                                                        ],
-                                                      ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ],
                                                 ),
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.01, 0.87),
-                                                  child: Container(
-                                                    width: MediaQuery.sizeOf(
-                                                                context)
-                                                            .width *
-                                                        0.9,
-                                                    height: 130.0,
-                                                    decoration: BoxDecoration(
-                                                      color: Color(0x00FFFFFF),
-                                                    ),
-                                                    child: Column(
+                                              ),
+                                            ],
+                                          ),
+                                          Align(
+                                            alignment: AlignmentDirectional(
+                                                0.01, 0.87),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  0.9,
+                                              height: 130.0,
+                                              decoration: BoxDecoration(
+                                                color: Color(0x00FFFFFF),
+                                              ),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 10.0,
+                                                                0.0, 0.0),
+                                                    child: Row(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
                                                       children: [
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceEvenly,
-                                                          children: [
-                                                            Padding(
+                                                        Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  0.0, 0.0),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        10.0,
+                                                                        0.0),
+                                                            child:
+                                                                FFButtonWidget(
+                                                              onPressed:
+                                                                  () async {
+                                                                await VotesRecord
+                                                                    .collection
+                                                                    .doc()
+                                                                    .set(
+                                                                        createVotesRecordData(
+                                                                      user:
+                                                                          currentUserReference,
+                                                                      poll: socialFeedUserPostsRecord
+                                                                          .reference,
+                                                                      vote: socialFeedUserPostsRecord
+                                                                          .postAnswer1,
+                                                                    ));
+                                                              },
+                                                              text: socialFeedUserPostsRecord
+                                                                  .postAnswer1,
+                                                              options:
+                                                                  FFButtonOptions(
+                                                                width: 81.0,
+                                                                height: 50.0,
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                iconPadding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                color: Color(
+                                                                    0xFFA24E8C),
+                                                                textStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Urbanist',
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ),
+                                                                elevation: 3.0,
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .background,
+                                                                  width: 2.0,
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            12.0),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      10.0,
+                                                                      0.0),
+                                                          child: FFButtonWidget(
+                                                            onPressed:
+                                                                () async {
+                                                              await VotesRecord
+                                                                  .collection
+                                                                  .doc()
+                                                                  .set(
+                                                                      createVotesRecordData(
+                                                                    user:
+                                                                        currentUserReference,
+                                                                    poll: socialFeedUserPostsRecord
+                                                                        .reference,
+                                                                    vote: socialFeedUserPostsRecord
+                                                                        .postAnswer3,
+                                                                  ));
+                                                            },
+                                                            text:
+                                                                socialFeedUserPostsRecord
+                                                                    .postAnswer3,
+                                                            options:
+                                                                FFButtonOptions(
+                                                              width: 81.0,
+                                                              height: 50.0,
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          30.0,
+                                                                          0.0,
                                                                           0.0,
                                                                           0.0,
                                                                           0.0),
-                                                              child:
-                                                                  FFButtonWidget(
-                                                                onPressed:
-                                                                    () async {
-                                                                  context
-                                                                      .pushNamed(
-                                                                    'postDetails',
-                                                                    queryParameters:
-                                                                        {
-                                                                      'userRecord':
-                                                                          serializeParam(
-                                                                        userPostUsersRecord,
-                                                                        ParamType
-                                                                            .Document,
-                                                                      ),
-                                                                      'postReference':
-                                                                          serializeParam(
-                                                                        socialFeedUserPostsRecord
-                                                                            .reference,
-                                                                        ParamType
-                                                                            .DocumentReference,
-                                                                      ),
-                                                                    }.withoutNulls,
-                                                                    extra: <String,
-                                                                        dynamic>{
-                                                                      'userRecord':
-                                                                          userPostUsersRecord,
-                                                                    },
-                                                                  );
-
-                                                                  await VotesRecord
-                                                                      .collection
-                                                                      .doc()
-                                                                      .set(
-                                                                          createVotesRecordData(
-                                                                        user:
-                                                                            currentUserReference,
-                                                                        poll: socialFeedUserPostsRecord
-                                                                            .reference,
-                                                                        vote: socialFeedUserPostsRecord
-                                                                            .postAnswer1,
-                                                                      ));
-                                                                },
-                                                                text: socialFeedUserPostsRecord
-                                                                    .postAnswer1,
-                                                                options:
-                                                                    FFButtonOptions(
-                                                                  width: 120.0,
-                                                                  height: 60.0,
-                                                                  padding: EdgeInsetsDirectional
+                                                              iconPadding:
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           0.0,
                                                                           0.0,
                                                                           0.0),
-                                                                  iconPadding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  color: Color(
-                                                                      0xFFA24E8C),
-                                                                  textStyle: FlutterFlowTheme.of(
+                                                              color: Color(
+                                                                  0xFFA24E8C),
+                                                              textStyle:
+                                                                  FlutterFlowTheme.of(
                                                                           context)
                                                                       .titleSmall
                                                                       .override(
@@ -827,267 +890,172 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                         color: Colors
                                                                             .white,
                                                                       ),
-                                                                  elevation:
-                                                                      3.0,
-                                                                  borderSide:
-                                                                      BorderSide(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .background,
-                                                                    width: 3.0,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
-                                                                ),
+                                                              elevation: 3.0,
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: Colors
+                                                                    .white,
+                                                                width: 2.0,
                                                               ),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12.0),
                                                             ),
-                                                            Align(
-                                                              alignment:
-                                                                  AlignmentDirectional(
-                                                                      0.0, 0.0),
-                                                              child: Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            30.0,
-                                                                            0.0),
-                                                                child:
-                                                                    FFButtonWidget(
-                                                                  onPressed:
-                                                                      () async {
-                                                                    await VotesRecord
-                                                                        .collection
-                                                                        .doc()
-                                                                        .set(
-                                                                            createVotesRecordData(
-                                                                          user:
-                                                                              currentUserReference,
-                                                                          poll:
-                                                                              socialFeedUserPostsRecord.reference,
-                                                                          vote:
-                                                                              socialFeedUserPostsRecord.postAnswer1,
-                                                                        ));
-                                                                  },
-                                                                  text: socialFeedUserPostsRecord
-                                                                      .postAnswer2,
-                                                                  options:
-                                                                      FFButtonOptions(
-                                                                    width:
-                                                                        120.0,
-                                                                    height:
-                                                                        60.0,
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    iconPadding:
-                                                                        EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    color: Color(
-                                                                        0xFFA24E8C),
-                                                                    textStyle: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleSmall
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Urbanist',
-                                                                          color:
-                                                                              Colors.white,
-                                                                        ),
-                                                                    elevation:
-                                                                        3.0,
-                                                                    borderSide:
-                                                                        BorderSide(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .background,
-                                                                      width:
-                                                                          2.0,
-                                                                    ),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            12.0),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
+                                                          ),
                                                         ),
                                                         Padding(
                                                           padding:
                                                               EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
-                                                                      10.0,
                                                                       0.0,
+                                                                      10.0,
                                                                       0.0),
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceEvenly,
-                                                            children: [
-                                                              Padding(
+                                                          child: FFButtonWidget(
+                                                            onPressed:
+                                                                () async {
+                                                              await VotesRecord
+                                                                  .collection
+                                                                  .doc()
+                                                                  .set(
+                                                                      createVotesRecordData(
+                                                                    user:
+                                                                        currentUserReference,
+                                                                    poll: socialFeedUserPostsRecord
+                                                                        .reference,
+                                                                    vote: socialFeedUserPostsRecord
+                                                                        .postAnswer4,
+                                                                  ));
+                                                            },
+                                                            text:
+                                                                socialFeedUserPostsRecord
+                                                                    .postAnswer4,
+                                                            options:
+                                                                FFButtonOptions(
+                                                              width: 81.0,
+                                                              height: 50.0,
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              iconPadding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              color: Color(
+                                                                  0xFFA24E8C),
+                                                              textStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Urbanist',
+                                                                        color: Colors
+                                                                            .white,
+                                                                      ),
+                                                              elevation: 3.0,
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: Colors
+                                                                    .white,
+                                                                width: 2.0,
+                                                              ),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12.0),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  0.0, 0.0),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        5.0,
+                                                                        0.0),
+                                                            child:
+                                                                FFButtonWidget(
+                                                              onPressed:
+                                                                  () async {
+                                                                await VotesRecord
+                                                                    .collection
+                                                                    .doc()
+                                                                    .set(
+                                                                        createVotesRecordData(
+                                                                      user:
+                                                                          currentUserReference,
+                                                                      poll: socialFeedUserPostsRecord
+                                                                          .reference,
+                                                                      vote: socialFeedUserPostsRecord
+                                                                          .postAnswer1,
+                                                                    ));
+                                                              },
+                                                              text: socialFeedUserPostsRecord
+                                                                  .postAnswer2,
+                                                              options:
+                                                                  FFButtonOptions(
+                                                                width: 81.0,
+                                                                height: 50.0,
                                                                 padding:
                                                                     EdgeInsetsDirectional
                                                                         .fromSTEB(
-                                                                            30.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                child:
-                                                                    FFButtonWidget(
-                                                                  onPressed:
-                                                                      () async {
-                                                                    await VotesRecord
-                                                                        .collection
-                                                                        .doc()
-                                                                        .set(
-                                                                            createVotesRecordData(
-                                                                          user:
-                                                                              currentUserReference,
-                                                                          poll:
-                                                                              socialFeedUserPostsRecord.reference,
-                                                                          vote:
-                                                                              socialFeedUserPostsRecord.postAnswer3,
-                                                                        ));
-                                                                  },
-                                                                  text: socialFeedUserPostsRecord
-                                                                      .postAnswer3,
-                                                                  options:
-                                                                      FFButtonOptions(
-                                                                    width:
-                                                                        120.0,
-                                                                    height:
-                                                                        60.0,
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
                                                                             0.0,
                                                                             0.0,
                                                                             0.0,
                                                                             0.0),
-                                                                    iconPadding:
-                                                                        EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    color: Color(
-                                                                        0xFFA24E8C),
-                                                                    textStyle: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleSmall
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Urbanist',
-                                                                          color:
-                                                                              Colors.white,
-                                                                        ),
-                                                                    elevation:
-                                                                        3.0,
-                                                                    borderSide:
-                                                                        BorderSide(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      width:
-                                                                          2.0,
-                                                                    ),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            12.0),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              Padding(
-                                                                padding:
+                                                                iconPadding:
                                                                     EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             0.0,
-                                                                            30.0,
-                                                                            0.0),
-                                                                child:
-                                                                    FFButtonWidget(
-                                                                  onPressed:
-                                                                      () async {
-                                                                    await VotesRecord
-                                                                        .collection
-                                                                        .doc()
-                                                                        .set(
-                                                                            createVotesRecordData(
-                                                                          user:
-                                                                              currentUserReference,
-                                                                          poll:
-                                                                              socialFeedUserPostsRecord.reference,
-                                                                          vote:
-                                                                              socialFeedUserPostsRecord.postAnswer4,
-                                                                        ));
-                                                                  },
-                                                                  text: socialFeedUserPostsRecord
-                                                                      .postAnswer4,
-                                                                  options:
-                                                                      FFButtonOptions(
-                                                                    width:
-                                                                        120.0,
-                                                                    height:
-                                                                        60.0,
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
                                                                             0.0,
                                                                             0.0),
-                                                                    iconPadding:
-                                                                        EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    color: Color(
-                                                                        0xFFA24E8C),
-                                                                    textStyle: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .titleSmall
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Urbanist',
-                                                                          color:
-                                                                              Colors.white,
-                                                                        ),
-                                                                    elevation:
-                                                                        3.0,
-                                                                    borderSide:
-                                                                        BorderSide(
+                                                                color: Color(
+                                                                    0xFFA24E8C),
+                                                                textStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Urbanist',
                                                                       color: Colors
                                                                           .white,
-                                                                      width:
-                                                                          2.0,
                                                                     ),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            12.0),
-                                                                  ),
+                                                                elevation: 3.0,
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .background,
+                                                                  width: 2.0,
                                                                 ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            12.0),
                                                               ),
-                                                            ],
+                                                            ),
                                                           ),
                                                         ),
                                                       ],
                                                     ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ],
