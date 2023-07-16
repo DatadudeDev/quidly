@@ -186,6 +186,13 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                                                                             0x34262D34),
                                                                         borderRadius:
                                                                             BorderRadius.circular(20.0),
+                                                                        border:
+                                                                            Border.all(
+                                                                          color:
+                                                                              Color(0xFFA83787),
+                                                                          width:
+                                                                              3.0,
+                                                                        ),
                                                                       ),
                                                                       child:
                                                                           Column(

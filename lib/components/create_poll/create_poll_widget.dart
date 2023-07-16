@@ -121,7 +121,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                   size: 24.0,
                                 ),
                                 onPressed: () async {
-                                  context.safePop();
+                                  Navigator.pop(context);
                                 },
                               ),
                             ],

@@ -72,6 +72,8 @@ class _CreateModalWidgetState extends State<CreateModalWidget> {
                     ),
                   },
                 );
+
+                Navigator.pop(context);
               },
               child: Container(
                 width: MediaQuery.sizeOf(context).width * 0.9,
@@ -202,6 +204,8 @@ class _CreateModalWidgetState extends State<CreateModalWidget> {
                   );
                 },
               ).then((value) => setState(() {}));
+
+              Navigator.pop(context);
             },
             child: Container(
               width: MediaQuery.sizeOf(context).width * 0.9,
