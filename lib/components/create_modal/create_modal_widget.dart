@@ -1,3 +1,4 @@
+import '/components/create_poll/create_poll_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -189,16 +190,18 @@ class _CreateModalWidgetState extends State<CreateModalWidget> {
             hoverColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onTap: () async {
-              context.pushNamed(
-                'createPost',
-                extra: <String, dynamic>{
-                  kTransitionInfoKey: TransitionInfo(
-                    hasTransition: true,
-                    transitionType: PageTransitionType.bottomToTop,
-                    duration: Duration(milliseconds: 200),
-                  ),
+              await showModalBottomSheet(
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
+                enableDrag: false,
+                context: context,
+                builder: (context) {
+                  return Padding(
+                    padding: MediaQuery.viewInsetsOf(context),
+                    child: CreatePollWidget(),
+                  );
                 },
-              );
+              ).then((value) => setState(() {}));
             },
             child: Container(
               width: MediaQuery.sizeOf(context).width * 0.9,
@@ -228,7 +231,7 @@ class _CreateModalWidgetState extends State<CreateModalWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 0.0, 4.0),
                             child: Text(
-                              'Create Post',
+                              'Create Poll',
                               style: FlutterFlowTheme.of(context).headlineSmall,
                             ),
                           ),

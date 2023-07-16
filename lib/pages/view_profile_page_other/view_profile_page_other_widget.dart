@@ -58,7 +58,9 @@ class _ViewProfilePageOtherWidgetState
                 width: 50.0,
                 height: 50.0,
                 child: CircularProgressIndicator(
-                  color: FlutterFlowTheme.of(context).primary,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    FlutterFlowTheme.of(context).primary,
+                  ),
                 ),
               ),
             ),
@@ -309,8 +311,11 @@ class _ViewProfilePageOtherWidgetState
                                           width: 50.0,
                                           height: 50.0,
                                           child: CircularProgressIndicator(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
                                           ),
                                         ),
                                       );
@@ -471,8 +476,11 @@ class _ViewProfilePageOtherWidgetState
                                         width: 50.0,
                                         height: 50.0,
                                         child: CircularProgressIndicator(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                            FlutterFlowTheme.of(context)
+                                                .primary,
+                                          ),
                                         ),
                                       ),
                                     );
@@ -517,10 +525,13 @@ class _ViewProfilePageOtherWidgetState
                                                     height: 50.0,
                                                     child:
                                                         CircularProgressIndicator(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
+                                                      valueColor:
+                                                          AlwaysStoppedAnimation<
+                                                              Color>(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary,
+                                                      ),
                                                     ),
                                                   ),
                                                 );
@@ -724,6 +735,14 @@ class _ViewProfilePageOtherWidgetState
                                                                 .circular(0.0),
                                                         child:
                                                             CachedNetworkImage(
+                                                          fadeInDuration:
+                                                              Duration(
+                                                                  milliseconds:
+                                                                      500),
+                                                          fadeOutDuration:
+                                                              Duration(
+                                                                  milliseconds:
+                                                                      500),
                                                           imageUrl:
                                                               valueOrDefault<
                                                                   String>(

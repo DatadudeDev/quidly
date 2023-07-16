@@ -61,6 +61,36 @@ class UserPostsRecord extends FirestoreRecord {
   bool get postOwner => _postOwner ?? false;
   bool hasPostOwner() => _postOwner != null;
 
+  // "shits" field.
+  List<DocumentReference>? _shits;
+  List<DocumentReference> get shits => _shits ?? const [];
+  bool hasShits() => _shits != null;
+
+  // "postPoll" field.
+  String? _postPoll;
+  String get postPoll => _postPoll ?? '';
+  bool hasPostPoll() => _postPoll != null;
+
+  // "postAnswer1" field.
+  String? _postAnswer1;
+  String get postAnswer1 => _postAnswer1 ?? '';
+  bool hasPostAnswer1() => _postAnswer1 != null;
+
+  // "postAnswer2" field.
+  String? _postAnswer2;
+  String get postAnswer2 => _postAnswer2 ?? '';
+  bool hasPostAnswer2() => _postAnswer2 != null;
+
+  // "postAnswer3" field.
+  String? _postAnswer3;
+  String get postAnswer3 => _postAnswer3 ?? '';
+  bool hasPostAnswer3() => _postAnswer3 != null;
+
+  // "postAnswer4" field.
+  String? _postAnswer4;
+  String get postAnswer4 => _postAnswer4 ?? '';
+  bool hasPostAnswer4() => _postAnswer4 != null;
+
   void _initializeFields() {
     _postPhoto = snapshotData['postPhoto'] as String?;
     _postTitle = snapshotData['postTitle'] as String?;
@@ -71,6 +101,12 @@ class UserPostsRecord extends FirestoreRecord {
     _numComments = castToType<int>(snapshotData['numComments']);
     _dogProfile = snapshotData['dogProfile'] as DocumentReference?;
     _postOwner = snapshotData['postOwner'] as bool?;
+    _shits = getDataList(snapshotData['shits']);
+    _postPoll = snapshotData['postPoll'] as String?;
+    _postAnswer1 = snapshotData['postAnswer1'] as String?;
+    _postAnswer2 = snapshotData['postAnswer2'] as String?;
+    _postAnswer3 = snapshotData['postAnswer3'] as String?;
+    _postAnswer4 = snapshotData['postAnswer4'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -116,6 +152,11 @@ Map<String, dynamic> createUserPostsRecordData({
   int? numComments,
   DocumentReference? dogProfile,
   bool? postOwner,
+  String? postPoll,
+  String? postAnswer1,
+  String? postAnswer2,
+  String? postAnswer3,
+  String? postAnswer4,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -127,6 +168,11 @@ Map<String, dynamic> createUserPostsRecordData({
       'numComments': numComments,
       'dogProfile': dogProfile,
       'postOwner': postOwner,
+      'postPoll': postPoll,
+      'postAnswer1': postAnswer1,
+      'postAnswer2': postAnswer2,
+      'postAnswer3': postAnswer3,
+      'postAnswer4': postAnswer4,
     }.withoutNulls,
   );
 
@@ -147,7 +193,13 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         listEquality.equals(e1?.likes, e2?.likes) &&
         e1?.numComments == e2?.numComments &&
         e1?.dogProfile == e2?.dogProfile &&
-        e1?.postOwner == e2?.postOwner;
+        e1?.postOwner == e2?.postOwner &&
+        listEquality.equals(e1?.shits, e2?.shits) &&
+        e1?.postPoll == e2?.postPoll &&
+        e1?.postAnswer1 == e2?.postAnswer1 &&
+        e1?.postAnswer2 == e2?.postAnswer2 &&
+        e1?.postAnswer3 == e2?.postAnswer3 &&
+        e1?.postAnswer4 == e2?.postAnswer4;
   }
 
   @override
@@ -160,7 +212,13 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e?.likes,
         e?.numComments,
         e?.dogProfile,
-        e?.postOwner
+        e?.postOwner,
+        e?.shits,
+        e?.postPoll,
+        e?.postAnswer1,
+        e?.postAnswer2,
+        e?.postAnswer3,
+        e?.postAnswer4
       ]);
 
   @override

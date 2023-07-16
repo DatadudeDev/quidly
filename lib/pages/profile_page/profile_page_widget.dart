@@ -52,7 +52,9 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                 width: 50.0,
                 height: 50.0,
                 child: CircularProgressIndicator(
-                  color: FlutterFlowTheme.of(context).primary,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    FlutterFlowTheme.of(context).primary,
+                  ),
                 ),
               ),
             ),
@@ -192,7 +194,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                       FFButtonWidget(
                         onPressed: () async {
                           context.pushNamed(
-                            'homePage',
+                            'pollDev',
                             extra: <String, dynamic>{
                               kTransitionInfoKey: TransitionInfo(
                                 hasTransition: true,
@@ -309,8 +311,11 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                           width: 50.0,
                                           height: 50.0,
                                           child: CircularProgressIndicator(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
                                           ),
                                         ),
                                       );
@@ -372,6 +377,10 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                         Radius.circular(0.0),
                                                   ),
                                                   child: CachedNetworkImage(
+                                                    fadeInDuration: Duration(
+                                                        milliseconds: 500),
+                                                    fadeOutDuration: Duration(
+                                                        milliseconds: 500),
                                                     imageUrl:
                                                         valueOrDefault<String>(
                                                       listViewDogsRecord
@@ -505,8 +514,11 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                           width: 50.0,
                                           height: 50.0,
                                           child: CircularProgressIndicator(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
                                           ),
                                         ),
                                       );
@@ -551,10 +563,13 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                     height: 50.0,
                                                     child:
                                                         CircularProgressIndicator(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
+                                                      valueColor:
+                                                          AlwaysStoppedAnimation<
+                                                              Color>(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary,
+                                                      ),
                                                     ),
                                                   ),
                                                 );
@@ -749,6 +764,14 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                                                                 .circular(0.0),
                                                         child:
                                                             CachedNetworkImage(
+                                                          fadeInDuration:
+                                                              Duration(
+                                                                  milliseconds:
+                                                                      500),
+                                                          fadeOutDuration:
+                                                              Duration(
+                                                                  milliseconds:
+                                                                      500),
                                                           imageUrl:
                                                               valueOrDefault<
                                                                   String>(

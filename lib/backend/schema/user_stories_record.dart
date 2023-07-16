@@ -56,6 +56,11 @@ class UserStoriesRecord extends FirestoreRecord {
   bool get isOwner => _isOwner ?? false;
   bool hasIsOwner() => _isOwner != null;
 
+  // "shits" field.
+  List<DocumentReference>? _shits;
+  List<DocumentReference> get shits => _shits ?? const [];
+  bool hasShits() => _shits != null;
+
   void _initializeFields() {
     _user = snapshotData['user'] as DocumentReference?;
     _storyVideo = snapshotData['storyVideo'] as String?;
@@ -65,6 +70,7 @@ class UserStoriesRecord extends FirestoreRecord {
     _likes = getDataList(snapshotData['likes']);
     _numComments = castToType<int>(snapshotData['numComments']);
     _isOwner = snapshotData['isOwner'] as bool?;
+    _shits = getDataList(snapshotData['shits']);
   }
 
   static CollectionReference get collection =>
@@ -138,7 +144,8 @@ class UserStoriesRecordDocumentEquality implements Equality<UserStoriesRecord> {
         e1?.storyPostedAt == e2?.storyPostedAt &&
         listEquality.equals(e1?.likes, e2?.likes) &&
         e1?.numComments == e2?.numComments &&
-        e1?.isOwner == e2?.isOwner;
+        e1?.isOwner == e2?.isOwner &&
+        listEquality.equals(e1?.shits, e2?.shits);
   }
 
   @override
@@ -150,7 +157,8 @@ class UserStoriesRecordDocumentEquality implements Equality<UserStoriesRecord> {
         e?.storyPostedAt,
         e?.likes,
         e?.numComments,
-        e?.isOwner
+        e?.isOwner,
+        e?.shits
       ]);
 
   @override

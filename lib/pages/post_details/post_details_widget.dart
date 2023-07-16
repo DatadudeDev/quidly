@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -64,7 +63,9 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                 width: 50.0,
                 height: 50.0,
                 child: CircularProgressIndicator(
-                  color: FlutterFlowTheme.of(context).primary,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    FlutterFlowTheme.of(context).primary,
+                  ),
                 ),
               ),
             ),
@@ -90,86 +91,464 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                             Container(
                               width: MediaQuery.sizeOf(context).width * 1.0,
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: Color(0x00FFFFFF),
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(0.0),
-                                child: CachedNetworkImage(
-                                  imageUrl: valueOrDefault<String>(
-                                    postDetailsUserPostsRecord.postPhoto,
-                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/sample-app-social-app-tx2kqp/assets/ot903vcfouv7/oscar-sutton-yihlaRCCvd4-unsplash.jpg',
-                                  ),
-                                  width: 100.0,
-                                  height: 430.0,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 12.0, 16.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                              child: Stack(
                                 children: [
-                                  Card(
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    color: Color(0x3F000000),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(40.0),
-                                    ),
-                                    child: FlutterFlowIconButton(
-                                      borderColor: Colors.transparent,
-                                      borderRadius: 30.0,
-                                      buttonSize: 46.0,
-                                      icon: Icon(
-                                        Icons.arrow_back_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .tertiary,
-                                        size: 24.0,
+                                  Container(
+                                    width: 400.0,
+                                    height: 400.0,
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          FlutterFlowTheme.of(context).primary,
+                                          FlutterFlowTheme.of(context).secondary
+                                        ],
+                                        stops: [0.0, 1.0],
+                                        begin: AlignmentDirectional(0.0, -1.0),
+                                        end: AlignmentDirectional(0, 1.0),
                                       ),
-                                      onPressed: () async {
-                                        context.pop();
-                                      },
+                                      borderRadius: BorderRadius.circular(16.0),
                                     ),
-                                  ),
-                                  if (postDetailsUserPostsRecord.postOwner)
-                                    FlutterFlowIconButton(
-                                      borderColor: Colors.transparent,
-                                      borderRadius: 30.0,
-                                      borderWidth: 1.0,
-                                      buttonSize: 44.0,
-                                      fillColor: Color(0x41000000),
-                                      icon: Icon(
-                                        Icons.more_vert_sharp,
-                                        color: FlutterFlowTheme.of(context)
-                                            .tertiary,
-                                        size: 24.0,
-                                      ),
-                                      onPressed: () async {
-                                        await showModalBottomSheet(
-                                          isScrollControlled: true,
-                                          backgroundColor: Color(0x00000000),
-                                          barrierColor: Color(0x00000000),
-                                          context: context,
-                                          builder: (context) {
-                                            return Padding(
-                                              padding: MediaQuery.viewInsetsOf(
-                                                  context),
-                                              child: Container(
-                                                height: 250.0,
-                                                child: DeletePostWidget(
-                                                  postParameters:
-                                                      postDetailsUserPostsRecord,
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Container(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  1.0,
+                                          height: 400.0,
+                                          decoration: BoxDecoration(
+                                            color: Color(0x401A1F24),
+                                            borderRadius:
+                                                BorderRadius.circular(16.0),
+                                          ),
+                                          child: Stack(
+                                            children: [
+                                              Stack(
+                                                children: [
+                                                  Form(
+                                                    key: _model.formKey,
+                                                    autovalidateMode:
+                                                        AutovalidateMode.always,
+                                                    child: Stack(
+                                                      children: [
+                                                        Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          10.0,
+                                                                          50.0,
+                                                                          10.0,
+                                                                          0.0),
+                                                                  child:
+                                                                      Container(
+                                                                    width: MediaQuery.sizeOf(context)
+                                                                            .width *
+                                                                        0.9,
+                                                                    height:
+                                                                        185.0,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Color(
+                                                                          0x00FFFFFF),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10.0),
+                                                                      border:
+                                                                          Border
+                                                                              .all(
+                                                                        color: Color(
+                                                                            0x6E811081),
+                                                                        width:
+                                                                            4.0,
+                                                                      ),
+                                                                    ),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.center,
+                                                                          children: [
+                                                                            Text(
+                                                                              postDetailsUserPostsRecord.postPoll,
+                                                                              textAlign: TextAlign.center,
+                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                    fontFamily: 'Urbanist',
+                                                                                    fontSize: 30.0,
+                                                                                    fontWeight: FontWeight.bold,
+                                                                                  ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    0.0, 0.54),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 0.0, 20.0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    children: [
+                                                      Container(
+                                                        width:
+                                                            MediaQuery.sizeOf(
+                                                                        context)
+                                                                    .width *
+                                                                0.65,
+                                                        height: 80.0,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color:
+                                                              Color(0x00FFFFFF),
+                                                        ),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Container(
+                                                              width: 120.0,
+                                                              height: 60.0,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Color(
+                                                                    0x471A1F24),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20.0),
+                                                                border:
+                                                                    Border.all(
+                                                                  color: Color(
+                                                                      0xA9CA18CA),
+                                                                  width: 2.0,
+                                                                ),
+                                                              ),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Text(
+                                                                    postDetailsUserPostsRecord
+                                                                        .postAnswer1,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Urbanist',
+                                                                          fontSize:
+                                                                              16.0,
+                                                                        ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              width: 120.0,
+                                                              height: 60.0,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Color(
+                                                                    0x471A1F24),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20.0),
+                                                                border:
+                                                                    Border.all(
+                                                                  color: Color(
+                                                                      0xA9CA18CA),
+                                                                  width: 2.0,
+                                                                ),
+                                                              ),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Text(
+                                                                    postDetailsUserPostsRecord
+                                                                        .postAnswer2,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Urbanist',
+                                                                          fontSize:
+                                                                              16.0,
+                                                                        ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
-                                            );
-                                          },
-                                        ).then((value) => setState(() {}));
-                                      },
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    0.0, 0.93),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 20.0, 0.0, 0.0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Container(
+                                                        width:
+                                                            MediaQuery.sizeOf(
+                                                                        context)
+                                                                    .width *
+                                                                0.65,
+                                                        height: 80.0,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color:
+                                                              Color(0x00FFFFFF),
+                                                        ),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Container(
+                                                              width: 120.0,
+                                                              height: 60.0,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Color(
+                                                                    0x471A1F24),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20.0),
+                                                                border:
+                                                                    Border.all(
+                                                                  color: Color(
+                                                                      0xA9CA18CA),
+                                                                  width: 2.0,
+                                                                ),
+                                                              ),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Text(
+                                                                    postDetailsUserPostsRecord
+                                                                        .postAnswer3,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Urbanist',
+                                                                          fontSize:
+                                                                              16.0,
+                                                                        ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              width: 120.0,
+                                                              height: 60.0,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Color(
+                                                                    0x471A1F24),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20.0),
+                                                                border:
+                                                                    Border.all(
+                                                                  color: Color(
+                                                                      0xA9CA18CA),
+                                                                  width: 2.0,
+                                                                ),
+                                                              ),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Text(
+                                                                    postDetailsUserPostsRecord
+                                                                        .postAnswer4,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Urbanist',
+                                                                          fontSize:
+                                                                              16.0,
+                                                                        ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 0.0, 16.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Card(
+                                          clipBehavior:
+                                              Clip.antiAliasWithSaveLayer,
+                                          color: Color(0x3F000000),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(40.0),
+                                          ),
+                                          child: FlutterFlowIconButton(
+                                            borderColor: Colors.transparent,
+                                            borderRadius: 30.0,
+                                            buttonSize: 40.0,
+                                            icon: Icon(
+                                              Icons.arrow_back_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .tertiary,
+                                              size: 24.0,
+                                            ),
+                                            onPressed: () async {
+                                              context.pop();
+                                            },
+                                          ),
+                                        ),
+                                        if (postDetailsUserPostsRecord
+                                            .postOwner)
+                                          FlutterFlowIconButton(
+                                            borderColor: Colors.transparent,
+                                            borderRadius: 30.0,
+                                            borderWidth: 1.0,
+                                            buttonSize: 40.0,
+                                            fillColor: Color(0x41000000),
+                                            icon: Icon(
+                                              Icons.more_vert_sharp,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .tertiary,
+                                              size: 24.0,
+                                            ),
+                                            onPressed: () async {
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Color(0x00000000),
+                                                barrierColor: Color(0x00000000),
+                                                context: context,
+                                                builder: (context) {
+                                                  return Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child: Container(
+                                                      height: 250.0,
+                                                      child: DeletePostWidget(
+                                                        postParameters:
+                                                            postDetailsUserPostsRecord,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ).then(
+                                                  (value) => setState(() {}));
+                                            },
+                                          ),
+                                      ],
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -183,7 +562,7 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                             children: [
                               Card(
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
-                                color: Color(0xFF4B39EF),
+                                color: FlutterFlowTheme.of(context).primary,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
@@ -322,26 +701,81 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                                       ],
                                     ),
                                   ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Icon(
-                                        Icons.mode_comment_outlined,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        size: 24.0,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            4.0, 0.0, 0.0, 0.0),
-                                        child: Text(
-                                          postDetailsUserPostsRecord.numComments
-                                              .toString(),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodySmall,
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 16.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        ToggleIcon(
+                                          onPressed: () async {
+                                            final shitsElement =
+                                                currentUserReference;
+                                            final shitsUpdate =
+                                                postDetailsUserPostsRecord.shits
+                                                        .contains(shitsElement)
+                                                    ? FieldValue.arrayRemove(
+                                                        [shitsElement])
+                                                    : FieldValue.arrayUnion(
+                                                        [shitsElement]);
+                                            await postDetailsUserPostsRecord
+                                                .reference
+                                                .update({
+                                              'shits': shitsUpdate,
+                                            });
+                                          },
+                                          value: postDetailsUserPostsRecord
+                                              .shits
+                                              .contains(currentUserReference),
+                                          onIcon: FaIcon(
+                                            FontAwesomeIcons.poo,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            size: 25.0,
+                                          ),
+                                          offIcon: FaIcon(
+                                            FontAwesomeIcons.poo,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 25.0,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  4.0, 0.0, 0.0, 0.0),
+                                          child: Text(
+                                            functions
+                                                .shits(
+                                                    postDetailsUserPostsRecord)
+                                                .toString(),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodySmall,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Icon(
+                                    Icons.mode_comment_outlined,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24.0,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        4.0, 0.0, 0.0, 0.0),
+                                    child: Text(
+                                      postDetailsUserPostsRecord.numComments
+                                          .toString(),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodySmall,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -405,8 +839,11 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                                         width: 50.0,
                                         height: 50.0,
                                         child: CircularProgressIndicator(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                            FlutterFlowTheme.of(context)
+                                                .primary,
+                                          ),
                                         ),
                                       ),
                                     );
@@ -450,9 +887,13 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                                                   height: 50.0,
                                                   child:
                                                       CircularProgressIndicator(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary,
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                            Color>(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primary,
+                                                    ),
                                                   ),
                                                 ),
                                               );
@@ -604,6 +1045,10 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                               ),
                             ],
                           ),
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [],
                         ),
                       ],
                     ),
