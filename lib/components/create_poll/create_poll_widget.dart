@@ -171,7 +171,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                 ),
                 Container(
                   width: 400.0,
-                  height: 480.0,
+                  height: 426.0,
                   decoration: BoxDecoration(
                     color: Color(0x00FFFFFF),
                   ),
@@ -181,7 +181,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                       Expanded(
                         child: Container(
                           width: MediaQuery.sizeOf(context).width * 1.0,
-                          height: MediaQuery.sizeOf(context).height * 1.0,
+                          height: MediaQuery.sizeOf(context).height * 4.36,
                           decoration: BoxDecoration(
                             color: Color(0x00FFFFFF),
                             borderRadius: BorderRadius.circular(30.0),
@@ -201,7 +201,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                   Container(
                                     width: MediaQuery.sizeOf(context).width *
                                         0.945,
-                                    height: 458.0,
+                                    height: 425.0,
                                     decoration: BoxDecoration(
                                       color: Color(0x00FFFFFF),
                                       borderRadius: BorderRadius.circular(20.0),
@@ -322,13 +322,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                               onChanged: (_) => EasyDebounce.debounce(
                                                                                 '_model.textController1',
                                                                                 Duration(milliseconds: 2000),
-                                                                                () async {
-                                                                                  _model.apiResulte1k = await ApiTestCall.call(
-                                                                                    user: currentUserReference?.id,
-                                                                                  );
-
-                                                                                  setState(() {});
-                                                                                },
+                                                                                () => setState(() {}),
                                                                               ),
                                                                               autofocus: true,
                                                                               obscureText: false,
@@ -349,11 +343,6 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                                     ? InkWell(
                                                                                         onTap: () async {
                                                                                           _model.textController1?.clear();
-                                                                                          _model.apiResulte1k = await ApiTestCall.call(
-                                                                                            user: currentUserReference?.id,
-                                                                                          );
-
-                                                                                          setState(() {});
                                                                                           setState(() {});
                                                                                         },
                                                                                         child: Icon(
@@ -874,134 +863,6 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                             ],
                                           ),
                                         ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 5.0, 0.0, 0.0),
-                                          child:
-                                              StreamBuilder<List<ImagesRecord>>(
-                                            stream: queryImagesRecord(
-                                              singleRecord: true,
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      valueColor:
-                                                          AlwaysStoppedAnimation<
-                                                              Color>(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primary,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              List<ImagesRecord>
-                                                  buttonImagesRecordList =
-                                                  snapshot.data!;
-                                              // Return an empty Container when the item does not exist.
-                                              if (snapshot.data!.isEmpty) {
-                                                return Container();
-                                              }
-                                              final buttonImagesRecord =
-                                                  buttonImagesRecordList
-                                                          .isNotEmpty
-                                                      ? buttonImagesRecordList
-                                                          .first
-                                                      : null;
-                                              return FFButtonWidget(
-                                                onPressed: () async {
-                                                  var _shouldSetState = false;
-                                                  _model.apiResult8ja =
-                                                      await GetURLCall.call();
-                                                  _shouldSetState = true;
-                                                  if ((_model.apiResulte1k
-                                                          ?.succeeded ??
-                                                      true)) {
-                                                    await UserPostsRecord
-                                                        .collection
-                                                        .doc()
-                                                        .set(
-                                                            createUserPostsRecordData(
-                                                          postUser:
-                                                              currentUserReference,
-                                                          timePosted:
-                                                              getCurrentTimestamp,
-                                                          postOwner: true,
-                                                          postPoll: _model
-                                                              .textController1
-                                                              .text,
-                                                          postAnswer1: _model
-                                                              .textController2
-                                                              .text,
-                                                          postAnswer2: _model
-                                                              .textController3
-                                                              .text,
-                                                          postAnswer3: _model
-                                                              .textController4
-                                                              .text,
-                                                          postAnswer4: _model
-                                                              .textController5
-                                                              .text,
-                                                          imageURL: GetURLCall
-                                                              .imageURL(
-                                                            (_model.apiResult8ja
-                                                                    ?.jsonBody ??
-                                                                ''),
-                                                          ),
-                                                        ));
-                                                    Navigator.pop(context);
-                                                  } else {
-                                                    if (_shouldSetState)
-                                                      setState(() {});
-                                                    return;
-                                                  }
-
-                                                  if (_shouldSetState)
-                                                    setState(() {});
-                                                },
-                                                text: 'Create Post',
-                                                options: FFButtonOptions(
-                                                  width: 0.0,
-                                                  height: 50.0,
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 0.0, 0.0),
-                                                  iconPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: Color(0x6E811081),
-                                                  textStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .titleSmall
-                                                      .override(
-                                                        fontFamily: 'Outfit',
-                                                        color: Colors.white,
-                                                        fontSize: 16.0,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                  elevation: 0.0,
-                                                  borderSide: BorderSide(
-                                                    color: Colors.transparent,
-                                                    width: 1.0,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          24.0),
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
                                       ],
                                     ),
                                   ),
@@ -1012,6 +873,73 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                         ),
                       ),
                     ],
+                  ),
+                ),
+                FFButtonWidget(
+                  onPressed: () async {
+                    var _shouldSetState = false;
+                    _model.prompt = _model.textController1.text;
+                    _model.imageURL = null;
+                    _model.apiResult47j = await ApiTestCall.call(
+                      prompt: _model.prompt,
+                    );
+                    _shouldSetState = true;
+                    if ((_model.apiResult47j?.succeeded ?? true)) {
+                      _model.apiResult1m6 = await GetURLCall.call();
+                      _shouldSetState = true;
+                      if ((_model.apiResult1m6?.succeeded ?? true)) {
+                        setState(() {
+                          _model.imageURL = GetURLCall.imageURL(
+                            (_model.apiResult1m6?.jsonBody ?? ''),
+                          );
+                        });
+
+                        await UserPostsRecord.collection
+                            .doc()
+                            .set(createUserPostsRecordData(
+                              postUser: currentUserReference,
+                              timePosted: getCurrentTimestamp,
+                              postOwner: true,
+                              postAnswer1: _model.textController2.text,
+                              postAnswer2: _model.textController3.text,
+                              postAnswer3: _model.textController4.text,
+                              postAnswer4: _model.textController5.text,
+                              imageURL: _model.imageURL,
+                              postPoll: _model.textController1.text,
+                            ));
+                        Navigator.pop(context);
+                      } else {
+                        if (_shouldSetState) setState(() {});
+                        return;
+                      }
+
+                      if (_shouldSetState) setState(() {});
+                      return;
+                    } else {
+                      if (_shouldSetState) setState(() {});
+                      return;
+                    }
+
+                    if (_shouldSetState) setState(() {});
+                  },
+                  text: 'Button',
+                  options: FFButtonOptions(
+                    height: 40.0,
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Urbanist',
+                          color: Colors.white,
+                        ),
+                    elevation: 3.0,
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
               ],

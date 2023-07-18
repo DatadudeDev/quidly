@@ -16,14 +16,18 @@ class CreatePollModel extends FlutterFlowModel {
 
   String? imageURL;
 
+  DocumentReference? user;
+
+  DocumentReference? poll;
+
+  String prompt = 'random';
+
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
   // State field(s) for TextField widget.
   TextEditingController? textController1;
   String? Function(BuildContext, String?)? textController1Validator;
-  // Stores action output result for [Backend Call - API (apiTest)] action in TextField widget.
-  ApiCallResponse? apiResulte1k;
   // State field(s) for TextField widget.
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
@@ -36,8 +40,10 @@ class CreatePollModel extends FlutterFlowModel {
   // State field(s) for TextField widget.
   TextEditingController? textController5;
   String? Function(BuildContext, String?)? textController5Validator;
+  // Stores action output result for [Backend Call - API (apiTest)] action in Button widget.
+  ApiCallResponse? apiResult47j;
   // Stores action output result for [Backend Call - API (getURL)] action in Button widget.
-  ApiCallResponse? apiResult8ja;
+  ApiCallResponse? apiResult1m6;
 
   /// Initialization and disposal methods.
 

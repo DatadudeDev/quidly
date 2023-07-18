@@ -145,6 +145,11 @@ flutter:
     - assets/rive_animations/
     - assets/pdfs/
 
+  fonts:
+    - family: 'Fancy'
+      fonts:
+        - asset: assets/fonts/CadillacPersonalUseItalic-K7pny.ttf
+          style: italic
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

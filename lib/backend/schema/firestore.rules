@@ -72,7 +72,7 @@ service cloud.firestore {
       allow delete: if false;
     }
 
-    match /images/{document} {
+    match /polls/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if false;
