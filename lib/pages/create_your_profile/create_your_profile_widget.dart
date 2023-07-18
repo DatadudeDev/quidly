@@ -413,7 +413,7 @@ class _CreateYourProfileWidgetState extends State<CreateYourProfileWidget> {
                               .update(createUsersRecordData(
                             displayName: _model.yourNameController.text,
                             userName: _model.userNameController.text,
-                            photoUrl: _model.uploadedFileUrl,
+                            photoUrl: currentUserPhoto,
                             bio: _model.bioController.text,
                           ));
 

@@ -91,6 +91,11 @@ class UserPostsRecord extends FirestoreRecord {
   String get postAnswer4 => _postAnswer4 ?? '';
   bool hasPostAnswer4() => _postAnswer4 != null;
 
+  // "imageURL" field.
+  String? _imageURL;
+  String get imageURL => _imageURL ?? '';
+  bool hasImageURL() => _imageURL != null;
+
   void _initializeFields() {
     _postPhoto = snapshotData['postPhoto'] as String?;
     _postTitle = snapshotData['postTitle'] as String?;
@@ -107,6 +112,7 @@ class UserPostsRecord extends FirestoreRecord {
     _postAnswer2 = snapshotData['postAnswer2'] as String?;
     _postAnswer3 = snapshotData['postAnswer3'] as String?;
     _postAnswer4 = snapshotData['postAnswer4'] as String?;
+    _imageURL = snapshotData['imageURL'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -157,6 +163,7 @@ Map<String, dynamic> createUserPostsRecordData({
   String? postAnswer2,
   String? postAnswer3,
   String? postAnswer4,
+  String? imageURL,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -173,6 +180,7 @@ Map<String, dynamic> createUserPostsRecordData({
       'postAnswer2': postAnswer2,
       'postAnswer3': postAnswer3,
       'postAnswer4': postAnswer4,
+      'imageURL': imageURL,
     }.withoutNulls,
   );
 
@@ -199,7 +207,8 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e1?.postAnswer1 == e2?.postAnswer1 &&
         e1?.postAnswer2 == e2?.postAnswer2 &&
         e1?.postAnswer3 == e2?.postAnswer3 &&
-        e1?.postAnswer4 == e2?.postAnswer4;
+        e1?.postAnswer4 == e2?.postAnswer4 &&
+        e1?.imageURL == e2?.imageURL;
   }
 
   @override
@@ -218,7 +227,8 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e?.postAnswer1,
         e?.postAnswer2,
         e?.postAnswer3,
-        e?.postAnswer4
+        e?.postAnswer4,
+        e?.imageURL
       ]);
 
   @override

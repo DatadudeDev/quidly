@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -11,12 +12,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class CreatePollModel extends FlutterFlowModel {
+  ///  Local state fields for this component.
+
+  String? imageURL;
+
   ///  State fields for stateful widgets in this component.
 
   final formKey = GlobalKey<FormState>();
   // State field(s) for TextField widget.
   TextEditingController? textController1;
   String? Function(BuildContext, String?)? textController1Validator;
+  // Stores action output result for [Backend Call - API (apiTest)] action in TextField widget.
+  ApiCallResponse? apiResulte1k;
   // State field(s) for TextField widget.
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
@@ -29,6 +36,8 @@ class CreatePollModel extends FlutterFlowModel {
   // State field(s) for TextField widget.
   TextEditingController? textController5;
   String? Function(BuildContext, String?)? textController5Validator;
+  // Stores action output result for [Backend Call - API (getURL)] action in Button widget.
+  ApiCallResponse? apiResult8ja;
 
   /// Initialization and disposal methods.
 
@@ -43,6 +52,8 @@ class CreatePollModel extends FlutterFlowModel {
   }
 
   /// Action blocks are added here.
+
+  Future uRLimage(BuildContext context) async {}
 
   /// Additional helper methods are added here.
 }

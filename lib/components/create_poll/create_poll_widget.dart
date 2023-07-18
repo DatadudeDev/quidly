@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -245,114 +246,138 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                       .center,
                                                               children: [
                                                                 Expanded(
-                                                                  child:
-                                                                      Container(
-                                                                    width: MediaQuery.sizeOf(context)
-                                                                            .width *
-                                                                        0.9,
-                                                                    height:
-                                                                        185.0,
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: Color(
-                                                                          0x00FFFFFF),
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              10.0),
-                                                                      border:
-                                                                          Border
-                                                                              .all(
-                                                                        color: Color(
-                                                                            0x6E811081),
-                                                                        width:
-                                                                            4.0,
-                                                                      ),
+                                                                  child: StreamBuilder<
+                                                                      List<
+                                                                          UserPostsRecord>>(
+                                                                    stream:
+                                                                        queryUserPostsRecord(
+                                                                      singleRecord:
+                                                                          true,
                                                                     ),
-                                                                    child:
-                                                                        Align(
-                                                                      alignment:
-                                                                          AlignmentDirectional(
+                                                                    builder:
+                                                                        (context,
+                                                                            snapshot) {
+                                                                      // Customize what your widget looks like when it's loading.
+                                                                      if (!snapshot
+                                                                          .hasData) {
+                                                                        return Center(
+                                                                          child:
+                                                                              SizedBox(
+                                                                            width:
+                                                                                50.0,
+                                                                            height:
+                                                                                50.0,
+                                                                            child:
+                                                                                CircularProgressIndicator(
+                                                                              valueColor: AlwaysStoppedAnimation<Color>(
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        );
+                                                                      }
+                                                                      List<UserPostsRecord>
+                                                                          containerUserPostsRecordList =
+                                                                          snapshot
+                                                                              .data!;
+                                                                      final containerUserPostsRecord = containerUserPostsRecordList
+                                                                              .isNotEmpty
+                                                                          ? containerUserPostsRecordList
+                                                                              .first
+                                                                          : null;
+                                                                      return Container(
+                                                                        width: MediaQuery.sizeOf(context).width *
+                                                                            0.9,
+                                                                        height:
+                                                                            185.0,
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color:
+                                                                              Color(0x00FFFFFF),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(10.0),
+                                                                          border:
+                                                                              Border.all(
+                                                                            color:
+                                                                                Color(0x6E811081),
+                                                                            width:
+                                                                                4.0,
+                                                                          ),
+                                                                        ),
+                                                                        child:
+                                                                            Align(
+                                                                          alignment: AlignmentDirectional(
                                                                               0.0,
                                                                               0.0),
-                                                                      child:
-                                                                          Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            10.0,
-                                                                            0.0,
-                                                                            10.0,
-                                                                            0.0),
-                                                                        child:
-                                                                            TextFormField(
-                                                                          controller:
-                                                                              _model.textController1,
-                                                                          onChanged: (_) =>
-                                                                              EasyDebounce.debounce(
-                                                                            '_model.textController1',
-                                                                            Duration(milliseconds: 2000),
-                                                                            () =>
-                                                                                setState(() {}),
-                                                                          ),
-                                                                          autofocus:
-                                                                              true,
-                                                                          obscureText:
-                                                                              false,
-                                                                          decoration:
-                                                                              InputDecoration(
-                                                                            labelStyle:
-                                                                                FlutterFlowTheme.of(context).headlineMedium,
-                                                                            hintText:
-                                                                                'Write your question here...',
-                                                                            hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                  fontFamily: 'Outfit',
-                                                                                  fontSize: 20.0,
-                                                                                  fontWeight: FontWeight.w500,
-                                                                                ),
-                                                                            enabledBorder:
-                                                                                InputBorder.none,
-                                                                            focusedBorder:
-                                                                                InputBorder.none,
-                                                                            errorBorder:
-                                                                                InputBorder.none,
-                                                                            focusedErrorBorder:
-                                                                                InputBorder.none,
-                                                                            contentPadding: EdgeInsetsDirectional.fromSTEB(
+                                                                          child:
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                10.0,
                                                                                 0.0,
-                                                                                5.0,
-                                                                                0.0,
-                                                                                5.0),
-                                                                            suffixIcon: _model.textController1!.text.isNotEmpty
-                                                                                ? InkWell(
-                                                                                    onTap: () async {
-                                                                                      _model.textController1?.clear();
-                                                                                      setState(() {});
-                                                                                    },
-                                                                                    child: Icon(
-                                                                                      Icons.clear,
-                                                                                      color: Color(0xA9F91CF9),
-                                                                                      size: 10.0,
-                                                                                    ),
-                                                                                  )
-                                                                                : null,
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'Urbanist',
-                                                                                fontSize: 40.0,
-                                                                                fontWeight: FontWeight.w500,
+                                                                                10.0,
+                                                                                0.0),
+                                                                            child:
+                                                                                TextFormField(
+                                                                              controller: _model.textController1,
+                                                                              onChanged: (_) => EasyDebounce.debounce(
+                                                                                '_model.textController1',
+                                                                                Duration(milliseconds: 2000),
+                                                                                () async {
+                                                                                  _model.apiResulte1k = await ApiTestCall.call(
+                                                                                    user: currentUserReference?.id,
+                                                                                  );
+
+                                                                                  setState(() {});
+                                                                                },
                                                                               ),
-                                                                          textAlign:
-                                                                              TextAlign.start,
-                                                                          maxLines:
-                                                                              5,
-                                                                          cursorColor:
-                                                                              Color(0xA9F91CF9),
-                                                                          validator: _model
-                                                                              .textController1Validator
-                                                                              .asValidator(context),
+                                                                              autofocus: true,
+                                                                              obscureText: false,
+                                                                              decoration: InputDecoration(
+                                                                                labelStyle: FlutterFlowTheme.of(context).headlineMedium,
+                                                                                hintText: 'Write your question here...',
+                                                                                hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                      fontFamily: 'Outfit',
+                                                                                      fontSize: 20.0,
+                                                                                      fontWeight: FontWeight.w500,
+                                                                                    ),
+                                                                                enabledBorder: InputBorder.none,
+                                                                                focusedBorder: InputBorder.none,
+                                                                                errorBorder: InputBorder.none,
+                                                                                focusedErrorBorder: InputBorder.none,
+                                                                                contentPadding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+                                                                                suffixIcon: _model.textController1!.text.isNotEmpty
+                                                                                    ? InkWell(
+                                                                                        onTap: () async {
+                                                                                          _model.textController1?.clear();
+                                                                                          _model.apiResulte1k = await ApiTestCall.call(
+                                                                                            user: currentUserReference?.id,
+                                                                                          );
+
+                                                                                          setState(() {});
+                                                                                          setState(() {});
+                                                                                        },
+                                                                                        child: Icon(
+                                                                                          Icons.clear,
+                                                                                          color: Color(0xA9F91CF9),
+                                                                                          size: 10.0,
+                                                                                        ),
+                                                                                      )
+                                                                                    : null,
+                                                                              ),
+                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                    fontFamily: 'Urbanist',
+                                                                                    fontSize: 40.0,
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                  ),
+                                                                              textAlign: TextAlign.start,
+                                                                              maxLines: 5,
+                                                                              cursorColor: Color(0xA9F91CF9),
+                                                                              validator: _model.textController1Validator.asValidator(context),
+                                                                            ),
+                                                                          ),
                                                                         ),
-                                                                      ),
-                                                                    ),
+                                                                      );
+                                                                    },
                                                                   ),
                                                                 ),
                                                               ],
@@ -849,72 +874,132 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                             ],
                                           ),
                                         ),
-                                        Container(
-                                          width: 0.0,
-                                          height: 50.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0x00FFFFFF),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 10.0, 0.0, 0.0),
-                                            child: FFButtonWidget(
-                                              onPressed: () async {
-                                                await UserPostsRecord.collection
-                                                    .doc()
-                                                    .set(
-                                                        createUserPostsRecordData(
-                                                      postUser:
-                                                          currentUserReference,
-                                                      postTitle: '',
-                                                      timePosted:
-                                                          getCurrentTimestamp,
-                                                      postOwner: true,
-                                                      postPoll: _model
-                                                          .textController1.text,
-                                                      postAnswer1: _model
-                                                          .textController2.text,
-                                                      postAnswer2: _model
-                                                          .textController3.text,
-                                                      postAnswer3: _model
-                                                          .textController4.text,
-                                                      postAnswer4: _model
-                                                          .textController5.text,
-                                                    ));
-                                                Navigator.pop(context);
-                                              },
-                                              text: 'Create Post',
-                                              options: FFButtonOptions(
-                                                width: 0.0,
-                                                height: 50.0,
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 0.0, 0.0),
-                                                iconPadding:
-                                                    EdgeInsetsDirectional
-                                                        .fromSTEB(
-                                                            0.0, 0.0, 0.0, 0.0),
-                                                color: Color(0x6E811081),
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily: 'Outfit',
-                                                          color: Colors.white,
-                                                          fontSize: 16.0,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                elevation: 0.0,
-                                                borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(24.0),
-                                              ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 5.0, 0.0, 0.0),
+                                          child:
+                                              StreamBuilder<List<ImagesRecord>>(
+                                            stream: queryImagesRecord(
+                                              singleRecord: true,
                                             ),
+                                            builder: (context, snapshot) {
+                                              // Customize what your widget looks like when it's loading.
+                                              if (!snapshot.hasData) {
+                                                return Center(
+                                                  child: SizedBox(
+                                                    width: 50.0,
+                                                    height: 50.0,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      valueColor:
+                                                          AlwaysStoppedAnimation<
+                                                              Color>(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                              List<ImagesRecord>
+                                                  buttonImagesRecordList =
+                                                  snapshot.data!;
+                                              // Return an empty Container when the item does not exist.
+                                              if (snapshot.data!.isEmpty) {
+                                                return Container();
+                                              }
+                                              final buttonImagesRecord =
+                                                  buttonImagesRecordList
+                                                          .isNotEmpty
+                                                      ? buttonImagesRecordList
+                                                          .first
+                                                      : null;
+                                              return FFButtonWidget(
+                                                onPressed: () async {
+                                                  var _shouldSetState = false;
+                                                  _model.apiResult8ja =
+                                                      await GetURLCall.call();
+                                                  _shouldSetState = true;
+                                                  if ((_model.apiResulte1k
+                                                          ?.succeeded ??
+                                                      true)) {
+                                                    await UserPostsRecord
+                                                        .collection
+                                                        .doc()
+                                                        .set(
+                                                            createUserPostsRecordData(
+                                                          postUser:
+                                                              currentUserReference,
+                                                          timePosted:
+                                                              getCurrentTimestamp,
+                                                          postOwner: true,
+                                                          postPoll: _model
+                                                              .textController1
+                                                              .text,
+                                                          postAnswer1: _model
+                                                              .textController2
+                                                              .text,
+                                                          postAnswer2: _model
+                                                              .textController3
+                                                              .text,
+                                                          postAnswer3: _model
+                                                              .textController4
+                                                              .text,
+                                                          postAnswer4: _model
+                                                              .textController5
+                                                              .text,
+                                                          imageURL: GetURLCall
+                                                              .imageURL(
+                                                            (_model.apiResult8ja
+                                                                    ?.jsonBody ??
+                                                                ''),
+                                                          ),
+                                                        ));
+                                                    Navigator.pop(context);
+                                                  } else {
+                                                    if (_shouldSetState)
+                                                      setState(() {});
+                                                    return;
+                                                  }
+
+                                                  if (_shouldSetState)
+                                                    setState(() {});
+                                                },
+                                                text: 'Create Post',
+                                                options: FFButtonOptions(
+                                                  width: 0.0,
+                                                  height: 50.0,
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 0.0, 0.0),
+                                                  iconPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(0.0, 0.0,
+                                                              0.0, 0.0),
+                                                  color: Color(0x6E811081),
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily: 'Outfit',
+                                                        color: Colors.white,
+                                                        fontSize: 16.0,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                  elevation: 0.0,
+                                                  borderSide: BorderSide(
+                                                    color: Colors.transparent,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          24.0),
+                                                ),
+                                              );
+                                            },
                                           ),
                                         ),
                                       ],

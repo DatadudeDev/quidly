@@ -192,17 +192,8 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       FFButtonWidget(
-                        onPressed: () async {
-                          context.pushNamed(
-                            'pollDev',
-                            extra: <String, dynamic>{
-                              kTransitionInfoKey: TransitionInfo(
-                                hasTransition: true,
-                                transitionType: PageTransitionType.bottomToTop,
-                                duration: Duration(milliseconds: 250),
-                              ),
-                            },
-                          );
+                        onPressed: () {
+                          print('Button pressed ...');
                         },
                         text: 'Find Followers',
                         options: FFButtonOptions(
