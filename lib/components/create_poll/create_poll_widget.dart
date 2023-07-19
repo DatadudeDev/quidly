@@ -60,15 +60,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
       width: 400.0,
       height: 530.0,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            FlutterFlowTheme.of(context).primary,
-            FlutterFlowTheme.of(context).secondary
-          ],
-          stops: [0.0, 1.0],
-          begin: AlignmentDirectional(0.0, -1.0),
-          end: AlignmentDirectional(0, 1.0),
-        ),
+        color: Color(0xFF5B2B52),
         borderRadius: BorderRadius.circular(20.0),
       ),
       child: Column(
@@ -105,11 +97,11 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                               borderColor: Color(0x00FFFFFF),
                               borderRadius: 20.0,
                               borderWidth: 1.0,
-                              buttonSize: 10.0,
+                              buttonSize: 20.0,
                               fillColor: Color(0x00FFFFFF),
                               icon: Icon(
                                 Icons.arrow_back_sharp,
-                                color: Color(0x6E811081),
+                                color: FlutterFlowTheme.of(context).primary,
                                 size: 24.0,
                               ),
                               onPressed: () async {
@@ -129,7 +121,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                 color: Color(0x00FFFFFF),
                                 borderRadius: BorderRadius.circular(24.0),
                                 border: Border.all(
-                                  color: Color(0x6E811081),
+                                  color: FlutterFlowTheme.of(context).primary,
                                   width: 3.0,
                                 ),
                               ),
@@ -142,7 +134,8 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                   children: [
                                     Icon(
                                       Icons.bubble_chart,
-                                      color: Color(0x6E811081),
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
                                       size: 24.0,
                                     ),
                                     Padding(
@@ -201,7 +194,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                   Container(
                                     width: MediaQuery.sizeOf(context).width *
                                         0.945,
-                                    height: 425.0,
+                                    height: 405.0,
                                     decoration: BoxDecoration(
                                       color: Color(0x00FFFFFF),
                                       borderRadius: BorderRadius.circular(20.0),
@@ -227,83 +220,86 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                             children: [
                                               Stack(
                                                 children: [
-                                                  Form(
-                                                    key: _model.formKey,
-                                                    autovalidateMode:
-                                                        AutovalidateMode.always,
-                                                    child: Stack(
-                                                      children: [
-                                                        Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Expanded(
-                                                                  child: StreamBuilder<
-                                                                      List<
-                                                                          UserPostsRecord>>(
-                                                                    stream:
-                                                                        queryUserPostsRecord(
-                                                                      singleRecord:
-                                                                          true,
-                                                                    ),
-                                                                    builder:
-                                                                        (context,
-                                                                            snapshot) {
-                                                                      // Customize what your widget looks like when it's loading.
-                                                                      if (!snapshot
-                                                                          .hasData) {
-                                                                        return Center(
+                                                  Stack(
+                                                    children: [
+                                                      Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Expanded(
+                                                                child: StreamBuilder<
+                                                                    List<
+                                                                        UserPostsRecord>>(
+                                                                  stream:
+                                                                      queryUserPostsRecord(
+                                                                    singleRecord:
+                                                                        true,
+                                                                  ),
+                                                                  builder: (context,
+                                                                      snapshot) {
+                                                                    // Customize what your widget looks like when it's loading.
+                                                                    if (!snapshot
+                                                                        .hasData) {
+                                                                      return Center(
+                                                                        child:
+                                                                            SizedBox(
+                                                                          width:
+                                                                              50.0,
+                                                                          height:
+                                                                              50.0,
                                                                           child:
-                                                                              SizedBox(
-                                                                            width:
-                                                                                50.0,
-                                                                            height:
-                                                                                50.0,
-                                                                            child:
-                                                                                CircularProgressIndicator(
-                                                                              valueColor: AlwaysStoppedAnimation<Color>(
-                                                                                FlutterFlowTheme.of(context).primary,
-                                                                              ),
+                                                                              CircularProgressIndicator(
+                                                                            valueColor:
+                                                                                AlwaysStoppedAnimation<Color>(
+                                                                              FlutterFlowTheme.of(context).primary,
                                                                             ),
                                                                           ),
-                                                                        );
-                                                                      }
-                                                                      List<UserPostsRecord>
-                                                                          containerUserPostsRecordList =
-                                                                          snapshot
-                                                                              .data!;
-                                                                      final containerUserPostsRecord = containerUserPostsRecordList
-                                                                              .isNotEmpty
-                                                                          ? containerUserPostsRecordList
-                                                                              .first
-                                                                          : null;
-                                                                      return Container(
-                                                                        width: MediaQuery.sizeOf(context).width *
-                                                                            0.9,
-                                                                        height:
-                                                                            185.0,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              Color(0x00FFFFFF),
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(10.0),
-                                                                          border:
-                                                                              Border.all(
-                                                                            color:
-                                                                                Color(0x6E811081),
-                                                                            width:
-                                                                                4.0,
-                                                                          ),
                                                                         ),
+                                                                      );
+                                                                    }
+                                                                    List<UserPostsRecord>
+                                                                        containerUserPostsRecordList =
+                                                                        snapshot
+                                                                            .data!;
+                                                                    final containerUserPostsRecord = containerUserPostsRecordList
+                                                                            .isNotEmpty
+                                                                        ? containerUserPostsRecordList
+                                                                            .first
+                                                                        : null;
+                                                                    return Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.9,
+                                                                      height:
+                                                                          185.0,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: Color(
+                                                                            0x00FFFFFF),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(10.0),
+                                                                        border:
+                                                                            Border.all(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primary,
+                                                                          width:
+                                                                              4.0,
+                                                                        ),
+                                                                      ),
+                                                                      child:
+                                                                          Form(
+                                                                        key: _model
+                                                                            .formKey,
+                                                                        autovalidateMode:
+                                                                            AutovalidateMode.always,
                                                                         child:
                                                                             Align(
                                                                           alignment: AlignmentDirectional(
@@ -325,6 +321,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                                 () => setState(() {}),
                                                                               ),
                                                                               autofocus: true,
+                                                                              textCapitalization: TextCapitalization.sentences,
                                                                               obscureText: false,
                                                                               decoration: InputDecoration(
                                                                                 labelStyle: FlutterFlowTheme.of(context).headlineMedium,
@@ -365,16 +362,16 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                             ),
                                                                           ),
                                                                         ),
-                                                                      );
-                                                                    },
-                                                                  ),
+                                                                      ),
+                                                                    );
+                                                                  },
                                                                 ),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
                                               ),
@@ -404,213 +401,224 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
                                                                 .spaceBetween,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
                                                         children: [
-                                                          Container(
-                                                            width: 120.0,
-                                                            height: 80.0,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: Color(
-                                                                  0x471A1F24),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          20.0),
-                                                              border:
-                                                                  Border.all(
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        20.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            child: Container(
+                                                              width: 120.0,
+                                                              height: 80.0,
+                                                              decoration:
+                                                                  BoxDecoration(
                                                                 color: Color(
-                                                                    0xA9CA18CA),
-                                                                width: 2.0,
+                                                                    0x471A1F24),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20.0),
+                                                                border:
+                                                                    Border.all(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                                  width: 2.0,
+                                                                ),
                                                               ),
-                                                            ),
-                                                            child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                                  child:
-                                                                      TextFormField(
-                                                                    controller:
-                                                                        _model
-                                                                            .textController2,
-                                                                    autofocus:
-                                                                        true,
-                                                                    textCapitalization:
-                                                                        TextCapitalization
-                                                                            .sentences,
-                                                                    obscureText:
-                                                                        false,
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      labelStyle:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .labelMedium,
-                                                                      hintText:
-                                                                          '(Answer 1)',
-                                                                      hintStyle: FlutterFlowTheme.of(
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            8.0,
+                                                                            0.0,
+                                                                            8.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        TextFormField(
+                                                                      controller:
+                                                                          _model
+                                                                              .textController2,
+                                                                      autofocus:
+                                                                          true,
+                                                                      textCapitalization:
+                                                                          TextCapitalization
+                                                                              .sentences,
+                                                                      obscureText:
+                                                                          false,
+                                                                      decoration:
+                                                                          InputDecoration(
+                                                                        labelStyle:
+                                                                            FlutterFlowTheme.of(context).labelMedium,
+                                                                        hintText:
+                                                                            '(Answer 1)',
+                                                                        hintStyle: FlutterFlowTheme.of(context)
+                                                                            .labelMedium
+                                                                            .override(
+                                                                              fontFamily: 'Outfit',
+                                                                              fontSize: 15.0,
+                                                                            ),
+                                                                        enabledBorder:
+                                                                            InputBorder.none,
+                                                                        focusedBorder:
+                                                                            InputBorder.none,
+                                                                        errorBorder:
+                                                                            InputBorder.none,
+                                                                        focusedErrorBorder:
+                                                                            InputBorder.none,
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .labelMedium
+                                                                          .bodyMedium
                                                                           .override(
                                                                             fontFamily:
-                                                                                'Outfit',
+                                                                                'Urbanist',
+                                                                            color:
+                                                                                Colors.white,
                                                                             fontSize:
-                                                                                15.0,
+                                                                                25.0,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
                                                                           ),
-                                                                      enabledBorder:
-                                                                          InputBorder
-                                                                              .none,
-                                                                      focusedBorder:
-                                                                          InputBorder
-                                                                              .none,
-                                                                      errorBorder:
-                                                                          InputBorder
-                                                                              .none,
-                                                                      focusedErrorBorder:
-                                                                          InputBorder
-                                                                              .none,
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .center,
+                                                                      maxLines:
+                                                                          2,
+                                                                      minLines:
+                                                                          1,
+                                                                      cursorColor:
+                                                                          Colors
+                                                                              .white,
+                                                                      validator: _model
+                                                                          .textController2Validator
+                                                                          .asValidator(
+                                                                              context),
                                                                     ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Urbanist',
-                                                                          color:
-                                                                              Colors.white,
-                                                                          fontSize:
-                                                                              25.0,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                        ),
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .center,
-                                                                    maxLines: 2,
-                                                                    minLines: 1,
-                                                                    cursorColor:
-                                                                        Colors
-                                                                            .white,
-                                                                    validator: _model
-                                                                        .textController2Validator
-                                                                        .asValidator(
-                                                                            context),
                                                                   ),
-                                                                ),
-                                                              ],
+                                                                ],
+                                                              ),
                                                             ),
                                                           ),
-                                                          Container(
-                                                            width: 120.0,
-                                                            height: 80.0,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: Color(
-                                                                  0x471A1F24),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          20.0),
-                                                              border:
-                                                                  Border.all(
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        20.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            child: Container(
+                                                              width: 120.0,
+                                                              height: 80.0,
+                                                              decoration:
+                                                                  BoxDecoration(
                                                                 color: Color(
-                                                                    0xA9CA18CA),
-                                                                width: 2.0,
+                                                                    0x471A1F24),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20.0),
+                                                                border:
+                                                                    Border.all(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                                  width: 2.0,
+                                                                ),
                                                               ),
-                                                            ),
-                                                            child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                                  child:
-                                                                      TextFormField(
-                                                                    controller:
-                                                                        _model
-                                                                            .textController3,
-                                                                    autofocus:
-                                                                        true,
-                                                                    textCapitalization:
-                                                                        TextCapitalization
-                                                                            .sentences,
-                                                                    obscureText:
-                                                                        false,
-                                                                    decoration:
-                                                                        InputDecoration(
-                                                                      labelStyle:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .labelMedium,
-                                                                      hintText:
-                                                                          '(Answer 2)',
-                                                                      hintStyle: FlutterFlowTheme.of(
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            8.0,
+                                                                            0.0,
+                                                                            8.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        TextFormField(
+                                                                      controller:
+                                                                          _model
+                                                                              .textController3,
+                                                                      autofocus:
+                                                                          true,
+                                                                      textCapitalization:
+                                                                          TextCapitalization
+                                                                              .sentences,
+                                                                      obscureText:
+                                                                          false,
+                                                                      decoration:
+                                                                          InputDecoration(
+                                                                        labelStyle:
+                                                                            FlutterFlowTheme.of(context).labelMedium,
+                                                                        hintText:
+                                                                            '(Answer 2)',
+                                                                        hintStyle: FlutterFlowTheme.of(context)
+                                                                            .labelMedium
+                                                                            .override(
+                                                                              fontFamily: 'Outfit',
+                                                                              fontSize: 15.0,
+                                                                            ),
+                                                                        enabledBorder:
+                                                                            InputBorder.none,
+                                                                        focusedBorder:
+                                                                            InputBorder.none,
+                                                                        errorBorder:
+                                                                            InputBorder.none,
+                                                                        focusedErrorBorder:
+                                                                            InputBorder.none,
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .labelMedium
+                                                                          .bodyMedium
                                                                           .override(
                                                                             fontFamily:
-                                                                                'Outfit',
+                                                                                'Urbanist',
+                                                                            color:
+                                                                                Colors.white,
                                                                             fontSize:
-                                                                                15.0,
+                                                                                25.0,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
                                                                           ),
-                                                                      enabledBorder:
-                                                                          InputBorder
-                                                                              .none,
-                                                                      focusedBorder:
-                                                                          InputBorder
-                                                                              .none,
-                                                                      errorBorder:
-                                                                          InputBorder
-                                                                              .none,
-                                                                      focusedErrorBorder:
-                                                                          InputBorder
-                                                                              .none,
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .center,
+                                                                      maxLines:
+                                                                          2,
+                                                                      minLines:
+                                                                          1,
+                                                                      cursorColor:
+                                                                          Colors
+                                                                              .white,
+                                                                      validator: _model
+                                                                          .textController3Validator
+                                                                          .asValidator(
+                                                                              context),
                                                                     ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Urbanist',
-                                                                          color:
-                                                                              Colors.white,
-                                                                          fontSize:
-                                                                              25.0,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                        ),
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .center,
-                                                                    maxLines: 2,
-                                                                    minLines: 1,
-                                                                    cursorColor:
-                                                                        Colors
-                                                                            .white,
-                                                                    validator: _model
-                                                                        .textController3Validator
-                                                                        .asValidator(
-                                                                            context),
                                                                   ),
-                                                                ),
-                                                              ],
+                                                                ],
+                                                              ),
                                                             ),
                                                           ),
                                                         ],
@@ -659,8 +667,9 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                           20.0),
                                                               border:
                                                                   Border.all(
-                                                                color: Color(
-                                                                    0xA9CA18CA),
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
                                                                 width: 2.0,
                                                               ),
                                                             ),
@@ -763,8 +772,9 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                           20.0),
                                                               border:
                                                                   Border.all(
-                                                                color: Color(
-                                                                    0xA9CA18CA),
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
                                                                 width: 2.0,
                                                               ),
                                                             ),
@@ -875,71 +885,87 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                     ],
                   ),
                 ),
-                FFButtonWidget(
-                  onPressed: () async {
-                    var _shouldSetState = false;
-                    _model.prompt = _model.textController1.text;
-                    _model.imageURL = null;
-                    _model.apiResult47j = await ApiTestCall.call(
-                      prompt: _model.prompt,
-                    );
-                    _shouldSetState = true;
-                    if ((_model.apiResult47j?.succeeded ?? true)) {
-                      _model.apiResult1m6 = await GetURLCall.call();
+                Container(
+                  width: 100.0,
+                  height: 35.0,
+                  decoration: BoxDecoration(
+                    color: Color(0x00FFFFFF),
+                  ),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      var _shouldSetState = false;
+                      _model.imageURL = null;
+                      _model.poll = _model.poll;
+                      _model.answer1 = _model.textController2.text;
+                      _model.answer2 = _model.textController3.text;
+                      _model.answer3 = _model.textController4.text;
+                      _model.answer4 = _model.textController5.text;
+                      _model.apiResult47j = await ApiTestCall.call(
+                        poll: _model.poll,
+                        answer1: _model.answer1,
+                        answer2: _model.answer2,
+                        answer3: _model.answer3,
+                        answer4: _model.answer4,
+                      );
                       _shouldSetState = true;
-                      if ((_model.apiResult1m6?.succeeded ?? true)) {
-                        setState(() {
-                          _model.imageURL = GetURLCall.imageURL(
-                            (_model.apiResult1m6?.jsonBody ?? ''),
-                          );
-                        });
+                      if ((_model.apiResult47j?.succeeded ?? true)) {
+                        _model.apiResult1m6 = await GetURLCall.call();
+                        _shouldSetState = true;
+                        if ((_model.apiResult1m6?.succeeded ?? true)) {
+                          setState(() {
+                            _model.imageURL = GetURLCall.imageURL(
+                              (_model.apiResult1m6?.jsonBody ?? ''),
+                            );
+                          });
 
-                        await UserPostsRecord.collection
-                            .doc()
-                            .set(createUserPostsRecordData(
-                              postUser: currentUserReference,
-                              timePosted: getCurrentTimestamp,
-                              postOwner: true,
-                              postAnswer1: _model.textController2.text,
-                              postAnswer2: _model.textController3.text,
-                              postAnswer3: _model.textController4.text,
-                              postAnswer4: _model.textController5.text,
-                              imageURL: _model.imageURL,
-                              postPoll: _model.textController1.text,
-                            ));
-                        Navigator.pop(context);
+                          await UserPostsRecord.collection
+                              .doc()
+                              .set(createUserPostsRecordData(
+                                postUser: currentUserReference,
+                                timePosted: getCurrentTimestamp,
+                                postOwner: true,
+                                postAnswer1: _model.textController2.text,
+                                postAnswer2: _model.textController3.text,
+                                postAnswer3: _model.textController4.text,
+                                postAnswer4: _model.textController5.text,
+                                imageURL: _model.imageURL,
+                                postPoll: _model.textController1.text,
+                              ));
+                          Navigator.pop(context);
+                        } else {
+                          if (_shouldSetState) setState(() {});
+                          return;
+                        }
+
+                        if (_shouldSetState) setState(() {});
+                        return;
                       } else {
                         if (_shouldSetState) setState(() {});
                         return;
                       }
 
                       if (_shouldSetState) setState(() {});
-                      return;
-                    } else {
-                      if (_shouldSetState) setState(() {});
-                      return;
-                    }
-
-                    if (_shouldSetState) setState(() {});
-                  },
-                  text: 'Button',
-                  options: FFButtonOptions(
-                    height: 40.0,
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Urbanist',
-                          color: Colors.white,
-                        ),
-                    elevation: 3.0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
+                    },
+                    text: 'Submit',
+                    options: FFButtonOptions(
+                      height: 40.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).primary,
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                fontFamily: 'Urbanist',
+                                color: Color(0xFF562752),
+                              ),
+                      elevation: 3.0,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
                     ),
-                    borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
               ],

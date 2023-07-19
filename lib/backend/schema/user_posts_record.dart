@@ -96,6 +96,26 @@ class UserPostsRecord extends FirestoreRecord {
   String get imageURL => _imageURL ?? '';
   bool hasImageURL() => _imageURL != null;
 
+  // "votes1" field.
+  List<DocumentReference>? _votes1;
+  List<DocumentReference> get votes1 => _votes1 ?? const [];
+  bool hasVotes1() => _votes1 != null;
+
+  // "votes2" field.
+  List<DocumentReference>? _votes2;
+  List<DocumentReference> get votes2 => _votes2 ?? const [];
+  bool hasVotes2() => _votes2 != null;
+
+  // "votes3" field.
+  List<DocumentReference>? _votes3;
+  List<DocumentReference> get votes3 => _votes3 ?? const [];
+  bool hasVotes3() => _votes3 != null;
+
+  // "votes4" field.
+  List<DocumentReference>? _votes4;
+  List<DocumentReference> get votes4 => _votes4 ?? const [];
+  bool hasVotes4() => _votes4 != null;
+
   void _initializeFields() {
     _postPhoto = snapshotData['postPhoto'] as String?;
     _postTitle = snapshotData['postTitle'] as String?;
@@ -113,6 +133,10 @@ class UserPostsRecord extends FirestoreRecord {
     _postAnswer3 = snapshotData['postAnswer3'] as String?;
     _postAnswer4 = snapshotData['postAnswer4'] as String?;
     _imageURL = snapshotData['imageURL'] as String?;
+    _votes1 = getDataList(snapshotData['votes1']);
+    _votes2 = getDataList(snapshotData['votes2']);
+    _votes3 = getDataList(snapshotData['votes3']);
+    _votes4 = getDataList(snapshotData['votes4']);
   }
 
   static CollectionReference get collection =>
@@ -208,7 +232,11 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e1?.postAnswer2 == e2?.postAnswer2 &&
         e1?.postAnswer3 == e2?.postAnswer3 &&
         e1?.postAnswer4 == e2?.postAnswer4 &&
-        e1?.imageURL == e2?.imageURL;
+        e1?.imageURL == e2?.imageURL &&
+        listEquality.equals(e1?.votes1, e2?.votes1) &&
+        listEquality.equals(e1?.votes2, e2?.votes2) &&
+        listEquality.equals(e1?.votes3, e2?.votes3) &&
+        listEquality.equals(e1?.votes4, e2?.votes4);
   }
 
   @override
@@ -228,7 +256,11 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e?.postAnswer2,
         e?.postAnswer3,
         e?.postAnswer4,
-        e?.imageURL
+        e?.imageURL,
+        e?.votes1,
+        e?.votes2,
+        e?.votes3,
+        e?.votes4
       ]);
 
   @override

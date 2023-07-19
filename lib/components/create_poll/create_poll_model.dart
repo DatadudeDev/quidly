@@ -18,9 +18,15 @@ class CreatePollModel extends FlutterFlowModel {
 
   DocumentReference? user;
 
-  DocumentReference? poll;
+  String? poll = 'random';
 
-  String prompt = 'random';
+  String answer1 = '';
+
+  String answer2 = '';
+
+  String answer3 = '';
+
+  String answer4 = '';
 
   ///  State fields for stateful widgets in this component.
 
@@ -28,6 +34,21 @@ class CreatePollModel extends FlutterFlowModel {
   // State field(s) for TextField widget.
   TextEditingController? textController1;
   String? Function(BuildContext, String?)? textController1Validator;
+  String? _textController1Validator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    if (val.length < 5) {
+      return 'Min 5 characters';
+    }
+    if (val.length > 50) {
+      return 'Max 50 characters';
+    }
+
+    return null;
+  }
+
   // State field(s) for TextField widget.
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
@@ -47,7 +68,9 @@ class CreatePollModel extends FlutterFlowModel {
 
   /// Initialization and disposal methods.
 
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    textController1Validator = _textController1Validator;
+  }
 
   void dispose() {
     textController1?.dispose();

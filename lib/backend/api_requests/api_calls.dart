@@ -11,11 +11,19 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
 class ApiTestCall {
   static Future<ApiCallResponse> call({
-    String? prompt = '\"Linky\"',
+    String? poll = 'random',
+    String? answer1 = '',
+    String? answer2 = '',
+    String? answer3 = '',
+    String? answer4 = '',
   }) {
     final body = '''
 {
-  "prompt": "${prompt}"
+  "poll": "${poll}",
+  "answer1": "${answer1}",
+  "answer2": "${answer2}",
+  "answer3": "${answer3}",
+  "answer4": "${answer4}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'apiTest',

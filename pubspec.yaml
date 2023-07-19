@@ -48,6 +48,7 @@ dependencies:
   firebase_storage: 11.2.2
   firebase_storage_platform_interface: 4.4.2
   firebase_storage_web: 3.6.2
+  flip_card: 0.6.0
   flutter_animate: 4.1.1+1
   flutter_cache_manager: 3.3.0
   flutter_google_places: 
