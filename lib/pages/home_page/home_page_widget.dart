@@ -838,16 +838,13 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                             MainAxisAlignment
                                                                 .center,
                                                         children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
-                                                                        10.0,
-                                                                        0.0),
-                                                            child:
-                                                                FFButtonWidget(
+                                                          if (socialFeedUserPostsRecord
+                                                                      .postAnswer3 !=
+                                                                  null &&
+                                                              socialFeedUserPostsRecord
+                                                                      .postAnswer3 !=
+                                                                  '')
+                                                            FFButtonWidget(
                                                               onPressed:
                                                                   () async {
                                                                 await socialFeedUserPostsRecord
@@ -905,12 +902,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                             12.0),
                                                               ),
                                                             ),
-                                                          ),
                                                           Padding(
                                                             padding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
-                                                                        0.0,
+                                                                        10.0,
                                                                         0.0,
                                                                         10.0,
                                                                         0.0),
@@ -974,83 +970,74 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               ),
                                                             ),
                                                           ),
-                                                          if (valueOrDefault<
-                                                              bool>(
-                                                            socialFeedUserPostsRecord
-                                                                        .postAnswer3 !=
-                                                                    null &&
-                                                                socialFeedUserPostsRecord
-                                                                        .postAnswer3 !=
-                                                                    '',
-                                                            true,
-                                                          ))
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          10.0,
-                                                                          0.0),
-                                                              child:
-                                                                  FFButtonWidget(
-                                                                onPressed:
-                                                                    () async {
-                                                                  await socialFeedUserPostsRecord
-                                                                      .reference
-                                                                      .update({
-                                                                    'votes1':
-                                                                        FieldValue
-                                                                            .arrayUnion([
-                                                                      userPostUsersRecord
-                                                                          .reference
-                                                                    ]),
-                                                                  });
-                                                                },
-                                                                text: socialFeedUserPostsRecord
-                                                                    .postAnswer1,
-                                                                options:
-                                                                    FFButtonOptions(
-                                                                  width: 81.0,
-                                                                  height: 50.0,
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  iconPadding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  color: Color(
-                                                                      0xFF5B2B52),
-                                                                  textStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleSmall
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Urbanist',
-                                                                        color: Colors
-                                                                            .white,
-                                                                      ),
-                                                                  elevation:
-                                                                      3.0,
-                                                                  borderSide:
-                                                                      BorderSide(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    width: 2.0,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        10.0,
+                                                                        0.0),
+                                                            child:
+                                                                FFButtonWidget(
+                                                              onPressed:
+                                                                  () async {
+                                                                await socialFeedUserPostsRecord
+                                                                    .reference
+                                                                    .update({
+                                                                  'votes1':
+                                                                      FieldValue
+                                                                          .arrayUnion([
+                                                                    userPostUsersRecord
+                                                                        .reference
+                                                                  ]),
+                                                                });
+                                                              },
+                                                              text: socialFeedUserPostsRecord
+                                                                  .postAnswer1,
+                                                              options:
+                                                                  FFButtonOptions(
+                                                                width: 81.0,
+                                                                height: 50.0,
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                iconPadding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                color: Color(
+                                                                    0xFF5B2B52),
+                                                                textStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Urbanist',
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ),
+                                                                elevation: 3.0,
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 2.0,
                                                                 ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            12.0),
                                                               ),
                                                             ),
+                                                          ),
                                                           if (valueOrDefault<
                                                               bool>(
                                                             socialFeedUserPostsRecord

@@ -901,7 +901,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                       _model.answer3 = _model.textController4.text;
                       _model.answer4 = _model.textController5.text;
                       _model.apiResult47j = await ApiTestCall.call(
-                        poll: _model.poll,
+                        poll: _model.textController1.text,
                         answer1: _model.answer1,
                         answer2: _model.answer2,
                         answer3: _model.answer3,
