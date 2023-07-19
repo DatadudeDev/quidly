@@ -208,6 +208,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'createGroupChat',
           path: '/createGroupChat',
           builder: (context, params) => CreateGroupChatWidget(),
+        ),
+        FFRoute(
+          name: 'pollDev',
+          path: '/pollDev',
+          builder: (context, params) => PollDevWidget(),
+        ),
+        FFRoute(
+          name: 'devc',
+          path: '/devc',
+          builder: (context, params) => DevcWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],
@@ -393,7 +403,9 @@ class FFRoute {
                     width: 50.0,
                     height: 50.0,
                     child: CircularProgressIndicator(
-                      color: FlutterFlowTheme.of(context).primary,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        FlutterFlowTheme.of(context).primary,
+                      ),
                     ),
                   ),
                 )

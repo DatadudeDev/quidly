@@ -19,3 +19,7 @@ int likes(UserPostsRecord? post) {
 bool hasUploadedMedia(String? mediaPath) {
   return mediaPath != null && mediaPath.isNotEmpty;
 }
+
+int shits(UserPostsRecord? post) {
+  return post!.shits!.length;
+}

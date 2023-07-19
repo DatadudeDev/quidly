@@ -63,11 +63,11 @@ class _LoginWidgetState extends State<LoginWidget> {
               children: [],
             ),
             Text(
-              'Quidly',
+              'Quid',
               style: FlutterFlowTheme.of(context).bodyMedium.override(
                     fontFamily: 'Roboto Mono',
                     color: Colors.black,
-                    fontSize: 90.0,
+                    fontSize: 100.0,
                     fontStyle: FontStyle.italic,
                   ),
             ),

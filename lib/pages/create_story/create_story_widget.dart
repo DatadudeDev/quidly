@@ -522,7 +522,7 @@ class _CreateStoryWidgetState extends State<CreateStoryWidget> {
                             .set(createUserStoriesRecordData(
                               user: currentUserReference,
                               storyVideo: _model.uploadedFileUrl3,
-                              storyPhoto: _model.uploadedFileUrl3,
+                              storyPhoto: _model.uploadedFileUrl2,
                               storyDescription:
                                   _model.storyDescriptionController.text,
                               storyPostedAt: getCurrentTimestamp,

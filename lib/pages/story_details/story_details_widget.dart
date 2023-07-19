@@ -1,5 +1,6 @@
 import '/backend/backend.dart';
 import '/components/comments/comments_widget.dart';
+import '/components/delete_story/delete_story_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_media_display.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -8,6 +9,7 @@ import '/flutter_flow/flutter_flow_video_player.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -67,7 +69,9 @@ class _StoryDetailsWidgetState extends State<StoryDetailsWidget> {
                             width: 50.0,
                             height: 50.0,
                             child: CircularProgressIndicator(
-                              color: FlutterFlowTheme.of(context).primary,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                FlutterFlowTheme.of(context).primary,
+                              ),
                             ),
                           ),
                         );
@@ -302,19 +306,54 @@ class _StoryDetailsWidgetState extends State<StoryDetailsWidget> {
             ),
             Row(
               mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                FlutterFlowIconButton(
-                  borderColor: Colors.transparent,
-                  borderRadius: 30.0,
-                  buttonSize: 46.0,
-                  icon: Icon(
-                    Icons.arrow_back_rounded,
-                    color: FlutterFlowTheme.of(context).secondaryText,
-                    size: 24.0,
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 0.0),
+                  child: FlutterFlowIconButton(
+                    borderColor: Color(0x00FFFFFF),
+                    borderRadius: 20.0,
+                    borderWidth: 1.0,
+                    buttonSize: 30.0,
+                    fillColor: Color(0x00FFFFFF),
+                    icon: FaIcon(
+                      FontAwesomeIcons.arrowLeft,
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      size: 24.0,
+                    ),
+                    onPressed: () async {
+                      context.safePop();
+                    },
                   ),
-                  onPressed: () async {
-                    context.pop();
-                  },
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 10.0, 0.0),
+                  child: FlutterFlowIconButton(
+                    borderColor: Color(0x00FFFFFF),
+                    borderRadius: 20.0,
+                    borderWidth: 1.0,
+                    buttonSize: 40.0,
+                    fillColor: Color(0x00FFFFFF),
+                    icon: Icon(
+                      Icons.keyboard_control,
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      size: 24.0,
+                    ),
+                    onPressed: () async {
+                      await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        enableDrag: false,
+                        context: context,
+                        builder: (context) {
+                          return Padding(
+                            padding: MediaQuery.viewInsetsOf(context),
+                            child: DeleteStoryWidget(),
+                          );
+                        },
+                      ).then((value) => setState(() {}));
+                    },
+                  ),
                 ),
               ],
             ),
