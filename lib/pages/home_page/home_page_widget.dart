@@ -128,7 +128,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
         ),
       ),
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: Colors.black,
         automaticallyImplyLeading: false,
         title: Stack(
           children: [
@@ -153,7 +153,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
             Container(
               width: MediaQuery.sizeOf(context).width * 1.0,
               decoration: BoxDecoration(
-                color: Colors.white,
                 boxShadow: [
                   BoxShadow(
                     blurRadius: 3.0,
@@ -174,11 +173,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
                   Container(
                     height: 72.0,
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      color: Colors.black,
                     ),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 8.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 8.0),
                       child: StreamBuilder<List<UserStoriesRecord>>(
                         stream: queryUserStoriesRecord(
                           queryBuilder: (userStoriesRecord) => userStoriesRecord
@@ -839,10 +838,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                 .center,
                                                         children: [
                                                           if (socialFeedUserPostsRecord
-                                                                      .postAnswer3 !=
+                                                                      .postAnswer4 !=
                                                                   null &&
                                                               socialFeedUserPostsRecord
-                                                                      .postAnswer3 !=
+                                                                      .postAnswer4 !=
                                                                   '')
                                                             FFButtonWidget(
                                                               onPressed:
@@ -878,8 +877,15 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                             0.0,
                                                                             0.0,
                                                                             0.0),
-                                                                color: Color(
-                                                                    0xFF5B2B52),
+                                                                color: socialFeedUserPostsRecord
+                                                                        .votes4
+                                                                        .contains(userPostUsersRecord
+                                                                            .reference)
+                                                                    ? FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .success
+                                                                    : Color(
+                                                                        0xFF2F162C),
                                                                 textStyle: FlutterFlowTheme.of(
                                                                         context)
                                                                     .titleSmall
@@ -908,7 +914,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                     .fromSTEB(
                                                                         10.0,
                                                                         0.0,
-                                                                        10.0,
+                                                                        0.0,
                                                                         0.0),
                                                             child:
                                                                 FFButtonWidget(
@@ -945,8 +951,15 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                             0.0,
                                                                             0.0,
                                                                             0.0),
-                                                                color: Color(
-                                                                    0xFF5B2B52),
+                                                                color: socialFeedUserPostsRecord
+                                                                        .votes2
+                                                                        .contains(userPostUsersRecord
+                                                                            .reference)
+                                                                    ? FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .success
+                                                                    : Color(
+                                                                        0xFF2F162C),
                                                                 textStyle: FlutterFlowTheme.of(
                                                                         context)
                                                                     .titleSmall
@@ -974,9 +987,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                             padding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
                                                                         10.0,
+                                                                        0.0,
+                                                                        0.0,
                                                                         0.0),
                                                             child:
                                                                 FFButtonWidget(
@@ -1013,8 +1026,15 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                             0.0,
                                                                             0.0,
                                                                             0.0),
-                                                                color: Color(
-                                                                    0xFF5B2B52),
+                                                                color: socialFeedUserPostsRecord
+                                                                        .votes1
+                                                                        .contains(userPostUsersRecord
+                                                                            .reference)
+                                                                    ? FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .success
+                                                                    : Color(
+                                                                        0xFF2F162C),
                                                                 textStyle: FlutterFlowTheme.of(
                                                                         context)
                                                                     .titleSmall
@@ -1038,72 +1058,84 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               ),
                                                             ),
                                                           ),
-                                                          if (valueOrDefault<
-                                                              bool>(
-                                                            socialFeedUserPostsRecord
-                                                                        .postAnswer3 !=
-                                                                    null &&
-                                                                socialFeedUserPostsRecord
-                                                                        .postAnswer3 !=
-                                                                    '',
-                                                            true,
-                                                          ))
-                                                            FFButtonWidget(
-                                                              onPressed:
-                                                                  () async {
-                                                                await socialFeedUserPostsRecord
-                                                                    .reference
-                                                                    .update({
-                                                                  'votes3':
-                                                                      FieldValue
-                                                                          .arrayUnion([
-                                                                    userPostUsersRecord
-                                                                        .reference
-                                                                  ]),
-                                                                });
-                                                              },
-                                                              text: socialFeedUserPostsRecord
-                                                                  .postAnswer3,
-                                                              options:
-                                                                  FFButtonOptions(
-                                                                width: 81.0,
-                                                                height: 50.0,
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                iconPadding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                color: Color(
-                                                                    0xFF5B2B52),
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Urbanist',
-                                                                      color: Colors
-                                                                          .white,
-                                                                    ),
-                                                                elevation: 3.0,
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  width: 2.0,
+                                                          if (socialFeedUserPostsRecord
+                                                                      .postAnswer3 !=
+                                                                  null &&
+                                                              socialFeedUserPostsRecord
+                                                                      .postAnswer3 !=
+                                                                  '')
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          10.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              child:
+                                                                  FFButtonWidget(
+                                                                onPressed:
+                                                                    () async {
+                                                                  await socialFeedUserPostsRecord
+                                                                      .reference
+                                                                      .update({
+                                                                    'votes3':
+                                                                        FieldValue
+                                                                            .arrayUnion([
+                                                                      userPostUsersRecord
+                                                                          .reference
+                                                                    ]),
+                                                                  });
+                                                                },
+                                                                text: socialFeedUserPostsRecord
+                                                                    .postAnswer3,
+                                                                options:
+                                                                    FFButtonOptions(
+                                                                  width: 81.0,
+                                                                  height: 50.0,
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                  iconPadding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                  color: socialFeedUserPostsRecord
+                                                                          .votes3
+                                                                          .contains(userPostUsersRecord
+                                                                              .reference)
+                                                                      ? FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .success
+                                                                      : Color(
+                                                                          0xFF2F162C),
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Urbanist',
+                                                                        color: Colors
+                                                                            .white,
+                                                                      ),
+                                                                  elevation:
+                                                                      3.0,
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    width: 2.0,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              12.0),
                                                                 ),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            12.0),
                                                               ),
                                                             ),
                                                         ],

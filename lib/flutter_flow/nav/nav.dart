@@ -218,6 +218,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'devc',
           path: '/devc',
           builder: (context, params) => DevcWidget(),
+        ),
+        FFRoute(
+          name: 'pollDevCopy',
+          path: '/pollDevCopy',
+          builder: (context, params) => PollDevCopyWidget(),
+        ),
+        FFRoute(
+          name: 'search',
+          path: '/search',
+          builder: (context, params) => SearchWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

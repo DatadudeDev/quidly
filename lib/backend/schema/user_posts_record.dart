@@ -116,6 +116,11 @@ class UserPostsRecord extends FirestoreRecord {
   List<DocumentReference> get votes4 => _votes4 ?? const [];
   bool hasVotes4() => _votes4 != null;
 
+  // "expiry" field.
+  DateTime? _expiry;
+  DateTime? get expiry => _expiry;
+  bool hasExpiry() => _expiry != null;
+
   void _initializeFields() {
     _postPhoto = snapshotData['postPhoto'] as String?;
     _postTitle = snapshotData['postTitle'] as String?;
@@ -137,6 +142,7 @@ class UserPostsRecord extends FirestoreRecord {
     _votes2 = getDataList(snapshotData['votes2']);
     _votes3 = getDataList(snapshotData['votes3']);
     _votes4 = getDataList(snapshotData['votes4']);
+    _expiry = snapshotData['expiry'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -188,6 +194,7 @@ Map<String, dynamic> createUserPostsRecordData({
   String? postAnswer3,
   String? postAnswer4,
   String? imageURL,
+  DateTime? expiry,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -205,6 +212,7 @@ Map<String, dynamic> createUserPostsRecordData({
       'postAnswer3': postAnswer3,
       'postAnswer4': postAnswer4,
       'imageURL': imageURL,
+      'expiry': expiry,
     }.withoutNulls,
   );
 
@@ -236,7 +244,8 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         listEquality.equals(e1?.votes1, e2?.votes1) &&
         listEquality.equals(e1?.votes2, e2?.votes2) &&
         listEquality.equals(e1?.votes3, e2?.votes3) &&
-        listEquality.equals(e1?.votes4, e2?.votes4);
+        listEquality.equals(e1?.votes4, e2?.votes4) &&
+        e1?.expiry == e2?.expiry;
   }
 
   @override
@@ -260,7 +269,8 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e?.votes1,
         e?.votes2,
         e?.votes3,
-        e?.votes4
+        e?.votes4,
+        e?.expiry
       ]);
 
   @override
