@@ -27,7 +27,7 @@ class ApiTestCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'apiTest',
-      apiUrl: 'https://pc.datadude.dev/execute_script',
+      apiUrl: 'https://api.datadude.dev/execute_script',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -42,15 +42,7 @@ class ApiTestCall {
 
   static dynamic imageURL(dynamic response) => getJsonField(
         response,
-        r'''$.public_url''',
-      );
-  static dynamic poll(dynamic response) => getJsonField(
-        response,
-        r'''$.poll''',
-      );
-  static dynamic user(dynamic response) => getJsonField(
-        response,
-        r'''$.user''',
+        r'''$.url''',
       );
 }
 
@@ -58,7 +50,7 @@ class GetURLCall {
   static Future<ApiCallResponse> call() {
     return ApiManager.instance.makeApiCall(
       callName: 'getURL',
-      apiUrl: 'https://pc.datadude.dev/get_json_file',
+      apiUrl: 'https://api.datadude.dev/get_json_file',
       callType: ApiCallType.GET,
       headers: {},
       params: {},

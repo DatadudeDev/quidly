@@ -23,3 +23,10 @@ bool hasUploadedMedia(String? mediaPath) {
 int shits(UserPostsRecord? post) {
   return post!.shits!.length;
 }
+
+int votes(UserPostsRecord? post) {
+  return post!.votes1!.length +
+      post!.votes2!.length +
+      post!.votes3!.length +
+      post!.votes4!.length;
+}

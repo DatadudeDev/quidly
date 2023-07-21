@@ -1,4 +1,4 @@
-import '/components/create_poll_test_widget.dart';
+import '/components/create_poll_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -21,18 +21,18 @@ class PollDevModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Model for createPollTest component.
-  late CreatePollTestModel createPollTestModel;
+  // Model for createPoll component.
+  late CreatePollModel createPollModel;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
-    createPollTestModel = createModel(context, () => CreatePollTestModel());
+    createPollModel = createModel(context, () => CreatePollModel());
   }
 
   void dispose() {
     unfocusNode.dispose();
-    createPollTestModel.dispose();
+    createPollModel.dispose();
   }
 
   /// Action blocks are added here.

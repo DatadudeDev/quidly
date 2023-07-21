@@ -61,6 +61,11 @@ class UsersRecord extends FirestoreRecord {
   bool get isFollowed => _isFollowed ?? false;
   bool hasIsFollowed() => _isFollowed != null;
 
+  // "followed_by" field.
+  List<DocumentReference>? _followedBy;
+  List<DocumentReference> get followedBy => _followedBy ?? const [];
+  bool hasFollowedBy() => _followedBy != null;
+
   void _initializeFields() {
     _displayName = snapshotData['display_name'] as String?;
     _email = snapshotData['email'] as String?;
@@ -71,6 +76,7 @@ class UsersRecord extends FirestoreRecord {
     _userName = snapshotData['userName'] as String?;
     _bio = snapshotData['bio'] as String?;
     _isFollowed = snapshotData['isFollowed'] as bool?;
+    _followedBy = getDataList(snapshotData['followed_by']);
   }
 
   static CollectionReference get collection =>
@@ -139,6 +145,7 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
 
   @override
   bool equals(UsersRecord? e1, UsersRecord? e2) {
+    const listEquality = ListEquality();
     return e1?.displayName == e2?.displayName &&
         e1?.email == e2?.email &&
         e1?.photoUrl == e2?.photoUrl &&
@@ -147,7 +154,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.phoneNumber == e2?.phoneNumber &&
         e1?.userName == e2?.userName &&
         e1?.bio == e2?.bio &&
-        e1?.isFollowed == e2?.isFollowed;
+        e1?.isFollowed == e2?.isFollowed &&
+        listEquality.equals(e1?.followedBy, e2?.followedBy);
   }
 
   @override
@@ -160,7 +168,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.phoneNumber,
         e?.userName,
         e?.bio,
-        e?.isFollowed
+        e?.isFollowed,
+        e?.followedBy
       ]);
 
   @override

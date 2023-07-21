@@ -13,18 +13,18 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'create_poll_test_model.dart';
-export 'create_poll_test_model.dart';
+import 'create_poll_model.dart';
+export 'create_poll_model.dart';
 
-class CreatePollTestWidget extends StatefulWidget {
-  const CreatePollTestWidget({Key? key}) : super(key: key);
+class CreatePollWidget extends StatefulWidget {
+  const CreatePollWidget({Key? key}) : super(key: key);
 
   @override
-  _CreatePollTestWidgetState createState() => _CreatePollTestWidgetState();
+  _CreatePollWidgetState createState() => _CreatePollWidgetState();
 }
 
-class _CreatePollTestWidgetState extends State<CreatePollTestWidget> {
-  late CreatePollTestModel _model;
+class _CreatePollWidgetState extends State<CreatePollWidget> {
+  late CreatePollModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -35,7 +35,7 @@ class _CreatePollTestWidgetState extends State<CreatePollTestWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => CreatePollTestModel());
+    _model = createModel(context, () => CreatePollModel());
 
     _model.textController1 ??= TextEditingController();
     _model.choicesTWOanswerONEController ??= TextEditingController();
@@ -77,44 +77,164 @@ class _CreatePollTestWidgetState extends State<CreatePollTestWidget> {
             children: [
               Container(
                 width: MediaQuery.sizeOf(context).width * 1.0,
-                height: 38.0,
+                height: 80.0,
                 decoration: BoxDecoration(
                   color: Color(0x00FFFFFF),
                 ),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(12.0, 10.0, 0.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(12.0, 10.0, 0.0, 0.0),
+                      child: Row(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    15.0, 0.0, 0.0, 0.0),
+                                child: FlutterFlowIconButton(
+                                  borderColor: Color(0x00FFFFFF),
+                                  borderRadius: 20.0,
+                                  borderWidth: 1.0,
+                                  buttonSize: 20.0,
+                                  fillColor: Color(0x00FFFFFF),
+                                  icon: Icon(
+                                    Icons.close,
+                                    color: Color(0xFFDCDCDC),
+                                    size: 24.0,
+                                  ),
+                                  onPressed: () async {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                15.0, 0.0, 0.0, 0.0),
-                            child: FlutterFlowIconButton(
-                              borderColor: Color(0x00FFFFFF),
-                              borderRadius: 20.0,
-                              borderWidth: 1.0,
-                              buttonSize: 20.0,
-                              fillColor: Color(0x00FFFFFF),
-                              icon: Icon(
-                                Icons.close,
-                                color: Color(0x6EEB10EB),
-                                size: 24.0,
-                              ),
+                                0.0, 0.0, 16.0, 0.0),
+                            child: FFButtonWidget(
                               onPressed: () async {
-                                Navigator.pop(context);
+                                var _shouldSetState = false;
+                                _model.poll = _model.textController1.text;
+                                _model.answer1 =
+                                    _model.choicesTWOanswerONEController.text;
+                                _model.answer2 =
+                                    _model.choicesTWOanswerTWOController.text;
+                                _model.answer3 = _model
+                                    .choicesTHREEanswerTHREEController.text;
+                                _model.answer4 =
+                                    _model.choicesFOURanswerFOURController.text;
+                                _model.pollExpiry = _model.datePicked1
+                                            ?.microsecondsSinceEpoch !=
+                                        null
+                                    ? _model.datePicked1
+                                    : (_model.datePicked2
+                                                ?.microsecondsSinceEpoch !=
+                                            null
+                                        ? _model.datePicked2
+                                        : (_model.datePicked3
+                                                    ?.microsecondsSinceEpoch !=
+                                                null
+                                            ? _model.datePicked3
+                                            : _model.datePicked3));
+                                _model.apiResultpwv = await ApiTestCall.call(
+                                  poll: _model.poll,
+                                  answer2: _model.answer2,
+                                  answer3: _model.answer3,
+                                  answer4: _model.answer4,
+                                  answer1: _model.answer1,
+                                );
+                                _shouldSetState = true;
+                                if ((_model.apiResultpwv?.succeeded ?? true)) {
+                                  _model.apiResult9jo = await GetURLCall.call();
+                                  _shouldSetState = true;
+                                  if ((_model.apiResult9jo?.succeeded ??
+                                      true)) {
+                                    _model.imageURL = GetURLCall.imageURL(
+                                      (_model.apiResult9jo?.jsonBody ?? ''),
+                                    );
+                                    if (_model.pollExpiry != null) {
+                                      await UserPostsRecord.collection
+                                          .doc()
+                                          .set(createUserPostsRecordData(
+                                            postUser: currentUserReference,
+                                            timePosted: getCurrentTimestamp,
+                                            postOwner: true,
+                                            postPoll: _model.poll,
+                                            postAnswer1: _model.answer1,
+                                            postAnswer2: _model.answer2,
+                                            postAnswer3: _model.answer3,
+                                            postAnswer4: _model.answer4,
+                                            imageURL: _model.imageURL,
+                                            expiry: _model.pollExpiry,
+                                            nullExpiry: '∞',
+                                          ));
+                                      Navigator.pop(context);
+                                    } else {
+                                      await UserPostsRecord.collection
+                                          .doc()
+                                          .set(createUserPostsRecordData(
+                                            postUser: currentUserReference,
+                                            timePosted: getCurrentTimestamp,
+                                            postOwner: true,
+                                            postPoll: _model.poll,
+                                            postAnswer1: _model.answer1,
+                                            postAnswer2: _model.answer2,
+                                            postAnswer3: _model.answer3,
+                                            postAnswer4: _model.answer4,
+                                            imageURL: _model.imageURL,
+                                            nullExpiry: '∞',
+                                          ));
+                                      Navigator.pop(context);
+                                    }
+                                  } else {
+                                    if (_shouldSetState) setState(() {});
+                                    return;
+                                  }
+                                } else {
+                                  if (_shouldSetState) setState(() {});
+                                  return;
+                                }
+
+                                if (_shouldSetState) setState(() {});
                               },
+                              text: 'Submit',
+                              options: FFButtonOptions(
+                                width: 70.0,
+                                height: 30.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).primary,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Urbanist',
+                                      color: Colors.white,
+                                    ),
+                                elevation: 3.0,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
                             ),
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -171,7 +291,10 @@ class _CreatePollTestWidgetState extends State<CreatePollTestWidget> {
                                                           null ||
                                                       currentUserPhoto == ''
                                                   ? 'https://www.pngfind.com/pngs/m/540-5404923_my-wedding-missing-profile-picture-icon-hd-png.png'
-                                                  : currentUserPhoto,
+                                                  : valueOrDefault<String>(
+                                                      currentUserPhoto,
+                                                      'https://www.pngfind.com/pngs/m/540-5404923_my-wedding-missing-profile-picture-icon-hd-png.png',
+                                                    ),
                                               fit: BoxFit.fitWidth,
                                             ),
                                           ),
@@ -237,104 +360,6 @@ class _CreatePollTestWidgetState extends State<CreatePollTestWidget> {
                                         ],
                                       ),
                                     ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 16.0, 0.0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    var _shouldSetState = false;
-                                    _model.poll = _model.textController1.text;
-                                    _model.answer1 = _model
-                                        .choicesTWOanswerONEController.text;
-                                    _model.answer2 = _model
-                                        .choicesTWOanswerTWOController.text;
-                                    _model.answer3 = _model
-                                        .choicesTHREEanswerTHREEController.text;
-                                    _model.answer4 = _model
-                                        .choicesFOURanswerFOURController.text;
-                                    _model.pollExpiry = _model.datePicked1
-                                                ?.microsecondsSinceEpoch !=
-                                            null
-                                        ? _model.datePicked1
-                                        : (_model.datePicked2
-                                                    ?.microsecondsSinceEpoch !=
-                                                null
-                                            ? _model.datePicked2
-                                            : (_model.datePicked3
-                                                        ?.microsecondsSinceEpoch !=
-                                                    null
-                                                ? _model.datePicked3
-                                                : _model.datePicked3));
-                                    _model.apiResultpwv =
-                                        await ApiTestCall.call(
-                                      poll: _model.poll,
-                                      answer2: _model.answer2,
-                                      answer3: _model.answer3,
-                                      answer4: _model.answer4,
-                                      answer1: _model.answer1,
-                                    );
-                                    _shouldSetState = true;
-                                    if ((_model.apiResultpwv?.succeeded ??
-                                        true)) {
-                                      _model.apiResult9jo =
-                                          await GetURLCall.call();
-                                      _shouldSetState = true;
-                                      if ((_model.apiResult9jo?.succeeded ??
-                                          true)) {
-                                        _model.imageURL = GetURLCall.imageURL(
-                                          (_model.apiResult9jo?.jsonBody ?? ''),
-                                        );
-                                      } else {
-                                        if (_shouldSetState) setState(() {});
-                                        return;
-                                      }
-
-                                      await UserPostsRecord.collection
-                                          .doc()
-                                          .set(createUserPostsRecordData(
-                                            postUser: currentUserReference,
-                                            timePosted: getCurrentTimestamp,
-                                            postOwner: true,
-                                            postPoll: _model.poll,
-                                            postAnswer1: _model.answer1,
-                                            postAnswer2: _model.answer2,
-                                            postAnswer3: _model.answer3,
-                                            postAnswer4: _model.answer4,
-                                            imageURL: _model.imageURL,
-                                            expiry: _model.pollExpiry,
-                                          ));
-                                      Navigator.pop(context);
-                                    } else {
-                                      if (_shouldSetState) setState(() {});
-                                      return;
-                                    }
-
-                                    if (_shouldSetState) setState(() {});
-                                  },
-                                  text: 'Submit',
-                                  options: FFButtonOptions(
-                                    width: 70.0,
-                                    height: 30.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Urbanist',
-                                          color: Colors.white,
-                                        ),
-                                    elevation: 3.0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(20.0),
                                   ),
                                 ),
                               ),
@@ -872,14 +897,10 @@ class _CreatePollTestWidgetState extends State<CreatePollTestWidget> {
                                                                   decoration:
                                                                       BoxDecoration(),
                                                                   child: Text(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      dateTimeFormat(
-                                                                          'MMMMEEEEd',
-                                                                          _model
-                                                                              .datePicked1),
-                                                                      '1 Week',
-                                                                    ),
+                                                                    dateTimeFormat(
+                                                                        'relative',
+                                                                        _model
+                                                                            .datePicked1),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
                                                                         .bodyMedium

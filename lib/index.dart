@@ -28,5 +28,4 @@ export '/pages/create_group_chat/create_group_chat_widget.dart'
     show CreateGroupChatWidget;
 export '/pages/poll_dev/poll_dev_widget.dart' show PollDevWidget;
 export '/devc/devc_widget.dart' show DevcWidget;
-export '/pages/poll_dev_copy/poll_dev_copy_widget.dart' show PollDevCopyWidget;
 export '/search/search_widget.dart' show SearchWidget;
