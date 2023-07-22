@@ -64,17 +64,7 @@ class _PostMenuWidgetState extends State<PostMenuWidget> {
                     FFButtonWidget(
                       onPressed: () async {
                         await widget.postParameters!.reference.delete();
-
-                        context.pushNamed(
-                          'homePage',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.leftToRight,
-                              duration: Duration(milliseconds: 220),
-                            ),
-                          },
-                        );
+                        Navigator.pop(context);
                       },
                       text: 'Delete Post',
                       options: FFButtonOptions(

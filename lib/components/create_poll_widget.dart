@@ -41,8 +41,8 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
     _model = createModel(context, () => CreatePollModel());
 
     _model.textController1 ??= TextEditingController();
-    _model.choicesTWOanswerONEController ??= TextEditingController();
-    _model.choicesTWOanswerTWOController ??= TextEditingController();
+    _model.choicesTWOanswerONEController1 ??= TextEditingController();
+    _model.choicesTWOanswerTWOController1 ??= TextEditingController();
     _model.choicesTHREEanswerONEController ??=
         TextEditingController(text: _model.answer1);
     _model.choicesTHREEanswerTWOController ??=
@@ -55,6 +55,8 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
     _model.choicesFOURanswerTHREEController ??=
         TextEditingController(text: _model.answer3);
     _model.choicesFOURanswerFOURController ??= TextEditingController();
+    _model.choicesTWOanswerONEController2 ??= TextEditingController();
+    _model.choicesTWOanswerTWOController2 ??= TextEditingController();
   }
 
   @override
@@ -124,10 +126,10 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                 onPressed: () async {
                                   var _shouldSetState = false;
                                   _model.poll = _model.textController1.text;
-                                  _model.answer1 =
-                                      _model.choicesTWOanswerONEController.text;
-                                  _model.answer2 =
-                                      _model.choicesTWOanswerTWOController.text;
+                                  _model.answer1 = _model
+                                      .choicesTWOanswerONEController1.text;
+                                  _model.answer2 = _model
+                                      .choicesTWOanswerTWOController1.text;
                                   _model.answer3 = _model
                                       .choicesTHREEanswerTHREEController.text;
                                   _model.answer4 = _model
@@ -137,6 +139,13 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                       : (_model.datePicked2 != null
                                           ? _model.datePicked2
                                           : _model.datePicked1);
+                                  _model.nullExpiry = '∞';
+                                  _model.pollLocation =
+                                      _model.placePickerValue3 != null
+                                          ? _model.placePickerValue3
+                                          : (_model.placePickerValue2 != null
+                                              ? _model.placePickerValue2
+                                              : _model.placePickerValue1);
                                   _model.apiResultpwv = await ApiTestCall.call(
                                     poll: _model.poll,
                                     answer2: _model.answer2,
@@ -155,7 +164,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                       _model.imageURL = GetURLCall.imageURL(
                                         (_model.apiResult9jo?.jsonBody ?? ''),
                                       );
-                                      if (_model.pollExpiry == null) {
+                                      if (_model.pollExpiry != null) {
                                         await UserPostsRecord.collection
                                             .doc()
                                             .set(createUserPostsRecordData(
@@ -168,14 +177,13 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                               postAnswer3: _model.answer3,
                                               postAnswer4: _model.answer4,
                                               imageURL: _model.imageURL,
-                                              pollLocation: _model
-                                                          .loc3!.latLng !=
-                                                      null
-                                                  ? _model.loc3!.latLng
-                                                  : (_model.loc2!.latLng != null
-                                                      ? _model.loc2!.latLng
-                                                      : _model.loc1!.latLng),
-                                              locationEnforced: true,
+                                              expiry: _model.datePicked3 != null
+                                                  ? _model.datePicked3
+                                                  : (_model.datePicked2 != null
+                                                      ? _model.datePicked2
+                                                      : _model.datePicked1),
+                                              pollLocation:
+                                                  _model.pollLocation!.latLng,
                                             ));
                                         Navigator.pop(context);
                                       } else {
@@ -191,15 +199,9 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                               postAnswer3: _model.answer3,
                                               postAnswer4: _model.answer4,
                                               imageURL: _model.imageURL,
-                                              expiry: _model.pollExpiry,
-                                              pollLocation: _model
-                                                          .loc3!.latLng !=
-                                                      null
-                                                  ? _model.loc3!.latLng
-                                                  : (_model.loc2!.latLng != null
-                                                      ? _model.loc2!.latLng
-                                                      : _model.loc1!.latLng),
-                                              locationEnforced: true,
+                                              nullExpiry: _model.nullExpiry,
+                                              pollLocation:
+                                                  _model.pollLocation!.latLng,
                                             ));
                                         Navigator.pop(context);
                                       }
@@ -471,30 +473,14 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                               borderRadius: 20.0,
                                               borderWidth: 1.0,
                                               buttonSize: 40.0,
-                                              icon: FaIcon(
-                                                FontAwesomeIcons.penFancy,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                size: 24.0,
-                                              ),
-                                              onPressed: () async {
-                                                setState(() {
-                                                  _model.writeIn = true;
-                                                  _model.multipleChoice = false;
-                                                  _model.trueFalse = false;
-                                                });
-                                              },
-                                            ),
-                                            FlutterFlowIconButton(
-                                              borderRadius: 20.0,
-                                              borderWidth: 1.0,
-                                              buttonSize: 40.0,
                                               icon: Icon(
                                                 Icons.format_list_bulleted,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
+                                                color: _model.multipleChoice ==
+                                                        true
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary
+                                                    : Color(0xB9B2B2B2),
                                                 size: 24.0,
                                               ),
                                               onPressed: () async {
@@ -509,11 +495,38 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                               borderRadius: 20.0,
                                               borderWidth: 1.0,
                                               buttonSize: 40.0,
+                                              icon: FaIcon(
+                                                FontAwesomeIcons.penFancy,
+                                                color: _model.writeIn == true
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary
+                                                    : Color(0xB9B2B2B2),
+                                                size: 24.0,
+                                              ),
+                                              onPressed: () async {
+                                                setState(() {
+                                                  _model.writeIn = true;
+                                                  _model.multipleChoice = false;
+                                                  _model.trueFalse = false;
+                                                  _model.answer1 = '';
+                                                  _model.answer2 = '';
+                                                  _model.answer3 = '';
+                                                  _model.answer4 = '';
+                                                });
+                                              },
+                                            ),
+                                            FlutterFlowIconButton(
+                                              borderRadius: 20.0,
+                                              borderWidth: 1.0,
+                                              buttonSize: 40.0,
                                               icon: Icon(
                                                 Icons.rule,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
+                                                color: _model.trueFalse == true
+                                                    ? FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary
+                                                    : Color(0xB9B2B2B2),
                                                 size: 24.0,
                                               ),
                                               onPressed: () async {
@@ -521,6 +534,8 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                   _model.writeIn = false;
                                                   _model.multipleChoice = false;
                                                   _model.trueFalse = true;
+                                                  _model.answer3 = '';
+                                                  _model.answer4 = '';
                                                 });
                                               },
                                             ),
@@ -646,7 +661,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                                   child: Padding(
                                                                                     padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                                                                                     child: TextFormField(
-                                                                                      controller: _model.choicesTWOanswerONEController,
+                                                                                      controller: _model.choicesTWOanswerONEController1,
                                                                                       autofocus: true,
                                                                                       obscureText: false,
                                                                                       decoration: InputDecoration(
@@ -671,7 +686,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                                             color: FlutterFlowTheme.of(context).primaryText,
                                                                                           ),
                                                                                       maxLines: 3,
-                                                                                      validator: _model.choicesTWOanswerONEControllerValidator.asValidator(context),
+                                                                                      validator: _model.choicesTWOanswerONEController1Validator.asValidator(context),
                                                                                     ),
                                                                                   ),
                                                                                 ),
@@ -708,7 +723,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                                     child: Padding(
                                                                                       padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                                                                                       child: TextFormField(
-                                                                                        controller: _model.choicesTWOanswerTWOController,
+                                                                                        controller: _model.choicesTWOanswerTWOController1,
                                                                                         autofocus: true,
                                                                                         obscureText: false,
                                                                                         decoration: InputDecoration(
@@ -733,7 +748,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                                               fontFamily: 'Urbanist',
                                                                                               color: FlutterFlowTheme.of(context).primaryText,
                                                                                             ),
-                                                                                        validator: _model.choicesTWOanswerTWOControllerValidator.asValidator(context),
+                                                                                        validator: _model.choicesTWOanswerTWOController1Validator.asValidator(context),
                                                                                       ),
                                                                                     ),
                                                                                   ),
@@ -811,10 +826,10 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                       setState(
                                                                           () {
                                                                         _model.answer1 = _model
-                                                                            .choicesTWOanswerONEController
+                                                                            .choicesTWOanswerONEController1
                                                                             .text;
                                                                         _model.answer2 = _model
-                                                                            .choicesTWOanswerTWOController
+                                                                            .choicesTWOanswerTWOController1
                                                                             .text;
                                                                         _model.date1 =
                                                                             _model.datePicked1;
@@ -2319,6 +2334,474 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                           ),
                                                         ],
                                                       ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      if (valueOrDefault<bool>(
+                                            _model.multipleChoice == true,
+                                            false,
+                                          ) &&
+                                          (_model.answer2 == null ||
+                                              _model.answer2 == '') &&
+                                          (_model.answer1 == null ||
+                                              _model.answer1 == ''))
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 5.0, 0.0, 0.0),
+                                          child: Container(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.85,
+                                            height: 145.0,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              border: Border.all(
+                                                color: Color(0x6395A1AC),
+                                                width: 1.0,
+                                              ),
+                                            ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  10.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        5.0,
+                                                                        0.0,
+                                                                        5.0),
+                                                            child: Container(
+                                                              width: MediaQuery
+                                                                          .sizeOf(
+                                                                              context)
+                                                                      .width *
+                                                                  0.7,
+                                                              height: MediaQuery
+                                                                          .sizeOf(
+                                                                              context)
+                                                                      .height *
+                                                                  0.11,
+                                                              decoration:
+                                                                  BoxDecoration(),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: [
+                                                                          Container(
+                                                                            width:
+                                                                                MediaQuery.sizeOf(context).width * 0.7,
+                                                                            height:
+                                                                                40.0,
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              borderRadius: BorderRadius.circular(10.0),
+                                                                              border: Border.all(
+                                                                                color: Color(0x6395A1AC),
+                                                                                width: 1.0,
+                                                                              ),
+                                                                            ),
+                                                                            child:
+                                                                                Row(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              children: [
+                                                                                Expanded(
+                                                                                  child: Padding(
+                                                                                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                                                                                    child: TextFormField(
+                                                                                      controller: _model.choicesTWOanswerONEController2,
+                                                                                      autofocus: true,
+                                                                                      obscureText: false,
+                                                                                      decoration: InputDecoration(
+                                                                                        labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                              fontFamily: 'Outfit',
+                                                                                              color: Color(0x6395A1AC),
+                                                                                              fontSize: 15.0,
+                                                                                            ),
+                                                                                        hintText: 'True',
+                                                                                        hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                              fontFamily: 'Outfit',
+                                                                                              color: Color(0x6395A1AC),
+                                                                                              fontSize: 14.0,
+                                                                                            ),
+                                                                                        enabledBorder: InputBorder.none,
+                                                                                        focusedBorder: InputBorder.none,
+                                                                                        errorBorder: InputBorder.none,
+                                                                                        focusedErrorBorder: InputBorder.none,
+                                                                                      ),
+                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                            fontFamily: 'Urbanist',
+                                                                                            color: FlutterFlowTheme.of(context).primaryText,
+                                                                                          ),
+                                                                                      maxLines: 3,
+                                                                                      validator: _model.choicesTWOanswerONEController2Validator.asValidator(context),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            7.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Container(
+                                                                              width: MediaQuery.sizeOf(context).width * 0.7,
+                                                                              height: 40.0,
+                                                                              decoration: BoxDecoration(
+                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                                border: Border.all(
+                                                                                  color: Color(0x6395A1AC),
+                                                                                  width: 1.0,
+                                                                                ),
+                                                                              ),
+                                                                              child: Row(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                children: [
+                                                                                  if ((_model.trueFalse == true) && (_model.answer3 == null || _model.answer3 == ''))
+                                                                                    Expanded(
+                                                                                      child: Padding(
+                                                                                        padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                                                                                        child: TextFormField(
+                                                                                          controller: _model.choicesTWOanswerTWOController2,
+                                                                                          autofocus: true,
+                                                                                          obscureText: false,
+                                                                                          decoration: InputDecoration(
+                                                                                            labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                                  fontFamily: 'Outfit',
+                                                                                                  color: Color(0x6395A1AC),
+                                                                                                  fontSize: 17.0,
+                                                                                                ),
+                                                                                            hintText: 'False',
+                                                                                            hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                                  fontFamily: 'Outfit',
+                                                                                                  color: Color(0x6395A1AC),
+                                                                                                  fontSize: 14.0,
+                                                                                                  fontWeight: FontWeight.w300,
+                                                                                                ),
+                                                                                            enabledBorder: InputBorder.none,
+                                                                                            focusedBorder: InputBorder.none,
+                                                                                            errorBorder: InputBorder.none,
+                                                                                            focusedErrorBorder: InputBorder.none,
+                                                                                          ),
+                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                fontFamily: 'Urbanist',
+                                                                                                color: FlutterFlowTheme.of(context).primaryText,
+                                                                                              ),
+                                                                                          validator: _model.choicesTWOanswerTWOController2Validator.asValidator(context),
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Container(
+                                                          width:
+                                                              MediaQuery.sizeOf(
+                                                                          context)
+                                                                      .width *
+                                                                  0.73,
+                                                          height: 38.0,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .only(
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      20.0),
+                                                              bottomRight:
+                                                                  Radius
+                                                                      .circular(
+                                                                          20.0),
+                                                              topLeft: Radius
+                                                                  .circular(
+                                                                      0.0),
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      0.0),
+                                                            ),
+                                                          ),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      FlutterFlowIconButton(
+                                                                        borderColor:
+                                                                            Colors.transparent,
+                                                                        borderRadius:
+                                                                            20.0,
+                                                                        borderWidth:
+                                                                            1.0,
+                                                                        buttonSize:
+                                                                            38.0,
+                                                                        icon:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .alarm,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primary,
+                                                                          size:
+                                                                              20.0,
+                                                                        ),
+                                                                        onPressed:
+                                                                            () async {
+                                                                          final _datePicked4Date =
+                                                                              await showDatePicker(
+                                                                            context:
+                                                                                context,
+                                                                            initialDate:
+                                                                                getCurrentTimestamp,
+                                                                            firstDate:
+                                                                                getCurrentTimestamp,
+                                                                            lastDate:
+                                                                                DateTime(2050),
+                                                                          );
+
+                                                                          if (_datePicked4Date !=
+                                                                              null) {
+                                                                            setState(() {
+                                                                              _model.datePicked4 = DateTime(
+                                                                                _datePicked4Date.year,
+                                                                                _datePicked4Date.month,
+                                                                                _datePicked4Date.day,
+                                                                              );
+                                                                            });
+                                                                          }
+                                                                        },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Container(
+                                                                        width:
+                                                                            100.0,
+                                                                        height:
+                                                                            15.0,
+                                                                        decoration:
+                                                                            BoxDecoration(),
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              3.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            'Poll ends on:',
+                                                                            textAlign:
+                                                                                TextAlign.start,
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: 'Urbanist',
+                                                                                  color: Color(0xCCB2B2B2),
+                                                                                  fontSize: 10.0,
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Container(
+                                                                        width:
+                                                                            100.0,
+                                                                        height:
+                                                                            20.0,
+                                                                        decoration:
+                                                                            BoxDecoration(),
+                                                                        child:
+                                                                            Text(
+                                                                          valueOrDefault<
+                                                                              String>(
+                                                                            dateTimeFormat('relative',
+                                                                                _model.datePicked4),
+                                                                            'Never',
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .override(
+                                                                                fontFamily: 'Urbanist',
+                                                                                color: FlutterFlowTheme.of(context).primary,
+                                                                                fontSize: 12.0,
+                                                                                fontWeight: FontWeight.bold,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Container(
+                                                                        width:
+                                                                            140.0,
+                                                                        height:
+                                                                            35.0,
+                                                                        decoration:
+                                                                            BoxDecoration(),
+                                                                        child:
+                                                                            Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Row(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              children: [
+                                                                                Container(
+                                                                                  width: 140.0,
+                                                                                  height: 35.0,
+                                                                                  decoration: BoxDecoration(),
+                                                                                  child: FlutterFlowPlacePicker(
+                                                                                    iOSGoogleMapsApiKey: 'AIzaSyBBzVycKke2mKHYdJlxidz4TDgmco1tW98',
+                                                                                    androidGoogleMapsApiKey: 'AIzaSyBBzVycKke2mKHYdJlxidz4TDgmco1tW98',
+                                                                                    webGoogleMapsApiKey: 'AIzaSyBBzVycKke2mKHYdJlxidz4TDgmco1tW98',
+                                                                                    onSelect: (place) async {
+                                                                                      setState(() => _model.placePickerValue4 = place);
+                                                                                    },
+                                                                                    defaultText: 'Select Location',
+                                                                                    icon: Icon(
+                                                                                      Icons.place,
+                                                                                      color: Color(0xFF00AEFF),
+                                                                                      size: 20.0,
+                                                                                    ),
+                                                                                    buttonOptions: FFButtonOptions(
+                                                                                      width: 140.0,
+                                                                                      height: 40.0,
+                                                                                      color: Colors.black,
+                                                                                      textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                            fontFamily: 'Urbanist',
+                                                                                            color: Color(0xFF00AEFF),
+                                                                                            fontSize: 14.0,
+                                                                                          ),
+                                                                                      elevation: 2.0,
+                                                                                      borderSide: BorderSide(
+                                                                                        color: Colors.transparent,
+                                                                                        width: 1.0,
+                                                                                      ),
+                                                                                      borderRadius: BorderRadius.circular(8.0),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ],
                                                 ),

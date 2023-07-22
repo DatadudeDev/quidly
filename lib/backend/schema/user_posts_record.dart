@@ -106,15 +106,15 @@ class UserPostsRecord extends FirestoreRecord {
   String get nullExpiry => _nullExpiry ?? '';
   bool hasNullExpiry() => _nullExpiry != null;
 
-  // "pollLocation" field.
-  LatLng? _pollLocation;
-  LatLng? get pollLocation => _pollLocation;
-  bool hasPollLocation() => _pollLocation != null;
-
   // "locationEnforced" field.
   bool? _locationEnforced;
   bool get locationEnforced => _locationEnforced ?? false;
   bool hasLocationEnforced() => _locationEnforced != null;
+
+  // "pollLocation" field.
+  LatLng? _pollLocation;
+  LatLng? get pollLocation => _pollLocation;
+  bool hasPollLocation() => _pollLocation != null;
 
   void _initializeFields() {
     _postUser = snapshotData['postUser'] as DocumentReference?;
@@ -135,8 +135,8 @@ class UserPostsRecord extends FirestoreRecord {
     _votes4 = getDataList(snapshotData['votes4']);
     _expiry = snapshotData['expiry'] as DateTime?;
     _nullExpiry = snapshotData['nullExpiry'] as String?;
-    _pollLocation = snapshotData['pollLocation'] as LatLng?;
     _locationEnforced = snapshotData['locationEnforced'] as bool?;
+    _pollLocation = snapshotData['pollLocation'] as LatLng?;
   }
 
   static CollectionReference get collection =>
@@ -186,8 +186,8 @@ Map<String, dynamic> createUserPostsRecordData({
   String? imageURL,
   DateTime? expiry,
   String? nullExpiry,
-  LatLng? pollLocation,
   bool? locationEnforced,
+  LatLng? pollLocation,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -203,8 +203,8 @@ Map<String, dynamic> createUserPostsRecordData({
       'imageURL': imageURL,
       'expiry': expiry,
       'nullExpiry': nullExpiry,
-      'pollLocation': pollLocation,
       'locationEnforced': locationEnforced,
+      'pollLocation': pollLocation,
     }.withoutNulls,
   );
 
@@ -235,8 +235,8 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         listEquality.equals(e1?.votes4, e2?.votes4) &&
         e1?.expiry == e2?.expiry &&
         e1?.nullExpiry == e2?.nullExpiry &&
-        e1?.pollLocation == e2?.pollLocation &&
-        e1?.locationEnforced == e2?.locationEnforced;
+        e1?.locationEnforced == e2?.locationEnforced &&
+        e1?.pollLocation == e2?.pollLocation;
   }
 
   @override
@@ -259,8 +259,8 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e?.votes4,
         e?.expiry,
         e?.nullExpiry,
-        e?.pollLocation,
-        e?.locationEnforced
+        e?.locationEnforced,
+        e?.pollLocation
       ]);
 
   @override

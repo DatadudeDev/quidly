@@ -68,13 +68,13 @@ class CreatePollModel extends FlutterFlowModel {
   TextEditingController? textController1;
   String? Function(BuildContext, String?)? textController1Validator;
   // State field(s) for choicesTWOanswerONE widget.
-  TextEditingController? choicesTWOanswerONEController;
+  TextEditingController? choicesTWOanswerONEController1;
   String? Function(BuildContext, String?)?
-      choicesTWOanswerONEControllerValidator;
+      choicesTWOanswerONEController1Validator;
   // State field(s) for choicesTWOanswerTWO widget.
-  TextEditingController? choicesTWOanswerTWOController;
+  TextEditingController? choicesTWOanswerTWOController1;
   String? Function(BuildContext, String?)?
-      choicesTWOanswerTWOControllerValidator;
+      choicesTWOanswerTWOController1Validator;
   DateTime? datePicked1;
   // State field(s) for PlacePicker widget.
   var placePickerValue1 = FFPlace();
@@ -112,6 +112,17 @@ class CreatePollModel extends FlutterFlowModel {
   DateTime? datePicked3;
   // State field(s) for PlacePicker widget.
   var placePickerValue3 = FFPlace();
+  // State field(s) for choicesTWOanswerONE widget.
+  TextEditingController? choicesTWOanswerONEController2;
+  String? Function(BuildContext, String?)?
+      choicesTWOanswerONEController2Validator;
+  // State field(s) for choicesTWOanswerTWO widget.
+  TextEditingController? choicesTWOanswerTWOController2;
+  String? Function(BuildContext, String?)?
+      choicesTWOanswerTWOController2Validator;
+  DateTime? datePicked4;
+  // State field(s) for PlacePicker widget.
+  var placePickerValue4 = FFPlace();
 
   /// Initialization and disposal methods.
 
@@ -119,8 +130,8 @@ class CreatePollModel extends FlutterFlowModel {
 
   void dispose() {
     textController1?.dispose();
-    choicesTWOanswerONEController?.dispose();
-    choicesTWOanswerTWOController?.dispose();
+    choicesTWOanswerONEController1?.dispose();
+    choicesTWOanswerTWOController1?.dispose();
     choicesTHREEanswerONEController?.dispose();
     choicesTHREEanswerTWOController?.dispose();
     choicesTHREEanswerTHREEController?.dispose();
@@ -128,6 +139,8 @@ class CreatePollModel extends FlutterFlowModel {
     choicesFOURanswerTWOController?.dispose();
     choicesFOURanswerTHREEController?.dispose();
     choicesFOURanswerFOURController?.dispose();
+    choicesTWOanswerONEController2?.dispose();
+    choicesTWOanswerTWOController2?.dispose();
   }
 
   /// Action blocks are added here.
