@@ -59,7 +59,8 @@
     <string>In order to record audio for video, this app requires permission to access the microphone.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
     <string>In order to upload data, this app requires permission to access the photo library.</string>
-
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>In order to capture your location, this app requires permission to access your location</string>
 
 
 	<key>UILaunchStoryboardName</key>

@@ -325,9 +325,12 @@ class _CreatePostWidgetState extends State<CreatePostWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       FlutterFlowPlacePicker(
-                        iOSGoogleMapsApiKey: '',
-                        androidGoogleMapsApiKey: '',
-                        webGoogleMapsApiKey: '',
+                        iOSGoogleMapsApiKey:
+                            'AIzaSyBBzVycKke2mKHYdJlxidz4TDgmco1tW98',
+                        androidGoogleMapsApiKey:
+                            'AIzaSyBBzVycKke2mKHYdJlxidz4TDgmco1tW98',
+                        webGoogleMapsApiKey:
+                            'AIzaSyBBzVycKke2mKHYdJlxidz4TDgmco1tW98',
                         onSelect: (place) async {
                           setState(() => _model.placePickerValue = place);
                         },
@@ -369,10 +372,7 @@ class _CreatePostWidgetState extends State<CreatePostWidget> {
                   await UserPostsRecord.collection
                       .doc()
                       .set(createUserPostsRecordData(
-                        postPhoto: _model.uploadedFileUrl,
-                        postDescription: _model.textController.text,
                         postUser: currentUserReference,
-                        postTitle: '',
                         timePosted: getCurrentTimestamp,
                         postOwner: true,
                       ));

@@ -16,21 +16,6 @@ class UserPostsRecord extends FirestoreRecord {
     _initializeFields();
   }
 
-  // "postPhoto" field.
-  String? _postPhoto;
-  String get postPhoto => _postPhoto ?? '';
-  bool hasPostPhoto() => _postPhoto != null;
-
-  // "postTitle" field.
-  String? _postTitle;
-  String get postTitle => _postTitle ?? '';
-  bool hasPostTitle() => _postTitle != null;
-
-  // "postDescription" field.
-  String? _postDescription;
-  String get postDescription => _postDescription ?? '';
-  bool hasPostDescription() => _postDescription != null;
-
   // "postUser" field.
   DocumentReference? _postUser;
   DocumentReference? get postUser => _postUser;
@@ -50,11 +35,6 @@ class UserPostsRecord extends FirestoreRecord {
   int? _numComments;
   int get numComments => _numComments ?? 0;
   bool hasNumComments() => _numComments != null;
-
-  // "dogProfile" field.
-  DocumentReference? _dogProfile;
-  DocumentReference? get dogProfile => _dogProfile;
-  bool hasDogProfile() => _dogProfile != null;
 
   // "postOwner" field.
   bool? _postOwner;
@@ -126,15 +106,21 @@ class UserPostsRecord extends FirestoreRecord {
   String get nullExpiry => _nullExpiry ?? '';
   bool hasNullExpiry() => _nullExpiry != null;
 
+  // "pollLocation" field.
+  LatLng? _pollLocation;
+  LatLng? get pollLocation => _pollLocation;
+  bool hasPollLocation() => _pollLocation != null;
+
+  // "locationEnforced" field.
+  bool? _locationEnforced;
+  bool get locationEnforced => _locationEnforced ?? false;
+  bool hasLocationEnforced() => _locationEnforced != null;
+
   void _initializeFields() {
-    _postPhoto = snapshotData['postPhoto'] as String?;
-    _postTitle = snapshotData['postTitle'] as String?;
-    _postDescription = snapshotData['postDescription'] as String?;
     _postUser = snapshotData['postUser'] as DocumentReference?;
     _timePosted = snapshotData['timePosted'] as DateTime?;
     _likes = getDataList(snapshotData['likes']);
     _numComments = castToType<int>(snapshotData['numComments']);
-    _dogProfile = snapshotData['dogProfile'] as DocumentReference?;
     _postOwner = snapshotData['postOwner'] as bool?;
     _shits = getDataList(snapshotData['shits']);
     _postPoll = snapshotData['postPoll'] as String?;
@@ -149,6 +135,8 @@ class UserPostsRecord extends FirestoreRecord {
     _votes4 = getDataList(snapshotData['votes4']);
     _expiry = snapshotData['expiry'] as DateTime?;
     _nullExpiry = snapshotData['nullExpiry'] as String?;
+    _pollLocation = snapshotData['pollLocation'] as LatLng?;
+    _locationEnforced = snapshotData['locationEnforced'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -186,13 +174,9 @@ class UserPostsRecord extends FirestoreRecord {
 }
 
 Map<String, dynamic> createUserPostsRecordData({
-  String? postPhoto,
-  String? postTitle,
-  String? postDescription,
   DocumentReference? postUser,
   DateTime? timePosted,
   int? numComments,
-  DocumentReference? dogProfile,
   bool? postOwner,
   String? postPoll,
   String? postAnswer1,
@@ -202,16 +186,14 @@ Map<String, dynamic> createUserPostsRecordData({
   String? imageURL,
   DateTime? expiry,
   String? nullExpiry,
+  LatLng? pollLocation,
+  bool? locationEnforced,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
-      'postPhoto': postPhoto,
-      'postTitle': postTitle,
-      'postDescription': postDescription,
       'postUser': postUser,
       'timePosted': timePosted,
       'numComments': numComments,
-      'dogProfile': dogProfile,
       'postOwner': postOwner,
       'postPoll': postPoll,
       'postAnswer1': postAnswer1,
@@ -221,6 +203,8 @@ Map<String, dynamic> createUserPostsRecordData({
       'imageURL': imageURL,
       'expiry': expiry,
       'nullExpiry': nullExpiry,
+      'pollLocation': pollLocation,
+      'locationEnforced': locationEnforced,
     }.withoutNulls,
   );
 
@@ -233,14 +217,10 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
   @override
   bool equals(UserPostsRecord? e1, UserPostsRecord? e2) {
     const listEquality = ListEquality();
-    return e1?.postPhoto == e2?.postPhoto &&
-        e1?.postTitle == e2?.postTitle &&
-        e1?.postDescription == e2?.postDescription &&
-        e1?.postUser == e2?.postUser &&
+    return e1?.postUser == e2?.postUser &&
         e1?.timePosted == e2?.timePosted &&
         listEquality.equals(e1?.likes, e2?.likes) &&
         e1?.numComments == e2?.numComments &&
-        e1?.dogProfile == e2?.dogProfile &&
         e1?.postOwner == e2?.postOwner &&
         listEquality.equals(e1?.shits, e2?.shits) &&
         e1?.postPoll == e2?.postPoll &&
@@ -254,19 +234,17 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         listEquality.equals(e1?.votes3, e2?.votes3) &&
         listEquality.equals(e1?.votes4, e2?.votes4) &&
         e1?.expiry == e2?.expiry &&
-        e1?.nullExpiry == e2?.nullExpiry;
+        e1?.nullExpiry == e2?.nullExpiry &&
+        e1?.pollLocation == e2?.pollLocation &&
+        e1?.locationEnforced == e2?.locationEnforced;
   }
 
   @override
   int hash(UserPostsRecord? e) => const ListEquality().hash([
-        e?.postPhoto,
-        e?.postTitle,
-        e?.postDescription,
         e?.postUser,
         e?.timePosted,
         e?.likes,
         e?.numComments,
-        e?.dogProfile,
         e?.postOwner,
         e?.shits,
         e?.postPoll,
@@ -280,7 +258,9 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e?.votes3,
         e?.votes4,
         e?.expiry,
-        e?.nullExpiry
+        e?.nullExpiry,
+        e?.pollLocation,
+        e?.locationEnforced
       ]);
 
   @override

@@ -2,9 +2,12 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/flutter_flow/flutter_flow_place_picker.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/place.dart';
+import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -33,6 +36,28 @@ class CreatePollModel extends FlutterFlowModel {
 
   String? nullExpiry = '';
 
+  DateTime? date1;
+
+  DateTime? date2;
+
+  DateTime? date3;
+
+  FFPlace? pollLocation;
+
+  bool locationEnforced = false;
+
+  FFPlace? loc1;
+
+  FFPlace? loc2;
+
+  FFPlace? loc3;
+
+  bool writeIn = true;
+
+  bool multipleChoice = false;
+
+  bool trueFalse = false;
+
   ///  State fields for stateful widgets in this component.
 
   // Stores action output result for [Backend Call - API (apiTest)] action in Button widget.
@@ -51,6 +76,8 @@ class CreatePollModel extends FlutterFlowModel {
   String? Function(BuildContext, String?)?
       choicesTWOanswerTWOControllerValidator;
   DateTime? datePicked1;
+  // State field(s) for PlacePicker widget.
+  var placePickerValue1 = FFPlace();
   // State field(s) for choicesTHREEanswerONE widget.
   TextEditingController? choicesTHREEanswerONEController;
   String? Function(BuildContext, String?)?
@@ -64,6 +91,8 @@ class CreatePollModel extends FlutterFlowModel {
   String? Function(BuildContext, String?)?
       choicesTHREEanswerTHREEControllerValidator;
   DateTime? datePicked2;
+  // State field(s) for PlacePicker widget.
+  var placePickerValue2 = FFPlace();
   // State field(s) for choicesFOURanswerONE widget.
   TextEditingController? choicesFOURanswerONEController;
   String? Function(BuildContext, String?)?
@@ -81,6 +110,8 @@ class CreatePollModel extends FlutterFlowModel {
   String? Function(BuildContext, String?)?
       choicesFOURanswerFOURControllerValidator;
   DateTime? datePicked3;
+  // State field(s) for PlacePicker widget.
+  var placePickerValue3 = FFPlace();
 
   /// Initialization and disposal methods.
 

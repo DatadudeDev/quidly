@@ -2,9 +2,12 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/flutter_flow/flutter_flow_place_picker.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/place.dart';
+import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -85,154 +88,159 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(12.0, 10.0, 0.0, 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    15.0, 0.0, 0.0, 0.0),
-                                child: FlutterFlowIconButton(
-                                  borderColor: Color(0x00FFFFFF),
-                                  borderRadius: 20.0,
-                                  borderWidth: 1.0,
-                                  buttonSize: 20.0,
-                                  fillColor: Color(0x00FFFFFF),
-                                  icon: Icon(
-                                    Icons.close,
-                                    color: Color(0xFFDCDCDC),
-                                    size: 24.0,
-                                  ),
-                                  onPressed: () async {
-                                    Navigator.pop(context);
-                                  },
-                                ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            FlutterFlowIconButton(
+                              borderColor: Color(0x00FFFFFF),
+                              borderRadius: 20.0,
+                              borderWidth: 1.0,
+                              buttonSize: 40.0,
+                              fillColor: Color(0x00FFFFFF),
+                              icon: Icon(
+                                Icons.close,
+                                color: Color(0xFFDCDCDC),
+                                size: 24.0,
                               ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 16.0, 0.0),
-                            child: FFButtonWidget(
                               onPressed: () async {
-                                var _shouldSetState = false;
-                                _model.poll = _model.textController1.text;
-                                _model.answer1 =
-                                    _model.choicesTWOanswerONEController.text;
-                                _model.answer2 =
-                                    _model.choicesTWOanswerTWOController.text;
-                                _model.answer3 = _model
-                                    .choicesTHREEanswerTHREEController.text;
-                                _model.answer4 =
-                                    _model.choicesFOURanswerFOURController.text;
-                                _model.pollExpiry = _model.datePicked1
-                                            ?.microsecondsSinceEpoch !=
-                                        null
-                                    ? _model.datePicked1
-                                    : (_model.datePicked2
-                                                ?.microsecondsSinceEpoch !=
-                                            null
-                                        ? _model.datePicked2
-                                        : (_model.datePicked3
-                                                    ?.microsecondsSinceEpoch !=
-                                                null
-                                            ? _model.datePicked3
-                                            : _model.datePicked3));
-                                _model.apiResultpwv = await ApiTestCall.call(
-                                  poll: _model.poll,
-                                  answer2: _model.answer2,
-                                  answer3: _model.answer3,
-                                  answer4: _model.answer4,
-                                  answer1: _model.answer1,
-                                );
-                                _shouldSetState = true;
-                                if ((_model.apiResultpwv?.succeeded ?? true)) {
-                                  _model.apiResult9jo = await GetURLCall.call();
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 20.0, 0.0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  var _shouldSetState = false;
+                                  _model.poll = _model.textController1.text;
+                                  _model.answer1 =
+                                      _model.choicesTWOanswerONEController.text;
+                                  _model.answer2 =
+                                      _model.choicesTWOanswerTWOController.text;
+                                  _model.answer3 = _model
+                                      .choicesTHREEanswerTHREEController.text;
+                                  _model.answer4 = _model
+                                      .choicesFOURanswerFOURController.text;
+                                  _model.pollExpiry = _model.datePicked3 != null
+                                      ? _model.datePicked3
+                                      : (_model.datePicked2 != null
+                                          ? _model.datePicked2
+                                          : _model.datePicked1);
+                                  _model.apiResultpwv = await ApiTestCall.call(
+                                    poll: _model.poll,
+                                    answer2: _model.answer2,
+                                    answer3: _model.answer3,
+                                    answer4: _model.answer4,
+                                    answer1: _model.answer1,
+                                  );
                                   _shouldSetState = true;
-                                  if ((_model.apiResult9jo?.succeeded ??
+                                  if ((_model.apiResultpwv?.succeeded ??
                                       true)) {
-                                    _model.imageURL = GetURLCall.imageURL(
-                                      (_model.apiResult9jo?.jsonBody ?? ''),
-                                    );
-                                    if (_model.pollExpiry != null) {
-                                      await UserPostsRecord.collection
-                                          .doc()
-                                          .set(createUserPostsRecordData(
-                                            postUser: currentUserReference,
-                                            timePosted: getCurrentTimestamp,
-                                            postOwner: true,
-                                            postPoll: _model.poll,
-                                            postAnswer1: _model.answer1,
-                                            postAnswer2: _model.answer2,
-                                            postAnswer3: _model.answer3,
-                                            postAnswer4: _model.answer4,
-                                            imageURL: _model.imageURL,
-                                            expiry: _model.pollExpiry,
-                                            nullExpiry: '∞',
-                                          ));
-                                      Navigator.pop(context);
+                                    _model.apiResult9jo =
+                                        await GetURLCall.call();
+                                    _shouldSetState = true;
+                                    if ((_model.apiResult9jo?.succeeded ??
+                                        true)) {
+                                      _model.imageURL = GetURLCall.imageURL(
+                                        (_model.apiResult9jo?.jsonBody ?? ''),
+                                      );
+                                      if (_model.pollExpiry == null) {
+                                        await UserPostsRecord.collection
+                                            .doc()
+                                            .set(createUserPostsRecordData(
+                                              postUser: currentUserReference,
+                                              timePosted: getCurrentTimestamp,
+                                              postOwner: true,
+                                              postPoll: _model.poll,
+                                              postAnswer1: _model.answer1,
+                                              postAnswer2: _model.answer2,
+                                              postAnswer3: _model.answer3,
+                                              postAnswer4: _model.answer4,
+                                              imageURL: _model.imageURL,
+                                              pollLocation: _model
+                                                          .loc3!.latLng !=
+                                                      null
+                                                  ? _model.loc3!.latLng
+                                                  : (_model.loc2!.latLng != null
+                                                      ? _model.loc2!.latLng
+                                                      : _model.loc1!.latLng),
+                                              locationEnforced: true,
+                                            ));
+                                        Navigator.pop(context);
+                                      } else {
+                                        await UserPostsRecord.collection
+                                            .doc()
+                                            .set(createUserPostsRecordData(
+                                              postUser: currentUserReference,
+                                              timePosted: getCurrentTimestamp,
+                                              postOwner: true,
+                                              postPoll: _model.poll,
+                                              postAnswer1: _model.answer1,
+                                              postAnswer2: _model.answer2,
+                                              postAnswer3: _model.answer3,
+                                              postAnswer4: _model.answer4,
+                                              imageURL: _model.imageURL,
+                                              expiry: _model.pollExpiry,
+                                              pollLocation: _model
+                                                          .loc3!.latLng !=
+                                                      null
+                                                  ? _model.loc3!.latLng
+                                                  : (_model.loc2!.latLng != null
+                                                      ? _model.loc2!.latLng
+                                                      : _model.loc1!.latLng),
+                                              locationEnforced: true,
+                                            ));
+                                        Navigator.pop(context);
+                                      }
                                     } else {
-                                      await UserPostsRecord.collection
-                                          .doc()
-                                          .set(createUserPostsRecordData(
-                                            postUser: currentUserReference,
-                                            timePosted: getCurrentTimestamp,
-                                            postOwner: true,
-                                            postPoll: _model.poll,
-                                            postAnswer1: _model.answer1,
-                                            postAnswer2: _model.answer2,
-                                            postAnswer3: _model.answer3,
-                                            postAnswer4: _model.answer4,
-                                            imageURL: _model.imageURL,
-                                            nullExpiry: '∞',
-                                          ));
-                                      Navigator.pop(context);
+                                      if (_shouldSetState) setState(() {});
+                                      return;
                                     }
                                   } else {
                                     if (_shouldSetState) setState(() {});
                                     return;
                                   }
-                                } else {
-                                  if (_shouldSetState) setState(() {});
-                                  return;
-                                }
 
-                                if (_shouldSetState) setState(() {});
-                              },
-                              text: 'Submit',
-                              options: FFButtonOptions(
-                                width: 70.0,
-                                height: 30.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context).primary,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Urbanist',
-                                      color: Colors.white,
-                                    ),
-                                elevation: 3.0,
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1.0,
+                                  if (_shouldSetState) setState(() {});
+                                },
+                                text: 'Submit',
+                                options: FFButtonOptions(
+                                  width: 70.0,
+                                  height: 30.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Urbanist',
+                                        color: Colors.white,
+                                      ),
+                                  elevation: 3.0,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(20.0),
                                 ),
-                                borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -442,205 +450,294 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Stack(
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                if ((_model.poll != null &&
-                                        _model.poll != '') &&
-                                    (_model.answer2 == null ||
-                                        _model.answer2 == ''))
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        40.0, 5.0, 16.0, 0.0),
-                                    child: Container(
-                                      width: MediaQuery.sizeOf(context).width *
-                                          0.855,
-                                      height: 145.0,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        border: Border.all(
-                                          color: Color(0x6395A1AC),
-                                          width: 1.0,
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 20.0, 0.0, 80.0),
+                                      child: Container(
+                                        width: 50.0,
+                                        height: 150.0,
+                                        decoration: BoxDecoration(),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            FlutterFlowIconButton(
+                                              borderRadius: 20.0,
+                                              borderWidth: 1.0,
+                                              buttonSize: 40.0,
+                                              icon: FaIcon(
+                                                FontAwesomeIcons.penFancy,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                size: 24.0,
+                                              ),
+                                              onPressed: () async {
+                                                setState(() {
+                                                  _model.writeIn = true;
+                                                  _model.multipleChoice = false;
+                                                  _model.trueFalse = false;
+                                                });
+                                              },
+                                            ),
+                                            FlutterFlowIconButton(
+                                              borderRadius: 20.0,
+                                              borderWidth: 1.0,
+                                              buttonSize: 40.0,
+                                              icon: Icon(
+                                                Icons.format_list_bulleted,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                size: 24.0,
+                                              ),
+                                              onPressed: () async {
+                                                setState(() {
+                                                  _model.writeIn = false;
+                                                  _model.multipleChoice = true;
+                                                  _model.trueFalse = false;
+                                                });
+                                              },
+                                            ),
+                                            FlutterFlowIconButton(
+                                              borderRadius: 20.0,
+                                              borderWidth: 1.0,
+                                              buttonSize: 40.0,
+                                              icon: Icon(
+                                                Icons.rule,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                size: 24.0,
+                                              ),
+                                              onPressed: () async {
+                                                setState(() {
+                                                  _model.writeIn = false;
+                                                  _model.multipleChoice = false;
+                                                  _model.trueFalse = true;
+                                                });
+                                              },
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        10.0, 0.0, 0.0, 0.0),
-                                                child: Column(
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Container(
+                                  width: 350.0,
+                                  height: 250.0,
+                                  decoration: BoxDecoration(),
+                                  child: Stack(
+                                    children: [
+                                      if (valueOrDefault<bool>(
+                                            _model.multipleChoice == true,
+                                            false,
+                                          ) &&
+                                          (_model.answer2 == null ||
+                                              _model.answer2 == '') &&
+                                          (_model.answer1 == null ||
+                                              _model.answer1 == ''))
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 5.0, 0.0, 0.0),
+                                          child: Container(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.85,
+                                            height: 145.0,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              border: Border.all(
+                                                color: Color(0x6395A1AC),
+                                                width: 1.0,
+                                              ),
+                                            ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
                                                   mainAxisAlignment:
-                                                      MainAxisAlignment.center,
+                                                      MainAxisAlignment.start,
                                                   children: [
                                                     Padding(
                                                       padding:
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
+                                                                  10.0,
                                                                   0.0,
-                                                                  5.0,
                                                                   0.0,
-                                                                  5.0),
-                                                      child: Container(
-                                                        width:
-                                                            MediaQuery.sizeOf(
-                                                                        context)
-                                                                    .width *
-                                                                0.7,
-                                                        height:
-                                                            MediaQuery.sizeOf(
-                                                                        context)
-                                                                    .height *
-                                                                0.11,
-                                                        decoration:
-                                                            BoxDecoration(),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
-                                                                    Container(
-                                                                      width: MediaQuery.sizeOf(context)
-                                                                              .width *
-                                                                          0.7,
-                                                                      height:
-                                                                          40.0,
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(10.0),
-                                                                        border:
-                                                                            Border.all(
-                                                                          color:
-                                                                              Color(0x6395A1AC),
-                                                                          width:
-                                                                              1.0,
-                                                                        ),
-                                                                      ),
-                                                                      child:
-                                                                          Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        children: [
-                                                                          Expanded(
-                                                                            child:
-                                                                                Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                                                                              child: TextFormField(
-                                                                                controller: _model.choicesTWOanswerONEController,
-                                                                                autofocus: true,
-                                                                                obscureText: false,
-                                                                                decoration: InputDecoration(
-                                                                                  labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                        fontFamily: 'Outfit',
-                                                                                        color: Color(0x6395A1AC),
-                                                                                        fontSize: 15.0,
-                                                                                      ),
-                                                                                  hintText: 'Choice 1',
-                                                                                  hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                        fontFamily: 'Outfit',
-                                                                                        color: Color(0x6395A1AC),
-                                                                                      ),
-                                                                                  enabledBorder: InputBorder.none,
-                                                                                  focusedBorder: InputBorder.none,
-                                                                                  errorBorder: InputBorder.none,
-                                                                                  focusedErrorBorder: InputBorder.none,
-                                                                                ),
-                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                      fontFamily: 'Urbanist',
-                                                                                      color: FlutterFlowTheme.of(context).primaryText,
-                                                                                    ),
-                                                                                maxLines: 3,
-                                                                                validator: _model.choicesTWOanswerONEControllerValidator.asValidator(context),
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          7.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child: Row(
+                                                                  0.0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        5.0,
+                                                                        0.0,
+                                                                        5.0),
+                                                            child: Container(
+                                                              width: MediaQuery
+                                                                          .sizeOf(
+                                                                              context)
+                                                                      .width *
+                                                                  0.7,
+                                                              height: MediaQuery
+                                                                          .sizeOf(
+                                                                              context)
+                                                                      .height *
+                                                                  0.11,
+                                                              decoration:
+                                                                  BoxDecoration(),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Column(
                                                                     mainAxisSize:
                                                                         MainAxisSize
                                                                             .max,
                                                                     children: [
-                                                                      Container(
-                                                                        width: MediaQuery.sizeOf(context).width *
-                                                                            0.7,
-                                                                        height:
-                                                                            40.0,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(10.0),
-                                                                          border:
-                                                                              Border.all(
-                                                                            color:
-                                                                                Color(0x6395A1AC),
+                                                                      Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: [
+                                                                          Container(
                                                                             width:
-                                                                                1.0,
+                                                                                MediaQuery.sizeOf(context).width * 0.7,
+                                                                            height:
+                                                                                40.0,
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              borderRadius: BorderRadius.circular(10.0),
+                                                                              border: Border.all(
+                                                                                color: Color(0x6395A1AC),
+                                                                                width: 1.0,
+                                                                              ),
+                                                                            ),
+                                                                            child:
+                                                                                Row(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              children: [
+                                                                                Expanded(
+                                                                                  child: Padding(
+                                                                                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                                                                                    child: TextFormField(
+                                                                                      controller: _model.choicesTWOanswerONEController,
+                                                                                      autofocus: true,
+                                                                                      obscureText: false,
+                                                                                      decoration: InputDecoration(
+                                                                                        labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                              fontFamily: 'Outfit',
+                                                                                              color: Color(0x6395A1AC),
+                                                                                              fontSize: 15.0,
+                                                                                            ),
+                                                                                        hintText: 'Choice 1',
+                                                                                        hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                              fontFamily: 'Outfit',
+                                                                                              color: Color(0x6395A1AC),
+                                                                                              fontSize: 14.0,
+                                                                                            ),
+                                                                                        enabledBorder: InputBorder.none,
+                                                                                        focusedBorder: InputBorder.none,
+                                                                                        errorBorder: InputBorder.none,
+                                                                                        focusedErrorBorder: InputBorder.none,
+                                                                                      ),
+                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                            fontFamily: 'Urbanist',
+                                                                                            color: FlutterFlowTheme.of(context).primaryText,
+                                                                                          ),
+                                                                                      maxLines: 3,
+                                                                                      validator: _model.choicesTWOanswerONEControllerValidator.asValidator(context),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            ),
                                                                           ),
-                                                                        ),
+                                                                        ],
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            7.0,
+                                                                            0.0,
+                                                                            0.0),
                                                                         child:
                                                                             Row(
                                                                           mainAxisSize:
                                                                               MainAxisSize.max,
                                                                           children: [
-                                                                            Expanded(
-                                                                              child: Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                                                                                child: TextFormField(
-                                                                                  controller: _model.choicesTWOanswerTWOController,
-                                                                                  autofocus: true,
-                                                                                  obscureText: false,
-                                                                                  decoration: InputDecoration(
-                                                                                    labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                          fontFamily: 'Outfit',
-                                                                                          color: Color(0x6395A1AC),
-                                                                                          fontSize: 17.0,
-                                                                                        ),
-                                                                                    hintText: 'Choice 2',
-                                                                                    hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                          fontFamily: 'Outfit',
-                                                                                          color: Color(0x6395A1AC),
-                                                                                          fontWeight: FontWeight.w300,
-                                                                                        ),
-                                                                                    enabledBorder: InputBorder.none,
-                                                                                    focusedBorder: InputBorder.none,
-                                                                                    errorBorder: InputBorder.none,
-                                                                                    focusedErrorBorder: InputBorder.none,
-                                                                                  ),
-                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                        fontFamily: 'Urbanist',
-                                                                                        color: FlutterFlowTheme.of(context).primaryText,
-                                                                                      ),
-                                                                                  validator: _model.choicesTWOanswerTWOControllerValidator.asValidator(context),
+                                                                            Container(
+                                                                              width: MediaQuery.sizeOf(context).width * 0.7,
+                                                                              height: 40.0,
+                                                                              decoration: BoxDecoration(
+                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                                border: Border.all(
+                                                                                  color: Color(0x6395A1AC),
+                                                                                  width: 1.0,
                                                                                 ),
+                                                                              ),
+                                                                              child: Row(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                children: [
+                                                                                  Expanded(
+                                                                                    child: Padding(
+                                                                                      padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                                                                                      child: TextFormField(
+                                                                                        controller: _model.choicesTWOanswerTWOController,
+                                                                                        autofocus: true,
+                                                                                        obscureText: false,
+                                                                                        decoration: InputDecoration(
+                                                                                          labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                                fontFamily: 'Outfit',
+                                                                                                color: Color(0x6395A1AC),
+                                                                                                fontSize: 17.0,
+                                                                                              ),
+                                                                                          hintText: 'Choice 2',
+                                                                                          hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                                fontFamily: 'Outfit',
+                                                                                                color: Color(0x6395A1AC),
+                                                                                                fontSize: 14.0,
+                                                                                                fontWeight: FontWeight.w300,
+                                                                                              ),
+                                                                                          enabledBorder: InputBorder.none,
+                                                                                          focusedBorder: InputBorder.none,
+                                                                                          errorBorder: InputBorder.none,
+                                                                                          focusedErrorBorder: InputBorder.none,
+                                                                                        ),
+                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                              fontFamily: 'Urbanist',
+                                                                                              color: FlutterFlowTheme.of(context).primaryText,
+                                                                                            ),
+                                                                                        validator: _model.choicesTWOanswerTWOControllerValidator.asValidator(context),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
                                                                               ),
                                                                             ),
                                                                           ],
@@ -648,134 +745,37 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                       ),
                                                                     ],
                                                                   ),
-                                                                ),
-                                                              ],
+                                                                ],
+                                                              ),
                                                             ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        8.0, 0.0, 0.0, 0.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        FlutterFlowIconButton(
-                                                          borderColor: Colors
-                                                              .transparent,
-                                                          borderRadius: 20.0,
-                                                          borderWidth: 1.0,
-                                                          buttonSize: 40.0,
-                                                          icon: Icon(
-                                                            Icons.close,
-                                                            color: Color(
-                                                                0xB9B2B2B2),
-                                                            size: 24.0,
                                                           ),
-                                                          onPressed: () {
-                                                            print(
-                                                                'IconButton pressed ...');
-                                                          },
-                                                        ),
-                                                      ],
+                                                        ],
+                                                      ),
                                                     ),
                                                     Padding(
                                                       padding:
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
+                                                                  8.0,
                                                                   0.0,
-                                                                  10.0,
                                                                   0.0,
                                                                   0.0),
-                                                      child: Row(
+                                                      child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
                                                         children: [
-                                                          FlutterFlowIconButton(
-                                                            borderColor: Colors
-                                                                .transparent,
-                                                            borderRadius: 20.0,
-                                                            borderWidth: 1.0,
-                                                            buttonSize: 40.0,
-                                                            icon: Icon(
-                                                              Icons.add,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primary,
-                                                              size: 24.0,
-                                                            ),
-                                                            onPressed:
-                                                                () async {
-                                                              setState(() {
-                                                                _model.answer1 =
-                                                                    _model
-                                                                        .choicesTWOanswerONEController
-                                                                        .text;
-                                                                _model.answer2 =
-                                                                    _model
-                                                                        .choicesTWOanswerTWOController
-                                                                        .text;
-                                                              });
-                                                            },
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Container(
-                                                    width: MediaQuery.sizeOf(
-                                                                context)
-                                                            .width *
-                                                        0.85,
-                                                    height: 38.0,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                        bottomLeft:
-                                                            Radius.circular(
-                                                                20.0),
-                                                        bottomRight:
-                                                            Radius.circular(
-                                                                20.0),
-                                                        topLeft:
-                                                            Radius.circular(
-                                                                0.0),
-                                                        topRight:
-                                                            Radius.circular(
-                                                                0.0),
-                                                      ),
-                                                    ),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Row(
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        10.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            child: Row(
                                                               mainAxisSize:
                                                                   MainAxisSize
                                                                       .max,
@@ -783,8 +783,8 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                 Padding(
                                                                   padding: EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          5.0,
                                                                           0.0,
+                                                                          25.0,
                                                                           0.0,
                                                                           0.0),
                                                                   child:
@@ -797,79 +797,773 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                     borderWidth:
                                                                         1.0,
                                                                     buttonSize:
-                                                                        38.0,
+                                                                        40.0,
                                                                     icon: Icon(
-                                                                      Icons
-                                                                          .alarm,
+                                                                      Icons.add,
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
                                                                           .primary,
                                                                       size:
-                                                                          20.0,
+                                                                          24.0,
                                                                     ),
                                                                     onPressed:
                                                                         () async {
-                                                                      final _datePicked1Date =
-                                                                          await showDatePicker(
-                                                                        context:
-                                                                            context,
-                                                                        initialDate:
-                                                                            getCurrentTimestamp,
-                                                                        firstDate:
-                                                                            getCurrentTimestamp,
-                                                                        lastDate:
-                                                                            DateTime(2050),
-                                                                      );
-
-                                                                      if (_datePicked1Date !=
-                                                                          null) {
-                                                                        setState(
-                                                                            () {
-                                                                          _model.datePicked1 =
-                                                                              DateTime(
-                                                                            _datePicked1Date.year,
-                                                                            _datePicked1Date.month,
-                                                                            _datePicked1Date.day,
-                                                                          );
-                                                                        });
-                                                                      }
+                                                                      setState(
+                                                                          () {
+                                                                        _model.answer1 = _model
+                                                                            .choicesTWOanswerONEController
+                                                                            .text;
+                                                                        _model.answer2 = _model
+                                                                            .choicesTWOanswerTWOController
+                                                                            .text;
+                                                                        _model.date1 =
+                                                                            _model.datePicked1;
+                                                                      });
                                                                     },
                                                                   ),
                                                                 ),
                                                               ],
                                                             ),
-                                                          ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Container(
+                                                          width:
+                                                              MediaQuery.sizeOf(
+                                                                          context)
+                                                                      .width *
+                                                                  0.73,
+                                                          height: 38.0,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .only(
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      20.0),
+                                                              bottomRight:
+                                                                  Radius
+                                                                      .circular(
+                                                                          20.0),
+                                                              topLeft: Radius
+                                                                  .circular(
+                                                                      0.0),
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      0.0),
+                                                            ),
+                                                          ),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      FlutterFlowIconButton(
+                                                                        borderColor:
+                                                                            Colors.transparent,
+                                                                        borderRadius:
+                                                                            20.0,
+                                                                        borderWidth:
+                                                                            1.0,
+                                                                        buttonSize:
+                                                                            38.0,
+                                                                        icon:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .alarm,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primary,
+                                                                          size:
+                                                                              20.0,
+                                                                        ),
+                                                                        onPressed:
+                                                                            () async {
+                                                                          final _datePicked1Date =
+                                                                              await showDatePicker(
+                                                                            context:
+                                                                                context,
+                                                                            initialDate:
+                                                                                getCurrentTimestamp,
+                                                                            firstDate:
+                                                                                getCurrentTimestamp,
+                                                                            lastDate:
+                                                                                DateTime(2050),
+                                                                          );
+
+                                                                          if (_datePicked1Date !=
+                                                                              null) {
+                                                                            setState(() {
+                                                                              _model.datePicked1 = DateTime(
+                                                                                _datePicked1Date.year,
+                                                                                _datePicked1Date.month,
+                                                                                _datePicked1Date.day,
+                                                                              );
+                                                                            });
+                                                                          }
+                                                                        },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Container(
+                                                                        width:
+                                                                            100.0,
+                                                                        height:
+                                                                            15.0,
+                                                                        decoration:
+                                                                            BoxDecoration(),
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              3.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            'Poll ends on:',
+                                                                            textAlign:
+                                                                                TextAlign.start,
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: 'Urbanist',
+                                                                                  color: Color(0xCCB2B2B2),
+                                                                                  fontSize: 10.0,
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Container(
+                                                                        width:
+                                                                            100.0,
+                                                                        height:
+                                                                            20.0,
+                                                                        decoration:
+                                                                            BoxDecoration(),
+                                                                        child:
+                                                                            Text(
+                                                                          valueOrDefault<
+                                                                              String>(
+                                                                            dateTimeFormat('relative',
+                                                                                _model.datePicked1),
+                                                                            'Never',
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .override(
+                                                                                fontFamily: 'Urbanist',
+                                                                                color: FlutterFlowTheme.of(context).primary,
+                                                                                fontSize: 12.0,
+                                                                                fontWeight: FontWeight.bold,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Container(
+                                                                        width:
+                                                                            140.0,
+                                                                        height:
+                                                                            35.0,
+                                                                        decoration:
+                                                                            BoxDecoration(),
+                                                                        child:
+                                                                            Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Row(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              children: [
+                                                                                Container(
+                                                                                  width: 140.0,
+                                                                                  height: 35.0,
+                                                                                  decoration: BoxDecoration(),
+                                                                                  child: FlutterFlowPlacePicker(
+                                                                                    iOSGoogleMapsApiKey: 'AIzaSyBBzVycKke2mKHYdJlxidz4TDgmco1tW98',
+                                                                                    androidGoogleMapsApiKey: 'AIzaSyBBzVycKke2mKHYdJlxidz4TDgmco1tW98',
+                                                                                    webGoogleMapsApiKey: 'AIzaSyBBzVycKke2mKHYdJlxidz4TDgmco1tW98',
+                                                                                    onSelect: (place) async {
+                                                                                      setState(() => _model.placePickerValue1 = place);
+                                                                                    },
+                                                                                    defaultText: 'Select Location',
+                                                                                    icon: Icon(
+                                                                                      Icons.place,
+                                                                                      color: Color(0xFF00AEFF),
+                                                                                      size: 20.0,
+                                                                                    ),
+                                                                                    buttonOptions: FFButtonOptions(
+                                                                                      width: 140.0,
+                                                                                      height: 40.0,
+                                                                                      color: Colors.black,
+                                                                                      textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                            fontFamily: 'Urbanist',
+                                                                                            color: Color(0xFF00AEFF),
+                                                                                            fontSize: 14.0,
+                                                                                          ),
+                                                                                      elevation: 2.0,
+                                                                                      borderSide: BorderSide(
+                                                                                        color: Colors.transparent,
+                                                                                        width: 1.0,
+                                                                                      ),
+                                                                                      borderRadius: BorderRadius.circular(8.0),
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
-                                                        Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Row(
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      if ((_model.answer2 != null &&
+                                              _model.answer2 != '') &&
+                                          (_model.answer3 == null ||
+                                              _model.answer3 == '') &&
+                                          (_model.multipleChoice == true))
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 5.0, 0.0, 0.0),
+                                          child: Container(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.85,
+                                            height: 190.0,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              border: Border.all(
+                                                color: Color(0x6395A1AC),
+                                                width: 1.0,
+                                              ),
+                                            ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  10.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        5.0,
+                                                                        0.0,
+                                                                        5.0),
+                                                            child: Container(
+                                                              width: MediaQuery
+                                                                          .sizeOf(
+                                                                              context)
+                                                                      .width *
+                                                                  0.7,
+                                                              height: 135.0,
+                                                              decoration:
+                                                                  BoxDecoration(),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: [
+                                                                          Container(
+                                                                            width:
+                                                                                MediaQuery.sizeOf(context).width * 0.7,
+                                                                            height:
+                                                                                40.0,
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              borderRadius: BorderRadius.circular(10.0),
+                                                                              border: Border.all(
+                                                                                color: Color(0x6395A1AC),
+                                                                                width: 1.0,
+                                                                              ),
+                                                                            ),
+                                                                            child:
+                                                                                Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                                                                              child: TextFormField(
+                                                                                controller: _model.choicesTHREEanswerONEController,
+                                                                                autofocus: true,
+                                                                                obscureText: false,
+                                                                                decoration: InputDecoration(
+                                                                                  labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                        fontFamily: 'Outfit',
+                                                                                        color: Color(0x6395A1AC),
+                                                                                      ),
+                                                                                  hintText: _model.answer1,
+                                                                                  hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                        fontFamily: 'Outfit',
+                                                                                        fontSize: 14.0,
+                                                                                      ),
+                                                                                  enabledBorder: InputBorder.none,
+                                                                                  focusedBorder: InputBorder.none,
+                                                                                  errorBorder: InputBorder.none,
+                                                                                  focusedErrorBorder: InputBorder.none,
+                                                                                ),
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Urbanist',
+                                                                                      color: FlutterFlowTheme.of(context).primaryText,
+                                                                                    ),
+                                                                                validator: _model.choicesTHREEanswerONEControllerValidator.asValidator(context),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            7.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Container(
+                                                                              width: MediaQuery.sizeOf(context).width * 0.7,
+                                                                              height: 40.0,
+                                                                              decoration: BoxDecoration(
+                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                                border: Border.all(
+                                                                                  color: Color(0x6395A1AC),
+                                                                                  width: 1.0,
+                                                                                ),
+                                                                              ),
+                                                                              child: Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                                                                                child: TextFormField(
+                                                                                  controller: _model.choicesTHREEanswerTWOController,
+                                                                                  autofocus: true,
+                                                                                  obscureText: false,
+                                                                                  decoration: InputDecoration(
+                                                                                    labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                          fontFamily: 'Outfit',
+                                                                                          color: Color(0x6395A1AC),
+                                                                                        ),
+                                                                                    hintText: _model.answer2,
+                                                                                    hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                          fontFamily: 'Outfit',
+                                                                                          fontSize: 14.0,
+                                                                                        ),
+                                                                                    enabledBorder: InputBorder.none,
+                                                                                    focusedBorder: InputBorder.none,
+                                                                                    errorBorder: InputBorder.none,
+                                                                                    focusedErrorBorder: InputBorder.none,
+                                                                                  ),
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        fontFamily: 'Urbanist',
+                                                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                                                      ),
+                                                                                  validator: _model.choicesTHREEanswerTWOControllerValidator.asValidator(context),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            7.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Container(
+                                                                              width: MediaQuery.sizeOf(context).width * 0.7,
+                                                                              height: 40.0,
+                                                                              decoration: BoxDecoration(
+                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                                border: Border.all(
+                                                                                  color: Color(0x6395A1AC),
+                                                                                  width: 1.0,
+                                                                                ),
+                                                                              ),
+                                                                              child: Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                                                                                child: TextFormField(
+                                                                                  controller: _model.choicesTHREEanswerTHREEController,
+                                                                                  autofocus: true,
+                                                                                  obscureText: false,
+                                                                                  decoration: InputDecoration(
+                                                                                    labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                          fontFamily: 'Outfit',
+                                                                                          color: Color(0x6395A1AC),
+                                                                                        ),
+                                                                                    hintText: 'Choice 3 (optional)',
+                                                                                    hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                          fontFamily: 'Outfit',
+                                                                                          color: Color(0xCCB2B2B2),
+                                                                                          fontSize: 14.0,
+                                                                                          fontWeight: FontWeight.w300,
+                                                                                        ),
+                                                                                    enabledBorder: InputBorder.none,
+                                                                                    focusedBorder: InputBorder.none,
+                                                                                    errorBorder: InputBorder.none,
+                                                                                    focusedErrorBorder: InputBorder.none,
+                                                                                  ),
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        fontFamily: 'Urbanist',
+                                                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                                                      ),
+                                                                                  validator: _model.choicesTHREEanswerTHREEControllerValidator.asValidator(context),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  8.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        10.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            child: Row(
                                                               mainAxisSize:
                                                                   MainAxisSize
                                                                       .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
                                                               children: [
-                                                                Container(
-                                                                  width: 100.0,
-                                                                  height: 15.0,
-                                                                  decoration:
-                                                                      BoxDecoration(),
-                                                                  child:
+                                                                Stack(
+                                                                  children: [
+                                                                    if ((_model.multipleChoice ==
+                                                                            true) &&
+                                                                        (_model.answer3 ==
+                                                                                null ||
+                                                                            _model.answer3 ==
+                                                                                ''))
                                                                       Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             0.0,
-                                                                            3.0,
+                                                                            75.0,
                                                                             0.0,
                                                                             0.0),
+                                                                        child:
+                                                                            FlutterFlowIconButton(
+                                                                          borderColor:
+                                                                              Colors.transparent,
+                                                                          borderRadius:
+                                                                              20.0,
+                                                                          borderWidth:
+                                                                              1.0,
+                                                                          buttonSize:
+                                                                              40.0,
+                                                                          icon:
+                                                                              Icon(
+                                                                            Icons.add,
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            size:
+                                                                                20.0,
+                                                                          ),
+                                                                          onPressed:
+                                                                              () async {
+                                                                            setState(() {
+                                                                              _model.answer3 = _model.choicesTHREEanswerTHREEController.text;
+                                                                              _model.pollExpiry = _model.datePicked2 != null ? _model.datePicked2 : _model.pollExpiry;
+                                                                              _model.date2 = _model.datePicked2;
+                                                                            });
+                                                                          },
+                                                                        ),
+                                                                      ),
+                                                                    if ((_model.multipleChoice ==
+                                                                            true) &&
+                                                                        (_model.answer3 !=
+                                                                                null &&
+                                                                            _model.answer3 !=
+                                                                                ''))
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            75.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            FlutterFlowIconButton(
+                                                                          borderColor:
+                                                                              Colors.transparent,
+                                                                          borderRadius:
+                                                                              20.0,
+                                                                          borderWidth:
+                                                                              1.0,
+                                                                          buttonSize:
+                                                                              40.0,
+                                                                          icon:
+                                                                              Icon(
+                                                                            Icons.remove,
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            size:
+                                                                                20.0,
+                                                                          ),
+                                                                          onPressed:
+                                                                              () async {
+                                                                            setState(() {
+                                                                              _model.answer3 = '';
+                                                                            });
+                                                                          },
+                                                                        ),
+                                                                      ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Container(
+                                                      width: MediaQuery.sizeOf(
+                                                                  context)
+                                                              .width *
+                                                          0.73,
+                                                      height: 38.0,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  20.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  20.0),
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  0.0),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  0.0),
+                                                        ),
+                                                      ),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            5.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        FlutterFlowIconButton(
+                                                                      borderColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      borderRadius:
+                                                                          20.0,
+                                                                      borderWidth:
+                                                                          1.0,
+                                                                      buttonSize:
+                                                                          38.0,
+                                                                      icon:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .alarm,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primary,
+                                                                        size:
+                                                                            20.0,
+                                                                      ),
+                                                                      onPressed:
+                                                                          () async {
+                                                                        final _datePicked2Date =
+                                                                            await showDatePicker(
+                                                                          context:
+                                                                              context,
+                                                                          initialDate:
+                                                                              getCurrentTimestamp,
+                                                                          firstDate:
+                                                                              getCurrentTimestamp,
+                                                                          lastDate:
+                                                                              DateTime(2050),
+                                                                        );
+
+                                                                        if (_datePicked2Date !=
+                                                                            null) {
+                                                                          setState(
+                                                                              () {
+                                                                            _model.datePicked2 =
+                                                                                DateTime(
+                                                                              _datePicked2Date.year,
+                                                                              _datePicked2Date.month,
+                                                                              _datePicked2Date.day,
+                                                                            );
+                                                                          });
+                                                                        }
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Container(
+                                                                    width:
+                                                                        100.0,
+                                                                    height:
+                                                                        10.0,
+                                                                    decoration:
+                                                                        BoxDecoration(),
                                                                     child: Text(
                                                                       'Poll ends on:',
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .start,
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyMedium
@@ -883,415 +1577,490 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                           ),
                                                                     ),
                                                                   ),
-                                                                ),
-                                                              ],
+                                                                ],
+                                                              ),
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Container(
+                                                                    width:
+                                                                        100.0,
+                                                                    height:
+                                                                        25.0,
+                                                                    decoration:
+                                                                        BoxDecoration(),
+                                                                    child: Text(
+                                                                      _model.datePicked2 !=
+                                                                              null
+                                                                          ? dateTimeFormat(
+                                                                              'relative',
+                                                                              _model
+                                                                                  .datePicked2)
+                                                                          : dateTimeFormat(
+                                                                              'relative',
+                                                                              _model.date1),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Urbanist',
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            fontSize:
+                                                                                12.0,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                          ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Container(
+                                                                    width:
+                                                                        140.0,
+                                                                    height:
+                                                                        35.0,
+                                                                    decoration:
+                                                                        BoxDecoration(),
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      children: [
+                                                                        Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Container(
+                                                                              width: 140.0,
+                                                                              height: 35.0,
+                                                                              decoration: BoxDecoration(),
+                                                                              child: FlutterFlowPlacePicker(
+                                                                                iOSGoogleMapsApiKey: 'AIzaSyBBzVycKke2mKHYdJlxidz4TDgmco1tW98',
+                                                                                androidGoogleMapsApiKey: 'AIzaSyBBzVycKke2mKHYdJlxidz4TDgmco1tW98',
+                                                                                webGoogleMapsApiKey: 'AIzaSyBBzVycKke2mKHYdJlxidz4TDgmco1tW98',
+                                                                                onSelect: (place) async {
+                                                                                  setState(() => _model.placePickerValue2 = place);
+                                                                                },
+                                                                                defaultText: 'Select Location',
+                                                                                icon: Icon(
+                                                                                  Icons.place,
+                                                                                  color: Color(0xFF00AEFF),
+                                                                                  size: 20.0,
+                                                                                ),
+                                                                                buttonOptions: FFButtonOptions(
+                                                                                  width: 140.0,
+                                                                                  height: 40.0,
+                                                                                  color: Colors.black,
+                                                                                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                        fontFamily: 'Urbanist',
+                                                                                        color: Color(0xFF00AEFF),
+                                                                                        fontSize: 14.0,
+                                                                                      ),
+                                                                                  elevation: 2.0,
+                                                                                  borderSide: BorderSide(
+                                                                                    color: Colors.transparent,
+                                                                                    width: 1.0,
+                                                                                  ),
+                                                                                  borderRadius: BorderRadius.circular(8.0),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      if ((_model.multipleChoice == true) &&
+                                          (_model.answer3 != null &&
+                                              _model.answer3 != ''))
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 5.0, 0.0, 0.0),
+                                          child: Container(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.85,
+                                            height: 231.0,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              border: Border.all(
+                                                color: Color(0x6395A1AC),
+                                                width: 1.0,
+                                              ),
+                                            ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  10.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        5.0,
+                                                                        0.0,
+                                                                        5.0),
+                                                            child: Container(
+                                                              width: MediaQuery
+                                                                          .sizeOf(
+                                                                              context)
+                                                                      .width *
+                                                                  0.7,
+                                                              height: 181.0,
+                                                              decoration:
+                                                                  BoxDecoration(),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: [
+                                                                          Container(
+                                                                            width:
+                                                                                MediaQuery.sizeOf(context).width * 0.7,
+                                                                            height:
+                                                                                40.0,
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              borderRadius: BorderRadius.circular(10.0),
+                                                                              border: Border.all(
+                                                                                color: Color(0x6395A1AC),
+                                                                                width: 1.0,
+                                                                              ),
+                                                                            ),
+                                                                            child:
+                                                                                Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                                                                              child: TextFormField(
+                                                                                controller: _model.choicesFOURanswerONEController,
+                                                                                autofocus: true,
+                                                                                obscureText: false,
+                                                                                decoration: InputDecoration(
+                                                                                  labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                        fontFamily: 'Outfit',
+                                                                                        color: Color(0x6395A1AC),
+                                                                                      ),
+                                                                                  hintText: _model.answer1,
+                                                                                  hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                        fontFamily: 'Outfit',
+                                                                                        fontSize: 14.0,
+                                                                                      ),
+                                                                                  enabledBorder: InputBorder.none,
+                                                                                  focusedBorder: InputBorder.none,
+                                                                                  errorBorder: InputBorder.none,
+                                                                                  focusedErrorBorder: InputBorder.none,
+                                                                                ),
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Urbanist',
+                                                                                      color: FlutterFlowTheme.of(context).primaryText,
+                                                                                    ),
+                                                                                validator: _model.choicesFOURanswerONEControllerValidator.asValidator(context),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            7.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Container(
+                                                                              width: MediaQuery.sizeOf(context).width * 0.7,
+                                                                              height: 40.0,
+                                                                              decoration: BoxDecoration(
+                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                                border: Border.all(
+                                                                                  color: Color(0x6395A1AC),
+                                                                                  width: 1.0,
+                                                                                ),
+                                                                              ),
+                                                                              child: Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                                                                                child: TextFormField(
+                                                                                  controller: _model.choicesFOURanswerTWOController,
+                                                                                  autofocus: true,
+                                                                                  obscureText: false,
+                                                                                  decoration: InputDecoration(
+                                                                                    labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                          fontFamily: 'Outfit',
+                                                                                          color: Color(0x6395A1AC),
+                                                                                        ),
+                                                                                    hintText: _model.answer2,
+                                                                                    hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                          fontFamily: 'Outfit',
+                                                                                          fontSize: 14.0,
+                                                                                        ),
+                                                                                    enabledBorder: InputBorder.none,
+                                                                                    focusedBorder: InputBorder.none,
+                                                                                    errorBorder: InputBorder.none,
+                                                                                    focusedErrorBorder: InputBorder.none,
+                                                                                  ),
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        fontFamily: 'Urbanist',
+                                                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                                                      ),
+                                                                                  validator: _model.choicesFOURanswerTWOControllerValidator.asValidator(context),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            7.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Container(
+                                                                              width: MediaQuery.sizeOf(context).width * 0.7,
+                                                                              height: 40.0,
+                                                                              decoration: BoxDecoration(
+                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                                border: Border.all(
+                                                                                  color: Color(0x6395A1AC),
+                                                                                  width: 1.0,
+                                                                                ),
+                                                                              ),
+                                                                              child: Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                                                                                child: TextFormField(
+                                                                                  controller: _model.choicesFOURanswerTHREEController,
+                                                                                  autofocus: true,
+                                                                                  obscureText: false,
+                                                                                  decoration: InputDecoration(
+                                                                                    labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                          fontFamily: 'Outfit',
+                                                                                          color: Color(0x6395A1AC),
+                                                                                        ),
+                                                                                    hintText: _model.answer3,
+                                                                                    hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                          fontFamily: 'Outfit',
+                                                                                          color: FlutterFlowTheme.of(context).background,
+                                                                                          fontSize: 14.0,
+                                                                                        ),
+                                                                                    enabledBorder: InputBorder.none,
+                                                                                    focusedBorder: InputBorder.none,
+                                                                                    errorBorder: InputBorder.none,
+                                                                                    focusedErrorBorder: InputBorder.none,
+                                                                                  ),
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        fontFamily: 'Urbanist',
+                                                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                                                      ),
+                                                                                  validator: _model.choicesFOURanswerTHREEControllerValidator.asValidator(context),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            7.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Container(
+                                                                              width: MediaQuery.sizeOf(context).width * 0.7,
+                                                                              height: 40.0,
+                                                                              decoration: BoxDecoration(
+                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                                border: Border.all(
+                                                                                  color: Color(0x6395A1AC),
+                                                                                  width: 1.0,
+                                                                                ),
+                                                                              ),
+                                                                              child: Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                                                                                child: TextFormField(
+                                                                                  controller: _model.choicesFOURanswerFOURController,
+                                                                                  autofocus: true,
+                                                                                  obscureText: false,
+                                                                                  decoration: InputDecoration(
+                                                                                    hintText: 'Choice 4 (optional)',
+                                                                                    hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                          fontFamily: 'Outfit',
+                                                                                          color: Color(0x6395A1AC),
+                                                                                          fontSize: 14.0,
+                                                                                          fontWeight: FontWeight.w300,
+                                                                                        ),
+                                                                                    enabledBorder: InputBorder.none,
+                                                                                    focusedBorder: InputBorder.none,
+                                                                                    errorBorder: InputBorder.none,
+                                                                                    focusedErrorBorder: InputBorder.none,
+                                                                                  ),
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        fontFamily: 'Urbanist',
+                                                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                                                      ),
+                                                                                  validator: _model.choicesFOURanswerFOURControllerValidator.asValidator(context),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ],
+                                                              ),
                                                             ),
-                                                            Row(
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  8.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        10.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            child: Row(
                                                               mainAxisSize:
                                                                   MainAxisSize
                                                                       .max,
                                                               children: [
                                                                 Container(
-                                                                  width: 100.0,
-                                                                  height: 15.0,
+                                                                  width: 35.0,
+                                                                  height: 35.0,
                                                                   decoration:
                                                                       BoxDecoration(),
-                                                                  child: Text(
-                                                                    dateTimeFormat(
-                                                                        'relative',
-                                                                        _model
-                                                                            .datePicked1),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Urbanist',
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primary,
-                                                                          fontSize:
-                                                                              12.0,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                        ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                if ((_model.answer2 != null &&
-                                        _model.answer2 != '') &&
-                                    (_model.answer3 == null ||
-                                        _model.answer3 == ''))
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        40.0, 5.0, 16.0, 0.0),
-                                    child: Container(
-                                      width: MediaQuery.sizeOf(context).width *
-                                          0.855,
-                                      height: 190.0,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        border: Border.all(
-                                          color: Color(0x6395A1AC),
-                                          width: 1.0,
-                                        ),
-                                      ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        10.0, 0.0, 0.0, 0.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  5.0,
-                                                                  0.0,
-                                                                  5.0),
-                                                      child: Container(
-                                                        width:
-                                                            MediaQuery.sizeOf(
-                                                                        context)
-                                                                    .width *
-                                                                0.7,
-                                                        height: 135.0,
-                                                        decoration:
-                                                            BoxDecoration(),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
-                                                                    Container(
-                                                                      width: MediaQuery.sizeOf(context)
-                                                                              .width *
-                                                                          0.7,
-                                                                      height:
-                                                                          40.0,
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(10.0),
-                                                                        border:
-                                                                            Border.all(
-                                                                          color:
-                                                                              Color(0x6395A1AC),
-                                                                          width:
-                                                                              1.0,
-                                                                        ),
-                                                                      ),
-                                                                      child:
-                                                                          Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            8.0,
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
                                                                             0.0,
-                                                                            8.0,
+                                                                            60.0,
+                                                                            0.0,
                                                                             0.0),
-                                                                        child:
-                                                                            TextFormField(
-                                                                          controller:
-                                                                              _model.choicesTHREEanswerONEController,
-                                                                          autofocus:
-                                                                              true,
-                                                                          obscureText:
-                                                                              false,
-                                                                          decoration:
-                                                                              InputDecoration(
-                                                                            labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                  fontFamily: 'Outfit',
-                                                                                  color: Color(0x6395A1AC),
-                                                                                ),
-                                                                            hintText:
-                                                                                _model.answer1,
-                                                                            hintStyle:
-                                                                                FlutterFlowTheme.of(context).labelMedium,
-                                                                            enabledBorder:
-                                                                                InputBorder.none,
-                                                                            focusedBorder:
-                                                                                InputBorder.none,
-                                                                            errorBorder:
-                                                                                InputBorder.none,
-                                                                            focusedErrorBorder:
-                                                                                InputBorder.none,
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'Urbanist',
-                                                                                color: FlutterFlowTheme.of(context).primaryText,
-                                                                              ),
-                                                                          validator: _model
-                                                                              .choicesTHREEanswerONEControllerValidator
-                                                                              .asValidator(context),
-                                                                        ),
+                                                                    child:
+                                                                        FlutterFlowIconButton(
+                                                                      borderColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      borderRadius:
+                                                                          30.0,
+                                                                      buttonSize:
+                                                                          40.0,
+                                                                      icon:
+                                                                          FaIcon(
+                                                                        FontAwesomeIcons
+                                                                            .minus,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primary,
+                                                                        size:
+                                                                            20.0,
                                                                       ),
+                                                                      onPressed:
+                                                                          () async {
+                                                                        setState(
+                                                                            () {
+                                                                          _model.answer3 =
+                                                                              '';
+                                                                        });
+                                                                      },
                                                                     ),
-                                                                  ],
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          7.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      Container(
-                                                                        width: MediaQuery.sizeOf(context).width *
-                                                                            0.7,
-                                                                        height:
-                                                                            40.0,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(10.0),
-                                                                          border:
-                                                                              Border.all(
-                                                                            color:
-                                                                                Color(0x6395A1AC),
-                                                                            width:
-                                                                                1.0,
-                                                                          ),
-                                                                        ),
-                                                                        child:
-                                                                            Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              8.0,
-                                                                              0.0,
-                                                                              8.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              TextFormField(
-                                                                            controller:
-                                                                                _model.choicesTHREEanswerTWOController,
-                                                                            autofocus:
-                                                                                true,
-                                                                            obscureText:
-                                                                                false,
-                                                                            decoration:
-                                                                                InputDecoration(
-                                                                              labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                    fontFamily: 'Outfit',
-                                                                                    color: Color(0x6395A1AC),
-                                                                                  ),
-                                                                              hintText: _model.answer2,
-                                                                              hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                                                                              enabledBorder: InputBorder.none,
-                                                                              focusedBorder: InputBorder.none,
-                                                                              errorBorder: InputBorder.none,
-                                                                              focusedErrorBorder: InputBorder.none,
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                  fontFamily: 'Urbanist',
-                                                                                  color: FlutterFlowTheme.of(context).primaryText,
-                                                                                ),
-                                                                            validator:
-                                                                                _model.choicesTHREEanswerTWOControllerValidator.asValidator(context),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          7.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      Container(
-                                                                        width: MediaQuery.sizeOf(context).width *
-                                                                            0.7,
-                                                                        height:
-                                                                            40.0,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(10.0),
-                                                                          border:
-                                                                              Border.all(
-                                                                            color:
-                                                                                Color(0x6395A1AC),
-                                                                            width:
-                                                                                1.0,
-                                                                          ),
-                                                                        ),
-                                                                        child:
-                                                                            Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              8.0,
-                                                                              0.0,
-                                                                              8.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              TextFormField(
-                                                                            controller:
-                                                                                _model.choicesTHREEanswerTHREEController,
-                                                                            autofocus:
-                                                                                true,
-                                                                            obscureText:
-                                                                                false,
-                                                                            decoration:
-                                                                                InputDecoration(
-                                                                              labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                    fontFamily: 'Outfit',
-                                                                                    color: Color(0x6395A1AC),
-                                                                                  ),
-                                                                              hintText: 'Choice 3 (optional)',
-                                                                              hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                    fontFamily: 'Outfit',
-                                                                                    color: Color(0xCCB2B2B2),
-                                                                                  ),
-                                                                              enabledBorder: InputBorder.none,
-                                                                              focusedBorder: InputBorder.none,
-                                                                              errorBorder: InputBorder.none,
-                                                                              focusedErrorBorder: InputBorder.none,
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                  fontFamily: 'Urbanist',
-                                                                                  color: FlutterFlowTheme.of(context).primaryText,
-                                                                                ),
-                                                                            validator:
-                                                                                _model.choicesTHREEanswerTHREEControllerValidator.asValidator(context),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ],
                                                                   ),
                                                                 ),
                                                               ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        8.0, 0.0, 0.0, 0.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        FlutterFlowIconButton(
-                                                          borderColor: Colors
-                                                              .transparent,
-                                                          borderRadius: 20.0,
-                                                          borderWidth: 1.0,
-                                                          buttonSize: 40.0,
-                                                          icon: Icon(
-                                                            Icons.close,
-                                                            color: Color(
-                                                                0xB9B2B2B2),
-                                                            size: 24.0,
-                                                          ),
-                                                          onPressed: () {
-                                                            print(
-                                                                'IconButton pressed ...');
-                                                          },
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  10.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        50.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child:
-                                                                FlutterFlowIconButton(
-                                                              borderColor: Colors
-                                                                  .transparent,
-                                                              borderRadius:
-                                                                  20.0,
-                                                              borderWidth: 1.0,
-                                                              buttonSize: 40.0,
-                                                              icon: Icon(
-                                                                Icons.add,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                                size: 24.0,
-                                                              ),
-                                                              onPressed:
-                                                                  () async {
-                                                                setState(() {
-                                                                  _model.answer3 =
-                                                                      _model
-                                                                          .choicesTHREEanswerTHREEController
-                                                                          .text;
-                                                                });
-                                                              },
                                                             ),
                                                           ),
                                                         ],
@@ -1299,752 +2068,267 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                     ),
                                                   ],
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        0.85,
-                                                height: 38.0,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(20.0),
-                                                    bottomRight:
-                                                        Radius.circular(20.0),
-                                                    topLeft:
-                                                        Radius.circular(0.0),
-                                                    topRight:
-                                                        Radius.circular(0.0),
-                                                  ),
-                                                ),
-                                                child: Row(
+                                                Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
                                                   children: [
-                                                    Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          5.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              child:
-                                                                  FlutterFlowIconButton(
-                                                                borderColor: Colors
-                                                                    .transparent,
-                                                                borderRadius:
-                                                                    20.0,
-                                                                borderWidth:
-                                                                    1.0,
-                                                                buttonSize:
-                                                                    38.0,
-                                                                icon: Icon(
-                                                                  Icons.alarm,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                                  size: 20.0,
-                                                                ),
-                                                                onPressed:
-                                                                    () async {
-                                                                  final _datePicked2Date =
-                                                                      await showDatePicker(
-                                                                    context:
-                                                                        context,
-                                                                    initialDate:
-                                                                        getCurrentTimestamp,
-                                                                    firstDate:
-                                                                        getCurrentTimestamp,
-                                                                    lastDate:
-                                                                        DateTime(
-                                                                            2050),
-                                                                  );
-
-                                                                  if (_datePicked2Date !=
-                                                                      null) {
-                                                                    setState(
-                                                                        () {
-                                                                      _model.datePicked2 =
-                                                                          DateTime(
-                                                                        _datePicked2Date
-                                                                            .year,
-                                                                        _datePicked2Date
-                                                                            .month,
-                                                                        _datePicked2Date
-                                                                            .day,
-                                                                      );
-                                                                    });
-                                                                  }
-                                                                },
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Text(
-                                                              'Poll Length',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Urbanist',
-                                                                    color: Color(
-                                                                        0xCCB2B2B2),
-                                                                    fontSize:
-                                                                        10.0,
-                                                                  ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Text(
-                                                              '1 week',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Urbanist',
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                  ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                if (_model.answer3 != null &&
-                                    _model.answer3 != '')
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        40.0, 5.0, 16.0, 0.0),
-                                    child: Container(
-                                      width: MediaQuery.sizeOf(context).width *
-                                          0.85,
-                                      height: 231.0,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        border: Border.all(
-                                          color: Color(0x6395A1AC),
-                                          width: 1.0,
-                                        ),
-                                      ),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        10.0, 0.0, 0.0, 0.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  5.0,
-                                                                  0.0,
-                                                                  5.0),
-                                                      child: Container(
-                                                        width:
-                                                            MediaQuery.sizeOf(
-                                                                        context)
-                                                                    .width *
-                                                                0.7,
-                                                        height: 181.0,
-                                                        decoration:
-                                                            BoxDecoration(),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
-                                                                    Container(
-                                                                      width: MediaQuery.sizeOf(context)
-                                                                              .width *
-                                                                          0.7,
-                                                                      height:
-                                                                          40.0,
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(10.0),
-                                                                        border:
-                                                                            Border.all(
-                                                                          color:
-                                                                              Color(0x6395A1AC),
-                                                                          width:
-                                                                              1.0,
-                                                                        ),
-                                                                      ),
-                                                                      child:
-                                                                          Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            8.0,
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0),
-                                                                        child:
-                                                                            TextFormField(
-                                                                          controller:
-                                                                              _model.choicesFOURanswerONEController,
-                                                                          autofocus:
-                                                                              true,
-                                                                          obscureText:
-                                                                              false,
-                                                                          decoration:
-                                                                              InputDecoration(
-                                                                            labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                  fontFamily: 'Outfit',
-                                                                                  color: Color(0x6395A1AC),
-                                                                                ),
-                                                                            hintText:
-                                                                                _model.answer1,
-                                                                            hintStyle:
-                                                                                FlutterFlowTheme.of(context).labelMedium,
-                                                                            enabledBorder:
-                                                                                InputBorder.none,
-                                                                            focusedBorder:
-                                                                                InputBorder.none,
-                                                                            errorBorder:
-                                                                                InputBorder.none,
-                                                                            focusedErrorBorder:
-                                                                                InputBorder.none,
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'Urbanist',
-                                                                                color: FlutterFlowTheme.of(context).primaryText,
-                                                                              ),
-                                                                          validator: _model
-                                                                              .choicesFOURanswerONEControllerValidator
-                                                                              .asValidator(context),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          7.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      Container(
-                                                                        width: MediaQuery.sizeOf(context).width *
-                                                                            0.7,
-                                                                        height:
-                                                                            40.0,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(10.0),
-                                                                          border:
-                                                                              Border.all(
-                                                                            color:
-                                                                                Color(0x6395A1AC),
-                                                                            width:
-                                                                                1.0,
-                                                                          ),
-                                                                        ),
-                                                                        child:
-                                                                            Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              8.0,
-                                                                              0.0,
-                                                                              8.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              TextFormField(
-                                                                            controller:
-                                                                                _model.choicesFOURanswerTWOController,
-                                                                            autofocus:
-                                                                                true,
-                                                                            obscureText:
-                                                                                false,
-                                                                            decoration:
-                                                                                InputDecoration(
-                                                                              labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                    fontFamily: 'Outfit',
-                                                                                    color: Color(0x6395A1AC),
-                                                                                  ),
-                                                                              hintText: _model.answer2,
-                                                                              hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                                                                              enabledBorder: InputBorder.none,
-                                                                              focusedBorder: InputBorder.none,
-                                                                              errorBorder: InputBorder.none,
-                                                                              focusedErrorBorder: InputBorder.none,
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                  fontFamily: 'Urbanist',
-                                                                                  color: FlutterFlowTheme.of(context).primaryText,
-                                                                                ),
-                                                                            validator:
-                                                                                _model.choicesFOURanswerTWOControllerValidator.asValidator(context),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          7.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      Container(
-                                                                        width: MediaQuery.sizeOf(context).width *
-                                                                            0.7,
-                                                                        height:
-                                                                            40.0,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(10.0),
-                                                                          border:
-                                                                              Border.all(
-                                                                            color:
-                                                                                Color(0x6395A1AC),
-                                                                            width:
-                                                                                1.0,
-                                                                          ),
-                                                                        ),
-                                                                        child:
-                                                                            Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              8.0,
-                                                                              0.0,
-                                                                              8.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              TextFormField(
-                                                                            controller:
-                                                                                _model.choicesFOURanswerTHREEController,
-                                                                            autofocus:
-                                                                                true,
-                                                                            obscureText:
-                                                                                false,
-                                                                            decoration:
-                                                                                InputDecoration(
-                                                                              labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                    fontFamily: 'Outfit',
-                                                                                    color: Color(0x6395A1AC),
-                                                                                  ),
-                                                                              hintText: _model.answer3,
-                                                                              hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                    fontFamily: 'Outfit',
-                                                                                    color: FlutterFlowTheme.of(context).background,
-                                                                                  ),
-                                                                              enabledBorder: InputBorder.none,
-                                                                              focusedBorder: InputBorder.none,
-                                                                              errorBorder: InputBorder.none,
-                                                                              focusedErrorBorder: InputBorder.none,
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                  fontFamily: 'Urbanist',
-                                                                                  color: FlutterFlowTheme.of(context).primaryText,
-                                                                                ),
-                                                                            validator:
-                                                                                _model.choicesFOURanswerTHREEControllerValidator.asValidator(context),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          7.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      Container(
-                                                                        width: MediaQuery.sizeOf(context).width *
-                                                                            0.7,
-                                                                        height:
-                                                                            40.0,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(10.0),
-                                                                          border:
-                                                                              Border.all(
-                                                                            color:
-                                                                                Color(0x6395A1AC),
-                                                                            width:
-                                                                                1.0,
-                                                                          ),
-                                                                        ),
-                                                                        child:
-                                                                            Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              8.0,
-                                                                              0.0,
-                                                                              8.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              TextFormField(
-                                                                            controller:
-                                                                                _model.choicesFOURanswerFOURController,
-                                                                            autofocus:
-                                                                                true,
-                                                                            obscureText:
-                                                                                false,
-                                                                            decoration:
-                                                                                InputDecoration(
-                                                                              labelStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                    fontFamily: 'Outfit',
-                                                                                    color: Color(0x6395A1AC),
-                                                                                  ),
-                                                                              hintText: 'Choice 4 (optional)',
-                                                                              hintStyle: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                    fontFamily: 'Outfit',
-                                                                                    color: Color(0x6395A1AC),
-                                                                                  ),
-                                                                              enabledBorder: InputBorder.none,
-                                                                              focusedBorder: InputBorder.none,
-                                                                              errorBorder: InputBorder.none,
-                                                                              focusedErrorBorder: InputBorder.none,
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                  fontFamily: 'Urbanist',
-                                                                                  color: FlutterFlowTheme.of(context).primaryText,
-                                                                                ),
-                                                                            validator:
-                                                                                _model.choicesFOURanswerFOURControllerValidator.asValidator(context),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ],
+                                                    Container(
+                                                      width: MediaQuery.sizeOf(
+                                                                  context)
+                                                              .width *
+                                                          0.841,
+                                                      height: 38.0,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  20.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  20.0),
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  0.0),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  0.0),
                                                         ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        8.0, 0.0, 0.0, 0.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        FlutterFlowIconButton(
-                                                          borderColor: Colors
-                                                              .transparent,
-                                                          borderRadius: 20.0,
-                                                          borderWidth: 1.0,
-                                                          buttonSize: 40.0,
-                                                          icon: Icon(
-                                                            Icons.close,
-                                                            color: Color(
-                                                                0xB9B2B2B2),
-                                                            size: 24.0,
-                                                          ),
-                                                          onPressed: () {
-                                                            print(
-                                                                'IconButton pressed ...');
-                                                          },
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  10.0,
-                                                                  0.0,
-                                                                  0.0),
                                                       child: Row(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
                                                         children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        80.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child:
-                                                                FlutterFlowIconButton(
-                                                              borderColor: Colors
-                                                                  .transparent,
-                                                              borderRadius:
-                                                                  20.0,
-                                                              borderWidth: 1.0,
-                                                              buttonSize: 40.0,
-                                                              icon: FaIcon(
-                                                                FontAwesomeIcons
-                                                                    .minus,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                                size: 20.0,
+                                                          Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            5.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        FlutterFlowIconButton(
+                                                                      borderColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      borderRadius:
+                                                                          20.0,
+                                                                      borderWidth:
+                                                                          1.0,
+                                                                      buttonSize:
+                                                                          38.0,
+                                                                      icon:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .alarm,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primary,
+                                                                        size:
+                                                                            20.0,
+                                                                      ),
+                                                                      onPressed:
+                                                                          () async {
+                                                                        final _datePicked3Date =
+                                                                            await showDatePicker(
+                                                                          context:
+                                                                              context,
+                                                                          initialDate:
+                                                                              getCurrentTimestamp,
+                                                                          firstDate:
+                                                                              getCurrentTimestamp,
+                                                                          lastDate:
+                                                                              DateTime(2050),
+                                                                        );
+
+                                                                        if (_datePicked3Date !=
+                                                                            null) {
+                                                                          setState(
+                                                                              () {
+                                                                            _model.datePicked3 =
+                                                                                DateTime(
+                                                                              _datePicked3Date.year,
+                                                                              _datePicked3Date.month,
+                                                                              _datePicked3Date.day,
+                                                                            );
+                                                                          });
+                                                                        }
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                ],
                                                               ),
-                                                              onPressed: () {
-                                                                print(
-                                                                    'IconButton pressed ...');
-                                                              },
-                                                            ),
+                                                            ],
+                                                          ),
+                                                          Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Container(
+                                                                    width:
+                                                                        100.0,
+                                                                    height:
+                                                                        10.0,
+                                                                    decoration:
+                                                                        BoxDecoration(),
+                                                                    child: Text(
+                                                                      'Poll ends on:',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Urbanist',
+                                                                            color:
+                                                                                Color(0xCCB2B2B2),
+                                                                            fontSize:
+                                                                                10.0,
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                          ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Container(
+                                                                    width:
+                                                                        100.0,
+                                                                    height:
+                                                                        20.0,
+                                                                    decoration:
+                                                                        BoxDecoration(),
+                                                                    child: Text(
+                                                                      _model.datePicked3 !=
+                                                                              null
+                                                                          ? dateTimeFormat(
+                                                                              'relative',
+                                                                              _model
+                                                                                  .datePicked3)
+                                                                          : dateTimeFormat(
+                                                                              'relative',
+                                                                              _model.date2),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Urbanist',
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            fontSize:
+                                                                                12.0,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                          ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Container(
+                                                                    width:
+                                                                        140.0,
+                                                                    height:
+                                                                        35.0,
+                                                                    decoration:
+                                                                        BoxDecoration(),
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      children: [
+                                                                        Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Container(
+                                                                              width: 140.0,
+                                                                              height: 35.0,
+                                                                              decoration: BoxDecoration(),
+                                                                              child: FlutterFlowPlacePicker(
+                                                                                iOSGoogleMapsApiKey: 'AIzaSyBBzVycKke2mKHYdJlxidz4TDgmco1tW98',
+                                                                                androidGoogleMapsApiKey: 'AIzaSyBBzVycKke2mKHYdJlxidz4TDgmco1tW98',
+                                                                                webGoogleMapsApiKey: 'AIzaSyBBzVycKke2mKHYdJlxidz4TDgmco1tW98',
+                                                                                onSelect: (place) async {
+                                                                                  setState(() => _model.placePickerValue3 = place);
+                                                                                },
+                                                                                defaultText: 'Select Location',
+                                                                                icon: Icon(
+                                                                                  Icons.place,
+                                                                                  color: Color(0xFF00AEFF),
+                                                                                  size: 20.0,
+                                                                                ),
+                                                                                buttonOptions: FFButtonOptions(
+                                                                                  width: 140.0,
+                                                                                  height: 40.0,
+                                                                                  color: Colors.black,
+                                                                                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                        fontFamily: 'Urbanist',
+                                                                                        color: Color(0xFF00AEFF),
+                                                                                        fontSize: 14.0,
+                                                                                      ),
+                                                                                  elevation: 2.0,
+                                                                                  borderSide: BorderSide(
+                                                                                    color: Colors.transparent,
+                                                                                    width: 1.0,
+                                                                                  ),
+                                                                                  borderRadius: BorderRadius.circular(8.0),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
                                                           ),
                                                         ],
                                                       ),
                                                     ),
                                                   ],
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        0.841,
-                                                height: 38.0,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(20.0),
-                                                    bottomRight:
-                                                        Radius.circular(20.0),
-                                                    topLeft:
-                                                        Radius.circular(0.0),
-                                                    topRight:
-                                                        Radius.circular(0.0),
-                                                  ),
-                                                ),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          5.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              child:
-                                                                  FlutterFlowIconButton(
-                                                                borderColor: Colors
-                                                                    .transparent,
-                                                                borderRadius:
-                                                                    20.0,
-                                                                borderWidth:
-                                                                    1.0,
-                                                                buttonSize:
-                                                                    38.0,
-                                                                icon: Icon(
-                                                                  Icons.alarm,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                                  size: 20.0,
-                                                                ),
-                                                                onPressed:
-                                                                    () async {
-                                                                  final _datePicked3Date =
-                                                                      await showDatePicker(
-                                                                    context:
-                                                                        context,
-                                                                    initialDate:
-                                                                        getCurrentTimestamp,
-                                                                    firstDate:
-                                                                        getCurrentTimestamp,
-                                                                    lastDate:
-                                                                        DateTime(
-                                                                            2050),
-                                                                  );
-
-                                                                  if (_datePicked3Date !=
-                                                                      null) {
-                                                                    setState(
-                                                                        () {
-                                                                      _model.datePicked3 =
-                                                                          DateTime(
-                                                                        _datePicked3Date
-                                                                            .year,
-                                                                        _datePicked3Date
-                                                                            .month,
-                                                                        _datePicked3Date
-                                                                            .day,
-                                                                      );
-                                                                    });
-                                                                  }
-                                                                },
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Text(
-                                                              'Poll Length',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Urbanist',
-                                                                    color: Color(
-                                                                        0xCCB2B2B2),
-                                                                    fontSize:
-                                                                        10.0,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                  ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Text(
-                                                              '1 week',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Urbanist',
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
-                                                                  ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                        ),
+                                    ],
                                   ),
+                                ),
                               ],
                             ),
                           ],

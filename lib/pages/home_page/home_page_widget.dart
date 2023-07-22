@@ -2,6 +2,7 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/create_modal/create_modal_widget.dart';
 import '/components/delete_post/delete_post_widget.dart';
+import '/components/post_menu/post_menu_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -737,7 +738,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                             width: 100.0,
                             height: 100.0,
                             decoration: BoxDecoration(
-                              color: Color(0x861A1F24),
+                              color: Color(0x5C1A1F24),
                             ),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
@@ -792,7 +793,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                 width: 200.0,
                                                 height: 50.0,
                                                 decoration: BoxDecoration(
-                                                  color: Color(0x86000000),
+                                                  color: Color(0xAB000000),
                                                   borderRadius:
                                                       BorderRadius.only(
                                                     bottomLeft:
@@ -953,10 +954,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         child: Container(
                                                           height: 250.0,
                                                           child:
-                                                              DeletePostWidget(
-                                                            postParameters:
-                                                                socialFeedUserPostsRecord,
-                                                          ),
+                                                              PostMenuWidget(),
                                                         ),
                                                       );
                                                     },
@@ -975,12 +973,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                   .height *
                                               0.3,
                                           decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: Image.asset(
-                                                'assets/images/2vqf7_',
-                                              ).image,
-                                            ),
                                             borderRadius: BorderRadius.only(
                                               bottomLeft: Radius.circular(0.0),
                                               bottomRight: Radius.circular(0.0),
@@ -996,11 +988,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                     width: MediaQuery.sizeOf(
                                                                 context)
                                                             .width *
-                                                        1.01,
+                                                        1.0,
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
-                                                        0.22,
+                                                        0.34,
                                                     decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.only(
@@ -1035,7 +1027,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                     .max,
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
-                                                                    .center,
+                                                                    .spaceEvenly,
                                                             children: [
                                                               Align(
                                                                 alignment:
@@ -1098,11 +1090,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                         width: MediaQuery.sizeOf(context).width *
                                                                             0.9,
                                                                         height: MediaQuery.sizeOf(context).height *
-                                                                            0.2,
+                                                                            0.28,
                                                                         decoration:
                                                                             BoxDecoration(
                                                                           color:
-                                                                              Color(0x86000000),
+                                                                              Color(0xAB000000),
                                                                           borderRadius:
                                                                               BorderRadius.circular(20.0),
                                                                         ),
@@ -1151,26 +1143,244 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                           decoration: BoxDecoration(),
                                                                                           child: Column(
                                                                                             mainAxisSize: MainAxisSize.max,
-                                                                                            mainAxisAlignment: MainAxisAlignment.center,
                                                                                             children: [
-                                                                                              AutoSizeText(
-                                                                                                socialFeedUserPostsRecord.postPoll.maybeHandleOverflow(
-                                                                                                  maxChars: 100,
-                                                                                                  replacement: '…',
-                                                                                                ),
-                                                                                                textAlign: TextAlign.center,
-                                                                                                maxLines: 4,
-                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                      fontFamily: 'Urbanist',
-                                                                                                      color: Color(0xFFDCDCDC),
-                                                                                                      fontSize: 30.0,
-                                                                                                      fontWeight: FontWeight.bold,
-                                                                                                    ),
+                                                                                              Row(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                children: [
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                    children: [
+                                                                                                      Container(
+                                                                                                        width: MediaQuery.sizeOf(context).width * 0.84,
+                                                                                                        height: 2.0,
+                                                                                                        decoration: BoxDecoration(
+                                                                                                          color: Color(0xFFDCDCDC),
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ),
+                                                                                              Row(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                children: [
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                    children: [
+                                                                                                      Container(
+                                                                                                        width: MediaQuery.sizeOf(context).width * 0.84,
+                                                                                                        height: 120.0,
+                                                                                                        decoration: BoxDecoration(),
+                                                                                                        child: Column(
+                                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                          children: [
+                                                                                                            AutoSizeText(
+                                                                                                              socialFeedUserPostsRecord.postPoll.maybeHandleOverflow(
+                                                                                                                maxChars: 100,
+                                                                                                                replacement: '…',
+                                                                                                              ),
+                                                                                                              textAlign: TextAlign.center,
+                                                                                                              maxLines: 4,
+                                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                    fontFamily: 'Urbanist',
+                                                                                                                    color: Color(0xFFDCDCDC),
+                                                                                                                    fontSize: 30.0,
+                                                                                                                    fontWeight: FontWeight.bold,
+                                                                                                                  ),
+                                                                                                            ),
+                                                                                                          ],
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ),
+                                                                                              Row(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                children: [
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                    children: [
+                                                                                                      Container(
+                                                                                                        width: MediaQuery.sizeOf(context).width * 0.84,
+                                                                                                        height: 2.0,
+                                                                                                        decoration: BoxDecoration(
+                                                                                                          color: Color(0xFFDCDCDC),
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                ],
                                                                                               ),
                                                                                             ],
                                                                                           ),
                                                                                         ),
                                                                                       ],
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                              Row(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                                                children: [
+                                                                                  Align(
+                                                                                    alignment: AlignmentDirectional(0.01, 0.87),
+                                                                                    child: Container(
+                                                                                      width: MediaQuery.sizeOf(context).width * 0.86,
+                                                                                      height: 65.0,
+                                                                                      decoration: BoxDecoration(
+                                                                                        borderRadius: BorderRadius.only(
+                                                                                          bottomLeft: Radius.circular(16.0),
+                                                                                          bottomRight: Radius.circular(16.0),
+                                                                                          topLeft: Radius.circular(0.0),
+                                                                                          topRight: Radius.circular(0.0),
+                                                                                        ),
+                                                                                      ),
+                                                                                      child: Column(
+                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                                                        children: [
+                                                                                          Row(
+                                                                                            mainAxisSize: MainAxisSize.max,
+                                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                                            children: [
+                                                                                              if (socialFeedUserPostsRecord.postAnswer4 != null && socialFeedUserPostsRecord.postAnswer4 != '')
+                                                                                                FFButtonWidget(
+                                                                                                  onPressed: () async {
+                                                                                                    if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
+                                                                                                      return;
+                                                                                                    }
+
+                                                                                                    await socialFeedUserPostsRecord.reference.update({
+                                                                                                      'votes4': FieldValue.arrayUnion([currentUserReference]),
+                                                                                                    });
+                                                                                                  },
+                                                                                                  text: socialFeedUserPostsRecord.postAnswer4,
+                                                                                                  options: FFButtonOptions(
+                                                                                                    width: 77.0,
+                                                                                                    height: 50.0,
+                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                                    iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                                    color: socialFeedUserPostsRecord.votes4.contains(currentUserReference) ? FlutterFlowTheme.of(context).primary : Color(0xFF2F162C),
+                                                                                                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                                          fontFamily: 'Urbanist',
+                                                                                                          color: socialFeedUserPostsRecord.votes4.contains(currentUserReference) ? Color(0xFF2F162C) : Color(0xFFDCDCDC),
+                                                                                                        ),
+                                                                                                    elevation: 3.0,
+                                                                                                    borderSide: BorderSide(
+                                                                                                      color: Color(0xFFDCDCDC),
+                                                                                                      width: 1.0,
+                                                                                                    ),
+                                                                                                    borderRadius: BorderRadius.circular(12.0),
+                                                                                                  ),
+                                                                                                ),
+                                                                                              Padding(
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                                child: FFButtonWidget(
+                                                                                                  onPressed: () async {
+                                                                                                    if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
+                                                                                                      return;
+                                                                                                    }
+
+                                                                                                    await socialFeedUserPostsRecord.reference.update({
+                                                                                                      'votes2': FieldValue.arrayUnion([currentUserReference]),
+                                                                                                    });
+                                                                                                  },
+                                                                                                  text: socialFeedUserPostsRecord.postAnswer2,
+                                                                                                  options: FFButtonOptions(
+                                                                                                    width: 77.0,
+                                                                                                    height: 50.0,
+                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                                    iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                                    color: socialFeedUserPostsRecord.votes2.contains(currentUserReference) ? FlutterFlowTheme.of(context).primary : Color(0xFF2F162C),
+                                                                                                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                                          fontFamily: 'Urbanist',
+                                                                                                          color: socialFeedUserPostsRecord.votes2.contains(currentUserReference) ? Color(0xFF2F162C) : Color(0xFFDCDCDC),
+                                                                                                        ),
+                                                                                                    elevation: 3.0,
+                                                                                                    borderSide: BorderSide(
+                                                                                                      color: Color(0xFFDCDCDC),
+                                                                                                      width: 1.0,
+                                                                                                    ),
+                                                                                                    borderRadius: BorderRadius.circular(12.0),
+                                                                                                  ),
+                                                                                                ),
+                                                                                              ),
+                                                                                              Padding(
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                                child: FFButtonWidget(
+                                                                                                  onPressed: () async {
+                                                                                                    if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
+                                                                                                      return;
+                                                                                                    }
+
+                                                                                                    await socialFeedUserPostsRecord.reference.update({
+                                                                                                      'votes1': FieldValue.arrayUnion([currentUserReference]),
+                                                                                                    });
+                                                                                                  },
+                                                                                                  text: socialFeedUserPostsRecord.postAnswer1,
+                                                                                                  options: FFButtonOptions(
+                                                                                                    width: 77.0,
+                                                                                                    height: 50.0,
+                                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                                    iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                                    color: socialFeedUserPostsRecord.votes1.contains(currentUserReference) ? FlutterFlowTheme.of(context).primary : Color(0xFF2F162C),
+                                                                                                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                                          fontFamily: 'Urbanist',
+                                                                                                          color: socialFeedUserPostsRecord.votes1.contains(currentUserReference) ? Color(0xFF2F162C) : Color(0xFFDCDCDC),
+                                                                                                        ),
+                                                                                                    elevation: 3.0,
+                                                                                                    borderSide: BorderSide(
+                                                                                                      color: Color(0xFFDCDCDC),
+                                                                                                      width: 1.0,
+                                                                                                    ),
+                                                                                                    borderRadius: BorderRadius.circular(12.0),
+                                                                                                  ),
+                                                                                                ),
+                                                                                              ),
+                                                                                              if (socialFeedUserPostsRecord.postAnswer3 != null && socialFeedUserPostsRecord.postAnswer3 != '')
+                                                                                                Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                                  child: FFButtonWidget(
+                                                                                                    onPressed: () async {
+                                                                                                      if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
+                                                                                                        return;
+                                                                                                      }
+
+                                                                                                      await socialFeedUserPostsRecord.reference.update({
+                                                                                                        'votes3': FieldValue.arrayUnion([currentUserReference]),
+                                                                                                      });
+                                                                                                    },
+                                                                                                    text: socialFeedUserPostsRecord.postAnswer3,
+                                                                                                    options: FFButtonOptions(
+                                                                                                      width: 77.0,
+                                                                                                      height: 50.0,
+                                                                                                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                                      iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                                                                                      color: socialFeedUserPostsRecord.votes3.contains(currentUserReference) ? FlutterFlowTheme.of(context).primary : Color(0xFF2F162C),
+                                                                                                      textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                                                                                                            fontFamily: 'Urbanist',
+                                                                                                            color: socialFeedUserPostsRecord.votes3.contains(currentUserReference) ? Color(0xFF2F162C) : Color(0xFFDCDCDC),
+                                                                                                          ),
+                                                                                                      elevation: 3.0,
+                                                                                                      borderSide: BorderSide(
+                                                                                                        color: Color(0xFFDCDCDC),
+                                                                                                        width: 1.0,
+                                                                                                      ),
+                                                                                                      borderRadius: BorderRadius.circular(12.0),
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                ),
+                                                                                            ],
+                                                                                          ),
+                                                                                        ],
+                                                                                      ),
                                                                                     ),
                                                                                   ),
                                                                                 ],
@@ -1191,380 +1401,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                   ),
                                                 ],
                                               ),
-                                              Align(
-                                                alignment: AlignmentDirectional(
-                                                    0.01, 0.87),
-                                                child: Container(
-                                                  width:
-                                                      MediaQuery.sizeOf(context)
-                                                              .width *
-                                                          1.0,
-                                                  height: 65.0,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      bottomLeft:
-                                                          Radius.circular(16.0),
-                                                      bottomRight:
-                                                          Radius.circular(16.0),
-                                                      topLeft:
-                                                          Radius.circular(0.0),
-                                                      topRight:
-                                                          Radius.circular(0.0),
-                                                    ),
-                                                  ),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          if (socialFeedUserPostsRecord
-                                                                      .postAnswer4 !=
-                                                                  null &&
-                                                              socialFeedUserPostsRecord
-                                                                      .postAnswer4 !=
-                                                                  '')
-                                                            FFButtonWidget(
-                                                              onPressed:
-                                                                  () async {
-                                                                if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) ||
-                                                                    socialFeedUserPostsRecord
-                                                                        .votes2
-                                                                        .contains(
-                                                                            currentUserReference) ||
-                                                                    socialFeedUserPostsRecord
-                                                                        .votes3
-                                                                        .contains(
-                                                                            currentUserReference) ||
-                                                                    socialFeedUserPostsRecord
-                                                                        .votes4
-                                                                        .contains(
-                                                                            currentUserReference)) {
-                                                                  return;
-                                                                }
-
-                                                                await socialFeedUserPostsRecord
-                                                                    .reference
-                                                                    .update({
-                                                                  'votes4':
-                                                                      FieldValue
-                                                                          .arrayUnion([
-                                                                    currentUserReference
-                                                                  ]),
-                                                                });
-                                                              },
-                                                              text: socialFeedUserPostsRecord
-                                                                  .postAnswer4,
-                                                              options:
-                                                                  FFButtonOptions(
-                                                                width: 81.0,
-                                                                height: 50.0,
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                iconPadding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                color: socialFeedUserPostsRecord
-                                                                        .votes4
-                                                                        .contains(
-                                                                            currentUserReference)
-                                                                    ? FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary
-                                                                    : Color(
-                                                                        0xFF2F162C),
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Urbanist',
-                                                                      color: socialFeedUserPostsRecord
-                                                                              .votes4
-                                                                              .contains(
-                                                                                  currentUserReference)
-                                                                          ? Color(
-                                                                              0xFF2F162C)
-                                                                          : Color(
-                                                                              0xFFDCDCDC),
-                                                                    ),
-                                                                elevation: 3.0,
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: Color(
-                                                                      0xFFDCDCDC),
-                                                                  width: 1.0,
-                                                                ),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            12.0),
-                                                              ),
-                                                            ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        10.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child:
-                                                                FFButtonWidget(
-                                                              onPressed:
-                                                                  () async {
-                                                                await socialFeedUserPostsRecord
-                                                                    .reference
-                                                                    .update({
-                                                                  'votes2':
-                                                                      FieldValue
-                                                                          .arrayUnion([
-                                                                    currentUserReference
-                                                                  ]),
-                                                                });
-                                                              },
-                                                              text: socialFeedUserPostsRecord
-                                                                  .postAnswer2,
-                                                              options:
-                                                                  FFButtonOptions(
-                                                                width: 81.0,
-                                                                height: 50.0,
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                iconPadding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                color: socialFeedUserPostsRecord
-                                                                        .votes2
-                                                                        .contains(
-                                                                            currentUserReference)
-                                                                    ? FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary
-                                                                    : Color(
-                                                                        0xFF2F162C),
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Urbanist',
-                                                                      color: socialFeedUserPostsRecord
-                                                                              .votes2
-                                                                              .contains(
-                                                                                  currentUserReference)
-                                                                          ? Color(
-                                                                              0xFF2F162C)
-                                                                          : Color(
-                                                                              0xFFDCDCDC),
-                                                                    ),
-                                                                elevation: 3.0,
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: Color(
-                                                                      0xFFDCDCDC),
-                                                                  width: 1.0,
-                                                                ),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            12.0),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        10.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child:
-                                                                FFButtonWidget(
-                                                              onPressed:
-                                                                  () async {
-                                                                await socialFeedUserPostsRecord
-                                                                    .reference
-                                                                    .update({
-                                                                  'votes1':
-                                                                      FieldValue
-                                                                          .arrayUnion([
-                                                                    currentUserReference
-                                                                  ]),
-                                                                });
-                                                              },
-                                                              text: socialFeedUserPostsRecord
-                                                                  .postAnswer1,
-                                                              options:
-                                                                  FFButtonOptions(
-                                                                width: 81.0,
-                                                                height: 50.0,
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                iconPadding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                color: socialFeedUserPostsRecord
-                                                                        .votes1
-                                                                        .contains(
-                                                                            currentUserReference)
-                                                                    ? FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary
-                                                                    : Color(
-                                                                        0xFF2F162C),
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Urbanist',
-                                                                      color: socialFeedUserPostsRecord
-                                                                              .votes1
-                                                                              .contains(
-                                                                                  currentUserReference)
-                                                                          ? Color(
-                                                                              0xFF2F162C)
-                                                                          : Color(
-                                                                              0xFFDCDCDC),
-                                                                    ),
-                                                                elevation: 3.0,
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: Color(
-                                                                      0xFFDCDCDC),
-                                                                  width: 1.0,
-                                                                ),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            12.0),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          if (socialFeedUserPostsRecord
-                                                                      .postAnswer3 !=
-                                                                  null &&
-                                                              socialFeedUserPostsRecord
-                                                                      .postAnswer3 !=
-                                                                  '')
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          10.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              child:
-                                                                  FFButtonWidget(
-                                                                onPressed:
-                                                                    () async {
-                                                                  await socialFeedUserPostsRecord
-                                                                      .reference
-                                                                      .update({
-                                                                    'votes3':
-                                                                        FieldValue
-                                                                            .arrayUnion([
-                                                                      currentUserReference
-                                                                    ]),
-                                                                  });
-                                                                },
-                                                                text: socialFeedUserPostsRecord
-                                                                    .postAnswer3,
-                                                                options:
-                                                                    FFButtonOptions(
-                                                                  width: 81.0,
-                                                                  height: 50.0,
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  iconPadding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                  color: socialFeedUserPostsRecord
-                                                                          .votes3
-                                                                          .contains(
-                                                                              currentUserReference)
-                                                                      ? FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary
-                                                                      : Color(
-                                                                          0xFF2F162C),
-                                                                  textStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .titleSmall
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Urbanist',
-                                                                        color: socialFeedUserPostsRecord.votes3.contains(currentUserReference)
-                                                                            ? Color(0xFF2F162C)
-                                                                            : Color(0xFFDCDCDC),
-                                                                      ),
-                                                                  elevation:
-                                                                      3.0,
-                                                                  borderSide:
-                                                                      BorderSide(
-                                                                    color: Color(
-                                                                        0xFFDCDCDC),
-                                                                    width: 1.0,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
                                             ],
                                           ),
                                         ),
@@ -1583,10 +1419,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                 MainAxisAlignment.center,
                                             children: [
                                               Container(
-                                                width: 160.0,
+                                                width: 180.0,
                                                 height: 46.0,
                                                 decoration: BoxDecoration(
-                                                  color: Color(0x86000000),
+                                                  color: Color(0xAB000000),
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10.0),
@@ -1603,8 +1439,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                           MainAxisSize.max,
                                                       children: [
                                                         Container(
-                                                          width: 75.0,
-                                                          height: 46.0,
+                                                          width: 95.0,
+                                                          height: 50.0,
                                                           decoration:
                                                               BoxDecoration(),
                                                           child: Row(
@@ -1654,45 +1490,55 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                   ],
                                                                 ),
                                                               ),
-                                                              Container(
-                                                                width: 50.0,
-                                                                height: 46.0,
-                                                                decoration:
-                                                                    BoxDecoration(),
-                                                                child: Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
-                                                                  children: [
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            2.0,
+                                                                            3.0,
+                                                                            0.0,
+                                                                            3.0),
+                                                                child:
                                                                     Container(
-                                                                      width:
-                                                                          40.0,
-                                                                      height:
-                                                                          46.0,
-                                                                      decoration:
-                                                                          BoxDecoration(),
-                                                                      child:
-                                                                          Text(
-                                                                        socialFeedUserPostsRecord.nullExpiry != null &&
-                                                                                socialFeedUserPostsRecord.nullExpiry != ''
-                                                                            ? socialFeedUserPostsRecord.nullExpiry
-                                                                            : dateTimeFormat('relative', socialFeedUserPostsRecord.expiry!),
-                                                                        textAlign:
-                                                                            TextAlign.start,
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodySmall
-                                                                            .override(
-                                                                              fontFamily: 'Lexend Deca',
-                                                                              color: FlutterFlowTheme.of(context).primary,
-                                                                              fontSize: socialFeedUserPostsRecord.nullExpiry != null && socialFeedUserPostsRecord.nullExpiry != '' ? 25.0 : 11.0,
-                                                                              fontWeight: FontWeight.normal,
+                                                                  width: 60.0,
+                                                                  height: 50.0,
+                                                                  decoration:
+                                                                      BoxDecoration(),
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Container(
+                                                                        width:
+                                                                            60.0,
+                                                                        height:
+                                                                            100.0,
+                                                                        decoration:
+                                                                            BoxDecoration(),
+                                                                        child:
+                                                                            Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.center,
+                                                                          children: [
+                                                                            AutoSizeText(
+                                                                              socialFeedUserPostsRecord.expiry != null ? dateTimeFormat('relative', socialFeedUserPostsRecord.expiry!) : socialFeedUserPostsRecord.nullExpiry,
+                                                                              textAlign: TextAlign.start,
+                                                                              maxLines: 2,
+                                                                              style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                    fontFamily: 'Lexend Deca',
+                                                                                    color: FlutterFlowTheme.of(context).primary,
+                                                                                    fontSize: socialFeedUserPostsRecord.expiry != null ? 11.0 : 25.0,
+                                                                                    fontWeight: FontWeight.normal,
+                                                                                  ),
                                                                             ),
+                                                                          ],
+                                                                        ),
                                                                       ),
-                                                                    ),
-                                                                  ],
+                                                                    ],
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ],
@@ -2094,12 +1940,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                   .height *
                                               0.3,
                                           decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: Image.asset(
-                                                'assets/images/2vqf7_',
-                                              ).image,
-                                            ),
                                             borderRadius: BorderRadius.only(
                                               bottomLeft: Radius.circular(0.0),
                                               bottomRight: Radius.circular(0.0),
