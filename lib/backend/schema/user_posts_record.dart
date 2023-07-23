@@ -116,6 +116,66 @@ class UserPostsRecord extends FirestoreRecord {
   LatLng? get pollLocation => _pollLocation;
   bool hasPollLocation() => _pollLocation != null;
 
+  // "countVotes1" field.
+  int? _countVotes1;
+  int get countVotes1 => _countVotes1 ?? 0;
+  bool hasCountVotes1() => _countVotes1 != null;
+
+  // "countVotes2" field.
+  int? _countVotes2;
+  int get countVotes2 => _countVotes2 ?? 0;
+  bool hasCountVotes2() => _countVotes2 != null;
+
+  // "countVotes3" field.
+  int? _countVotes3;
+  int get countVotes3 => _countVotes3 ?? 0;
+  bool hasCountVotes3() => _countVotes3 != null;
+
+  // "countVotes4" field.
+  int? _countVotes4;
+  int get countVotes4 => _countVotes4 ?? 0;
+  bool hasCountVotes4() => _countVotes4 != null;
+
+  // "popVotes1" field.
+  int? _popVotes1;
+  int get popVotes1 => _popVotes1 ?? 0;
+  bool hasPopVotes1() => _popVotes1 != null;
+
+  // "popVotes2" field.
+  int? _popVotes2;
+  int get popVotes2 => _popVotes2 ?? 0;
+  bool hasPopVotes2() => _popVotes2 != null;
+
+  // "popVotes3" field.
+  int? _popVotes3;
+  int get popVotes3 => _popVotes3 ?? 0;
+  bool hasPopVotes3() => _popVotes3 != null;
+
+  // "popVotes4" field.
+  int? _popVotes4;
+  int get popVotes4 => _popVotes4 ?? 0;
+  bool hasPopVotes4() => _popVotes4 != null;
+
+  // "percentVotes1" field.
+  String? _percentVotes1;
+  String get percentVotes1 => _percentVotes1 ?? '';
+  bool hasPercentVotes1() => _percentVotes1 != null;
+
+  // "percentVotes2" field.
+  String? _percentVotes2;
+  String get percentVotes2 => _percentVotes2 ?? '';
+  bool hasPercentVotes2() => _percentVotes2 != null;
+
+  // "percentVotes3" field.
+  String? _percentVotes3;
+  String get percentVotes3 => _percentVotes3 ?? '';
+  bool hasPercentVotes3() => _percentVotes3 != null;
+
+  // "percentVotes4" field.
+  String? _percentVotes4;
+  String get percentVotes4 => _percentVotes4 ?? '';
+  bool hasPercentVotes4() => _percentVotes4 != null;
+
   void _initializeFields() {
     _postUser = snapshotData['postUser'] as DocumentReference?;
     _timePosted = snapshotData['timePosted'] as DateTime?;
@@ -137,6 +197,18 @@ class UserPostsRecord extends FirestoreRecord {
     _nullExpiry = snapshotData['nullExpiry'] as String?;
     _locationEnforced = snapshotData['locationEnforced'] as bool?;
     _pollLocation = snapshotData['pollLocation'] as LatLng?;
+    _countVotes1 = castToType<int>(snapshotData['countVotes1']);
+    _countVotes2 = castToType<int>(snapshotData['countVotes2']);
+    _countVotes3 = castToType<int>(snapshotData['countVotes3']);
+    _countVotes4 = castToType<int>(snapshotData['countVotes4']);
+    _popVotes1 = castToType<int>(snapshotData['popVotes1']);
+    _popVotes2 = castToType<int>(snapshotData['popVotes2']);
+    _popVotes3 = castToType<int>(snapshotData['popVotes3']);
+    _popVotes4 = castToType<int>(snapshotData['popVotes4']);
+    _percentVotes1 = snapshotData['percentVotes1'] as String?;
+    _percentVotes2 = snapshotData['percentVotes2'] as String?;
+    _percentVotes3 = snapshotData['percentVotes3'] as String?;
+    _percentVotes4 = snapshotData['percentVotes4'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -188,6 +260,18 @@ Map<String, dynamic> createUserPostsRecordData({
   String? nullExpiry,
   bool? locationEnforced,
   LatLng? pollLocation,
+  int? countVotes1,
+  int? countVotes2,
+  int? countVotes3,
+  int? countVotes4,
+  int? popVotes1,
+  int? popVotes2,
+  int? popVotes3,
+  int? popVotes4,
+  String? percentVotes1,
+  String? percentVotes2,
+  String? percentVotes3,
+  String? percentVotes4,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -205,6 +289,18 @@ Map<String, dynamic> createUserPostsRecordData({
       'nullExpiry': nullExpiry,
       'locationEnforced': locationEnforced,
       'pollLocation': pollLocation,
+      'countVotes1': countVotes1,
+      'countVotes2': countVotes2,
+      'countVotes3': countVotes3,
+      'countVotes4': countVotes4,
+      'popVotes1': popVotes1,
+      'popVotes2': popVotes2,
+      'popVotes3': popVotes3,
+      'popVotes4': popVotes4,
+      'percentVotes1': percentVotes1,
+      'percentVotes2': percentVotes2,
+      'percentVotes3': percentVotes3,
+      'percentVotes4': percentVotes4,
     }.withoutNulls,
   );
 
@@ -236,7 +332,19 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e1?.expiry == e2?.expiry &&
         e1?.nullExpiry == e2?.nullExpiry &&
         e1?.locationEnforced == e2?.locationEnforced &&
-        e1?.pollLocation == e2?.pollLocation;
+        e1?.pollLocation == e2?.pollLocation &&
+        e1?.countVotes1 == e2?.countVotes1 &&
+        e1?.countVotes2 == e2?.countVotes2 &&
+        e1?.countVotes3 == e2?.countVotes3 &&
+        e1?.countVotes4 == e2?.countVotes4 &&
+        e1?.popVotes1 == e2?.popVotes1 &&
+        e1?.popVotes2 == e2?.popVotes2 &&
+        e1?.popVotes3 == e2?.popVotes3 &&
+        e1?.popVotes4 == e2?.popVotes4 &&
+        e1?.percentVotes1 == e2?.percentVotes1 &&
+        e1?.percentVotes2 == e2?.percentVotes2 &&
+        e1?.percentVotes3 == e2?.percentVotes3 &&
+        e1?.percentVotes4 == e2?.percentVotes4;
   }
 
   @override
@@ -260,7 +368,19 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e?.expiry,
         e?.nullExpiry,
         e?.locationEnforced,
-        e?.pollLocation
+        e?.pollLocation,
+        e?.countVotes1,
+        e?.countVotes2,
+        e?.countVotes3,
+        e?.countVotes4,
+        e?.popVotes1,
+        e?.popVotes2,
+        e?.popVotes3,
+        e?.popVotes4,
+        e?.percentVotes1,
+        e?.percentVotes2,
+        e?.percentVotes3,
+        e?.percentVotes4
       ]);
 
   @override

@@ -469,75 +469,166 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            FlutterFlowIconButton(
-                                              borderRadius: 20.0,
-                                              borderWidth: 1.0,
-                                              buttonSize: 40.0,
-                                              icon: Icon(
-                                                Icons.format_list_bulleted,
-                                                color: _model.multipleChoice ==
-                                                        true
-                                                    ? FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary
-                                                    : Color(0xB9B2B2B2),
-                                                size: 24.0,
-                                              ),
-                                              onPressed: () async {
-                                                setState(() {
-                                                  _model.writeIn = false;
-                                                  _model.multipleChoice = true;
-                                                  _model.trueFalse = false;
-                                                });
-                                              },
+                                            Stack(
+                                              children: [
+                                                if (_model.multipleChoice ==
+                                                    false)
+                                                  FlutterFlowIconButton(
+                                                    borderRadius: 20.0,
+                                                    borderWidth: 1.0,
+                                                    buttonSize: 40.0,
+                                                    icon: Icon(
+                                                      Icons
+                                                          .format_list_bulleted,
+                                                      color: Color(0xB9B2B2B2),
+                                                      size: 18.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      setState(() {
+                                                        _model.writeIn = false;
+                                                        _model.multipleChoice =
+                                                            true;
+                                                        _model.trueFalse =
+                                                            false;
+                                                      });
+                                                    },
+                                                  ),
+                                                if (_model.multipleChoice ==
+                                                    true)
+                                                  FlutterFlowIconButton(
+                                                    borderColor:
+                                                        Colors.transparent,
+                                                    borderRadius: 20.0,
+                                                    borderWidth: 1.0,
+                                                    buttonSize: 40.0,
+                                                    icon: Icon(
+                                                      Icons
+                                                          .format_list_bulleted,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      size: 24.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      setState(() {
+                                                        _model.writeIn = false;
+                                                        _model.multipleChoice =
+                                                            true;
+                                                        _model.trueFalse =
+                                                            false;
+                                                      });
+                                                    },
+                                                  ),
+                                              ],
                                             ),
-                                            FlutterFlowIconButton(
-                                              borderRadius: 20.0,
-                                              borderWidth: 1.0,
-                                              buttonSize: 40.0,
-                                              icon: FaIcon(
-                                                FontAwesomeIcons.penFancy,
-                                                color: _model.writeIn == true
-                                                    ? FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary
-                                                    : Color(0xB9B2B2B2),
-                                                size: 24.0,
-                                              ),
-                                              onPressed: () async {
-                                                setState(() {
-                                                  _model.writeIn = true;
-                                                  _model.multipleChoice = false;
-                                                  _model.trueFalse = false;
-                                                  _model.answer1 = '';
-                                                  _model.answer2 = '';
-                                                  _model.answer3 = '';
-                                                  _model.answer4 = '';
-                                                });
-                                              },
+                                            Stack(
+                                              children: [
+                                                if (_model.writeIn == true)
+                                                  FlutterFlowIconButton(
+                                                    borderRadius: 20.0,
+                                                    borderWidth: 1.0,
+                                                    buttonSize: 40.0,
+                                                    icon: FaIcon(
+                                                      FontAwesomeIcons.penFancy,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      size: 24.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      setState(() {
+                                                        _model.writeIn = true;
+                                                        _model.multipleChoice =
+                                                            false;
+                                                        _model.trueFalse =
+                                                            false;
+                                                        _model.answer1 = '';
+                                                        _model.answer2 = '';
+                                                        _model.answer3 = '';
+                                                        _model.answer4 = '';
+                                                      });
+                                                    },
+                                                  ),
+                                                if (_model.writeIn == false)
+                                                  FlutterFlowIconButton(
+                                                    borderColor:
+                                                        Colors.transparent,
+                                                    borderRadius: 20.0,
+                                                    borderWidth: 1.0,
+                                                    buttonSize: 40.0,
+                                                    icon: FaIcon(
+                                                      FontAwesomeIcons.penFancy,
+                                                      color: Color(0xB9B2B2B2),
+                                                      size: 18.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      setState(() {
+                                                        _model.writeIn = true;
+                                                        _model.multipleChoice =
+                                                            false;
+                                                        _model.trueFalse =
+                                                            false;
+                                                        _model.answer1 = '';
+                                                        _model.answer2 = '';
+                                                        _model.answer3 = '';
+                                                        _model.answer4 = '';
+                                                      });
+                                                    },
+                                                  ),
+                                              ],
                                             ),
-                                            FlutterFlowIconButton(
-                                              borderRadius: 20.0,
-                                              borderWidth: 1.0,
-                                              buttonSize: 40.0,
-                                              icon: Icon(
-                                                Icons.rule,
-                                                color: _model.trueFalse == true
-                                                    ? FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary
-                                                    : Color(0xB9B2B2B2),
-                                                size: 24.0,
-                                              ),
-                                              onPressed: () async {
-                                                setState(() {
-                                                  _model.writeIn = false;
-                                                  _model.multipleChoice = false;
-                                                  _model.trueFalse = true;
-                                                  _model.answer3 = '';
-                                                  _model.answer4 = '';
-                                                });
-                                              },
+                                            Stack(
+                                              children: [
+                                                if (_model.trueFalse == false)
+                                                  FlutterFlowIconButton(
+                                                    borderRadius: 20.0,
+                                                    borderWidth: 1.0,
+                                                    buttonSize: 40.0,
+                                                    icon: Icon(
+                                                      Icons.rule,
+                                                      color: Color(0xB9B2B2B2),
+                                                      size: 18.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      setState(() {
+                                                        _model.writeIn = false;
+                                                        _model.multipleChoice =
+                                                            false;
+                                                        _model.trueFalse = true;
+                                                        _model.answer3 = '';
+                                                        _model.answer4 = '';
+                                                      });
+                                                    },
+                                                  ),
+                                                if (_model.trueFalse == true)
+                                                  FlutterFlowIconButton(
+                                                    borderColor:
+                                                        Colors.transparent,
+                                                    borderRadius: 20.0,
+                                                    borderWidth: 1.0,
+                                                    buttonSize: 40.0,
+                                                    icon: Icon(
+                                                      Icons.rule,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      size: 24.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      setState(() {
+                                                        _model.writeIn = false;
+                                                        _model.multipleChoice =
+                                                            false;
+                                                        _model.trueFalse = true;
+                                                        _model.answer3 = '';
+                                                        _model.answer4 = '';
+                                                      });
+                                                    },
+                                                  ),
+                                              ],
                                             ),
                                           ],
                                         ),
@@ -551,7 +642,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Container(
-                                  width: 350.0,
+                                  width: 340.0,
                                   height: 250.0,
                                   decoration: BoxDecoration(),
                                   child: Stack(
@@ -2341,10 +2432,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                             ),
                                           ),
                                         ),
-                                      if (valueOrDefault<bool>(
-                                            _model.multipleChoice == true,
-                                            false,
-                                          ) &&
+                                      if ((_model.trueFalse == true) &&
                                           (_model.answer2 == null ||
                                               _model.answer2 == '') &&
                                           (_model.answer1 == null ||
