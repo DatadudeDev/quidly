@@ -366,10 +366,7 @@ class _ViewProfilePageOtherWidgetState
                                                         Radius.circular(0.0),
                                                   ),
                                                   child: Image.network(
-                                                    valueOrDefault<String>(
-                                                      columnDogsRecord.dogPhoto,
-                                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/sample-app-social-app-tx2kqp/assets/gu4akoa3hju1/victor-grabarczyk-N04FIfHhv_k-unsplash.jpg',
-                                                    ),
+                                                    'https://picsum.photos/seed/544/600',
                                                     width: 100.0,
                                                     height: 100.0,
                                                     fit: BoxFit.cover,
@@ -744,12 +741,7 @@ class _ViewProfilePageOtherWidgetState
                                                                   milliseconds:
                                                                       500),
                                                           imageUrl:
-                                                              valueOrDefault<
-                                                                  String>(
-                                                            socialFeedUserPostsRecord
-                                                                .postPhoto,
-                                                            'https://d.newsweek.com/en/full/1310267/best-hawaii-beaches.jpg',
-                                                          ),
+                                                              'https://d.newsweek.com/en/full/1310267/best-hawaii-beaches.jpg',
                                                           width:
                                                               MediaQuery.sizeOf(
                                                                           context)
@@ -951,12 +943,7 @@ class _ViewProfilePageOtherWidgetState
                                                                         12.0,
                                                                         12.0),
                                                                 child: Text(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    socialFeedUserPostsRecord
-                                                                        .postDescription,
-                                                                    'I\'m back with a super quick Instagram redesign just for the fan. Rounded corners and cute icons, what else do we need, haha.⁣ ',
-                                                                  ),
+                                                                  'I\'m back with a super quick Instagram redesign just for the fan. Rounded corners and cute icons, what else do we need, haha.⁣ ',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyMedium

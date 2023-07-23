@@ -59,16 +59,7 @@ class _DeletePostWidgetState extends State<DeletePostWidget> {
               onPressed: () async {
                 await widget.postParameters!.reference.delete();
 
-                context.pushNamed(
-                  'homePage',
-                  extra: <String, dynamic>{
-                    kTransitionInfoKey: TransitionInfo(
-                      hasTransition: true,
-                      transitionType: PageTransitionType.leftToRight,
-                      duration: Duration(milliseconds: 220),
-                    ),
-                  },
-                );
+                context.pushNamed('homePage');
               },
               text: 'Delete Post',
               options: FFButtonOptions(

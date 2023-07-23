@@ -27,4 +27,4 @@ export '/pages/add_chat_users/add_chat_users_widget.dart'
 export '/pages/create_group_chat/create_group_chat_widget.dart'
     show CreateGroupChatWidget;
 export '/pages/poll_dev/poll_dev_widget.dart' show PollDevWidget;
-export '/devc/devc_widget.dart' show DevcWidget;
+export '/search/search_widget.dart' show SearchWidget;

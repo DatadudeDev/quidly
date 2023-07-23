@@ -888,11 +888,7 @@ class _PostDetailsWidgetState extends State<PostDetailsWidget> {
                             children: [
                               Expanded(
                                 child: Text(
-                                  postDetailsUserPostsRecord.postDescription
-                                      .maybeHandleOverflow(
-                                    maxChars: 200,
-                                    replacement: '…',
-                                  ),
+                                  'I\'m back with a super quick Instagram redesign just for the fan. Rounded corners and cute icons, what else do we need, haha.⁣ ',
                                   style:
                                       FlutterFlowTheme.of(context).bodyMedium,
                                 ),

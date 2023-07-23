@@ -215,9 +215,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => PollDevWidget(),
         ),
         FFRoute(
-          name: 'devc',
-          path: '/devc',
-          builder: (context, params) => DevcWidget(),
+          name: 'search',
+          path: '/search',
+          builder: (context, params) => SearchWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],
