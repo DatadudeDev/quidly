@@ -9,8 +9,8 @@ import 'package:provider/provider.dart';
 import 'map_google_model.dart';
 export 'map_google_model.dart';
 
-class MapGoogleWidget extends StatefulWidget {
-  const MapGoogleWidget({
+class MapsCustom extends StatefulWidget {
+  const MapsCustom({
     Key? key,
     this.parameter1,
   }) : super(key: key);
@@ -18,10 +18,10 @@ class MapGoogleWidget extends StatefulWidget {
   final LatLng? parameter1;
 
   @override
-  _MapGoogleWidgetState createState() => _MapGoogleWidgetState();
+  _MapsCustomState createState() => _MapsCustomState();
 }
 
-class _MapGoogleWidgetState extends State<MapGoogleWidget> {
+class _MapsCustomState extends State<MapsCustom> {
   late MapGoogleModel _model;
 
   LatLng? currentUserLocationValue;
