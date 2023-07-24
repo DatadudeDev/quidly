@@ -176,6 +176,36 @@ class UserPostsRecord extends FirestoreRecord {
   String get percentVotes4 => _percentVotes4 ?? '';
   bool hasPercentVotes4() => _percentVotes4 != null;
 
+  // "intPercentVotes" field.
+  List<int>? _intPercentVotes;
+  List<int> get intPercentVotes => _intPercentVotes ?? const [];
+  bool hasIntPercentVotes() => _intPercentVotes != null;
+
+  // "labelPercentVotes" field.
+  List<String>? _labelPercentVotes;
+  List<String> get labelPercentVotes => _labelPercentVotes ?? const [];
+  bool hasLabelPercentVotes() => _labelPercentVotes != null;
+
+  // "totalVotes1" field.
+  int? _totalVotes1;
+  int get totalVotes1 => _totalVotes1 ?? 0;
+  bool hasTotalVotes1() => _totalVotes1 != null;
+
+  // "totalVotes2" field.
+  int? _totalVotes2;
+  int get totalVotes2 => _totalVotes2 ?? 0;
+  bool hasTotalVotes2() => _totalVotes2 != null;
+
+  // "totalVotes3" field.
+  int? _totalVotes3;
+  int get totalVotes3 => _totalVotes3 ?? 0;
+  bool hasTotalVotes3() => _totalVotes3 != null;
+
+  // "totalVotes4" field.
+  int? _totalVotes4;
+  int get totalVotes4 => _totalVotes4 ?? 0;
+  bool hasTotalVotes4() => _totalVotes4 != null;
+
   void _initializeFields() {
     _postUser = snapshotData['postUser'] as DocumentReference?;
     _timePosted = snapshotData['timePosted'] as DateTime?;
@@ -209,6 +239,12 @@ class UserPostsRecord extends FirestoreRecord {
     _percentVotes2 = snapshotData['percentVotes2'] as String?;
     _percentVotes3 = snapshotData['percentVotes3'] as String?;
     _percentVotes4 = snapshotData['percentVotes4'] as String?;
+    _intPercentVotes = getDataList(snapshotData['intPercentVotes']);
+    _labelPercentVotes = getDataList(snapshotData['labelPercentVotes']);
+    _totalVotes1 = castToType<int>(snapshotData['totalVotes1']);
+    _totalVotes2 = castToType<int>(snapshotData['totalVotes2']);
+    _totalVotes3 = castToType<int>(snapshotData['totalVotes3']);
+    _totalVotes4 = castToType<int>(snapshotData['totalVotes4']);
   }
 
   static CollectionReference get collection =>
@@ -272,6 +308,10 @@ Map<String, dynamic> createUserPostsRecordData({
   String? percentVotes2,
   String? percentVotes3,
   String? percentVotes4,
+  int? totalVotes1,
+  int? totalVotes2,
+  int? totalVotes3,
+  int? totalVotes4,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -301,6 +341,10 @@ Map<String, dynamic> createUserPostsRecordData({
       'percentVotes2': percentVotes2,
       'percentVotes3': percentVotes3,
       'percentVotes4': percentVotes4,
+      'totalVotes1': totalVotes1,
+      'totalVotes2': totalVotes2,
+      'totalVotes3': totalVotes3,
+      'totalVotes4': totalVotes4,
     }.withoutNulls,
   );
 
@@ -344,7 +388,13 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e1?.percentVotes1 == e2?.percentVotes1 &&
         e1?.percentVotes2 == e2?.percentVotes2 &&
         e1?.percentVotes3 == e2?.percentVotes3 &&
-        e1?.percentVotes4 == e2?.percentVotes4;
+        e1?.percentVotes4 == e2?.percentVotes4 &&
+        listEquality.equals(e1?.intPercentVotes, e2?.intPercentVotes) &&
+        listEquality.equals(e1?.labelPercentVotes, e2?.labelPercentVotes) &&
+        e1?.totalVotes1 == e2?.totalVotes1 &&
+        e1?.totalVotes2 == e2?.totalVotes2 &&
+        e1?.totalVotes3 == e2?.totalVotes3 &&
+        e1?.totalVotes4 == e2?.totalVotes4;
   }
 
   @override
@@ -380,7 +430,13 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e?.percentVotes1,
         e?.percentVotes2,
         e?.percentVotes3,
-        e?.percentVotes4
+        e?.percentVotes4,
+        e?.intPercentVotes,
+        e?.labelPercentVotes,
+        e?.totalVotes1,
+        e?.totalVotes2,
+        e?.totalVotes3,
+        e?.totalVotes4
       ]);
 
   @override
