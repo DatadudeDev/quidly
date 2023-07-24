@@ -66,6 +66,21 @@ class UsersRecord extends FirestoreRecord {
   List<DocumentReference> get followedBy => _followedBy ?? const [];
   bool hasFollowedBy() => _followedBy != null;
 
+  // "age" field.
+  int? _age;
+  int get age => _age ?? 0;
+  bool hasAge() => _age != null;
+
+  // "isMale" field.
+  bool? _isMale;
+  bool get isMale => _isMale ?? false;
+  bool hasIsMale() => _isMale != null;
+
+  // "isFemale" field.
+  bool? _isFemale;
+  bool get isFemale => _isFemale ?? false;
+  bool hasIsFemale() => _isFemale != null;
+
   void _initializeFields() {
     _displayName = snapshotData['display_name'] as String?;
     _email = snapshotData['email'] as String?;
@@ -77,6 +92,9 @@ class UsersRecord extends FirestoreRecord {
     _bio = snapshotData['bio'] as String?;
     _isFollowed = snapshotData['isFollowed'] as bool?;
     _followedBy = getDataList(snapshotData['followed_by']);
+    _age = castToType<int>(snapshotData['age']);
+    _isMale = snapshotData['isMale'] as bool?;
+    _isFemale = snapshotData['isFemale'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -122,6 +140,9 @@ Map<String, dynamic> createUsersRecordData({
   String? userName,
   String? bio,
   bool? isFollowed,
+  int? age,
+  bool? isMale,
+  bool? isFemale,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -134,6 +155,9 @@ Map<String, dynamic> createUsersRecordData({
       'userName': userName,
       'bio': bio,
       'isFollowed': isFollowed,
+      'age': age,
+      'isMale': isMale,
+      'isFemale': isFemale,
     }.withoutNulls,
   );
 
@@ -155,7 +179,10 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.userName == e2?.userName &&
         e1?.bio == e2?.bio &&
         e1?.isFollowed == e2?.isFollowed &&
-        listEquality.equals(e1?.followedBy, e2?.followedBy);
+        listEquality.equals(e1?.followedBy, e2?.followedBy) &&
+        e1?.age == e2?.age &&
+        e1?.isMale == e2?.isMale &&
+        e1?.isFemale == e2?.isFemale;
   }
 
   @override
@@ -169,7 +196,10 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.userName,
         e?.bio,
         e?.isFollowed,
-        e?.followedBy
+        e?.followedBy,
+        e?.age,
+        e?.isMale,
+        e?.isFemale
       ]);
 
   @override

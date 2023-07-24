@@ -58,6 +58,8 @@ class CreatePollModel extends FlutterFlowModel {
 
   bool trueFalse = false;
 
+  bool imageChoice = false;
+
   ///  State fields for stateful widgets in this component.
 
   // Stores action output result for [Backend Call - API (apiTest)] action in Button widget.

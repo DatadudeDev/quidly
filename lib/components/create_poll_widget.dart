@@ -461,10 +461,10 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                   children: [
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 20.0, 0.0, 80.0),
+                                          0.0, 20.0, 0.0, 50.0),
                                       child: Container(
                                         width: 50.0,
-                                        height: 150.0,
+                                        height: 200.0,
                                         decoration: BoxDecoration(),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -517,6 +517,8 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                             true;
                                                         _model.trueFalse =
                                                             false;
+                                                        _model.imageChoice =
+                                                            false;
                                                       });
                                                     },
                                                   ),
@@ -548,34 +550,46 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                         _model.answer2 = '';
                                                         _model.answer3 = '';
                                                         _model.answer4 = '';
+                                                        _model.imageChoice =
+                                                            false;
                                                       });
                                                     },
                                                   ),
                                                 if (_model.writeIn == false)
-                                                  FlutterFlowIconButton(
-                                                    borderColor:
-                                                        Colors.transparent,
-                                                    borderRadius: 20.0,
-                                                    borderWidth: 1.0,
-                                                    buttonSize: 40.0,
-                                                    icon: FaIcon(
-                                                      FontAwesomeIcons.penFancy,
-                                                      color: Color(0xB9B2B2B2),
-                                                      size: 18.0,
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            0.0, 0.0),
+                                                    child:
+                                                        FlutterFlowIconButton(
+                                                      borderColor:
+                                                          Colors.transparent,
+                                                      borderRadius: 20.0,
+                                                      borderWidth: 1.0,
+                                                      buttonSize: 40.0,
+                                                      icon: FaIcon(
+                                                        FontAwesomeIcons
+                                                            .penFancy,
+                                                        color:
+                                                            Color(0xB9B2B2B2),
+                                                        size: 18.0,
+                                                      ),
+                                                      onPressed: () async {
+                                                        setState(() {
+                                                          _model.writeIn = true;
+                                                          _model.multipleChoice =
+                                                              false;
+                                                          _model.trueFalse =
+                                                              false;
+                                                          _model.answer1 = '';
+                                                          _model.answer2 = '';
+                                                          _model.answer3 = '';
+                                                          _model.answer4 = '';
+                                                          _model.imageChoice =
+                                                              false;
+                                                        });
+                                                      },
                                                     ),
-                                                    onPressed: () async {
-                                                      setState(() {
-                                                        _model.writeIn = true;
-                                                        _model.multipleChoice =
-                                                            false;
-                                                        _model.trueFalse =
-                                                            false;
-                                                        _model.answer1 = '';
-                                                        _model.answer2 = '';
-                                                        _model.answer3 = '';
-                                                        _model.answer4 = '';
-                                                      });
-                                                    },
                                                   ),
                                               ],
                                             ),
@@ -625,6 +639,67 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                         _model.trueFalse = true;
                                                         _model.answer3 = '';
                                                         _model.answer4 = '';
+                                                        _model.imageChoice =
+                                                            false;
+                                                      });
+                                                    },
+                                                  ),
+                                              ],
+                                            ),
+                                            Stack(
+                                              children: [
+                                                if (_model.imageChoice == false)
+                                                  FlutterFlowIconButton(
+                                                    borderColor:
+                                                        Colors.transparent,
+                                                    borderRadius: 20.0,
+                                                    borderWidth: 1.0,
+                                                    buttonSize: 40.0,
+                                                    icon: Icon(
+                                                      Icons.image_outlined,
+                                                      color: Color(0xB9B2B2B2),
+                                                      size: 18.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      setState(() {
+                                                        _model.writeIn = false;
+                                                        _model.multipleChoice =
+                                                            false;
+                                                        _model.trueFalse =
+                                                            false;
+                                                        _model.answer3 = '';
+                                                        _model.answer4 = '';
+                                                        _model.imageChoice =
+                                                            true;
+                                                      });
+                                                    },
+                                                  ),
+                                                if (_model.imageChoice == true)
+                                                  FlutterFlowIconButton(
+                                                    borderColor:
+                                                        Colors.transparent,
+                                                    borderRadius: 20.0,
+                                                    borderWidth: 1.0,
+                                                    buttonSize: 40.0,
+                                                    icon: Icon(
+                                                      Icons.image_outlined,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      size: 24.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      setState(() {
+                                                        _model.writeIn = false;
+                                                        _model.multipleChoice =
+                                                            false;
+                                                        _model.trueFalse =
+                                                            false;
+                                                        _model.answer3 = '';
+                                                        _model.answer4 = '';
+                                                        _model.answer2 = '';
+                                                        _model.answer1 = '';
                                                       });
                                                     },
                                                   ),
@@ -2160,6 +2235,8 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                         setState(
                                                                             () {
                                                                           _model.answer3 =
+                                                                              '';
+                                                                          _model.answer4 =
                                                                               '';
                                                                         });
                                                                       },

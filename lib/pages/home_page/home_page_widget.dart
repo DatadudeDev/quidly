@@ -2,8 +2,10 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/create_modal/create_modal_widget.dart';
 import '/components/delete_post/delete_post_widget.dart';
+import '/components/map_google_widget.dart';
 import '/components/time_travel_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_toggle_icon.dart';
@@ -37,6 +39,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
   late HomePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  LatLng? currentUserLocationValue;
   var hasIconTriggered1 = false;
   var hasIconTriggered2 = false;
   var hasIconTriggered3 = false;
@@ -104,6 +107,12 @@ class _HomePageWidgetState extends State<HomePageWidget>
 
   @override
   Widget build(BuildContext context) {
+    final chartPieChartColorsList1 = [
+      Color(0xFF3C145E),
+      Color(0xFF6F1CAE),
+      Color(0xFF4383FF),
+      Color(0xFF1C4796)
+    ];
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0x961A1F24),
@@ -1982,6 +1991,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                                 if (socialFeedUserPostsRecord.postAnswer4 != null && socialFeedUserPostsRecord.postAnswer4 != '')
                                                                                                   FFButtonWidget(
                                                                                                     onPressed: () async {
+                                                                                                      currentUserLocationValue = await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
                                                                                                       if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
                                                                                                         return;
                                                                                                       }
@@ -1989,6 +1999,12 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                                       await socialFeedUserPostsRecord.reference.update({
                                                                                                         'votes4': FieldValue.arrayUnion([currentUserReference]),
                                                                                                       });
+
+                                                                                                      await LocationVotesRecord.collection.doc().set(createLocationVotesRecordData(
+                                                                                                            userPost: containerUserPostsRecord?.reference,
+                                                                                                            voter: currentUserReference,
+                                                                                                            voteLocation: currentUserLocationValue,
+                                                                                                          ));
                                                                                                     },
                                                                                                     text: socialFeedUserPostsRecord.postAnswer4,
                                                                                                     options: FFButtonOptions(
@@ -2013,6 +2029,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                                   padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                                                                                                   child: FFButtonWidget(
                                                                                                     onPressed: () async {
+                                                                                                      currentUserLocationValue = await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
                                                                                                       if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
                                                                                                         return;
                                                                                                       }
@@ -2020,6 +2037,12 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                                       await socialFeedUserPostsRecord.reference.update({
                                                                                                         'votes2': FieldValue.arrayUnion([currentUserReference]),
                                                                                                       });
+
+                                                                                                      await LocationVotesRecord.collection.doc().set(createLocationVotesRecordData(
+                                                                                                            userPost: containerUserPostsRecord?.reference,
+                                                                                                            voter: currentUserReference,
+                                                                                                            voteLocation: currentUserLocationValue,
+                                                                                                          ));
                                                                                                     },
                                                                                                     text: socialFeedUserPostsRecord.postAnswer2,
                                                                                                     options: FFButtonOptions(
@@ -2045,6 +2068,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                                   padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                                                                                                   child: FFButtonWidget(
                                                                                                     onPressed: () async {
+                                                                                                      currentUserLocationValue = await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
                                                                                                       if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
                                                                                                         return;
                                                                                                       }
@@ -2052,6 +2076,12 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                                       await socialFeedUserPostsRecord.reference.update({
                                                                                                         'votes1': FieldValue.arrayUnion([currentUserReference]),
                                                                                                       });
+
+                                                                                                      await LocationVotesRecord.collection.doc().set(createLocationVotesRecordData(
+                                                                                                            userPost: containerUserPostsRecord?.reference,
+                                                                                                            voter: currentUserReference,
+                                                                                                            voteLocation: currentUserLocationValue,
+                                                                                                          ));
                                                                                                     },
                                                                                                     text: socialFeedUserPostsRecord.postAnswer1,
                                                                                                     options: FFButtonOptions(
@@ -2078,6 +2108,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                                     padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                                                                                                     child: FFButtonWidget(
                                                                                                       onPressed: () async {
+                                                                                                        currentUserLocationValue = await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
                                                                                                         if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
                                                                                                           return;
                                                                                                         }
@@ -2085,6 +2116,13 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                                         await socialFeedUserPostsRecord.reference.update({
                                                                                                           'votes3': FieldValue.arrayUnion([currentUserReference]),
                                                                                                         });
+
+                                                                                                        await LocationVotesRecord.collection.doc().set(createLocationVotesRecordData(
+                                                                                                              userPost: containerUserPostsRecord?.reference,
+                                                                                                              voter: currentUserReference,
+                                                                                                              voteLocation: currentUserLocationValue,
+                                                                                                            ));
+                                                                                                        return;
                                                                                                       },
                                                                                                       text: socialFeedUserPostsRecord.postAnswer3,
                                                                                                       options: FFButtonOptions(
@@ -2523,556 +2561,1432 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               ),
                                                             ],
                                                           ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        20.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
+                                                          Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            20.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                child:
                                                                     Container(
-                                                                      width: MediaQuery.sizeOf(context)
-                                                                              .width *
-                                                                          0.75,
+                                                                  width: 325.0,
+                                                                  height: 250.0,
+                                                                  decoration:
+                                                                      BoxDecoration(),
+                                                                  child:
+                                                                      FlipCard(
+                                                                    fill: Fill
+                                                                        .fillBack,
+                                                                    direction:
+                                                                        FlipDirection
+                                                                            .HORIZONTAL,
+                                                                    speed: 400,
+                                                                    front:
+                                                                        Container(
+                                                                      width:
+                                                                          310.0,
                                                                       height:
-                                                                          145.0,
+                                                                          100.0,
                                                                       decoration:
                                                                           BoxDecoration(
-                                                                        color: Color(
-                                                                            0xAB000000),
                                                                         borderRadius:
-                                                                            BorderRadius.circular(10.0),
+                                                                            BorderRadius.circular(12.0),
                                                                       ),
                                                                       child:
                                                                           Padding(
                                                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            5.0,
                                                                             0.0,
+                                                                            20.0,
                                                                             0.0,
                                                                             0.0),
                                                                         child:
                                                                             Column(
                                                                           mainAxisSize:
                                                                               MainAxisSize.max,
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.start,
                                                                           children: [
                                                                             Row(
                                                                               mainAxisSize: MainAxisSize.max,
-                                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                                              mainAxisAlignment: MainAxisAlignment.center,
                                                                               children: [
-                                                                                Column(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                                Stack(
                                                                                   children: [
-                                                                                    Row(
-                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                      children: [
-                                                                                        Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                                                                                          child: Container(
-                                                                                            width: 80.0,
-                                                                                            height: 30.0,
-                                                                                            decoration: BoxDecoration(
-                                                                                              color: Color(0xFF3C145E),
-                                                                                              borderRadius: BorderRadius.circular(10.0),
-                                                                                              border: Border.all(
-                                                                                                color: FlutterFlowTheme.of(context).gray200,
-                                                                                                width: 1.0,
-                                                                                              ),
-                                                                                            ),
-                                                                                            child: Column(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              mainAxisAlignment: MainAxisAlignment.center,
-                                                                                              children: [
-                                                                                                Row(
-                                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                  children: [
-                                                                                                    Container(
-                                                                                                      width: 80.0,
-                                                                                                      height: 20.0,
-                                                                                                      decoration: BoxDecoration(),
-                                                                                                      child: Padding(
-                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                                        child: Text(
-                                                                                                          socialFeedUserPostsRecord.postAnswer1,
-                                                                                                          textAlign: TextAlign.center,
-                                                                                                          style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                                        ),
+                                                                                    if ((socialFeedUserPostsRecord.postAnswer3 == null || socialFeedUserPostsRecord.postAnswer3 == '') && (socialFeedUserPostsRecord.postAnswer4 == null || socialFeedUserPostsRecord.postAnswer4 == '') && (socialFeedUserPostsRecord.postAnswer1 != null && socialFeedUserPostsRecord.postAnswer1 != ''))
+                                                                                      Container(
+                                                                                        width: MediaQuery.sizeOf(context).width * 0.75,
+                                                                                        height: 55.0,
+                                                                                        decoration: BoxDecoration(
+                                                                                          color: Color(0xAB000000),
+                                                                                          borderRadius: BorderRadius.circular(10.0),
+                                                                                        ),
+                                                                                        child: Padding(
+                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                          child: Column(
+                                                                                            mainAxisSize: MainAxisSize.max,
+                                                                                            mainAxisAlignment: MainAxisAlignment.start,
+                                                                                            children: [
+                                                                                              Row(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                children: [
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    children: [
+                                                                                                      Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        children: [
+                                                                                                          Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                                                                                            child: Container(
+                                                                                                              width: 80.0,
+                                                                                                              height: 20.0,
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: Color(0xFF3C145E),
+                                                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                                                                border: Border.all(
+                                                                                                                  color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                  width: 1.0,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              child: Column(
+                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                children: [
+                                                                                                                  Row(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                    children: [
+                                                                                                                      Container(
+                                                                                                                        width: 80.0,
+                                                                                                                        height: 20.0,
+                                                                                                                        decoration: BoxDecoration(),
+                                                                                                                        child: Padding(
+                                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                                                          child: Text(
+                                                                                                                            socialFeedUserPostsRecord.postAnswer1,
+                                                                                                                            textAlign: TextAlign.center,
+                                                                                                                            style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                                                          ),
+                                                                                                                        ),
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
                                                                                                       ),
-                                                                                                    ),
-                                                                                                  ],
-                                                                                                ),
-                                                                                              ],
-                                                                                            ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    children: [
+                                                                                                      Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                        children: [
+                                                                                                          Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(3.0, 5.0, 0.0, 0.0),
+                                                                                                            child: Container(
+                                                                                                              width: socialFeedUserPostsRecord.popVotes1.toDouble(),
+                                                                                                              height: 20.0,
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: Color(0xFF3C145E),
+                                                                                                                borderRadius: BorderRadius.circular(20.0),
+                                                                                                                border: Border.all(
+                                                                                                                  color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                  width: 1.0,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              child: Row(
+                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                children: [
+                                                                                                                  Column(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                    children: [
+                                                                                                                      Row(
+                                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                        children: [
+                                                                                                                          Container(
+                                                                                                                            width: 30.0,
+                                                                                                                            height: 20.0,
+                                                                                                                            decoration: BoxDecoration(),
+                                                                                                                            child: Column(
+                                                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                              children: [
+                                                                                                                                Padding(
+                                                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                                                                                                                                  child: Text(
+                                                                                                                                    socialFeedUserPostsRecord.percentVotes1,
+                                                                                                                                    maxLines: 1,
+                                                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                                          fontFamily: 'Urbanist',
+                                                                                                                                          fontSize: 12.0,
+                                                                                                                                        ),
+                                                                                                                                  ),
+                                                                                                                                ),
+                                                                                                                              ],
+                                                                                                                            ),
+                                                                                                                          ),
+                                                                                                                        ],
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ),
+                                                                                                                  Column(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    children: [],
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ),
+                                                                                              Row(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                children: [
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    children: [
+                                                                                                      Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        children: [
+                                                                                                          Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                                                                                            child: Container(
+                                                                                                              width: 80.0,
+                                                                                                              height: 20.0,
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: Color(0xFF6F1CAE),
+                                                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                                                                border: Border.all(
+                                                                                                                  color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                  width: 1.0,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              child: Column(
+                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                children: [
+                                                                                                                  Row(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                    children: [
+                                                                                                                      Container(
+                                                                                                                        width: 80.0,
+                                                                                                                        height: 20.0,
+                                                                                                                        decoration: BoxDecoration(),
+                                                                                                                        child: Padding(
+                                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                                                          child: Text(
+                                                                                                                            socialFeedUserPostsRecord.postAnswer2,
+                                                                                                                            textAlign: TextAlign.center,
+                                                                                                                            style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                                                          ),
+                                                                                                                        ),
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    children: [
+                                                                                                      Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                        children: [
+                                                                                                          Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(3.0, 5.0, 0.0, 0.0),
+                                                                                                            child: Container(
+                                                                                                              width: socialFeedUserPostsRecord.popVotes2.toDouble(),
+                                                                                                              height: 20.0,
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: Color(0xFF6F1CAE),
+                                                                                                                borderRadius: BorderRadius.circular(20.0),
+                                                                                                                border: Border.all(
+                                                                                                                  color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              child: Row(
+                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                children: [
+                                                                                                                  Column(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                    children: [
+                                                                                                                      Row(
+                                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                        children: [
+                                                                                                                          Container(
+                                                                                                                            width: 40.0,
+                                                                                                                            height: 20.0,
+                                                                                                                            decoration: BoxDecoration(),
+                                                                                                                            child: Column(
+                                                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                              children: [
+                                                                                                                                Padding(
+                                                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                                                                                                                                  child: Text(
+                                                                                                                                    socialFeedUserPostsRecord.percentVotes2,
+                                                                                                                                    maxLines: 1,
+                                                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                                          fontFamily: 'Urbanist',
+                                                                                                                                          fontSize: 12.0,
+                                                                                                                                        ),
+                                                                                                                                  ),
+                                                                                                                                ),
+                                                                                                                              ],
+                                                                                                                            ),
+                                                                                                                          ),
+                                                                                                                        ],
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ),
+                                                                                                                  Column(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    children: [],
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ),
+                                                                                            ],
                                                                                           ),
                                                                                         ),
-                                                                                      ],
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-                                                                                Column(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                  children: [
-                                                                                    Row(
-                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                      mainAxisAlignment: MainAxisAlignment.end,
-                                                                                      children: [
-                                                                                        Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(3.0, 5.0, 0.0, 0.0),
-                                                                                          child: Container(
-                                                                                            width: socialFeedUserPostsRecord.popVotes1.toDouble(),
-                                                                                            height: 30.0,
-                                                                                            decoration: BoxDecoration(
-                                                                                              color: Color(0xFF3C145E),
-                                                                                              borderRadius: BorderRadius.circular(20.0),
-                                                                                              border: Border.all(
-                                                                                                color: FlutterFlowTheme.of(context).gray200,
-                                                                                                width: 1.0,
-                                                                                              ),
-                                                                                            ),
-                                                                                            child: Row(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              mainAxisAlignment: MainAxisAlignment.end,
-                                                                                              children: [
-                                                                                                Column(
-                                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                  children: [
-                                                                                                    Row(
-                                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                                      mainAxisAlignment: MainAxisAlignment.end,
-                                                                                                      children: [
-                                                                                                        Container(
-                                                                                                          width: 30.0,
-                                                                                                          height: 20.0,
-                                                                                                          decoration: BoxDecoration(),
-                                                                                                          child: Column(
-                                                                                                            mainAxisSize: MainAxisSize.max,
-                                                                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                            children: [
-                                                                                                              Padding(
-                                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
-                                                                                                                child: Text(
-                                                                                                                  socialFeedUserPostsRecord.percentVotes1,
-                                                                                                                  maxLines: 1,
-                                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                        fontFamily: 'Urbanist',
-                                                                                                                        fontSize: 12.0,
+                                                                                      ),
+                                                                                    if ((socialFeedUserPostsRecord.postAnswer3 != null && socialFeedUserPostsRecord.postAnswer3 != '') && (socialFeedUserPostsRecord.postAnswer4 == null || socialFeedUserPostsRecord.postAnswer4 == '') && (socialFeedUserPostsRecord.postAnswer1 != null && socialFeedUserPostsRecord.postAnswer1 != ''))
+                                                                                      Container(
+                                                                                        width: MediaQuery.sizeOf(context).width * 0.75,
+                                                                                        height: 80.0,
+                                                                                        decoration: BoxDecoration(
+                                                                                          color: Color(0xAB000000),
+                                                                                          borderRadius: BorderRadius.circular(10.0),
+                                                                                        ),
+                                                                                        child: Padding(
+                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                          child: Column(
+                                                                                            mainAxisSize: MainAxisSize.max,
+                                                                                            mainAxisAlignment: MainAxisAlignment.start,
+                                                                                            children: [
+                                                                                              Row(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                children: [
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    children: [
+                                                                                                      Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        children: [
+                                                                                                          Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                                                                                            child: Container(
+                                                                                                              width: 80.0,
+                                                                                                              height: 20.0,
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: Color(0xFF3C145E),
+                                                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                                                                border: Border.all(
+                                                                                                                  color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                  width: 1.0,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              child: Column(
+                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                children: [
+                                                                                                                  Row(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                    children: [
+                                                                                                                      Container(
+                                                                                                                        width: 80.0,
+                                                                                                                        height: 20.0,
+                                                                                                                        decoration: BoxDecoration(),
+                                                                                                                        child: Padding(
+                                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                                                          child: Text(
+                                                                                                                            socialFeedUserPostsRecord.postAnswer1,
+                                                                                                                            textAlign: TextAlign.center,
+                                                                                                                            style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                                                          ),
+                                                                                                                        ),
                                                                                                                       ),
+                                                                                                                    ],
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    children: [
+                                                                                                      Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                        children: [
+                                                                                                          Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(3.0, 5.0, 0.0, 0.0),
+                                                                                                            child: Container(
+                                                                                                              width: socialFeedUserPostsRecord.popVotes1.toDouble(),
+                                                                                                              height: 20.0,
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: Color(0xFF3C145E),
+                                                                                                                borderRadius: BorderRadius.circular(20.0),
+                                                                                                                border: Border.all(
+                                                                                                                  color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                  width: 1.0,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              child: Row(
+                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                children: [
+                                                                                                                  Column(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                    children: [
+                                                                                                                      Row(
+                                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                        children: [
+                                                                                                                          Container(
+                                                                                                                            width: 30.0,
+                                                                                                                            height: 20.0,
+                                                                                                                            decoration: BoxDecoration(),
+                                                                                                                            child: Column(
+                                                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                              children: [
+                                                                                                                                Padding(
+                                                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                                                                                                                                  child: Text(
+                                                                                                                                    socialFeedUserPostsRecord.percentVotes1,
+                                                                                                                                    maxLines: 1,
+                                                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                                          fontFamily: 'Urbanist',
+                                                                                                                                          fontSize: 12.0,
+                                                                                                                                        ),
+                                                                                                                                  ),
+                                                                                                                                ),
+                                                                                                                              ],
+                                                                                                                            ),
+                                                                                                                          ),
+                                                                                                                        ],
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ),
+                                                                                                                  Column(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    children: [],
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ),
+                                                                                              Row(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                children: [
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    children: [
+                                                                                                      Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        children: [
+                                                                                                          Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                                                                                            child: Container(
+                                                                                                              width: 80.0,
+                                                                                                              height: 20.0,
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: Color(0xFF6F1CAE),
+                                                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                                                                border: Border.all(
+                                                                                                                  color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                  width: 1.0,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              child: Column(
+                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                children: [
+                                                                                                                  Row(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                    children: [
+                                                                                                                      Container(
+                                                                                                                        width: 80.0,
+                                                                                                                        height: 20.0,
+                                                                                                                        decoration: BoxDecoration(),
+                                                                                                                        child: Padding(
+                                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                                                          child: Text(
+                                                                                                                            socialFeedUserPostsRecord.postAnswer2,
+                                                                                                                            textAlign: TextAlign.center,
+                                                                                                                            style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                                                          ),
+                                                                                                                        ),
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    children: [
+                                                                                                      Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                        children: [
+                                                                                                          Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(3.0, 5.0, 0.0, 0.0),
+                                                                                                            child: Container(
+                                                                                                              width: socialFeedUserPostsRecord.popVotes2.toDouble(),
+                                                                                                              height: 20.0,
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: Color(0xFF6F1CAE),
+                                                                                                                borderRadius: BorderRadius.circular(20.0),
+                                                                                                                border: Border.all(
+                                                                                                                  color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              child: Row(
+                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                children: [
+                                                                                                                  Column(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                    children: [
+                                                                                                                      Row(
+                                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                        children: [
+                                                                                                                          Container(
+                                                                                                                            width: 40.0,
+                                                                                                                            height: 20.0,
+                                                                                                                            decoration: BoxDecoration(),
+                                                                                                                            child: Column(
+                                                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                              children: [
+                                                                                                                                Padding(
+                                                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                                                                                                                                  child: Text(
+                                                                                                                                    socialFeedUserPostsRecord.percentVotes2,
+                                                                                                                                    maxLines: 1,
+                                                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                                          fontFamily: 'Urbanist',
+                                                                                                                                          fontSize: 12.0,
+                                                                                                                                        ),
+                                                                                                                                  ),
+                                                                                                                                ),
+                                                                                                                              ],
+                                                                                                                            ),
+                                                                                                                          ),
+                                                                                                                        ],
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ),
+                                                                                                                  Column(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    children: [],
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ),
+                                                                                              Row(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                children: [
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    children: [
+                                                                                                      Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        children: [
+                                                                                                          Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                                                                                            child: Container(
+                                                                                                              width: 80.0,
+                                                                                                              height: 20.0,
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: Color(0xFF2A6CF0),
+                                                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                                                                border: Border.all(
+                                                                                                                  color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              child: Column(
+                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                children: [
+                                                                                                                  Row(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                    children: [
+                                                                                                                      Container(
+                                                                                                                        width: 80.0,
+                                                                                                                        height: 20.0,
+                                                                                                                        decoration: BoxDecoration(),
+                                                                                                                        child: Padding(
+                                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                                                          child: Text(
+                                                                                                                            socialFeedUserPostsRecord.postAnswer3,
+                                                                                                                            textAlign: TextAlign.center,
+                                                                                                                            style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                                                          ),
+                                                                                                                        ),
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    children: [
+                                                                                                      Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                        children: [
+                                                                                                          Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(3.0, 5.0, 0.0, 0.0),
+                                                                                                            child: Container(
+                                                                                                              width: socialFeedUserPostsRecord.popVotes3.toDouble(),
+                                                                                                              height: 20.0,
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: Color(0xFF2A6CF0),
+                                                                                                                borderRadius: BorderRadius.circular(20.0),
+                                                                                                                border: Border.all(
+                                                                                                                  color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              child: Row(
+                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                children: [
+                                                                                                                  Column(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                    children: [
+                                                                                                                      Row(
+                                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                        children: [
+                                                                                                                          Container(
+                                                                                                                            width: 40.0,
+                                                                                                                            height: 20.0,
+                                                                                                                            decoration: BoxDecoration(),
+                                                                                                                            child: Column(
+                                                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                              children: [
+                                                                                                                                Padding(
+                                                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                                                                                                                                  child: Text(
+                                                                                                                                    socialFeedUserPostsRecord.percentVotes3,
+                                                                                                                                    maxLines: 1,
+                                                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                                          fontFamily: 'Urbanist',
+                                                                                                                                          fontSize: 12.0,
+                                                                                                                                        ),
+                                                                                                                                  ),
+                                                                                                                                ),
+                                                                                                                              ],
+                                                                                                                            ),
+                                                                                                                          ),
+                                                                                                                        ],
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ),
+                                                                                                                  Column(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    children: [],
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ),
+                                                                                            ],
+                                                                                          ),
+                                                                                        ),
+                                                                                      ),
+                                                                                    if ((socialFeedUserPostsRecord.postAnswer3 != null && socialFeedUserPostsRecord.postAnswer3 != '') && (socialFeedUserPostsRecord.postAnswer4 != null && socialFeedUserPostsRecord.postAnswer4 != '') && (socialFeedUserPostsRecord.postAnswer1 != null && socialFeedUserPostsRecord.postAnswer1 != ''))
+                                                                                      Container(
+                                                                                        width: MediaQuery.sizeOf(context).width * 0.75,
+                                                                                        height: 105.0,
+                                                                                        decoration: BoxDecoration(
+                                                                                          color: Color(0xAB000000),
+                                                                                          borderRadius: BorderRadius.circular(10.0),
+                                                                                        ),
+                                                                                        child: Padding(
+                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                          child: Column(
+                                                                                            mainAxisSize: MainAxisSize.max,
+                                                                                            mainAxisAlignment: MainAxisAlignment.start,
+                                                                                            children: [
+                                                                                              Row(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                children: [
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    children: [
+                                                                                                      Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        children: [
+                                                                                                          Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                                                                                            child: Container(
+                                                                                                              width: 80.0,
+                                                                                                              height: 20.0,
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: Color(0xFF3C145E),
+                                                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                                                                border: Border.all(
+                                                                                                                  color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                  width: 1.0,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              child: Column(
+                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                children: [
+                                                                                                                  Row(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                    children: [
+                                                                                                                      Container(
+                                                                                                                        width: 80.0,
+                                                                                                                        height: 20.0,
+                                                                                                                        decoration: BoxDecoration(),
+                                                                                                                        child: Padding(
+                                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                                                          child: Text(
+                                                                                                                            socialFeedUserPostsRecord.postAnswer1,
+                                                                                                                            textAlign: TextAlign.center,
+                                                                                                                            style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                                                          ),
+                                                                                                                        ),
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    children: [
+                                                                                                      Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                        children: [
+                                                                                                          Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(3.0, 5.0, 0.0, 0.0),
+                                                                                                            child: Container(
+                                                                                                              width: socialFeedUserPostsRecord.popVotes1.toDouble(),
+                                                                                                              height: 20.0,
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: Color(0xFF3C145E),
+                                                                                                                borderRadius: BorderRadius.circular(20.0),
+                                                                                                                border: Border.all(
+                                                                                                                  color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                  width: 1.0,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              child: Row(
+                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                children: [
+                                                                                                                  Column(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                    children: [
+                                                                                                                      Row(
+                                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                        children: [
+                                                                                                                          Container(
+                                                                                                                            width: 30.0,
+                                                                                                                            height: 20.0,
+                                                                                                                            decoration: BoxDecoration(),
+                                                                                                                            child: Column(
+                                                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                              children: [
+                                                                                                                                Padding(
+                                                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                                                                                                                                  child: Text(
+                                                                                                                                    socialFeedUserPostsRecord.totalVotes1.toString(),
+                                                                                                                                    maxLines: 1,
+                                                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                                          fontFamily: 'Urbanist',
+                                                                                                                                          fontSize: 16.0,
+                                                                                                                                          fontWeight: FontWeight.bold,
+                                                                                                                                        ),
+                                                                                                                                  ),
+                                                                                                                                ),
+                                                                                                                              ],
+                                                                                                                            ),
+                                                                                                                          ),
+                                                                                                                        ],
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ),
+                                                                                                                  Column(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    children: [],
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ),
+                                                                                              Row(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                children: [
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    children: [
+                                                                                                      Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        children: [
+                                                                                                          Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                                                                                            child: Container(
+                                                                                                              width: 80.0,
+                                                                                                              height: 20.0,
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: Color(0xFF6F1CAE),
+                                                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                                                                border: Border.all(
+                                                                                                                  color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                  width: 1.0,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              child: Column(
+                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                children: [
+                                                                                                                  Row(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                    children: [
+                                                                                                                      Container(
+                                                                                                                        width: 80.0,
+                                                                                                                        height: 20.0,
+                                                                                                                        decoration: BoxDecoration(),
+                                                                                                                        child: Padding(
+                                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                                                          child: Text(
+                                                                                                                            socialFeedUserPostsRecord.postAnswer2,
+                                                                                                                            textAlign: TextAlign.center,
+                                                                                                                            style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                                                          ),
+                                                                                                                        ),
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    children: [
+                                                                                                      Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                        children: [
+                                                                                                          Stack(
+                                                                                                            children: [
+                                                                                                              if (socialFeedUserPostsRecord.popVotes1 < 10)
+                                                                                                                Padding(
+                                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(3.0, 5.0, 0.0, 0.0),
+                                                                                                                  child: Container(
+                                                                                                                    width: socialFeedUserPostsRecord.popVotes2.toDouble(),
+                                                                                                                    height: 20.0,
+                                                                                                                    decoration: BoxDecoration(
+                                                                                                                      color: Color(0xFF6F1CAE),
+                                                                                                                      borderRadius: BorderRadius.circular(20.0),
+                                                                                                                      border: Border.all(
+                                                                                                                        color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                      ),
+                                                                                                                    ),
+                                                                                                                    child: Row(
+                                                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                                                      mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                      children: [
+                                                                                                                        Column(
+                                                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                          children: [
+                                                                                                                            Row(
+                                                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                                                              mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                              children: [
+                                                                                                                                Container(
+                                                                                                                                  width: 40.0,
+                                                                                                                                  height: 20.0,
+                                                                                                                                  decoration: BoxDecoration(),
+                                                                                                                                  child: Column(
+                                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                                    children: [
+                                                                                                                                      Padding(
+                                                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                                                                                                                                        child: Text(
+                                                                                                                                          socialFeedUserPostsRecord.percentVotes2,
+                                                                                                                                          maxLines: 1,
+                                                                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                                                fontFamily: 'Urbanist',
+                                                                                                                                                fontSize: 12.0,
+                                                                                                                                              ),
+                                                                                                                                        ),
+                                                                                                                                      ),
+                                                                                                                                    ],
+                                                                                                                                  ),
+                                                                                                                                ),
+                                                                                                                              ],
+                                                                                                                            ),
+                                                                                                                          ],
+                                                                                                                        ),
+                                                                                                                        Column(
+                                                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                                                          children: [],
+                                                                                                                        ),
+                                                                                                                      ],
+                                                                                                                    ),
+                                                                                                                  ),
+                                                                                                                ),
+                                                                                                              Padding(
+                                                                                                                padding: EdgeInsetsDirectional.fromSTEB(3.0, 5.0, 0.0, 0.0),
+                                                                                                                child: Container(
+                                                                                                                  width: socialFeedUserPostsRecord.popVotes2.toDouble(),
+                                                                                                                  height: 20.0,
+                                                                                                                  decoration: BoxDecoration(
+                                                                                                                    color: Color(0xFF6F1CAE),
+                                                                                                                    borderRadius: BorderRadius.circular(20.0),
+                                                                                                                    border: Border.all(
+                                                                                                                      color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                    ),
+                                                                                                                  ),
+                                                                                                                  child: Row(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                    children: [
+                                                                                                                      Column(
+                                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                        children: [
+                                                                                                                          Row(
+                                                                                                                            mainAxisSize: MainAxisSize.max,
+                                                                                                                            mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                            children: [
+                                                                                                                              Container(
+                                                                                                                                width: 40.0,
+                                                                                                                                height: 20.0,
+                                                                                                                                decoration: BoxDecoration(),
+                                                                                                                                child: Column(
+                                                                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                                  children: [
+                                                                                                                                    Padding(
+                                                                                                                                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                                                                                                                                      child: Text(
+                                                                                                                                        socialFeedUserPostsRecord.totalVotes2.toString(),
+                                                                                                                                        maxLines: 1,
+                                                                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                                              fontFamily: 'Urbanist',
+                                                                                                                                              fontSize: 16.0,
+                                                                                                                                              fontWeight: FontWeight.bold,
+                                                                                                                                            ),
+                                                                                                                                      ),
+                                                                                                                                    ),
+                                                                                                                                  ],
+                                                                                                                                ),
+                                                                                                                              ),
+                                                                                                                            ],
+                                                                                                                          ),
+                                                                                                                        ],
+                                                                                                                      ),
+                                                                                                                      Column(
+                                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                                        children: [],
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ),
                                                                                                                 ),
                                                                                                               ),
                                                                                                             ],
                                                                                                           ),
-                                                                                                        ),
-                                                                                                      ],
-                                                                                                    ),
-                                                                                                  ],
-                                                                                                ),
-                                                                                                Column(
-                                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                                  children: [],
-                                                                                                ),
-                                                                                              ],
-                                                                                            ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ),
+                                                                                              Row(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                children: [
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    children: [
+                                                                                                      Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        children: [
+                                                                                                          Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                                                                                            child: Container(
+                                                                                                              width: 80.0,
+                                                                                                              height: 20.0,
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: Color(0xFF2A6CF0),
+                                                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                                                                border: Border.all(
+                                                                                                                  color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              child: Column(
+                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                children: [
+                                                                                                                  Row(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                    children: [
+                                                                                                                      Container(
+                                                                                                                        width: 80.0,
+                                                                                                                        height: 20.0,
+                                                                                                                        decoration: BoxDecoration(),
+                                                                                                                        child: Padding(
+                                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                                                          child: Text(
+                                                                                                                            socialFeedUserPostsRecord.postAnswer3,
+                                                                                                                            textAlign: TextAlign.center,
+                                                                                                                            style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                                                          ),
+                                                                                                                        ),
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    children: [
+                                                                                                      Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                        children: [
+                                                                                                          Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(3.0, 5.0, 0.0, 0.0),
+                                                                                                            child: Container(
+                                                                                                              width: socialFeedUserPostsRecord.popVotes3.toDouble(),
+                                                                                                              height: 20.0,
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: Color(0xFF2A6CF0),
+                                                                                                                borderRadius: BorderRadius.circular(20.0),
+                                                                                                                border: Border.all(
+                                                                                                                  color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              child: Row(
+                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                children: [
+                                                                                                                  Column(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                    children: [
+                                                                                                                      Row(
+                                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                        children: [
+                                                                                                                          Container(
+                                                                                                                            width: 40.0,
+                                                                                                                            height: 20.0,
+                                                                                                                            decoration: BoxDecoration(),
+                                                                                                                            child: Column(
+                                                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                              children: [
+                                                                                                                                Padding(
+                                                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                                                                                                                                  child: Text(
+                                                                                                                                    socialFeedUserPostsRecord.totalVotes3.toString(),
+                                                                                                                                    maxLines: 1,
+                                                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                                          fontFamily: 'Urbanist',
+                                                                                                                                          fontSize: 16.0,
+                                                                                                                                          fontWeight: FontWeight.bold,
+                                                                                                                                        ),
+                                                                                                                                  ),
+                                                                                                                                ),
+                                                                                                                              ],
+                                                                                                                            ),
+                                                                                                                          ),
+                                                                                                                        ],
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ),
+                                                                                                                  Column(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    children: [],
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ),
+                                                                                              Row(
+                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                children: [
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    children: [
+                                                                                                      Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        children: [
+                                                                                                          Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                                                                                                            child: Container(
+                                                                                                              width: 80.0,
+                                                                                                              height: 20.0,
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: FlutterFlowTheme.of(context).info,
+                                                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                                                                border: Border.all(
+                                                                                                                  color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              child: Column(
+                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                children: [
+                                                                                                                  Row(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                    children: [
+                                                                                                                      Container(
+                                                                                                                        width: 80.0,
+                                                                                                                        height: 20.0,
+                                                                                                                        decoration: BoxDecoration(),
+                                                                                                                        child: Padding(
+                                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                                                          child: Text(
+                                                                                                                            socialFeedUserPostsRecord.postAnswer4,
+                                                                                                                            textAlign: TextAlign.center,
+                                                                                                                            style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                                                          ),
+                                                                                                                        ),
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                  Column(
+                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    children: [
+                                                                                                      Row(
+                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                        children: [
+                                                                                                          Padding(
+                                                                                                            padding: EdgeInsetsDirectional.fromSTEB(3.0, 5.0, 0.0, 0.0),
+                                                                                                            child: Container(
+                                                                                                              width: valueOrDefault<double>(
+                                                                                                                socialFeedUserPostsRecord.popVotes4.toDouble(),
+                                                                                                                30.0,
+                                                                                                              ),
+                                                                                                              height: 20.0,
+                                                                                                              decoration: BoxDecoration(
+                                                                                                                color: Color(0xFF1C4796),
+                                                                                                                borderRadius: BorderRadius.circular(20.0),
+                                                                                                                border: Border.all(
+                                                                                                                  color: FlutterFlowTheme.of(context).gray200,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              child: Row(
+                                                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                                                mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                children: [
+                                                                                                                  Column(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                    children: [
+                                                                                                                      Row(
+                                                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                                                        mainAxisAlignment: MainAxisAlignment.end,
+                                                                                                                        children: [
+                                                                                                                          Container(
+                                                                                                                            width: 40.0,
+                                                                                                                            height: 20.0,
+                                                                                                                            decoration: BoxDecoration(),
+                                                                                                                            child: Column(
+                                                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                                              children: [
+                                                                                                                                Padding(
+                                                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                                                                                                                                  child: Text(
+                                                                                                                                    socialFeedUserPostsRecord.totalVotes4.toString(),
+                                                                                                                                    maxLines: 1,
+                                                                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                                                          fontFamily: 'Urbanist',
+                                                                                                                                          fontSize: 16.0,
+                                                                                                                                          fontWeight: FontWeight.bold,
+                                                                                                                                        ),
+                                                                                                                                  ),
+                                                                                                                                ),
+                                                                                                                              ],
+                                                                                                                            ),
+                                                                                                                          ),
+                                                                                                                        ],
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ),
+                                                                                                                  Column(
+                                                                                                                    mainAxisSize: MainAxisSize.max,
+                                                                                                                    children: [],
+                                                                                                                  ),
+                                                                                                                ],
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                        ],
+                                                                                                      ),
+                                                                                                    ],
+                                                                                                  ),
+                                                                                                ],
+                                                                                              ),
+                                                                                            ],
                                                                                           ),
                                                                                         ),
-                                                                                      ],
-                                                                                    ),
+                                                                                      ),
                                                                                   ],
                                                                                 ),
                                                                               ],
                                                                             ),
                                                                             Row(
                                                                               mainAxisSize: MainAxisSize.max,
-                                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                                              mainAxisAlignment: MainAxisAlignment.center,
                                                                               children: [
                                                                                 Column(
                                                                                   mainAxisSize: MainAxisSize.max,
                                                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                                                   children: [
-                                                                                    Row(
-                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                      children: [
-                                                                                        Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                                                                                          child: Container(
-                                                                                            width: 80.0,
-                                                                                            height: 30.0,
-                                                                                            decoration: BoxDecoration(
-                                                                                              color: Color(0xFF6F1CAE),
-                                                                                              borderRadius: BorderRadius.circular(10.0),
-                                                                                              border: Border.all(
-                                                                                                color: FlutterFlowTheme.of(context).gray200,
-                                                                                                width: 1.0,
-                                                                                              ),
-                                                                                            ),
-                                                                                            child: Column(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              mainAxisAlignment: MainAxisAlignment.center,
-                                                                                              children: [
-                                                                                                Row(
-                                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                  children: [
-                                                                                                    Container(
-                                                                                                      width: 80.0,
-                                                                                                      height: 20.0,
-                                                                                                      decoration: BoxDecoration(),
-                                                                                                      child: Padding(
-                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                                        child: Text(
-                                                                                                          socialFeedUserPostsRecord.postAnswer2,
-                                                                                                          textAlign: TextAlign.center,
-                                                                                                          style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                    ),
-                                                                                                  ],
-                                                                                                ),
-                                                                                              ],
-                                                                                            ),
-                                                                                          ),
+                                                                                    Padding(
+                                                                                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                                                                                      child: Container(
+                                                                                        width: MediaQuery.sizeOf(context).width * 0.75,
+                                                                                        height: 120.0,
+                                                                                        decoration: BoxDecoration(
+                                                                                          borderRadius: BorderRadius.circular(10.0),
                                                                                         ),
-                                                                                      ],
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-                                                                                Column(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                  children: [
-                                                                                    Row(
-                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                      mainAxisAlignment: MainAxisAlignment.end,
-                                                                                      children: [
-                                                                                        Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(3.0, 5.0, 0.0, 0.0),
-                                                                                          child: Container(
-                                                                                            width: socialFeedUserPostsRecord.popVotes2.toDouble(),
-                                                                                            height: 30.0,
-                                                                                            decoration: BoxDecoration(
-                                                                                              color: Color(0xFF6F1CAE),
-                                                                                              borderRadius: BorderRadius.circular(20.0),
-                                                                                              border: Border.all(
-                                                                                                color: FlutterFlowTheme.of(context).gray200,
-                                                                                              ),
-                                                                                            ),
-                                                                                            child: Row(
+                                                                                        child: Row(
+                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                          children: [
+                                                                                            Column(
                                                                                               mainAxisSize: MainAxisSize.max,
-                                                                                              mainAxisAlignment: MainAxisAlignment.end,
                                                                                               children: [
-                                                                                                Column(
-                                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                  children: [
-                                                                                                    Row(
-                                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                                      mainAxisAlignment: MainAxisAlignment.end,
-                                                                                                      children: [
+                                                                                                Container(
+                                                                                                  width: 120.0,
+                                                                                                  height: 120.0,
+                                                                                                  decoration: BoxDecoration(
+                                                                                                    color: Color(0xAB000000),
+                                                                                                    borderRadius: BorderRadius.circular(10.0),
+                                                                                                  ),
+                                                                                                  child: Stack(
+                                                                                                    children: [
+                                                                                                      if ((socialFeedUserPostsRecord.popVotes1 > 0) || (socialFeedUserPostsRecord.popVotes2 > 0) || (socialFeedUserPostsRecord.popVotes3 > 0) || (socialFeedUserPostsRecord.popVotes4 > 0))
                                                                                                         Container(
-                                                                                                          width: 40.0,
-                                                                                                          height: 20.0,
-                                                                                                          decoration: BoxDecoration(),
-                                                                                                          child: Column(
-                                                                                                            mainAxisSize: MainAxisSize.max,
-                                                                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                            children: [
-                                                                                                              Padding(
-                                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
-                                                                                                                child: Text(
-                                                                                                                  socialFeedUserPostsRecord.percentVotes2,
-                                                                                                                  maxLines: 1,
-                                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                        fontFamily: 'Urbanist',
-                                                                                                                        fontSize: 12.0,
-                                                                                                                      ),
+                                                                                                          width: 120.0,
+                                                                                                          height: 120.0,
+                                                                                                          child: FlutterFlowPieChart(
+                                                                                                            data: FFPieChartData(
+                                                                                                              values: socialFeedUserPostsRecord.intPercentVotes,
+                                                                                                              colors: chartPieChartColorsList1,
+                                                                                                              radius: [25.0],
+                                                                                                            ),
+                                                                                                            donutHoleRadius: 35.0,
+                                                                                                            donutHoleColor: Colors.transparent,
+                                                                                                            sectionLabelType: PieChartSectionLabelType.percent,
+                                                                                                            sectionLabelStyle: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                                                                  fontFamily: 'Urbanist',
+                                                                                                                  fontSize: 10.0,
                                                                                                                 ),
-                                                                                                              ),
-                                                                                                            ],
                                                                                                           ),
                                                                                                         ),
-                                                                                                      ],
-                                                                                                    ),
-                                                                                                  ],
-                                                                                                ),
-                                                                                                Column(
-                                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                                  children: [],
-                                                                                                ),
-                                                                                              ],
-                                                                                            ),
-                                                                                          ),
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-                                                                              ],
-                                                                            ),
-                                                                            Row(
-                                                                              mainAxisSize: MainAxisSize.max,
-                                                                              mainAxisAlignment: MainAxisAlignment.start,
-                                                                              children: [
-                                                                                Column(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                  children: [
-                                                                                    Row(
-                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                      children: [
-                                                                                        Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                                                                                          child: Container(
-                                                                                            width: 80.0,
-                                                                                            height: 30.0,
-                                                                                            decoration: BoxDecoration(
-                                                                                              color: Color(0xFF2A6CF0),
-                                                                                              borderRadius: BorderRadius.circular(10.0),
-                                                                                              border: Border.all(
-                                                                                                color: FlutterFlowTheme.of(context).gray200,
-                                                                                              ),
-                                                                                            ),
-                                                                                            child: Column(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              mainAxisAlignment: MainAxisAlignment.center,
-                                                                                              children: [
-                                                                                                Row(
-                                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                  children: [
-                                                                                                    Container(
-                                                                                                      width: 80.0,
-                                                                                                      height: 20.0,
-                                                                                                      decoration: BoxDecoration(),
-                                                                                                      child: Padding(
-                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                                        child: Text(
-                                                                                                          socialFeedUserPostsRecord.postAnswer3,
-                                                                                                          textAlign: TextAlign.center,
-                                                                                                          style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                    ),
-                                                                                                  ],
-                                                                                                ),
-                                                                                              ],
-                                                                                            ),
-                                                                                          ),
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-                                                                                Column(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                  children: [
-                                                                                    Row(
-                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                      mainAxisAlignment: MainAxisAlignment.end,
-                                                                                      children: [
-                                                                                        Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(3.0, 5.0, 0.0, 0.0),
-                                                                                          child: Container(
-                                                                                            width: socialFeedUserPostsRecord.popVotes3.toDouble(),
-                                                                                            height: 30.0,
-                                                                                            decoration: BoxDecoration(
-                                                                                              color: Color(0xFF2A6CF0),
-                                                                                              borderRadius: BorderRadius.circular(20.0),
-                                                                                              border: Border.all(
-                                                                                                color: FlutterFlowTheme.of(context).gray200,
-                                                                                              ),
-                                                                                            ),
-                                                                                            child: Row(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              mainAxisAlignment: MainAxisAlignment.end,
-                                                                                              children: [
-                                                                                                Column(
-                                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                  children: [
-                                                                                                    Row(
-                                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                                      mainAxisAlignment: MainAxisAlignment.end,
-                                                                                                      children: [
+                                                                                                      if ((socialFeedUserPostsRecord.popVotes1 == 0) && (socialFeedUserPostsRecord.popVotes2 == 0) && (socialFeedUserPostsRecord.popVotes3 == 0) && (socialFeedUserPostsRecord.popVotes4 == 0))
                                                                                                         Container(
-                                                                                                          width: 40.0,
-                                                                                                          height: 20.0,
-                                                                                                          decoration: BoxDecoration(),
-                                                                                                          child: Column(
-                                                                                                            mainAxisSize: MainAxisSize.max,
-                                                                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                            children: [
-                                                                                                              Padding(
-                                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
-                                                                                                                child: Text(
-                                                                                                                  socialFeedUserPostsRecord.percentVotes3,
-                                                                                                                  maxLines: 1,
-                                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                        fontFamily: 'Urbanist',
-                                                                                                                        fontSize: 12.0,
-                                                                                                                      ),
+                                                                                                          width: 120.0,
+                                                                                                          height: 120.0,
+                                                                                                          child: FlutterFlowPieChart(
+                                                                                                            data: FFPieChartData(
+                                                                                                              values: [
+                                                                                                                _model.pieDefault1!,
+                                                                                                                _model.pieDefault1!,
+                                                                                                                _model.pieDefault1!,
+                                                                                                                _model.pieDefault1!
+                                                                                                              ],
+                                                                                                              colors: [
+                                                                                                                Color(0xFF3C145E),
+                                                                                                                Color(0xFF8A2DD0),
+                                                                                                                Color(0xFF1C4796),
+                                                                                                                Color(0xFF4383FF)
+                                                                                                              ],
+                                                                                                              radius: [25.0, 25.0, 25.0, 25.0],
+                                                                                                            ),
+                                                                                                            donutHoleRadius: 35.0,
+                                                                                                            donutHoleColor: Colors.transparent,
+                                                                                                            sectionLabelType: PieChartSectionLabelType.percent,
+                                                                                                            sectionLabelStyle: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                                                                  fontFamily: 'Urbanist',
+                                                                                                                  fontSize: 10.0,
                                                                                                                 ),
-                                                                                                              ),
-                                                                                                            ],
                                                                                                           ),
                                                                                                         ),
-                                                                                                      ],
-                                                                                                    ),
-                                                                                                  ],
-                                                                                                ),
-                                                                                                Column(
-                                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                                  children: [],
+                                                                                                    ],
+                                                                                                  ),
                                                                                                 ),
                                                                                               ],
                                                                                             ),
-                                                                                          ),
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-                                                                              ],
-                                                                            ),
-                                                                            Row(
-                                                                              mainAxisSize: MainAxisSize.max,
-                                                                              mainAxisAlignment: MainAxisAlignment.start,
-                                                                              children: [
-                                                                                Column(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                  children: [
-                                                                                    Row(
-                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                      children: [
-                                                                                        Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                                                                                          child: Container(
-                                                                                            width: 80.0,
-                                                                                            height: 30.0,
-                                                                                            decoration: BoxDecoration(
-                                                                                              color: FlutterFlowTheme.of(context).info,
-                                                                                              borderRadius: BorderRadius.circular(10.0),
-                                                                                              border: Border.all(
-                                                                                                color: FlutterFlowTheme.of(context).gray200,
-                                                                                              ),
-                                                                                            ),
-                                                                                            child: Column(
+                                                                                            Column(
                                                                                               mainAxisSize: MainAxisSize.max,
-                                                                                              mainAxisAlignment: MainAxisAlignment.center,
                                                                                               children: [
-                                                                                                Row(
-                                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                  children: [
-                                                                                                    Container(
-                                                                                                      width: 80.0,
-                                                                                                      height: 20.0,
-                                                                                                      decoration: BoxDecoration(),
-                                                                                                      child: Padding(
-                                                                                                        padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                                        child: Text(
-                                                                                                          socialFeedUserPostsRecord.postAnswer4,
-                                                                                                          textAlign: TextAlign.center,
-                                                                                                          style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                    ),
-                                                                                                  ],
+                                                                                                Padding(
+                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                                                  child: MapGoogleWidget(
+                                                                                                    key: Key('Keyprj_${socialFeedIndex}_of_${socialFeedUserPostsRecordList.length}'),
+                                                                                                    parameter1: socialFeedUserPostsRecord.pollLocation,
+                                                                                                  ),
                                                                                                 ),
                                                                                               ],
                                                                                             ),
-                                                                                          ),
+                                                                                          ],
                                                                                         ),
-                                                                                      ],
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-                                                                                Column(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                  children: [
-                                                                                    Row(
-                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                      mainAxisAlignment: MainAxisAlignment.end,
-                                                                                      children: [
-                                                                                        Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(3.0, 5.0, 0.0, 0.0),
-                                                                                          child: Container(
-                                                                                            width: valueOrDefault<double>(
-                                                                                              socialFeedUserPostsRecord.popVotes4.toDouble(),
-                                                                                              30.0,
-                                                                                            ),
-                                                                                            height: 30.0,
-                                                                                            decoration: BoxDecoration(
-                                                                                              color: Color(0xFF1C4796),
-                                                                                              borderRadius: BorderRadius.circular(20.0),
-                                                                                              border: Border.all(
-                                                                                                color: FlutterFlowTheme.of(context).gray200,
-                                                                                              ),
-                                                                                            ),
-                                                                                            child: Row(
-                                                                                              mainAxisSize: MainAxisSize.max,
-                                                                                              mainAxisAlignment: MainAxisAlignment.end,
-                                                                                              children: [
-                                                                                                Column(
-                                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                  children: [
-                                                                                                    Row(
-                                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                                      mainAxisAlignment: MainAxisAlignment.end,
-                                                                                                      children: [
-                                                                                                        Container(
-                                                                                                          width: 40.0,
-                                                                                                          height: 20.0,
-                                                                                                          decoration: BoxDecoration(),
-                                                                                                          child: Column(
-                                                                                                            mainAxisSize: MainAxisSize.max,
-                                                                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                            children: [
-                                                                                                              Padding(
-                                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
-                                                                                                                child: Text(
-                                                                                                                  socialFeedUserPostsRecord.percentVotes4,
-                                                                                                                  maxLines: 1,
-                                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                                        fontFamily: 'Urbanist',
-                                                                                                                        fontSize: 12.0,
-                                                                                                                      ),
-                                                                                                                ),
-                                                                                                              ),
-                                                                                                            ],
-                                                                                                          ),
-                                                                                                        ),
-                                                                                                      ],
-                                                                                                    ),
-                                                                                                  ],
-                                                                                                ),
-                                                                                                Column(
-                                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                                  children: [],
-                                                                                                ),
-                                                                                              ],
-                                                                                            ),
-                                                                                          ),
-                                                                                        ),
-                                                                                      ],
+                                                                                      ),
                                                                                     ),
                                                                                   ],
                                                                                 ),
@@ -3082,35 +3996,53 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                         ),
                                                                       ),
                                                                     ),
-                                                                  ],
-                                                                ),
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
-                                                                    Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      children: [
+                                                                    back:
                                                                         Container(
-                                                                          width:
-                                                                              MediaQuery.sizeOf(context).width * 0.75,
-                                                                          height:
-                                                                              100.0,
-                                                                          decoration:
-                                                                              BoxDecoration(
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(10.0),
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          0.9,
+                                                                      height:
+                                                                          300.0,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: Color(
+                                                                            0x97000000),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(20.0),
+                                                                      ),
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        children: [
+                                                                          Column(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.center,
+                                                                            children: [
+                                                                              Container(
+                                                                                width: MediaQuery.sizeOf(context).width * 0.7,
+                                                                                height: 210.0,
+                                                                                decoration: BoxDecoration(
+                                                                                  borderRadius: BorderRadius.circular(20.0),
+                                                                                ),
+                                                                                child: MapGoogleWidget(
+                                                                                  key: Key('Keyldb_${socialFeedIndex}_of_${socialFeedUserPostsRecordList.length}'),
+                                                                                  parameter1: socialFeedUserPostsRecord.pollLocation,
+                                                                                ),
+                                                                              ),
+                                                                            ],
                                                                           ),
-                                                                        ),
-                                                                      ],
+                                                                        ],
+                                                                      ),
                                                                     ),
-                                                                  ],
+                                                                  ),
                                                                 ),
-                                                              ],
-                                                            ),
+                                                              ),
+                                                            ],
                                                           ),
                                                         ],
                                                       ),

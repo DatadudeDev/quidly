@@ -15,10 +15,7 @@ import 'schema/friends_record.dart';
 import 'schema/chats_record.dart';
 import 'schema/chat_messages_record.dart';
 import 'schema/polls_record.dart';
-import 'schema/votes1_record.dart';
-import 'schema/votes2_record.dart';
-import 'schema/votes3_record.dart';
-import 'schema/votes4_record.dart';
+import 'schema/location_votes_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -36,10 +33,7 @@ export 'schema/friends_record.dart';
 export 'schema/chats_record.dart';
 export 'schema/chat_messages_record.dart';
 export 'schema/polls_record.dart';
-export 'schema/votes1_record.dart';
-export 'schema/votes2_record.dart';
-export 'schema/votes3_record.dart';
-export 'schema/votes4_record.dart';
+export 'schema/location_votes_record.dart';
 
 /// Functions to query UserPostsRecords (as a Stream and as a Future).
 Future<int> queryUserPostsRecordCount({
@@ -411,149 +405,38 @@ Future<List<PollsRecord>> queryPollsRecordOnce({
       singleRecord: singleRecord,
     );
 
-/// Functions to query Votes1Records (as a Stream and as a Future).
-Future<int> queryVotes1RecordCount({
+/// Functions to query LocationVotesRecords (as a Stream and as a Future).
+Future<int> queryLocationVotesRecordCount({
   Query Function(Query)? queryBuilder,
   int limit = -1,
 }) =>
     queryCollectionCount(
-      Votes1Record.collection,
+      LocationVotesRecord.collection,
       queryBuilder: queryBuilder,
       limit: limit,
     );
 
-Stream<List<Votes1Record>> queryVotes1Record({
+Stream<List<LocationVotesRecord>> queryLocationVotesRecord({
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollection(
-      Votes1Record.collection,
-      Votes1Record.fromSnapshot,
+      LocationVotesRecord.collection,
+      LocationVotesRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<List<Votes1Record>> queryVotes1RecordOnce({
+Future<List<LocationVotesRecord>> queryLocationVotesRecordOnce({
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollectionOnce(
-      Votes1Record.collection,
-      Votes1Record.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-/// Functions to query Votes2Records (as a Stream and as a Future).
-Future<int> queryVotes2RecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      Votes2Record.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<Votes2Record>> queryVotes2Record({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      Votes2Record.collection,
-      Votes2Record.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<Votes2Record>> queryVotes2RecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      Votes2Record.collection,
-      Votes2Record.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-/// Functions to query Votes3Records (as a Stream and as a Future).
-Future<int> queryVotes3RecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      Votes3Record.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<Votes3Record>> queryVotes3Record({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      Votes3Record.collection,
-      Votes3Record.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<Votes3Record>> queryVotes3RecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      Votes3Record.collection,
-      Votes3Record.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-/// Functions to query Votes4Records (as a Stream and as a Future).
-Future<int> queryVotes4RecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      Votes4Record.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<Votes4Record>> queryVotes4Record({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      Votes4Record.collection,
-      Votes4Record.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<Votes4Record>> queryVotes4RecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      Votes4Record.collection,
-      Votes4Record.fromSnapshot,
+      LocationVotesRecord.collection,
+      LocationVotesRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

@@ -1,9 +1,8 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -823,99 +822,52 @@ class _ProfileSectionWidgetState extends State<ProfileSectionWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 32.0),
-                          child: StreamBuilder<List<UserPostsRecord>>(
-                            stream: queryUserPostsRecord(
-                              queryBuilder: (userPostsRecord) => userPostsRecord
-                                  .where('postUser',
-                                      isEqualTo: widget.parameter5)
-                                  .orderBy('timePosted', descending: true),
-                            ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        FlutterFlowTheme.of(context).primary,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }
-                              List<UserPostsRecord>
-                                  socialFeedUserPostsRecordList =
-                                  snapshot.data!;
-                              if (socialFeedUserPostsRecordList.isEmpty) {
-                                return Center(
-                                  child: Image.asset(
-                                    'assets/images/emptyPosts@2x.png',
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 0.5,
-                                    height: 400.0,
-                                  ),
-                                );
-                              }
-                              return ListView.builder(
-                                padding: EdgeInsets.zero,
-                                scrollDirection: Axis.vertical,
-                                itemCount: socialFeedUserPostsRecordList.length,
-                                itemBuilder: (context, socialFeedIndex) {
-                                  final socialFeedUserPostsRecord =
-                                      socialFeedUserPostsRecordList[
-                                          socialFeedIndex];
-                                  return Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 4.0, 0.0, 8.0),
-                                    child: StreamBuilder<UsersRecord>(
-                                      stream: UsersRecord.getDocument(
-                                          socialFeedUserPostsRecord.postUser!),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 50.0,
-                                              height: 50.0,
-                                              child: CircularProgressIndicator(
-                                                valueColor:
-                                                    AlwaysStoppedAnimation<
-                                                        Color>(
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                        final userPostUsersRecord =
-                                            snapshot.data!;
-                                        return Container(
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
-                                                  1.0,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                blurRadius: 4.0,
-                                                color: Color(0x32000000),
-                                                offset: Offset(0.0, 2.0),
-                                              )
-                                            ],
-                                            borderRadius:
-                                                BorderRadius.circular(0.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FFButtonWidget(
+                                    onPressed: () async {
+                                      GoRouter.of(context).prepareAuthEvent();
+                                      await authManager.signOut();
+                                      GoRouter.of(context)
+                                          .clearRedirectLocation();
+
+                                      context.goNamedAuth(
+                                          'login', context.mounted);
+                                    },
+                                    text: 'Log Out',
+                                    options: FFButtonOptions(
+                                      width: 90.0,
+                                      height: 40.0,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 0.0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color: Colors.white,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodySmall
+                                          .override(
+                                            fontFamily: 'Lexend Deca',
+                                            color: Color(0xFF4B39EF),
+                                            fontSize: 14.0,
+                                            fontWeight: FontWeight.normal,
                                           ),
-                                        );
-                                      },
+                                      elevation: 3.0,
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8.0),
                                     ),
-                                  );
-                                },
-                              );
-                            },
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ],
