@@ -1,23 +1,16 @@
-// Automatic FlutterFlow imports
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'index.dart'; // Imports other custom widgets
-import '/flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
-// Begin custom widget code
-// DO NOT REMOVE OR MODIFY THE CODE ABOVE!
-
-import '/auth/firebase_auth/auth_util.dart';
-import '/flutter_flow/flutter_flow_google_map.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import 'map_google_model.dart';
 export 'map_google_model.dart';
 
-class MapGoogleWidget extends StatefulWidget {
-  const MapGoogleWidget({
+class MapsCustom extends StatefulWidget {
+  const MapsCustom({
     Key? key,
     this.parameter1,
   }) : super(key: key);
@@ -25,10 +18,10 @@ class MapGoogleWidget extends StatefulWidget {
   final LatLng? parameter1;
 
   @override
-  _MapGoogleWidgetState createState() => _MapGoogleWidgetState();
+  _MapsCustomState createState() => _MapsCustomState();
 }
 
-class _MapGoogleWidgetState extends State<MapGoogleWidget> {
+class _MapsCustomState extends State<MapsCustom> {
   late MapGoogleModel _model;
 
   LatLng? currentUserLocationValue;
@@ -55,21 +48,6 @@ class _MapGoogleWidgetState extends State<MapGoogleWidget> {
     super.dispose();
   }
 
-  GoogleMarkerColor getMarkerColor(int voteAnswer) {
-    switch (voteAnswer) {
-      case 1:
-        return GoogleMarkerColor.red;
-      case 2:
-        return GoogleMarkerColor.blue;
-      case 3:
-        return GoogleMarkerColor.yellow;
-      case 4:
-        return GoogleMarkerColor.green;
-      default:
-        return GoogleMarkerColor.violet;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     if (currentUserLocationValue == null) {
@@ -77,8 +55,8 @@ class _MapGoogleWidgetState extends State<MapGoogleWidget> {
         color: FlutterFlowTheme.of(context).primaryBackground,
         child: Center(
           child: SizedBox(
-            width: 100,
-            height: 100,
+            width: 50.0,
+            height: 50.0,
             child: CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(
                 FlutterFlowTheme.of(context).primary,
@@ -89,14 +67,18 @@ class _MapGoogleWidgetState extends State<MapGoogleWidget> {
       );
     }
 
-    return StreamBuilder<List<LocationVotesRecord>>(
-      stream: queryLocationVotesRecord(),
+    return StreamBuilder<List<UserPostsRecord>>(
+      stream: queryUserPostsRecord(
+        queryBuilder: (userPostsRecord) =>
+            userPostsRecord.where('postUser', isEqualTo: currentUserReference),
+      ),
       builder: (context, snapshot) {
+        // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Center(
             child: SizedBox(
-              width: 100,
-              height: 100,
+              width: 50.0,
+              height: 50.0,
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(
                   FlutterFlowTheme.of(context).primary,
@@ -105,40 +87,69 @@ class _MapGoogleWidgetState extends State<MapGoogleWidget> {
             ),
           );
         }
-        List<LocationVotesRecord> containerLocationVotesRecordList =
-            snapshot.data!;
+        List<UserPostsRecord> containerUserPostsRecordList = snapshot.data!;
         return Container(
-          width: 100,
-          height: 100,
+          width: 165.0,
+          height: 120.0,
           decoration: BoxDecoration(
-            color: FlutterFlowTheme.of(context).secondaryBackground,
-            borderRadius: BorderRadius.circular(10),
+            color: Color(0xAB000000),
+            borderRadius: BorderRadius.circular(20.0),
           ),
-          child: FlutterFlowGoogleMap(
-            controller: _model.googleMapsController,
-            onCameraIdle: (latLng) =>
-                setState(() => _model.googleMapsCenter = latLng),
-            initialLocation: _model.googleMapsCenter ??=
-                currentUserLocationValue!,
-            markers: containerLocationVotesRecordList
-                .map(
-                  (containerLocationVotesRecord) => FlutterFlowMarker(
-                    containerLocationVotesRecord.reference.path,
-                    containerLocationVotesRecord.voteLocation!,
+          child: StreamBuilder<List<LocationVotesRecord>>(
+            stream: queryLocationVotesRecord(),
+            builder: (context, snapshot) {
+              // Customize what your widget looks like when it's loading.
+              if (!snapshot.hasData) {
+                return Center(
+                  child: SizedBox(
+                    width: 50.0,
+                    height: 50.0,
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        FlutterFlowTheme.of(context).primary,
+                      ),
+                    ),
                   ),
-                )
-                .toList(),
-            mapType: MapType.hybrid,
-            style: GoogleMapStyle.standard,
-            initialZoom: 3,
-            allowInteraction: true,
-            allowZoom: true,
-            showZoomControls: false,
-            showLocation: false,
-            showCompass: false,
-            showMapToolbar: false,
-            showTraffic: false,
-            centerMapOnMarkerTap: true,
+                );
+              }
+              List<LocationVotesRecord> containerLocationVotesRecordList =
+                  snapshot.data!;
+              return Container(
+                width: 100.0,
+                height: 100.0,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: FlutterFlowGoogleMap(
+                  controller: _model.googleMapsController,
+                  onCameraIdle: (latLng) =>
+                      setState(() => _model.googleMapsCenter = latLng),
+                  initialLocation: _model.googleMapsCenter ??=
+                      currentUserLocationValue!,
+                  markers: containerLocationVotesRecordList
+                      .map(
+                        (containerLocationVotesRecord) => FlutterFlowMarker(
+                          containerLocationVotesRecord.reference.path,
+                          containerLocationVotesRecord.voteLocation!,
+                        ),
+                      )
+                      .toList(),
+                  markerColor: GoogleMarkerColor.orange,
+                  mapType: MapType.hybrid,
+                  style: GoogleMapStyle.standard,
+                  initialZoom: 3.0,
+                  allowInteraction: true,
+                  allowZoom: true,
+                  showZoomControls: false,
+                  showLocation: false,
+                  showCompass: false,
+                  showMapToolbar: false,
+                  showTraffic: false,
+                  centerMapOnMarkerTap: true,
+                ),
+              );
+            },
           ),
         );
       },
