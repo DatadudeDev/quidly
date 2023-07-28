@@ -28,3 +28,4 @@ export '/pages/create_group_chat/create_group_chat_widget.dart'
     show CreateGroupChatWidget;
 export '/pages/poll_dev/poll_dev_widget.dart' show PollDevWidget;
 export '/search/search_widget.dart' show SearchWidget;
+export '/search_copy/search_copy_widget.dart' show SearchCopyWidget;

@@ -1,24 +1,27 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_google_map.dart';
+import '/components/maps_custom/maps_custom_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class MapGoogleModel extends FlutterFlowModel {
+class MapGoogleCopyModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this component.
 
-  // State field(s) for GoogleMap widget.
-  LatLng? googleMapsCenter;
-  final googleMapsController = Completer<GoogleMapController>();
+  // Model for MapsCustom component.
+  late MapsCustomModel mapsCustomModel;
 
   /// Initialization and disposal methods.
 
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    mapsCustomModel = createModel(context, () => MapsCustomModel());
+  }
 
-  void dispose() {}
+  void dispose() {
+    mapsCustomModel.dispose();
+  }
 
   /// Action blocks are added here.
 

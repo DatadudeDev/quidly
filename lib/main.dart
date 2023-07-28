@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
       ..listen((user) => _appStateNotifier.update(user));
     jwtTokenStream.listen((_) {});
     Future.delayed(
-      Duration(seconds: 1),
+      Duration(milliseconds: 1000),
       () => _appStateNotifier.stopShowingSplashImage(),
     );
   }
@@ -123,6 +123,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'homePage': HomePageWidget(),
       'allChatsPage': AllChatsPageWidget(),
       'profilePage': ProfilePageWidget(),
+      'searchCopy': SearchCopyWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -171,6 +172,14 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 24.0,
             ),
             label: 'Profile',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.trending_up,
+              size: 24.0,
+            ),
+            label: '',
             tooltip: '',
           )
         ],

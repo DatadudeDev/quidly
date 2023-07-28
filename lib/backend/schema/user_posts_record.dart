@@ -206,6 +206,21 @@ class UserPostsRecord extends FirestoreRecord {
   int get totalVotes4 => _totalVotes4 ?? 0;
   bool hasTotalVotes4() => _totalVotes4 != null;
 
+  // "category" field.
+  String? _category;
+  String get category => _category ?? '';
+  bool hasCategory() => _category != null;
+
+  // "subcategory" field.
+  List<String>? _subcategory;
+  List<String> get subcategory => _subcategory ?? const [];
+  bool hasSubcategory() => _subcategory != null;
+
+  // "isTrending" field.
+  String? _isTrending;
+  String get isTrending => _isTrending ?? '';
+  bool hasIsTrending() => _isTrending != null;
+
   void _initializeFields() {
     _postUser = snapshotData['postUser'] as DocumentReference?;
     _timePosted = snapshotData['timePosted'] as DateTime?;
@@ -245,6 +260,9 @@ class UserPostsRecord extends FirestoreRecord {
     _totalVotes2 = castToType<int>(snapshotData['totalVotes2']);
     _totalVotes3 = castToType<int>(snapshotData['totalVotes3']);
     _totalVotes4 = castToType<int>(snapshotData['totalVotes4']);
+    _category = snapshotData['category'] as String?;
+    _subcategory = getDataList(snapshotData['subcategory']);
+    _isTrending = snapshotData['isTrending'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -312,6 +330,8 @@ Map<String, dynamic> createUserPostsRecordData({
   int? totalVotes2,
   int? totalVotes3,
   int? totalVotes4,
+  String? category,
+  String? isTrending,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -345,6 +365,8 @@ Map<String, dynamic> createUserPostsRecordData({
       'totalVotes2': totalVotes2,
       'totalVotes3': totalVotes3,
       'totalVotes4': totalVotes4,
+      'category': category,
+      'isTrending': isTrending,
     }.withoutNulls,
   );
 
@@ -394,7 +416,10 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e1?.totalVotes1 == e2?.totalVotes1 &&
         e1?.totalVotes2 == e2?.totalVotes2 &&
         e1?.totalVotes3 == e2?.totalVotes3 &&
-        e1?.totalVotes4 == e2?.totalVotes4;
+        e1?.totalVotes4 == e2?.totalVotes4 &&
+        e1?.category == e2?.category &&
+        listEquality.equals(e1?.subcategory, e2?.subcategory) &&
+        e1?.isTrending == e2?.isTrending;
   }
 
   @override
@@ -436,7 +461,10 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e?.totalVotes1,
         e?.totalVotes2,
         e?.totalVotes3,
-        e?.totalVotes4
+        e?.totalVotes4,
+        e?.category,
+        e?.subcategory,
+        e?.isTrending
       ]);
 
   @override

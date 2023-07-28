@@ -1,16 +1,16 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_google_map.dart';
+import '/components/maps_custom/maps_custom_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'map_google_model.dart';
-export 'map_google_model.dart';
+import 'map_google_copy_model.dart';
+export 'map_google_copy_model.dart';
 
-class MapGoogleWidget extends StatefulWidget {
-  const MapGoogleWidget({
+class MapGoogleCopyWidget extends StatefulWidget {
+  const MapGoogleCopyWidget({
     Key? key,
     this.parameter1,
   }) : super(key: key);
@@ -18,13 +18,11 @@ class MapGoogleWidget extends StatefulWidget {
   final LatLng? parameter1;
 
   @override
-  _MapGoogleWidgetState createState() => _MapGoogleWidgetState();
+  _MapGoogleCopyWidgetState createState() => _MapGoogleCopyWidgetState();
 }
 
-class _MapGoogleWidgetState extends State<MapGoogleWidget> {
-  late MapGoogleModel _model;
-
-  LatLng? currentUserLocationValue;
+class _MapGoogleCopyWidgetState extends State<MapGoogleCopyWidget> {
+  late MapGoogleCopyModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -35,10 +33,7 @@ class _MapGoogleWidgetState extends State<MapGoogleWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => MapGoogleModel());
-
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
+    _model = createModel(context, () => MapGoogleCopyModel());
   }
 
   @override
@@ -50,23 +45,6 @@ class _MapGoogleWidgetState extends State<MapGoogleWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (currentUserLocationValue == null) {
-      return Container(
-        color: FlutterFlowTheme.of(context).primaryBackground,
-        child: Center(
-          child: SizedBox(
-            width: 50.0,
-            height: 50.0,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(
-                FlutterFlowTheme.of(context).primary,
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-
     return StreamBuilder<List<UserPostsRecord>>(
       stream: queryUserPostsRecord(
         queryBuilder: (userPostsRecord) =>
@@ -121,32 +99,10 @@ class _MapGoogleWidgetState extends State<MapGoogleWidget> {
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                   borderRadius: BorderRadius.circular(10.0),
                 ),
-                child: FlutterFlowGoogleMap(
-                  controller: _model.googleMapsController,
-                  onCameraIdle: (latLng) =>
-                      setState(() => _model.googleMapsCenter = latLng),
-                  initialLocation: _model.googleMapsCenter ??=
-                      currentUserLocationValue!,
-                  markers: containerLocationVotesRecordList
-                      .map(
-                        (containerLocationVotesRecord) => FlutterFlowMarker(
-                          containerLocationVotesRecord.reference.path,
-                          containerLocationVotesRecord.voteLocation!,
-                        ),
-                      )
-                      .toList(),
-                  markerColor: GoogleMarkerColor.orange,
-                  mapType: MapType.hybrid,
-                  style: GoogleMapStyle.standard,
-                  initialZoom: 3.0,
-                  allowInteraction: true,
-                  allowZoom: true,
-                  showZoomControls: true,
-                  showLocation: false,
-                  showCompass: false,
-                  showMapToolbar: false,
-                  showTraffic: false,
-                  centerMapOnMarkerTap: true,
+                child: wrapWithModel(
+                  model: _model.mapsCustomModel,
+                  updateCallback: () => setState(() {}),
+                  child: MapsCustomWidget(),
                 ),
               );
             },

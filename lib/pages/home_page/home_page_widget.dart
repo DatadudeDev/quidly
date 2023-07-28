@@ -4177,22 +4177,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                   hoverColor: Colors.transparent,
                                                                                   highlightColor: Colors.transparent,
                                                                                   onTap: () async {
-                                                                                    if (socialFeedUserPostsRecord.shits.contains(currentUserReference) != null) {
-                                                                                      await socialFeedUserPostsRecord.reference.update({
-                                                                                        'likes': FieldValue.arrayUnion([
-                                                                                          currentUserReference
-                                                                                        ]),
-                                                                                        'shits': FieldValue.arrayRemove([
-                                                                                          currentUserReference
-                                                                                        ]),
-                                                                                      });
-                                                                                    } else {
-                                                                                      await socialFeedUserPostsRecord.reference.update({
-                                                                                        'likes': FieldValue.arrayUnion([
-                                                                                          currentUserReference
-                                                                                        ]),
-                                                                                      });
-                                                                                    }
+                                                                                    await socialFeedUserPostsRecord.reference.update({
+                                                                                      'likes': FieldValue.arrayUnion([
+                                                                                        currentUserReference
+                                                                                      ]),
+                                                                                      'shits': FieldValue.arrayRemove([
+                                                                                        currentUserReference
+                                                                                      ]),
+                                                                                    });
                                                                                   },
                                                                                   child: FaIcon(
                                                                                     FontAwesomeIcons.solidHeart,
@@ -4327,23 +4319,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                         'shits': FieldValue.arrayUnion([
                                                                                           currentUserReference
                                                                                         ]),
+                                                                                        'likes': FieldValue.arrayRemove([
+                                                                                          currentUserReference
+                                                                                        ]),
                                                                                       });
-                                                                                      if (socialFeedUserPostsRecord.shits.contains(currentUserReference) != null) {
-                                                                                        await socialFeedUserPostsRecord.reference.update({
-                                                                                          'shits': FieldValue.arrayUnion([
-                                                                                            currentUserReference
-                                                                                          ]),
-                                                                                          'likes': FieldValue.arrayRemove([
-                                                                                            currentUserReference
-                                                                                          ]),
-                                                                                        });
-                                                                                      } else {
-                                                                                        await socialFeedUserPostsRecord.reference.update({
-                                                                                          'shits': FieldValue.arrayUnion([
-                                                                                            currentUserReference
-                                                                                          ]),
-                                                                                        });
-                                                                                      }
                                                                                     },
                                                                                     child: FaIcon(
                                                                                       FontAwesomeIcons.poo,
