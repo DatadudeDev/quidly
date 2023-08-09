@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_place_picker.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -13,6 +14,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -52,13 +54,19 @@ class CreatePollModel extends FlutterFlowModel {
 
   FFPlace? loc3;
 
-  bool writeIn = true;
+  bool writeIn = false;
 
   bool multipleChoice = false;
 
   bool trueFalse = false;
 
   bool imageChoice = false;
+
+  String autoComplete = '';
+
+  bool autoCompleted = false;
+
+  bool isPrivate = false;
 
   ///  State fields for stateful widgets in this component.
 
@@ -67,8 +75,12 @@ class CreatePollModel extends FlutterFlowModel {
   // Stores action output result for [Backend Call - API (getURL)] action in Button widget.
   ApiCallResponse? apiResult9jo;
   // State field(s) for TextField widget.
+  final textFieldKey = GlobalKey();
   TextEditingController? textController1;
+  String? textFieldSelectedOption;
   String? Function(BuildContext, String?)? textController1Validator;
+  // Stores action output result for [Backend Call - API (autoComplete)] action in TextField widget.
+  ApiCallResponse? apiResulthc6;
   // State field(s) for choicesTWOanswerONE widget.
   TextEditingController? choicesTWOanswerONEController1;
   String? Function(BuildContext, String?)?
@@ -131,7 +143,6 @@ class CreatePollModel extends FlutterFlowModel {
   void initState(BuildContext context) {}
 
   void dispose() {
-    textController1?.dispose();
     choicesTWOanswerONEController1?.dispose();
     choicesTWOanswerTWOController1?.dispose();
     choicesTHREEanswerONEController?.dispose();

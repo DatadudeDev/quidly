@@ -1,6 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/profile_section_widget.dart';
+import '/components/drawer_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +25,8 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ProfilePageModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -61,9 +63,9 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
           body: SafeArea(
             top: true,
             child: wrapWithModel(
-              model: _model.profileSectionModel,
+              model: _model.drawerModel,
               updateCallback: () => setState(() {}),
-              child: ProfileSectionWidget(
+              child: DrawerWidget(
                 parameter1: valueOrDefault<String>(
                   profilePageUsersRecord.displayName,
                   'UserName',

@@ -26,6 +26,8 @@ class _MapDevWidgetState extends State<MapDevWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MapDevModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

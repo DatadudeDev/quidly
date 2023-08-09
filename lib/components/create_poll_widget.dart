@@ -1,6 +1,7 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_place_picker.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -13,6 +14,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -40,6 +42,13 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
     super.initState();
     _model = createModel(context, () => CreatePollModel());
 
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        _model.multipleChoice = true;
+      });
+    });
+
     _model.textController1 ??= TextEditingController();
     _model.choicesTWOanswerONEController1 ??= TextEditingController();
     _model.choicesTWOanswerTWOController1 ??= TextEditingController();
@@ -57,6 +66,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
     _model.choicesFOURanswerFOURController ??= TextEditingController();
     _model.choicesTWOanswerONEController2 ??= TextEditingController();
     _model.choicesTWOanswerTWOController2 ??= TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -106,7 +116,9 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                               fillColor: Color(0x00FFFFFF),
                               icon: Icon(
                                 Icons.close,
-                                color: Color(0xFFDCDCDC),
+                                color: _model.isPrivate == true
+                                    ? Color(0xFF9C2BF1)
+                                    : FlutterFlowTheme.of(context).primary,
                                 size: 24.0,
                               ),
                               onPressed: () async {
@@ -164,46 +176,94 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                       _model.imageURL = GetURLCall.imageURL(
                                         (_model.apiResult9jo?.jsonBody ?? ''),
                                       );
-                                      if (_model.pollExpiry != null) {
-                                        await UserPostsRecord.collection
-                                            .doc()
-                                            .set(createUserPostsRecordData(
-                                              postUser: currentUserReference,
-                                              timePosted: getCurrentTimestamp,
-                                              postOwner: true,
-                                              postPoll: _model.poll,
-                                              postAnswer1: _model.answer1,
-                                              postAnswer2: _model.answer2,
-                                              postAnswer3: _model.answer3,
-                                              postAnswer4: _model.answer4,
-                                              imageURL: _model.imageURL,
-                                              expiry: _model.datePicked3 != null
-                                                  ? _model.datePicked3
-                                                  : (_model.datePicked2 != null
-                                                      ? _model.datePicked2
-                                                      : _model.datePicked1),
-                                              pollLocation:
-                                                  _model.pollLocation!.latLng,
-                                            ));
-                                        Navigator.pop(context);
+                                      if (_model.autoCompleted == true) {
+                                        if (_model.pollExpiry != null) {
+                                          await UserPostsRecord.collection
+                                              .doc()
+                                              .set(createUserPostsRecordData(
+                                                postUser: currentUserReference,
+                                                timePosted: getCurrentTimestamp,
+                                                postOwner: true,
+                                                postPoll: _model.autoComplete,
+                                                postAnswer1: _model.answer1,
+                                                postAnswer2: _model.answer2,
+                                                postAnswer3: _model.answer3,
+                                                postAnswer4: _model.answer4,
+                                                imageURL: _model.imageURL,
+                                                expiry: _model.datePicked3 !=
+                                                        null
+                                                    ? _model.datePicked3
+                                                    : (_model.datePicked2 !=
+                                                            null
+                                                        ? _model.datePicked2
+                                                        : _model.datePicked1),
+                                                pollLocation:
+                                                    _model.pollLocation!.latLng,
+                                              ));
+                                          Navigator.pop(context);
+                                        } else {
+                                          await UserPostsRecord.collection
+                                              .doc()
+                                              .set(createUserPostsRecordData(
+                                                postUser: currentUserReference,
+                                                timePosted: getCurrentTimestamp,
+                                                postOwner: true,
+                                                postPoll: _model.autoComplete,
+                                                postAnswer1: _model.answer1,
+                                                postAnswer2: _model.answer2,
+                                                postAnswer3: _model.answer3,
+                                                postAnswer4: _model.answer4,
+                                                imageURL: _model.imageURL,
+                                                nullExpiry: _model.nullExpiry,
+                                                pollLocation:
+                                                    _model.pollLocation!.latLng,
+                                              ));
+                                          Navigator.pop(context);
+                                        }
                                       } else {
-                                        await UserPostsRecord.collection
-                                            .doc()
-                                            .set(createUserPostsRecordData(
-                                              postUser: currentUserReference,
-                                              timePosted: getCurrentTimestamp,
-                                              postOwner: true,
-                                              postPoll: _model.poll,
-                                              postAnswer1: _model.answer1,
-                                              postAnswer2: _model.answer2,
-                                              postAnswer3: _model.answer3,
-                                              postAnswer4: _model.answer4,
-                                              imageURL: _model.imageURL,
-                                              nullExpiry: _model.nullExpiry,
-                                              pollLocation:
-                                                  _model.pollLocation!.latLng,
-                                            ));
-                                        Navigator.pop(context);
+                                        if (_model.pollExpiry != null) {
+                                          await UserPostsRecord.collection
+                                              .doc()
+                                              .set(createUserPostsRecordData(
+                                                postUser: currentUserReference,
+                                                timePosted: getCurrentTimestamp,
+                                                postOwner: true,
+                                                postPoll: _model.poll,
+                                                postAnswer1: _model.answer1,
+                                                postAnswer2: _model.answer2,
+                                                postAnswer3: _model.answer3,
+                                                postAnswer4: _model.answer4,
+                                                imageURL: _model.imageURL,
+                                                expiry: _model.datePicked3 !=
+                                                        null
+                                                    ? _model.datePicked3
+                                                    : (_model.datePicked2 !=
+                                                            null
+                                                        ? _model.datePicked2
+                                                        : _model.datePicked1),
+                                                pollLocation:
+                                                    _model.pollLocation!.latLng,
+                                              ));
+                                          Navigator.pop(context);
+                                        } else {
+                                          await UserPostsRecord.collection
+                                              .doc()
+                                              .set(createUserPostsRecordData(
+                                                postUser: currentUserReference,
+                                                timePosted: getCurrentTimestamp,
+                                                postOwner: true,
+                                                postPoll: _model.poll,
+                                                postAnswer1: _model.answer1,
+                                                postAnswer2: _model.answer2,
+                                                postAnswer3: _model.answer3,
+                                                postAnswer4: _model.answer4,
+                                                imageURL: _model.imageURL,
+                                                nullExpiry: _model.nullExpiry,
+                                                pollLocation:
+                                                    _model.pollLocation!.latLng,
+                                              ));
+                                          Navigator.pop(context);
+                                        }
                                       }
                                     } else {
                                       if (_shouldSetState) setState(() {});
@@ -224,7 +284,9 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                       0.0, 0.0, 0.0, 0.0),
                                   iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  color: FlutterFlowTheme.of(context).primary,
+                                  color: _model.isPrivate == true
+                                      ? Color(0xFF9C2BF1)
+                                      : FlutterFlowTheme.of(context).primary,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
@@ -259,7 +321,7 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                 children: [
                   Container(
                     width: MediaQuery.sizeOf(context).width * 1.0,
-                    height: 420.0,
+                    height: 435.0,
                     decoration: BoxDecoration(),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -317,55 +379,141 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, 0.0),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      10.0, 0.0, 20.0, 0.0),
-                                              child: FFButtonWidget(
-                                                onPressed: () {
-                                                  print('Button pressed ...');
-                                                },
-                                                text: 'Public  ▼',
-                                                options: FFButtonOptions(
-                                                  width: 70.0,
-                                                  height: 30.0,
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 0.0, 0.0),
-                                                  iconPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: Color(0xAA000000),
-                                                  textStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .titleSmall
-                                                      .override(
-                                                        fontFamily: 'Urbanist',
+                                          Stack(
+                                            children: [
+                                              if (_model.isPrivate == false)
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0.0, 0.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(10.0, 0.0,
+                                                                20.0, 0.0),
+                                                    child: FFButtonWidget(
+                                                      onPressed: () async {
+                                                        setState(() {
+                                                          _model.isPrivate =
+                                                              true;
+                                                        });
+                                                      },
+                                                      text: 'Public  ▼',
+                                                      options: FFButtonOptions(
+                                                        width: 70.0,
+                                                        height: 30.0,
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        iconPadding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
                                                         color:
+                                                            Color(0xAA000000),
+                                                        textStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primary,
-                                                        fontSize: 12.0,
-                                                        fontWeight:
-                                                            FontWeight.w300,
+                                                                .titleSmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Urbanist',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                                  fontSize:
+                                                                      12.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w300,
+                                                                ),
+                                                        elevation: 3.0,
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20.0),
                                                       ),
-                                                  elevation: 3.0,
-                                                  borderSide: BorderSide(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary,
-                                                    width: 1.0,
+                                                    ),
                                                   ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
                                                 ),
-                                              ),
-                                            ),
+                                              if (_model.isPrivate == true)
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0.0, 0.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(10.0, 0.0,
+                                                                20.0, 0.0),
+                                                    child: FFButtonWidget(
+                                                      onPressed: () async {
+                                                        setState(() {
+                                                          _model.isPrivate =
+                                                              false;
+                                                        });
+                                                      },
+                                                      text: 'Private ▲',
+                                                      options: FFButtonOptions(
+                                                        width: 70.0,
+                                                        height: 30.0,
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        iconPadding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        color:
+                                                            Color(0xAA000000),
+                                                        textStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Urbanist',
+                                                                  color: Color(
+                                                                      0xFF9C2BF1),
+                                                                  fontSize:
+                                                                      12.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w300,
+                                                                ),
+                                                        elevation: 3.0,
+                                                        borderSide: BorderSide(
+                                                          color:
+                                                              Color(0xFF9C2BF1),
+                                                          width: 1.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(20.0),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -376,78 +524,257 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                             ],
                           ),
                         ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    40.0, 10.0, 16.0, 0.0),
-                                child: Container(
-                                  width:
-                                      MediaQuery.sizeOf(context).width * 0.86,
-                                  child: TextFormField(
-                                    controller: _model.textController1,
-                                    onChanged: (_) => EasyDebounce.debounce(
-                                      '_model.textController1',
-                                      Duration(milliseconds: 500),
-                                      () async {
+                        Container(
+                          width: MediaQuery.sizeOf(context).width * 1.0,
+                          height: 50.0,
+                          decoration: BoxDecoration(),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  if (_model.autoCompleted == false)
+                                    Expanded(
+                                      child: Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  40.0, 0.0, 16.0, 0.0),
+                                          child: Container(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.86,
+                                            child: Autocomplete<String>(
+                                              initialValue: TextEditingValue(),
+                                              optionsBuilder:
+                                                  (textEditingValue) {
+                                                if (textEditingValue.text ==
+                                                    '') {
+                                                  return const Iterable<
+                                                      String>.empty();
+                                                }
+                                                return (getJsonField(
+                                                  (_model.apiResulthc6
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                  r'''$.autocomplete''',
+                                                ) as List)
+                                                    .map<String>(
+                                                        (s) => s.toString())
+                                                    .toList()!
+                                                    .where((option) {
+                                                  final lowercaseOption =
+                                                      option.toLowerCase();
+                                                  return lowercaseOption
+                                                      .contains(textEditingValue
+                                                          .text
+                                                          .toLowerCase());
+                                                });
+                                              },
+                                              optionsViewBuilder: (context,
+                                                  onSelected, options) {
+                                                return AutocompleteOptionsList(
+                                                  textFieldKey:
+                                                      _model.textFieldKey,
+                                                  textController:
+                                                      _model.textController1!,
+                                                  options: options.toList(),
+                                                  onSelected: onSelected,
+                                                  textStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium,
+                                                  textHighlightStyle:
+                                                      TextStyle(),
+                                                  elevation: 4.0,
+                                                  optionBackgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryBackground,
+                                                  optionHighlightColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondaryBackground,
+                                                  maxHeight: 200.0,
+                                                );
+                                              },
+                                              onSelected: (String selection) {
+                                                setState(() => _model
+                                                        .textFieldSelectedOption =
+                                                    selection);
+                                                FocusScope.of(context)
+                                                    .unfocus();
+                                              },
+                                              fieldViewBuilder: (
+                                                context,
+                                                textEditingController,
+                                                focusNode,
+                                                onEditingComplete,
+                                              ) {
+                                                _model.textController1 =
+                                                    textEditingController;
+                                                return TextFormField(
+                                                  key: _model.textFieldKey,
+                                                  controller:
+                                                      textEditingController,
+                                                  focusNode: focusNode,
+                                                  onEditingComplete:
+                                                      onEditingComplete,
+                                                  onChanged: (_) =>
+                                                      EasyDebounce.debounce(
+                                                    '_model.textController1',
+                                                    Duration(milliseconds: 500),
+                                                    () async {
+                                                      setState(() {
+                                                        _model.poll = _model
+                                                            .textController1
+                                                            .text;
+                                                      });
+                                                      _model.apiResulthc6 =
+                                                          await AutoCompleteCall
+                                                              .call(
+                                                        poll: _model.poll,
+                                                      );
+                                                      if ((_model.apiResulthc6
+                                                              ?.succeeded ??
+                                                          true)) {
+                                                        setState(() {
+                                                          _model.autoComplete =
+                                                              getJsonField(
+                                                            (_model.apiResulthc6
+                                                                    ?.jsonBody ??
+                                                                ''),
+                                                            r'''$.autocomplete''',
+                                                          ).toString();
+                                                        });
+                                                      }
+
+                                                      setState(() {});
+                                                    },
+                                                  ),
+                                                  autofocus: true,
+                                                  textCapitalization:
+                                                      TextCapitalization
+                                                          .sentences,
+                                                  obscureText: false,
+                                                  decoration: InputDecoration(
+                                                    labelStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Outfit',
+                                                          color:
+                                                              Color(0xB9B2B2B2),
+                                                          fontSize: 20.0,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .underline,
+                                                        ),
+                                                    hintText:
+                                                        'Ask a question...',
+                                                    hintStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily: 'Outfit',
+                                                          color:
+                                                              Color(0xB9B2B2B2),
+                                                          fontSize: 20.0,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                        ),
+                                                    enabledBorder:
+                                                        InputBorder.none,
+                                                    focusedBorder:
+                                                        InputBorder.none,
+                                                    errorBorder:
+                                                        InputBorder.none,
+                                                    focusedErrorBorder:
+                                                        InputBorder.none,
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Urbanist',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .background,
+                                                        fontSize: 20.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                  minLines: 1,
+                                                  cursorColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .background,
+                                                  validator: _model
+                                                      .textController1Validator
+                                                      .asValidator(context),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: MediaQuery.sizeOf(context).width * 1.0,
+                          height: 30.0,
+                          decoration: BoxDecoration(),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        40.0, 0.0, 0.0, 0.0),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
                                         setState(() {
-                                          _model.poll =
-                                              _model.textController1.text;
+                                          _model.poll = _model.autoComplete;
+                                          _model.autoCompleted = true;
                                         });
                                       },
+                                      child: Text(
+                                        _model.autoComplete,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Urbanist',
+                                              fontSize:
+                                                  _model.autoCompleted == true
+                                                      ? 20.0
+                                                      : 14.0,
+                                            ),
+                                      ),
                                     ),
-                                    autofocus: true,
-                                    textCapitalization:
-                                        TextCapitalization.sentences,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: Color(0xB9B2B2B2),
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.w300,
-                                            decoration:
-                                                TextDecoration.underline,
-                                          ),
-                                      hintText: 'Ask a question...',
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Outfit',
-                                            color: Color(0xB9B2B2B2),
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.w300,
-                                          ),
-                                      enabledBorder: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      errorBorder: InputBorder.none,
-                                      focusedErrorBorder: InputBorder.none,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Urbanist',
-                                          color: FlutterFlowTheme.of(context)
-                                              .background,
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                    maxLines: 3,
-                                    minLines: 1,
-                                    cursorColor:
-                                        FlutterFlowTheme.of(context).background,
-                                    validator: _model.textController1Validator
-                                        .asValidator(context),
                                   ),
-                                ),
+                                ],
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
@@ -490,6 +817,8 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                             true;
                                                         _model.trueFalse =
                                                             false;
+                                                        _model.imageChoice =
+                                                            false;
                                                       });
                                                     },
                                                   ),
@@ -504,8 +833,10 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                     icon: Icon(
                                                       Icons
                                                           .format_list_bulleted,
-                                                      color:
-                                                          FlutterFlowTheme.of(
+                                                      color: _model.isPrivate ==
+                                                              true
+                                                          ? Color(0xFF9C2BF1)
+                                                          : FlutterFlowTheme.of(
                                                                   context)
                                                               .primary,
                                                       size: 24.0,
@@ -526,35 +857,6 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                             ),
                                             Stack(
                                               children: [
-                                                if (_model.writeIn == true)
-                                                  FlutterFlowIconButton(
-                                                    borderRadius: 20.0,
-                                                    borderWidth: 1.0,
-                                                    buttonSize: 40.0,
-                                                    icon: FaIcon(
-                                                      FontAwesomeIcons.penFancy,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      size: 24.0,
-                                                    ),
-                                                    onPressed: () async {
-                                                      setState(() {
-                                                        _model.writeIn = true;
-                                                        _model.multipleChoice =
-                                                            false;
-                                                        _model.trueFalse =
-                                                            false;
-                                                        _model.answer1 = '';
-                                                        _model.answer2 = '';
-                                                        _model.answer3 = '';
-                                                        _model.answer4 = '';
-                                                        _model.imageChoice =
-                                                            false;
-                                                      });
-                                                    },
-                                                  ),
                                                 if (_model.writeIn == false)
                                                   Align(
                                                     alignment:
@@ -591,6 +893,37 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                       },
                                                     ),
                                                   ),
+                                                if (_model.writeIn == true)
+                                                  FlutterFlowIconButton(
+                                                    borderRadius: 20.0,
+                                                    borderWidth: 1.0,
+                                                    buttonSize: 40.0,
+                                                    icon: FaIcon(
+                                                      FontAwesomeIcons.penFancy,
+                                                      color: _model.isPrivate ==
+                                                              true
+                                                          ? Color(0xFF9C2BF1)
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                      size: 20.0,
+                                                    ),
+                                                    onPressed: () async {
+                                                      setState(() {
+                                                        _model.writeIn = true;
+                                                        _model.multipleChoice =
+                                                            false;
+                                                        _model.trueFalse =
+                                                            false;
+                                                        _model.answer1 = '';
+                                                        _model.answer2 = '';
+                                                        _model.answer3 = '';
+                                                        _model.answer4 = '';
+                                                        _model.imageChoice =
+                                                            false;
+                                                      });
+                                                    },
+                                                  ),
                                               ],
                                             ),
                                             Stack(
@@ -613,6 +946,8 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                         _model.trueFalse = true;
                                                         _model.answer3 = '';
                                                         _model.answer4 = '';
+                                                        _model.imageChoice =
+                                                            false;
                                                       });
                                                     },
                                                   ),
@@ -625,8 +960,10 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                     buttonSize: 40.0,
                                                     icon: Icon(
                                                       Icons.rule,
-                                                      color:
-                                                          FlutterFlowTheme.of(
+                                                      color: _model.isPrivate ==
+                                                              true
+                                                          ? Color(0xFF9C2BF1)
+                                                          : FlutterFlowTheme.of(
                                                                   context)
                                                               .primary,
                                                       size: 24.0,
@@ -683,8 +1020,10 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                     buttonSize: 40.0,
                                                     icon: Icon(
                                                       Icons.image_outlined,
-                                                      color:
-                                                          FlutterFlowTheme.of(
+                                                      color: _model.isPrivate ==
+                                                              true
+                                                          ? Color(0xFF9C2BF1)
+                                                          : FlutterFlowTheme.of(
                                                                   context)
                                                               .primary,
                                                       size: 24.0,
@@ -981,9 +1320,12 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                         40.0,
                                                                     icon: Icon(
                                                                       Icons.add,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
+                                                                      color: _model.isPrivate ==
+                                                                              true
+                                                                          ? Color(
+                                                                              0xFF9C2BF1)
+                                                                          : FlutterFlowTheme.of(context)
+                                                                              .primary,
                                                                       size:
                                                                           24.0,
                                                                     ),
@@ -1074,8 +1416,9 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                             Icon(
                                                                           Icons
                                                                               .alarm,
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primary,
+                                                                          color: _model.isPrivate == true
+                                                                              ? Color(0xFF9C2BF1)
+                                                                              : FlutterFlowTheme.of(context).primary,
                                                                           size:
                                                                               20.0,
                                                                         ),
@@ -1167,15 +1510,18 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                             Text(
                                                                           valueOrDefault<
                                                                               String>(
-                                                                            dateTimeFormat('relative',
-                                                                                _model.datePicked1),
+                                                                            dateTimeFormat(
+                                                                              'relative',
+                                                                              _model.datePicked1,
+                                                                              locale: FFLocalizations.of(context).languageShortCode ?? FFLocalizations.of(context).languageCode,
+                                                                            ),
                                                                             'Never',
                                                                           ),
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .bodyMedium
                                                                               .override(
                                                                                 fontFamily: 'Urbanist',
-                                                                                color: FlutterFlowTheme.of(context).primary,
+                                                                                color: _model.isPrivate == true ? Color(0xFF9C2BF1) : FlutterFlowTheme.of(context).primary,
                                                                                 fontSize: 12.0,
                                                                                 fontWeight: FontWeight.bold,
                                                                               ),
@@ -1559,8 +1905,9 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                           icon:
                                                                               Icon(
                                                                             Icons.add,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            color: _model.isPrivate == true
+                                                                                ? Color(0xFF9C2BF1)
+                                                                                : FlutterFlowTheme.of(context).primary,
                                                                             size:
                                                                                 20.0,
                                                                           ),
@@ -1599,8 +1946,9 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                           icon:
                                                                               Icon(
                                                                             Icons.remove,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            color: _model.isPrivate == true
+                                                                                ? Color(0xFF9C2BF1)
+                                                                                : FlutterFlowTheme.of(context).primary,
                                                                             size:
                                                                                 20.0,
                                                                           ),
@@ -1685,8 +2033,10 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                           Icon(
                                                                         Icons
                                                                             .alarm,
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .primary,
+                                                                        color: _model.isPrivate ==
+                                                                                true
+                                                                            ? Color(0xFF9C2BF1)
+                                                                            : FlutterFlowTheme.of(context).primary,
                                                                         size:
                                                                             20.0,
                                                                       ),
@@ -1780,19 +2130,23 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                               null
                                                                           ? dateTimeFormat(
                                                                               'relative',
-                                                                              _model
-                                                                                  .datePicked2)
+                                                                              _model.datePicked2,
+                                                                              locale: FFLocalizations.of(context).languageShortCode ?? FFLocalizations.of(context).languageCode,
+                                                                            )
                                                                           : dateTimeFormat(
                                                                               'relative',
-                                                                              _model.date1),
+                                                                              _model.date1,
+                                                                              locale: FFLocalizations.of(context).languageShortCode ?? FFLocalizations.of(context).languageCode,
+                                                                            ),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyMedium
                                                                           .override(
                                                                             fontFamily:
                                                                                 'Urbanist',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            color: _model.isPrivate == true
+                                                                                ? Color(0xFF9C2BF1)
+                                                                                : FlutterFlowTheme.of(context).primary,
                                                                             fontSize:
                                                                                 12.0,
                                                                             fontWeight:
@@ -2225,8 +2579,10 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                           FaIcon(
                                                                         FontAwesomeIcons
                                                                             .minus,
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .primary,
+                                                                        color: _model.isPrivate ==
+                                                                                true
+                                                                            ? Color(0xFF9C2BF1)
+                                                                            : FlutterFlowTheme.of(context).primary,
                                                                         size:
                                                                             20.0,
                                                                       ),
@@ -2314,8 +2670,10 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                           Icon(
                                                                         Icons
                                                                             .alarm,
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .primary,
+                                                                        color: _model.isPrivate ==
+                                                                                true
+                                                                            ? Color(0xFF9C2BF1)
+                                                                            : FlutterFlowTheme.of(context).primary,
                                                                         size:
                                                                             20.0,
                                                                       ),
@@ -2405,19 +2763,23 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                               null
                                                                           ? dateTimeFormat(
                                                                               'relative',
-                                                                              _model
-                                                                                  .datePicked3)
+                                                                              _model.datePicked3,
+                                                                              locale: FFLocalizations.of(context).languageShortCode ?? FFLocalizations.of(context).languageCode,
+                                                                            )
                                                                           : dateTimeFormat(
                                                                               'relative',
-                                                                              _model.date2),
+                                                                              _model.date2,
+                                                                              locale: FFLocalizations.of(context).languageShortCode ?? FFLocalizations.of(context).languageCode,
+                                                                            ),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyMedium
                                                                           .override(
                                                                             fontFamily:
                                                                                 'Urbanist',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            color: _model.isPrivate == true
+                                                                                ? Color(0xFF9C2BF1)
+                                                                                : FlutterFlowTheme.of(context).primary,
                                                                             fontSize:
                                                                                 12.0,
                                                                             fontWeight:
@@ -2783,8 +3145,9 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                             Icon(
                                                                           Icons
                                                                               .alarm,
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primary,
+                                                                          color: _model.isPrivate == true
+                                                                              ? Color(0xFF9C2BF1)
+                                                                              : FlutterFlowTheme.of(context).primary,
                                                                           size:
                                                                               20.0,
                                                                         ),
@@ -2876,15 +3239,18 @@ class _CreatePollWidgetState extends State<CreatePollWidget> {
                                                                             Text(
                                                                           valueOrDefault<
                                                                               String>(
-                                                                            dateTimeFormat('relative',
-                                                                                _model.datePicked4),
+                                                                            dateTimeFormat(
+                                                                              'relative',
+                                                                              _model.datePicked4,
+                                                                              locale: FFLocalizations.of(context).languageShortCode ?? FFLocalizations.of(context).languageCode,
+                                                                            ),
                                                                             'Never',
                                                                           ),
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .bodyMedium
                                                                               .override(
                                                                                 fontFamily: 'Urbanist',
-                                                                                color: FlutterFlowTheme.of(context).primary,
+                                                                                color: _model.isPrivate == true ? Color(0xFF9C2BF1) : FlutterFlowTheme.of(context).primary,
                                                                                 fontSize: 12.0,
                                                                                 fontWeight: FontWeight.bold,
                                                                               ),

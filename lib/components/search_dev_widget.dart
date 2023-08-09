@@ -31,6 +31,7 @@ class _SearchDevWidgetState extends State<SearchDevWidget> {
     _model = createModel(context, () => SearchDevModel());
 
     _model.textController ??= TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -205,7 +206,10 @@ class _SearchDevWidgetState extends State<SearchDevWidget> {
               ),
             ),
             StreamBuilder<List<UserPostsRecord>>(
-              stream: queryUserPostsRecord(),
+              stream: queryUserPostsRecord(
+                queryBuilder: (userPostsRecord) => userPostsRecord
+                    .orderBy('engagementScore', descending: true),
+              ),
               builder: (context, snapshot) {
                 // Customize what your widget looks like when it's loading.
                 if (!snapshot.hasData) {
@@ -367,9 +371,16 @@ class _SearchDevWidgetState extends State<SearchDevWidget> {
                                                 Expanded(
                                                   child: Text(
                                                     dateTimeFormat(
-                                                        'relative',
-                                                        listViewUserPostsRecord
-                                                            .timePosted!),
+                                                      'relative',
+                                                      listViewUserPostsRecord
+                                                          .timePosted!,
+                                                      locale: FFLocalizations
+                                                                  .of(context)
+                                                              .languageShortCode ??
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .languageCode,
+                                                    ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .labelSmall,

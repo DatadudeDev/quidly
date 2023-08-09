@@ -33,6 +33,7 @@ class _AddChatUsersWidgetState extends State<AddChatUsersWidget> {
     _model = createModel(context, () => AddChatUsersModel());
 
     _model.textController ??= TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

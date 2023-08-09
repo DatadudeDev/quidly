@@ -6,7 +6,8 @@ import 'package:page_transition/page_transition.dart';
 import '/backend/backend.dart';
 
 import '../../auth/base_auth_user_provider.dart';
-
+import '../../backend/push_notifications/push_notifications_handler.dart'
+    show PushNotificationsHandler;
 import '/index.dart';
 import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -116,9 +117,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'profilePage',
           path: '/profilePage',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'profilePage')
-              : ProfilePageWidget(),
+          builder: (context, params) => ProfilePageWidget(),
         ),
         FFRoute(
           name: 'createStory',
@@ -166,14 +165,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ChangePasswordWidget(),
         ),
         FFRoute(
-          name: 'viewProfilePageOther',
-          path: '/viewProfilePageOther',
+          name: 'profileDev',
+          path: '/profileDev',
           asyncParams: {
             'userDetails': getDoc(['users'], UsersRecord.fromSnapshot),
           },
-          builder: (context, params) => ViewProfilePageOtherWidget(
-            userDetails: params.getParam('userDetails', ParamType.Document),
-          ),
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'profileDev')
+              : ProfileDevWidget(
+                  userDetails:
+                      params.getParam('userDetails', ParamType.Document),
+                ),
         ),
         FFRoute(
           name: 'chatPage',
@@ -225,6 +227,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'searchCopy')
               : SearchCopyWidget(),
+        ),
+        FFRoute(
+          name: 'PinCode',
+          path: '/pinCode',
+          builder: (context, params) => PinCodeWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],
@@ -416,7 +423,7 @@ class FFRoute {
                     ),
                   ),
                 )
-              : page;
+              : PushNotificationsHandler(child: page);
 
           final transitionInfo = state.transitionInfo;
           return transitionInfo.hasTransition

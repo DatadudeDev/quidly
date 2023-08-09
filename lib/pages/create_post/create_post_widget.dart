@@ -37,6 +37,7 @@ class _CreatePostWidgetState extends State<CreatePostWidget> {
     _model = createModel(context, () => CreatePostModel());
 
     _model.textController ??= TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

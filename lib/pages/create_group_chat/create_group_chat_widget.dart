@@ -29,6 +29,7 @@ class _CreateGroupChatWidgetState extends State<CreateGroupChatWidget> {
     _model = createModel(context, () => CreateGroupChatModel());
 
     _model.textController ??= TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -34,6 +34,8 @@ class _MapGoogleCopyWidgetState extends State<MapGoogleCopyWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MapGoogleCopyModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

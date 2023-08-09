@@ -37,6 +37,8 @@ class _StoryDetailsWidgetState extends State<StoryDetailsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => StoryDetailsModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

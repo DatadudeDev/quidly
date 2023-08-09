@@ -34,6 +34,7 @@ class _CreateStoryWidgetState extends State<CreateStoryWidget> {
     _model = createModel(context, () => CreateStoryModel());
 
     _model.storyDescriptionController ??= TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

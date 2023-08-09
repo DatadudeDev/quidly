@@ -33,6 +33,8 @@ class _DeleteStoryWidgetState extends State<DeleteStoryWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => DeleteStoryModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

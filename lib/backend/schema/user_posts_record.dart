@@ -221,6 +221,11 @@ class UserPostsRecord extends FirestoreRecord {
   String get isTrending => _isTrending ?? '';
   bool hasIsTrending() => _isTrending != null;
 
+  // "engagementScore" field.
+  int? _engagementScore;
+  int get engagementScore => _engagementScore ?? 0;
+  bool hasEngagementScore() => _engagementScore != null;
+
   void _initializeFields() {
     _postUser = snapshotData['postUser'] as DocumentReference?;
     _timePosted = snapshotData['timePosted'] as DateTime?;
@@ -263,6 +268,7 @@ class UserPostsRecord extends FirestoreRecord {
     _category = snapshotData['category'] as String?;
     _subcategory = getDataList(snapshotData['subcategory']);
     _isTrending = snapshotData['isTrending'] as String?;
+    _engagementScore = castToType<int>(snapshotData['engagementScore']);
   }
 
   static CollectionReference get collection =>
@@ -332,6 +338,7 @@ Map<String, dynamic> createUserPostsRecordData({
   int? totalVotes4,
   String? category,
   String? isTrending,
+  int? engagementScore,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -367,6 +374,7 @@ Map<String, dynamic> createUserPostsRecordData({
       'totalVotes4': totalVotes4,
       'category': category,
       'isTrending': isTrending,
+      'engagementScore': engagementScore,
     }.withoutNulls,
   );
 
@@ -419,7 +427,8 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e1?.totalVotes4 == e2?.totalVotes4 &&
         e1?.category == e2?.category &&
         listEquality.equals(e1?.subcategory, e2?.subcategory) &&
-        e1?.isTrending == e2?.isTrending;
+        e1?.isTrending == e2?.isTrending &&
+        e1?.engagementScore == e2?.engagementScore;
   }
 
   @override
@@ -464,7 +473,8 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e?.totalVotes4,
         e?.category,
         e?.subcategory,
-        e?.isTrending
+        e?.isTrending,
+        e?.engagementScore
       ]);
 
   @override

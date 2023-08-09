@@ -17,8 +17,7 @@ export '/pages/edit_user_profile/edit_user_profile_widget.dart'
     show EditUserProfileWidget;
 export '/pages/change_password/change_password_widget.dart'
     show ChangePasswordWidget;
-export '/pages/view_profile_page_other/view_profile_page_other_widget.dart'
-    show ViewProfilePageOtherWidget;
+export '/pages/profile_dev/profile_dev_widget.dart' show ProfileDevWidget;
 export '/pages/chat_page/chat_page_widget.dart' show ChatPageWidget;
 export '/pages/all_chats_page/all_chats_page_widget.dart'
     show AllChatsPageWidget;
@@ -29,3 +28,4 @@ export '/pages/create_group_chat/create_group_chat_widget.dart'
 export '/pages/poll_dev/poll_dev_widget.dart' show PollDevWidget;
 export '/search/search_widget.dart' show SearchWidget;
 export '/search_copy/search_copy_widget.dart' show SearchCopyWidget;
+export '/pin_code/pin_code_widget.dart' show PinCodeWidget;

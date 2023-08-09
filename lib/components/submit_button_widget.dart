@@ -39,6 +39,8 @@ class _SubmitButtonWidgetState extends State<SubmitButtonWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SubmitButtonModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

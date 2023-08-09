@@ -37,6 +37,7 @@ class _CommentsWidgetState extends State<CommentsWidget> {
     _model = createModel(context, () => CommentsModel());
 
     _model.textController ??= TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -272,9 +273,13 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                                                           ),
                                                           Text(
                                                             dateTimeFormat(
-                                                                'relative',
-                                                                listViewStoryCommentsRecord
-                                                                    .timePosted!),
+                                                              'relative',
+                                                              listViewStoryCommentsRecord
+                                                                  .timePosted!,
+                                                              locale: FFLocalizations
+                                                                      .of(context)
+                                                                  .languageCode,
+                                                            ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodySmall

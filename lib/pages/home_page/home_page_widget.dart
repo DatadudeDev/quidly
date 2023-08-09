@@ -1,14 +1,12 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/create_modal/create_modal_widget.dart';
-import '/components/delete_post/delete_post_widget.dart';
-import '/components/map_google_widget.dart';
+import '/components/post_menu/post_menu_widget.dart';
 import '/components/time_travel_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_charts.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
@@ -96,6 +94,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -118,21 +118,36 @@ class _HomePageWidgetState extends State<HomePageWidget>
       backgroundColor: Color(0x961A1F24),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await showModalBottomSheet(
-            isScrollControlled: true,
-            backgroundColor: Color(0x00000000),
-            barrierColor: Color(0x00000000),
-            context: context,
-            builder: (context) {
-              return Padding(
-                padding: MediaQuery.viewInsetsOf(context),
-                child: Container(
-                  height: 240.0,
-                  child: CreateModalWidget(),
+          if (currentUserEmailVerified == true) {
+            await showModalBottomSheet(
+              isScrollControlled: true,
+              backgroundColor: Color(0x00000000),
+              barrierColor: Color(0x00000000),
+              context: context,
+              builder: (context) {
+                return Padding(
+                  padding: MediaQuery.viewInsetsOf(context),
+                  child: Container(
+                    height: 240.0,
+                    child: CreateModalWidget(),
+                  ),
+                );
+              },
+            ).then((value) => setState(() {}));
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  'Verify your email before creating a poll',
+                  style: TextStyle(
+                    color: FlutterFlowTheme.of(context).primaryText,
+                  ),
                 ),
-              );
-            },
-          ).then((value) => setState(() {}));
+                duration: Duration(milliseconds: 4000),
+                backgroundColor: FlutterFlowTheme.of(context).secondary,
+              ),
+            );
+          }
         },
         backgroundColor: Color(0xFF4B39EF),
         elevation: 8.0,
@@ -190,9 +205,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                     children: [
                                       AuthUserStreamWidget(
                                         builder: (context) => Text(
-                                          valueOrDefault(
-                                              currentUserDocument?.userName,
-                                              ''),
+                                          currentUserDisplayName,
                                           textAlign: TextAlign.start,
                                           style: FlutterFlowTheme.of(context)
                                               .headlineSmall,
@@ -1050,121 +1063,54 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                     ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 32.0),
-                                  child: StreamBuilder<List<UserPostsRecord>>(
-                                    stream: queryUserPostsRecord(
-                                      queryBuilder: (userPostsRecord) =>
-                                          userPostsRecord
-                                              .where('postUser',
-                                                  isEqualTo:
-                                                      currentUserReference)
-                                              .orderBy('timePosted',
-                                                  descending: true),
+                                Stack(
+                                  children: [
+                                    Container(
+                                      width: 100.0,
+                                      height: 100.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                      ),
                                     ),
-                                    builder: (context, snapshot) {
-                                      // Customize what your widget looks like when it's loading.
-                                      if (!snapshot.hasData) {
-                                        return Center(
-                                          child: SizedBox(
-                                            width: 50.0,
-                                            height: 50.0,
-                                            child: CircularProgressIndicator(
-                                              valueColor:
-                                                  AlwaysStoppedAnimation<Color>(
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
-                                              ),
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        GoRouter.of(context).prepareAuthEvent();
+                                        await authManager.signOut();
+                                        GoRouter.of(context)
+                                            .clearRedirectLocation();
+
+                                        context.goNamedAuth(
+                                            'login', context.mounted);
+                                      },
+                                      text: 'Log Out',
+                                      options: FFButtonOptions(
+                                        width: 90.0,
+                                        height: 40.0,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 0.0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: Colors.white,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodySmall
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color: Color(0xFF4B39EF),
+                                              fontSize: 14.0,
+                                              fontWeight: FontWeight.normal,
                                             ),
-                                          ),
-                                        );
-                                      }
-                                      List<UserPostsRecord>
-                                          socialFeedUserPostsRecordList =
-                                          snapshot.data!;
-                                      if (socialFeedUserPostsRecordList
-                                          .isEmpty) {
-                                        return Center(
-                                          child: Image.asset(
-                                            'assets/images/emptyPosts@2x.png',
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                0.5,
-                                            height: 400.0,
-                                          ),
-                                        );
-                                      }
-                                      return ListView.builder(
-                                        padding: EdgeInsets.zero,
-                                        scrollDirection: Axis.vertical,
-                                        itemCount: socialFeedUserPostsRecordList
-                                            .length,
-                                        itemBuilder:
-                                            (context, socialFeedIndex) {
-                                          final socialFeedUserPostsRecord =
-                                              socialFeedUserPostsRecordList[
-                                                  socialFeedIndex];
-                                          return Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 4.0, 0.0, 8.0),
-                                            child: StreamBuilder<UsersRecord>(
-                                              stream: UsersRecord.getDocument(
-                                                  socialFeedUserPostsRecord
-                                                      .postUser!),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50.0,
-                                                      height: 50.0,
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        valueColor:
-                                                            AlwaysStoppedAnimation<
-                                                                Color>(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                }
-                                                final userPostUsersRecord =
-                                                    snapshot.data!;
-                                                return Container(
-                                                  width:
-                                                      MediaQuery.sizeOf(context)
-                                                              .width *
-                                                          1.0,
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryBackground,
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        blurRadius: 4.0,
-                                                        color:
-                                                            Color(0x32000000),
-                                                        offset:
-                                                            Offset(0.0, 2.0),
-                                                      )
-                                                    ],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            0.0),
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    },
-                                  ),
+                                        elevation: 3.0,
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
@@ -1557,7 +1503,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         Colors.transparent,
                                                     onTap: () async {
                                                       context.pushNamed(
-                                                        'viewProfilePageOther',
+                                                        'profileDev',
                                                         queryParameters: {
                                                           'userDetails':
                                                               serializeParam(
@@ -1697,7 +1643,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                           child: Container(
                                                             height: 250.0,
                                                             child:
-                                                                DeletePostWidget(),
+                                                                PostMenuWidget(),
                                                           ),
                                                         );
                                                       },
@@ -1869,7 +1815,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                             mainAxisAlignment: MainAxisAlignment.end,
                                                                                             children: [
                                                                                               Text(
-                                                                                                dateTimeFormat('relative', containerUserPostsRecord!.timePosted!),
+                                                                                                dateTimeFormat(
+                                                                                                  'relative',
+                                                                                                  containerUserPostsRecord!.timePosted!,
+                                                                                                  locale: FFLocalizations.of(context).languageCode,
+                                                                                                ),
                                                                                                 textAlign: TextAlign.end,
                                                                                                 style: FlutterFlowTheme.of(context).bodyMedium,
                                                                                               ),
@@ -1992,19 +1942,35 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                                   FFButtonWidget(
                                                                                                     onPressed: () async {
                                                                                                       currentUserLocationValue = await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
-                                                                                                      if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
-                                                                                                        return;
+                                                                                                      if (currentUserEmailVerified == true) {
+                                                                                                        if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
+                                                                                                          return;
+                                                                                                        }
+
+                                                                                                        await socialFeedUserPostsRecord.reference.update({
+                                                                                                          'votes4': FieldValue.arrayUnion([currentUserReference]),
+                                                                                                        });
+
+                                                                                                        await LocationVotesRecord.collection.doc().set(createLocationVotesRecordData(
+                                                                                                              userPost: containerUserPostsRecord?.reference,
+                                                                                                              voter: currentUserReference,
+                                                                                                              voteLocation: currentUserLocationValue,
+                                                                                                              voteAnswer: 4,
+                                                                                                            ));
+                                                                                                      } else {
+                                                                                                        ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                          SnackBar(
+                                                                                                            content: Text(
+                                                                                                              'Please verify your email before voting in a poll',
+                                                                                                              style: TextStyle(
+                                                                                                                color: FlutterFlowTheme.of(context).primaryText,
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                            duration: Duration(milliseconds: 4000),
+                                                                                                            backgroundColor: FlutterFlowTheme.of(context).secondary,
+                                                                                                          ),
+                                                                                                        );
                                                                                                       }
-
-                                                                                                      await socialFeedUserPostsRecord.reference.update({
-                                                                                                        'votes4': FieldValue.arrayUnion([currentUserReference]),
-                                                                                                      });
-
-                                                                                                      await LocationVotesRecord.collection.doc().set(createLocationVotesRecordData(
-                                                                                                            userPost: containerUserPostsRecord?.reference,
-                                                                                                            voter: currentUserReference,
-                                                                                                            voteLocation: currentUserLocationValue,
-                                                                                                          ));
                                                                                                     },
                                                                                                     text: socialFeedUserPostsRecord.postAnswer4,
                                                                                                     options: FFButtonOptions(
@@ -2030,19 +1996,35 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                                   child: FFButtonWidget(
                                                                                                     onPressed: () async {
                                                                                                       currentUserLocationValue = await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
-                                                                                                      if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
-                                                                                                        return;
+                                                                                                      if (currentUserEmailVerified == true) {
+                                                                                                        if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
+                                                                                                          return;
+                                                                                                        }
+
+                                                                                                        await socialFeedUserPostsRecord.reference.update({
+                                                                                                          'votes2': FieldValue.arrayUnion([currentUserReference]),
+                                                                                                        });
+
+                                                                                                        await LocationVotesRecord.collection.doc().set(createLocationVotesRecordData(
+                                                                                                              userPost: containerUserPostsRecord?.reference,
+                                                                                                              voter: currentUserReference,
+                                                                                                              voteLocation: currentUserLocationValue,
+                                                                                                              voteAnswer: 2,
+                                                                                                            ));
+                                                                                                      } else {
+                                                                                                        ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                          SnackBar(
+                                                                                                            content: Text(
+                                                                                                              'Please verify your email before voting in a poll',
+                                                                                                              style: TextStyle(
+                                                                                                                color: FlutterFlowTheme.of(context).primaryText,
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                            duration: Duration(milliseconds: 4000),
+                                                                                                            backgroundColor: FlutterFlowTheme.of(context).secondary,
+                                                                                                          ),
+                                                                                                        );
                                                                                                       }
-
-                                                                                                      await socialFeedUserPostsRecord.reference.update({
-                                                                                                        'votes2': FieldValue.arrayUnion([currentUserReference]),
-                                                                                                      });
-
-                                                                                                      await LocationVotesRecord.collection.doc().set(createLocationVotesRecordData(
-                                                                                                            userPost: containerUserPostsRecord?.reference,
-                                                                                                            voter: currentUserReference,
-                                                                                                            voteLocation: currentUserLocationValue,
-                                                                                                          ));
                                                                                                     },
                                                                                                     text: socialFeedUserPostsRecord.postAnswer2,
                                                                                                     options: FFButtonOptions(
@@ -2069,19 +2051,35 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                                   child: FFButtonWidget(
                                                                                                     onPressed: () async {
                                                                                                       currentUserLocationValue = await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
-                                                                                                      if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
-                                                                                                        return;
+                                                                                                      if (currentUserEmailVerified == true) {
+                                                                                                        if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
+                                                                                                          return;
+                                                                                                        }
+
+                                                                                                        await socialFeedUserPostsRecord.reference.update({
+                                                                                                          'votes1': FieldValue.arrayUnion([currentUserReference]),
+                                                                                                        });
+
+                                                                                                        await LocationVotesRecord.collection.doc().set(createLocationVotesRecordData(
+                                                                                                              userPost: containerUserPostsRecord?.reference,
+                                                                                                              voter: currentUserReference,
+                                                                                                              voteLocation: currentUserLocationValue,
+                                                                                                              voteAnswer: 1,
+                                                                                                            ));
+                                                                                                      } else {
+                                                                                                        ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                          SnackBar(
+                                                                                                            content: Text(
+                                                                                                              'Please verify your email before voting in a poll',
+                                                                                                              style: TextStyle(
+                                                                                                                color: FlutterFlowTheme.of(context).primaryText,
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                            duration: Duration(milliseconds: 4000),
+                                                                                                            backgroundColor: FlutterFlowTheme.of(context).secondary,
+                                                                                                          ),
+                                                                                                        );
                                                                                                       }
-
-                                                                                                      await socialFeedUserPostsRecord.reference.update({
-                                                                                                        'votes1': FieldValue.arrayUnion([currentUserReference]),
-                                                                                                      });
-
-                                                                                                      await LocationVotesRecord.collection.doc().set(createLocationVotesRecordData(
-                                                                                                            userPost: containerUserPostsRecord?.reference,
-                                                                                                            voter: currentUserReference,
-                                                                                                            voteLocation: currentUserLocationValue,
-                                                                                                          ));
                                                                                                     },
                                                                                                     text: socialFeedUserPostsRecord.postAnswer1,
                                                                                                     options: FFButtonOptions(
@@ -2109,20 +2107,36 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                                     child: FFButtonWidget(
                                                                                                       onPressed: () async {
                                                                                                         currentUserLocationValue = await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
-                                                                                                        if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
+                                                                                                        if (currentUserEmailVerified == true) {
+                                                                                                          if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
+                                                                                                            return;
+                                                                                                          }
+
+                                                                                                          await socialFeedUserPostsRecord.reference.update({
+                                                                                                            'votes3': FieldValue.arrayUnion([currentUserReference]),
+                                                                                                          });
+
+                                                                                                          await LocationVotesRecord.collection.doc().set(createLocationVotesRecordData(
+                                                                                                                userPost: containerUserPostsRecord?.reference,
+                                                                                                                voter: currentUserReference,
+                                                                                                                voteLocation: currentUserLocationValue,
+                                                                                                                voteAnswer: 3,
+                                                                                                              ));
                                                                                                           return;
+                                                                                                        } else {
+                                                                                                          ScaffoldMessenger.of(context).showSnackBar(
+                                                                                                            SnackBar(
+                                                                                                              content: Text(
+                                                                                                                'Please verify your email before voting in a poll',
+                                                                                                                style: TextStyle(
+                                                                                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                                                                                ),
+                                                                                                              ),
+                                                                                                              duration: Duration(milliseconds: 4000),
+                                                                                                              backgroundColor: FlutterFlowTheme.of(context).secondary,
+                                                                                                            ),
+                                                                                                          );
                                                                                                         }
-
-                                                                                                        await socialFeedUserPostsRecord.reference.update({
-                                                                                                          'votes3': FieldValue.arrayUnion([currentUserReference]),
-                                                                                                        });
-
-                                                                                                        await LocationVotesRecord.collection.doc().set(createLocationVotesRecordData(
-                                                                                                              userPost: containerUserPostsRecord?.reference,
-                                                                                                              voter: currentUserReference,
-                                                                                                              voteLocation: currentUserLocationValue,
-                                                                                                            ));
-                                                                                                        return;
                                                                                                       },
                                                                                                       text: socialFeedUserPostsRecord.postAnswer3,
                                                                                                       options: FFButtonOptions(
@@ -2290,7 +2304,13 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                 MainAxisAlignment.center,
                                                                             children: [
                                                                               AutoSizeText(
-                                                                                socialFeedUserPostsRecord.expiry != null ? dateTimeFormat('relative', socialFeedUserPostsRecord.expiry!) : socialFeedUserPostsRecord.nullExpiry,
+                                                                                socialFeedUserPostsRecord.expiry != null
+                                                                                    ? dateTimeFormat(
+                                                                                        'relative',
+                                                                                        socialFeedUserPostsRecord.expiry!,
+                                                                                        locale: FFLocalizations.of(context).languageShortCode ?? FFLocalizations.of(context).languageCode,
+                                                                                      )
+                                                                                    : socialFeedUserPostsRecord.nullExpiry,
                                                                                 textAlign: TextAlign.start,
                                                                                 maxLines: 2,
                                                                                 style: FlutterFlowTheme.of(context).bodySmall.override(
@@ -3897,7 +3917,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                                                   children: [
                                                                                     Padding(
-                                                                                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                                                                                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                                                                                       child: Container(
                                                                                         width: MediaQuery.sizeOf(context).width * 0.75,
                                                                                         height: 120.0,
@@ -3975,12 +3995,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                             Column(
                                                                                               mainAxisSize: MainAxisSize.max,
                                                                                               children: [
-                                                                                                Padding(
-                                                                                                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                                                                                                  child: MapGoogleWidget(
-                                                                                                    key: Key('Keyprj_${socialFeedIndex}_of_${socialFeedUserPostsRecordList.length}'),
-                                                                                                    parameter1: socialFeedUserPostsRecord.pollLocation,
-                                                                                                  ),
+                                                                                                Container(
+                                                                                                  width: 175.0,
+                                                                                                  height: 120.0,
+                                                                                                  decoration: BoxDecoration(),
                                                                                                 ),
                                                                                               ],
                                                                                             ),
@@ -4023,16 +4041,32 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                             mainAxisAlignment:
                                                                                 MainAxisAlignment.center,
                                                                             children: [
-                                                                              Container(
-                                                                                width: MediaQuery.sizeOf(context).width * 0.7,
-                                                                                height: 210.0,
-                                                                                decoration: BoxDecoration(
-                                                                                  borderRadius: BorderRadius.circular(20.0),
-                                                                                ),
-                                                                                child: MapGoogleWidget(
-                                                                                  key: Key('Keyldb_${socialFeedIndex}_of_${socialFeedUserPostsRecordList.length}'),
-                                                                                  parameter1: socialFeedUserPostsRecord.pollLocation,
-                                                                                ),
+                                                                              StreamBuilder<List<LocationVotesRecord>>(
+                                                                                stream: queryLocationVotesRecord(),
+                                                                                builder: (context, snapshot) {
+                                                                                  // Customize what your widget looks like when it's loading.
+                                                                                  if (!snapshot.hasData) {
+                                                                                    return Center(
+                                                                                      child: SizedBox(
+                                                                                        width: 50.0,
+                                                                                        height: 50.0,
+                                                                                        child: CircularProgressIndicator(
+                                                                                          valueColor: AlwaysStoppedAnimation<Color>(
+                                                                                            FlutterFlowTheme.of(context).primary,
+                                                                                          ),
+                                                                                        ),
+                                                                                      ),
+                                                                                    );
+                                                                                  }
+                                                                                  List<LocationVotesRecord> containerLocationVotesRecordList = snapshot.data!;
+                                                                                  return Container(
+                                                                                    width: MediaQuery.sizeOf(context).width * 0.7,
+                                                                                    height: 210.0,
+                                                                                    decoration: BoxDecoration(
+                                                                                      borderRadius: BorderRadius.circular(20.0),
+                                                                                    ),
+                                                                                  );
+                                                                                },
                                                                               ),
                                                                             ],
                                                                           ),
@@ -4682,9 +4716,13 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                       0.0),
                                                           child: Text(
                                                             dateTimeFormat(
-                                                                'relative',
-                                                                socialFeedUserPostsRecord
-                                                                    .timePosted!),
+                                                              'relative',
+                                                              socialFeedUserPostsRecord
+                                                                  .timePosted!,
+                                                              locale: FFLocalizations
+                                                                      .of(context)
+                                                                  .languageCode,
+                                                            ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyMedium

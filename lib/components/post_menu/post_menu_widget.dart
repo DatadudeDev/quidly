@@ -33,6 +33,8 @@ class _PostMenuWidgetState extends State<PostMenuWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => PostMenuModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -109,7 +111,7 @@ class _PostMenuWidgetState extends State<PostMenuWidget> {
                           },
                         );
                       },
-                      text: 'Report Post',
+                      text: 'Report',
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 60.0,

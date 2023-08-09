@@ -23,6 +23,8 @@ class _SearchCopyWidgetState extends State<SearchCopyWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SearchCopyModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

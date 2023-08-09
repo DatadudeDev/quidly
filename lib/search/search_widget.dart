@@ -27,6 +27,7 @@ class _SearchWidgetState extends State<SearchWidget> {
     _model = createModel(context, () => SearchModel());
 
     _model.textController ??= TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -27,6 +27,8 @@ class _CreateModalWidgetState extends State<CreateModalWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CreateModalModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

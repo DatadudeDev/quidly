@@ -28,6 +28,8 @@ class _MapsCustomWidgetState extends State<MapsCustomWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MapsCustomModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

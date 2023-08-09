@@ -7,11 +7,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'profile_section_model.dart';
-export 'profile_section_model.dart';
+import 'drawer_model.dart';
+export 'drawer_model.dart';
 
-class ProfileSectionWidget extends StatefulWidget {
-  const ProfileSectionWidget({
+class DrawerWidget extends StatefulWidget {
+  const DrawerWidget({
     Key? key,
     this.parameter1,
     this.parameter2,
@@ -27,11 +27,11 @@ class ProfileSectionWidget extends StatefulWidget {
   final DocumentReference? parameter5;
 
   @override
-  _ProfileSectionWidgetState createState() => _ProfileSectionWidgetState();
+  _DrawerWidgetState createState() => _DrawerWidgetState();
 }
 
-class _ProfileSectionWidgetState extends State<ProfileSectionWidget> {
-  late ProfileSectionModel _model;
+class _DrawerWidgetState extends State<DrawerWidget> {
+  late DrawerModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -42,7 +42,9 @@ class _ProfileSectionWidgetState extends State<ProfileSectionWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ProfileSectionModel());
+    _model = createModel(context, () => DrawerModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
