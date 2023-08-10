@@ -55,6 +55,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
     super.initState();
     _model = createModel(context, () => HomePageModel());
 
+    _model.tabBarController = TabController(
+      vsync: this,
+      length: 2,
+      initialIndex: 0,
+    );
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -261,479 +266,388 @@ class _HomePageWidgetState extends State<HomePageWidget>
                     ],
                   ),
                   Expanded(
-                    child: DefaultTabController(
-                      length: 2,
-                      initialIndex: 0,
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment(0.0, 0),
-                            child: TabBar(
-                              labelColor: FlutterFlowTheme.of(context).primary,
-                              unselectedLabelColor:
-                                  FlutterFlowTheme.of(context).secondaryText,
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).titleSmall,
-                              indicatorColor:
-                                  FlutterFlowTheme.of(context).primary,
-                              indicatorWeight: 2.0,
-                              tabs: [
-                                Tab(
-                                  text: 'Pages',
-                                ),
-                                Tab(
-                                  text: 'Settings',
-                                ),
-                              ],
-                            ),
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment(0.0, 0),
+                          child: TabBar(
+                            labelColor: FlutterFlowTheme.of(context).primary,
+                            unselectedLabelColor:
+                                FlutterFlowTheme.of(context).secondaryText,
+                            labelStyle: FlutterFlowTheme.of(context).titleSmall,
+                            unselectedLabelStyle: TextStyle(),
+                            indicatorColor:
+                                FlutterFlowTheme.of(context).primary,
+                            indicatorWeight: 2.0,
+                            tabs: [
+                              Tab(
+                                text: 'Pages',
+                              ),
+                              Tab(
+                                text: 'Settings',
+                              ),
+                            ],
+                            controller: _model.tabBarController,
+                            onTap: (value) => setState(() {}),
                           ),
-                          Expanded(
-                            child: TabBarView(
-                              children: [
-                                Container(
-                                  width: 100.0,
-                                  height:
-                                      MediaQuery.sizeOf(context).height * 0.6,
-                                  decoration: BoxDecoration(
-                                    color: Color(0x00FFFFFF),
-                                  ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Container(
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                0.85,
-                                            height: MediaQuery.sizeOf(context)
-                                                    .height *
-                                                0.55,
-                                            decoration: BoxDecoration(),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                InkWell(
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  onTap: () async {
-                                                    context.pushNamed(
-                                                        'profilePage');
-                                                  },
-                                                  child: Row(
+                        ),
+                        Expanded(
+                          child: TabBarView(
+                            controller: _model.tabBarController,
+                            children: [
+                              Container(
+                                width: 100.0,
+                                height: MediaQuery.sizeOf(context).height * 0.6,
+                                decoration: BoxDecoration(
+                                  color: Color(0x00FFFFFF),
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Container(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.85,
+                                          height: MediaQuery.sizeOf(context)
+                                                  .height *
+                                              0.55,
+                                          decoration: BoxDecoration(),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  context
+                                                      .pushNamed('profilePage');
+                                                },
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      15.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child:
+                                                              FlutterFlowIconButton(
+                                                            borderColor: Colors
+                                                                .transparent,
+                                                            borderRadius: 20.0,
+                                                            borderWidth: 1.0,
+                                                            buttonSize: 60.0,
+                                                            icon: Icon(
+                                                              Icons
+                                                                  .person_outlined,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryText,
+                                                              size: 30.0,
+                                                            ),
+                                                            onPressed: () {
+                                                              print(
+                                                                  'IconButton pressed ...');
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      15.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Text(
+                                                                'Profile',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Urbanist',
+                                                                      fontSize:
+                                                                          25.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                    ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     children: [
-                                                      Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        15.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child:
-                                                                FlutterFlowIconButton(
-                                                              borderColor: Colors
-                                                                  .transparent,
-                                                              borderRadius:
-                                                                  20.0,
-                                                              borderWidth: 1.0,
-                                                              buttonSize: 60.0,
-                                                              icon: Icon(
-                                                                Icons
-                                                                    .person_outlined,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryText,
-                                                                size: 30.0,
-                                                              ),
-                                                              onPressed: () {
-                                                                print(
-                                                                    'IconButton pressed ...');
-                                                              },
-                                                            ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    15.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child:
+                                                            FlutterFlowIconButton(
+                                                          borderColor: Colors
+                                                              .transparent,
+                                                          borderRadius: 20.0,
+                                                          borderWidth: 1.0,
+                                                          buttonSize: 60.0,
+                                                          icon: Icon(
+                                                            Icons
+                                                                .diamond_outlined,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primary,
+                                                            size: 30.0,
                                                           ),
-                                                        ],
-                                                      ),
-                                                      Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        15.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Text(
-                                                                  'Profile',
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Urbanist',
-                                                                        fontSize:
-                                                                            25.0,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                      ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
+                                                          onPressed: () {
+                                                            print(
+                                                                'IconButton pressed ...');
+                                                          },
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
-                                                ),
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      15.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          child:
-                                                              FlutterFlowIconButton(
-                                                            borderColor: Colors
-                                                                .transparent,
-                                                            borderRadius: 20.0,
-                                                            borderWidth: 1.0,
-                                                            buttonSize: 60.0,
-                                                            icon: Icon(
-                                                              Icons
-                                                                  .diamond_outlined,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primary,
-                                                              size: 30.0,
-                                                            ),
-                                                            onPressed: () {
-                                                              print(
-                                                                  'IconButton pressed ...');
-                                                            },
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      15.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Text(
-                                                                'Quidly+',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Urbanist',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      fontSize:
-                                                                          25.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      15.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          child:
-                                                              FlutterFlowIconButton(
-                                                            borderColor: Colors
-                                                                .transparent,
-                                                            borderRadius: 20.0,
-                                                            borderWidth: 1.0,
-                                                            buttonSize: 60.0,
-                                                            icon: Icon(
-                                                              Icons
-                                                                  .bookmark_border_outlined,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryText,
-                                                              size: 30.0,
-                                                            ),
-                                                            onPressed: () {
-                                                              print(
-                                                                  'IconButton pressed ...');
-                                                            },
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      15.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Text(
-                                                                'Bookmarks',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Urbanist',
-                                                                      fontSize:
-                                                                          25.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      15.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          child:
-                                                              FlutterFlowIconButton(
-                                                            borderColor: Colors
-                                                                .transparent,
-                                                            borderRadius: 20.0,
-                                                            borderWidth: 1.0,
-                                                            buttonSize: 60.0,
-                                                            icon: Icon(
-                                                              Icons.groups,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryText,
-                                                              size: 30.0,
-                                                            ),
-                                                            onPressed: () {
-                                                              print(
-                                                                  'IconButton pressed ...');
-                                                            },
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      15.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Text(
-                                                                'Cohort',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Urbanist',
-                                                                      fontSize:
-                                                                          25.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                                InkWell(
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  onTap: () async {
-                                                    context.pushNamed(
-                                                        'profilePage');
-                                                  },
-                                                  child: Row(
+                                                  Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     children: [
-                                                      Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        15.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child:
-                                                                FlutterFlowIconButton(
-                                                              borderColor: Colors
-                                                                  .transparent,
-                                                              borderRadius:
-                                                                  20.0,
-                                                              borderWidth: 1.0,
-                                                              buttonSize: 60.0,
-                                                              icon: Icon(
-                                                                Icons.history,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryText,
-                                                                size: 30.0,
-                                                              ),
-                                                              onPressed: () {
-                                                                print(
-                                                                    'IconButton pressed ...');
-                                                              },
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    15.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Text(
+                                                              'Quidly+',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Urbanist',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primary,
+                                                                    fontSize:
+                                                                        25.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                  ),
                                                             ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        15.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Text(
-                                                                  'History',
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Urbanist',
-                                                                        fontSize:
-                                                                            25.0,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                      ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
-                                                ),
-                                                Row(
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    15.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child:
+                                                            FlutterFlowIconButton(
+                                                          borderColor: Colors
+                                                              .transparent,
+                                                          borderRadius: 20.0,
+                                                          borderWidth: 1.0,
+                                                          buttonSize: 60.0,
+                                                          icon: Icon(
+                                                            Icons
+                                                                .bookmark_border_outlined,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            size: 30.0,
+                                                          ),
+                                                          onPressed: () {
+                                                            print(
+                                                                'IconButton pressed ...');
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    15.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Text(
+                                                              'Bookmarks',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Urbanist',
+                                                                    fontSize:
+                                                                        25.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                  ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    15.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child:
+                                                            FlutterFlowIconButton(
+                                                          borderColor: Colors
+                                                              .transparent,
+                                                          borderRadius: 20.0,
+                                                          borderWidth: 1.0,
+                                                          buttonSize: 60.0,
+                                                          icon: Icon(
+                                                            Icons.groups,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            size: 30.0,
+                                                          ),
+                                                          onPressed: () {
+                                                            print(
+                                                                'IconButton pressed ...');
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    15.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Text(
+                                                              'Cohort',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Urbanist',
+                                                                    fontSize:
+                                                                        25.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                  ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  context
+                                                      .pushNamed('profilePage');
+                                                },
+                                                child: Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
                                                   children: [
@@ -757,8 +671,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                             borderWidth: 1.0,
                                                             buttonSize: 60.0,
                                                             icon: Icon(
-                                                              Icons
-                                                                  .analytics_outlined,
+                                                              Icons.history,
                                                               color: FlutterFlowTheme
                                                                       .of(context)
                                                                   .primaryText,
@@ -790,7 +703,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                     .max,
                                                             children: [
                                                               Text(
-                                                                'Analytics',
+                                                                'History',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyMedium
@@ -811,62 +724,179 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                     ),
                                                   ],
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    15.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child:
+                                                            FlutterFlowIconButton(
+                                                          borderColor: Colors
+                                                              .transparent,
+                                                          borderRadius: 20.0,
+                                                          borderWidth: 1.0,
+                                                          buttonSize: 60.0,
+                                                          icon: Icon(
+                                                            Icons
+                                                                .analytics_outlined,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            size: 30.0,
+                                                          ),
+                                                          onPressed: () {
+                                                            print(
+                                                                'IconButton pressed ...');
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    15.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Text(
+                                                              'Analytics',
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Urbanist',
+                                                                    fontSize:
+                                                                        25.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                  ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                0.7,
-                                            height: 2.0,
-                                            decoration: BoxDecoration(
-                                              color: Color(0x6395A1AC),
-                                            ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.7,
+                                          height: 2.0,
+                                          decoration: BoxDecoration(
+                                            color: Color(0x6395A1AC),
                                           ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Container(
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                0.85,
-                                            height: 100.0,
-                                            decoration: BoxDecoration(),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  20.0,
-                                                                  30.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Container(
-                                                            width: 150.0,
-                                                            height: 20.0,
-                                                            decoration:
-                                                                BoxDecoration(),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Container(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.85,
+                                          height: 100.0,
+                                          decoration: BoxDecoration(),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(20.0,
+                                                                30.0, 0.0, 0.0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Container(
+                                                          width: 150.0,
+                                                          height: 20.0,
+                                                          decoration:
+                                                              BoxDecoration(),
+                                                          child: Text(
+                                                            'Professional Tools',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Urbanist',
+                                                                  fontSize:
+                                                                      16.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 20.0,
+                                                                0.0, 0.0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Container(
+                                                          width: 150.0,
+                                                          height: 20.0,
+                                                          decoration:
+                                                              BoxDecoration(),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        8.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
                                                             child: Text(
-                                                              'Professional Tools',
+                                                              'Safety & Support',
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyMedium
@@ -881,203 +911,150 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                   ),
                                                             ),
                                                           ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  20.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Container(
-                                                            width: 150.0,
-                                                            height: 20.0,
-                                                            decoration:
-                                                                BoxDecoration(),
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              child: Text(
-                                                                'Safety & Support',
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .start,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Urbanist',
-                                                                      fontSize:
-                                                                          16.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Container(
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                0.85,
-                                            height: 60.0,
-                                            decoration: BoxDecoration(),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    Stack(
-                                                      children: [
-                                                        if ((Theme.of(context)
-                                                                    .brightness ==
-                                                                Brightness
-                                                                    .dark) ==
-                                                            false)
-                                                          FlutterFlowIconButton(
-                                                            borderColor: Colors
-                                                                .transparent,
-                                                            borderRadius: 20.0,
-                                                            borderWidth: 1.0,
-                                                            buttonSize: 40.0,
-                                                            icon: Icon(
-                                                              Icons.light_mode,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryText,
-                                                              size: 30.0,
-                                                            ),
-                                                            onPressed:
-                                                                () async {
-                                                              setDarkModeSetting(
-                                                                  context,
-                                                                  ThemeMode
-                                                                      .dark);
-                                                            },
-                                                          ),
-                                                        if ((Theme.of(context)
-                                                                    .brightness ==
-                                                                Brightness
-                                                                    .dark) ==
-                                                            true)
-                                                          FlutterFlowIconButton(
-                                                            borderColor: Colors
-                                                                .transparent,
-                                                            borderRadius: 20.0,
-                                                            borderWidth: 1.0,
-                                                            buttonSize: 40.0,
-                                                            icon: Icon(
-                                                              Icons
-                                                                  .dark_mode_outlined,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryText,
-                                                              size: 30.0,
-                                                            ),
-                                                            onPressed:
-                                                                () async {
-                                                              setDarkModeSetting(
-                                                                  context,
-                                                                  ThemeMode
-                                                                      .light);
-                                                            },
-                                                          ),
+                                                        ),
                                                       ],
                                                     ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Stack(
-                                  children: [
-                                    Container(
-                                      width: 100.0,
-                                      height: 100.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                      ),
-                                    ),
-                                    FFButtonWidget(
-                                      onPressed: () async {
-                                        GoRouter.of(context).prepareAuthEvent();
-                                        await authManager.signOut();
-                                        GoRouter.of(context)
-                                            .clearRedirectLocation();
-
-                                        context.goNamedAuth(
-                                            'login', context.mounted);
-                                      },
-                                      text: 'Log Out',
-                                      options: FFButtonOptions(
-                                        width: 90.0,
-                                        height: 40.0,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 0.0),
-                                        iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: Colors.white,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .bodySmall
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
-                                              color: Color(0xFF4B39EF),
-                                              fontSize: 14.0,
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                        elevation: 3.0,
-                                        borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1.0,
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Container(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.85,
+                                          height: 60.0,
+                                          decoration: BoxDecoration(),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  Stack(
+                                                    children: [
+                                                      if ((Theme.of(context)
+                                                                  .brightness ==
+                                                              Brightness
+                                                                  .dark) ==
+                                                          false)
+                                                        FlutterFlowIconButton(
+                                                          borderColor: Colors
+                                                              .transparent,
+                                                          borderRadius: 20.0,
+                                                          borderWidth: 1.0,
+                                                          buttonSize: 40.0,
+                                                          icon: Icon(
+                                                            Icons.light_mode,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            size: 30.0,
+                                                          ),
+                                                          onPressed: () async {
+                                                            setDarkModeSetting(
+                                                                context,
+                                                                ThemeMode.dark);
+                                                          },
+                                                        ),
+                                                      if ((Theme.of(context)
+                                                                  .brightness ==
+                                                              Brightness
+                                                                  .dark) ==
+                                                          true)
+                                                        FlutterFlowIconButton(
+                                                          borderColor: Colors
+                                                              .transparent,
+                                                          borderRadius: 20.0,
+                                                          borderWidth: 1.0,
+                                                          buttonSize: 40.0,
+                                                          icon: Icon(
+                                                            Icons
+                                                                .dark_mode_outlined,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            size: 30.0,
+                                                          ),
+                                                          onPressed: () async {
+                                                            setDarkModeSetting(
+                                                                context,
+                                                                ThemeMode
+                                                                    .light);
+                                                          },
+                                                        ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
+                              ),
+                              Stack(
+                                children: [
+                                  Container(
+                                    width: 100.0,
+                                    height: 100.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                    ),
+                                  ),
+                                  FFButtonWidget(
+                                    onPressed: () async {
+                                      GoRouter.of(context).prepareAuthEvent();
+                                      await authManager.signOut();
+                                      GoRouter.of(context)
+                                          .clearRedirectLocation();
+
+                                      context.goNamedAuth(
+                                          'login', context.mounted);
+                                    },
+                                    text: 'Log Out',
+                                    options: FFButtonOptions(
+                                      width: 90.0,
+                                      height: 40.0,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 0.0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color: Colors.white,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodySmall
+                                          .override(
+                                            fontFamily: 'Lexend Deca',
+                                            color: Color(0xFF4B39EF),
+                                            fontSize: 14.0,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                      elevation: 3.0,
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -2409,7 +2386,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                           MainAxisSize.max,
                                                       children: [
                                                         Container(
-                                                          width: 95.0,
+                                                          width: 80.0,
                                                           height: 50.0,
                                                           decoration:
                                                               BoxDecoration(),
@@ -2470,7 +2447,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                             3.0),
                                                                 child:
                                                                     Container(
-                                                                  width: 60.0,
+                                                                  width: 40.0,
                                                                   height: 50.0,
                                                                   decoration:
                                                                       BoxDecoration(),
@@ -2481,7 +2458,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                     children: [
                                                                       Container(
                                                                         width:
-                                                                            60.0,
+                                                                            40.0,
                                                                         height:
                                                                             100.0,
                                                                         decoration:
@@ -2493,22 +2470,27 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                           mainAxisAlignment:
                                                                               MainAxisAlignment.center,
                                                                           children: [
-                                                                            AutoSizeText(
-                                                                              socialFeedUserPostsRecord.expiry != null
-                                                                                  ? dateTimeFormat(
-                                                                                      'relative',
-                                                                                      socialFeedUserPostsRecord.expiry!,
-                                                                                      locale: FFLocalizations.of(context).languageShortCode ?? FFLocalizations.of(context).languageCode,
-                                                                                    )
-                                                                                  : socialFeedUserPostsRecord.nullExpiry,
-                                                                              textAlign: TextAlign.start,
-                                                                              maxLines: 2,
-                                                                              style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                    fontFamily: 'Lexend Deca',
-                                                                                    color: FlutterFlowTheme.of(context).primary,
-                                                                                    fontSize: socialFeedUserPostsRecord.expiry != null ? 11.0 : 25.0,
-                                                                                    fontWeight: FontWeight.normal,
-                                                                                  ),
+                                                                            Container(
+                                                                              width: 40.0,
+                                                                              height: 40.0,
+                                                                              decoration: BoxDecoration(),
+                                                                              child: AutoSizeText(
+                                                                                socialFeedUserPostsRecord.expiry != null
+                                                                                    ? dateTimeFormat(
+                                                                                        'relative',
+                                                                                        socialFeedUserPostsRecord.expiry!,
+                                                                                        locale: FFLocalizations.of(context).languageShortCode ?? FFLocalizations.of(context).languageCode,
+                                                                                      )
+                                                                                    : socialFeedUserPostsRecord.nullExpiry,
+                                                                                textAlign: TextAlign.start,
+                                                                                maxLines: 2,
+                                                                                style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                      fontFamily: 'Lexend Deca',
+                                                                                      color: FlutterFlowTheme.of(context).primary,
+                                                                                      fontSize: socialFeedUserPostsRecord.expiry != null ? 11.0 : 25.0,
+                                                                                      fontWeight: FontWeight.normal,
+                                                                                    ),
+                                                                              ),
                                                                             ),
                                                                           ],
                                                                         ),
@@ -2523,7 +2505,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                       ],
                                                     ),
                                                     Container(
-                                                      width: 80.0,
+                                                      width: 60.0,
                                                       height: 100.0,
                                                       decoration:
                                                           BoxDecoration(),
@@ -2639,6 +2621,56 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         ],
                                                       ),
                                                     ),
+                                                    if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) ||
+                                                        socialFeedUserPostsRecord
+                                                            .votes2
+                                                            .contains(
+                                                                currentUserReference) ||
+                                                        socialFeedUserPostsRecord
+                                                            .votes3
+                                                            .contains(
+                                                                currentUserReference) ||
+                                                        socialFeedUserPostsRecord
+                                                            .votes4
+                                                            .contains(
+                                                                currentUserReference))
+                                                      FlutterFlowIconButton(
+                                                        borderRadius: 20.0,
+                                                        borderWidth: 1.0,
+                                                        buttonSize: 40.0,
+                                                        icon: Icon(
+                                                          Icons.analytics,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondary,
+                                                          size: 24.0,
+                                                        ),
+                                                        onPressed: () async {
+                                                          context.pushNamed(
+                                                            'postDev',
+                                                            queryParameters: {
+                                                              'postReference':
+                                                                  serializeParam(
+                                                                socialFeedUserPostsRecord
+                                                                    .reference,
+                                                                ParamType
+                                                                    .DocumentReference,
+                                                              ),
+                                                              'userRecord':
+                                                                  serializeParam(
+                                                                userPostUsersRecord,
+                                                                ParamType
+                                                                    .Document,
+                                                              ),
+                                                            }.withoutNulls,
+                                                            extra: <String,
+                                                                dynamic>{
+                                                              'userRecord':
+                                                                  userPostUsersRecord,
+                                                            },
+                                                          );
+                                                        },
+                                                      ),
                                                   ],
                                                 ),
                                               ),

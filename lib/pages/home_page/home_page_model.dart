@@ -23,11 +23,20 @@ class HomePageModel extends FlutterFlowModel {
 
   int? pieDefault1 = 25;
 
+  ///  State fields for stateful widgets in this page.
+
+  // State field(s) for TabBar widget.
+  TabController? tabBarController;
+  int get tabBarCurrentIndex =>
+      tabBarController != null ? tabBarController!.index : 0;
+
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}
 
-  void dispose() {}
+  void dispose() {
+    tabBarController?.dispose();
+  }
 
   /// Action blocks are added here.
 
