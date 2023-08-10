@@ -1,5 +1,4 @@
 import '/backend/backend.dart';
-import '/components/comments/comments_widget.dart';
 import '/components/delete_story/delete_story_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_media_display.dart';
@@ -12,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
 import 'story_details_model.dart';
 export 'story_details_model.dart';
 
@@ -153,67 +151,37 @@ class _StoryDetailsWidgetState extends State<StoryDetailsWidget> {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              await showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                backgroundColor:
-                                                    Color(0x00000000),
-                                                barrierColor: Color(0x00000000),
-                                                context: context,
-                                                builder: (context) {
-                                                  return Padding(
-                                                    padding:
-                                                        MediaQuery.viewInsetsOf(
-                                                            context),
-                                                    child: Container(
-                                                      height: 600.0,
-                                                      child: CommentsWidget(
-                                                        story:
-                                                            pageViewUserStoriesRecord,
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                              ).then(
-                                                  (value) => setState(() {}));
-                                            },
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Icon(
-                                                  Icons.mode_comment_outlined,
-                                                  color: FlutterFlowTheme.of(
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Icon(
+                                                Icons.mode_comment_outlined,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .tertiary,
+                                                size: 24.0,
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        8.0, 0.0, 0.0, 0.0),
+                                                child: Text(
+                                                  pageViewUserStoriesRecord
+                                                      .numComments
+                                                      .toString(),
+                                                  style: FlutterFlowTheme.of(
                                                           context)
-                                                      .tertiary,
-                                                  size: 24.0,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Urbanist',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .tertiary,
+                                                      ),
                                                 ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          8.0, 0.0, 0.0, 0.0),
-                                                  child: Text(
-                                                    pageViewUserStoriesRecord
-                                                        .numComments
-                                                        .toString(),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Urbanist',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .tertiary,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
                                           Expanded(
                                             child: Row(
@@ -221,30 +189,22 @@ class _StoryDetailsWidgetState extends State<StoryDetailsWidget> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
                                               children: [
-                                                Builder(
-                                                  builder: (context) =>
-                                                      FlutterFlowIconButton(
-                                                    borderColor:
-                                                        Colors.transparent,
-                                                    borderRadius: 30.0,
-                                                    buttonSize: 48.0,
-                                                    icon: Icon(
-                                                      Icons.ios_share,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .tertiary,
-                                                      size: 30.0,
-                                                    ),
-                                                    onPressed: () async {
-                                                      await Share.share(
-                                                        'This post is really awesome!',
-                                                        sharePositionOrigin:
-                                                            getWidgetBoundingBox(
-                                                                context),
-                                                      );
-                                                    },
+                                                FlutterFlowIconButton(
+                                                  borderColor:
+                                                      Colors.transparent,
+                                                  borderRadius: 30.0,
+                                                  buttonSize: 48.0,
+                                                  icon: Icon(
+                                                    Icons.ios_share,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .tertiary,
+                                                    size: 30.0,
                                                   ),
+                                                  onPressed: () {
+                                                    print(
+                                                        'IconButton pressed ...');
+                                                  },
                                                 ),
                                               ],
                                             ),

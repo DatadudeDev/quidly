@@ -1,4 +1,4 @@
-# quid2
+# quidly
 
 A new Flutter project.
 

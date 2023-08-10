@@ -8,7 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class CommentsModel extends FlutterFlowModel {
+class CommentSectionModel extends FlutterFlowModel {
+  ///  Local state fields for this component.
+
+  DocumentReference? post;
+
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for TextField widget.

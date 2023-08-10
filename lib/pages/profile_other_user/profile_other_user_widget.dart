@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/profile_devz_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -7,25 +6,30 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'profile_dev_model.dart';
-export 'profile_dev_model.dart';
+import 'profile_other_user_model.dart';
+export 'profile_other_user_model.dart';
 
-class ProfileDevWidget extends StatefulWidget {
-  const ProfileDevWidget({Key? key}) : super(key: key);
+class ProfileOtherUserWidget extends StatefulWidget {
+  const ProfileOtherUserWidget({
+    Key? key,
+    this.userDetails,
+  }) : super(key: key);
+
+  final UsersRecord? userDetails;
 
   @override
-  _ProfileDevWidgetState createState() => _ProfileDevWidgetState();
+  _ProfileOtherUserWidgetState createState() => _ProfileOtherUserWidgetState();
 }
 
-class _ProfileDevWidgetState extends State<ProfileDevWidget> {
-  late ProfileDevModel _model;
+class _ProfileOtherUserWidgetState extends State<ProfileOtherUserWidget> {
+  late ProfileOtherUserModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ProfileDevModel());
+    _model = createModel(context, () => ProfileOtherUserModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -40,7 +44,7 @@ class _ProfileDevWidgetState extends State<ProfileDevWidget> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<UsersRecord>(
-      stream: UsersRecord.getDocument(currentUserReference!),
+      stream: UsersRecord.getDocument(widget.userDetails!.reference),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -58,7 +62,7 @@ class _ProfileDevWidgetState extends State<ProfileDevWidget> {
             ),
           );
         }
-        final profileDevUsersRecord = snapshot.data!;
+        final profileOtherUserUsersRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -87,9 +91,9 @@ class _ProfileDevWidgetState extends State<ProfileDevWidget> {
               model: _model.profileDevzModel,
               updateCallback: () => setState(() {}),
               child: ProfileDevzWidget(
-                parameter1: profileDevUsersRecord.bio,
-                parameter2: profileDevUsersRecord,
-                parameter3: profileDevUsersRecord.reference,
+                parameter1: profileOtherUserUsersRecord.bio,
+                parameter2: profileOtherUserUsersRecord,
+                parameter3: profileOtherUserUsersRecord.reference,
               ),
             ),
           ),

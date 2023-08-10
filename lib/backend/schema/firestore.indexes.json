@@ -1,34 +1,6 @@
 {
   "indexes": [
     {
-      "collectionGroup": "postComments",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "post",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "timePosted",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "storyComments",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "storyAssociation",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "timePosted",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
       "collectionGroup": "chats",
       "queryScope": "COLLECTION",
       "fields": [
@@ -57,6 +29,20 @@
       ]
     },
     {
+      "collectionGroup": "postComments",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "post",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "timePosted",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
       "collectionGroup": "chat_messages",
       "queryScope": "COLLECTION",
       "fields": [
@@ -67,18 +53,6 @@
         {
           "fieldPath": "timestamp",
           "order": "DESCENDING"
-        }
-      ]
-    }
-  ],
-  "fieldOverrides": [
-    {
-      "collectionGroup": "fcm_tokens",
-      "fieldPath": "fcm_token",
-      "indexes": [
-        {
-          "order": "ASCENDING",
-          "queryScope": "COLLECTION_GROUP"
         }
       ]
     }

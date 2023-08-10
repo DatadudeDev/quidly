@@ -6,8 +6,7 @@ import 'package:page_transition/page_transition.dart';
 import '/backend/backend.dart';
 
 import '../../auth/base_auth_user_provider.dart';
-import '../../backend/push_notifications/push_notifications_handler.dart'
-    show PushNotificationsHandler;
+
 import '/index.dart';
 import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -130,18 +129,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => CreatePostWidget(),
         ),
         FFRoute(
-          name: 'postDetails',
-          path: '/postDetails',
-          asyncParams: {
-            'userRecord': getDoc(['users'], UsersRecord.fromSnapshot),
-          },
-          builder: (context, params) => PostDetailsWidget(
-            postReference: params.getParam('postReference',
-                ParamType.DocumentReference, false, ['userPosts']),
-            userRecord: params.getParam('userRecord', ParamType.Document),
-          ),
-        ),
-        FFRoute(
           name: 'storyDetails',
           path: '/storyDetails',
           builder: (context, params) => StoryDetailsWidget(
@@ -167,15 +154,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'profileDev',
           path: '/profileDev',
-          asyncParams: {
-            'userDetails': getDoc(['users'], UsersRecord.fromSnapshot),
-          },
           builder: (context, params) => params.isEmpty
               ? NavBarPage(initialPage: 'profileDev')
-              : ProfileDevWidget(
-                  userDetails:
-                      params.getParam('userDetails', ParamType.Document),
-                ),
+              : ProfileDevWidget(),
         ),
         FFRoute(
           name: 'chatPage',
@@ -232,6 +213,52 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'PinCode',
           path: '/pinCode',
           builder: (context, params) => PinCodeWidget(),
+        ),
+        FFRoute(
+          name: 'postDetails',
+          path: '/postDetails',
+          requireAuth: true,
+          asyncParams: {
+            'userRecord': getDoc(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => PostDetailsWidget(
+            postReference: params.getParam('postReference',
+                ParamType.DocumentReference, false, ['userPosts']),
+            userRecord: params.getParam('userRecord', ParamType.Document),
+            pieDefault1: params.getParam('pieDefault1', ParamType.int),
+          ),
+        ),
+        FFRoute(
+          name: 'postDev',
+          path: '/postDev',
+          asyncParams: {
+            'userRecord': getDoc(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => PostDevWidget(
+            postReference: params.getParam('postReference',
+                ParamType.DocumentReference, false, ['userPosts']),
+            userRecord: params.getParam('userRecord', ParamType.Document),
+          ),
+        ),
+        FFRoute(
+          name: 'profileOtherUser',
+          path: '/profileOtherUser',
+          asyncParams: {
+            'userDetails': getDoc(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => ProfileOtherUserWidget(
+            userDetails: params.getParam('userDetails', ParamType.Document),
+          ),
+        ),
+        FFRoute(
+          name: 'profileOther',
+          path: '/profileOther',
+          asyncParams: {
+            'userDetails': getDoc(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => ProfileOtherWidget(
+            userDetails: params.getParam('userDetails', ParamType.Document),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],
@@ -423,7 +450,7 @@ class FFRoute {
                     ),
                   ),
                 )
-              : PushNotificationsHandler(child: page);
+              : page;
 
           final transitionInfo = state.transitionInfo;
           return transitionInfo.hasTransition

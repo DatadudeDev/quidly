@@ -1,4 +1,4 @@
-package dev.datadude.quid2
+package dev.datadude.quid
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/components/profile_devz_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -8,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class ProfileDevModel extends FlutterFlowModel {
+class ProfileOtherUserModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
   // Model for profileDevz component.
