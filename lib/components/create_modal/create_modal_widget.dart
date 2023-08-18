@@ -44,7 +44,7 @@ class _CreateModalWidgetState extends State<CreateModalWidget> {
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
+        color: Colors.black,
         boxShadow: [
           BoxShadow(
             blurRadius: 3.0,
@@ -112,7 +112,7 @@ class _CreateModalWidgetState extends State<CreateModalWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              'Share a video of your pup.',
+                              'I love stories uwu',
                               style: FlutterFlowTheme.of(context).bodySmall,
                             ),
                           ),
@@ -245,7 +245,7 @@ class _CreateModalWidgetState extends State<CreateModalWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              'Share photos on your timeline.',
+                              'What\'s on your mind? ',
                               style: FlutterFlowTheme.of(context).bodySmall,
                             ),
                           ),

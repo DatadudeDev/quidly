@@ -68,6 +68,17 @@ class CreatePollModel extends FlutterFlowModel {
 
   bool isPrivate = false;
 
+  List<String> labelVotes = [];
+  void addToLabelVotes(String item) => labelVotes.add(item);
+  void removeFromLabelVotes(String item) => labelVotes.remove(item);
+  void removeAtIndexFromLabelVotes(int index) => labelVotes.removeAt(index);
+  void updateLabelVotesAtIndex(int index, Function(String) updateFn) =>
+      labelVotes[index] = updateFn(labelVotes[index]);
+
+  bool row3 = false;
+
+  bool row4 = false;
+
   ///  State fields for stateful widgets in this component.
 
   // Stores action output result for [Backend Call - API (apiTest)] action in Button widget.
@@ -81,32 +92,6 @@ class CreatePollModel extends FlutterFlowModel {
   String? Function(BuildContext, String?)? textController1Validator;
   // Stores action output result for [Backend Call - API (autoComplete)] action in TextField widget.
   ApiCallResponse? apiResulthc6;
-  // State field(s) for choicesTWOanswerONE widget.
-  TextEditingController? choicesTWOanswerONEController1;
-  String? Function(BuildContext, String?)?
-      choicesTWOanswerONEController1Validator;
-  // State field(s) for choicesTWOanswerTWO widget.
-  TextEditingController? choicesTWOanswerTWOController1;
-  String? Function(BuildContext, String?)?
-      choicesTWOanswerTWOController1Validator;
-  DateTime? datePicked1;
-  // State field(s) for PlacePicker widget.
-  var placePickerValue1 = FFPlace();
-  // State field(s) for choicesTHREEanswerONE widget.
-  TextEditingController? choicesTHREEanswerONEController;
-  String? Function(BuildContext, String?)?
-      choicesTHREEanswerONEControllerValidator;
-  // State field(s) for choicesTHREEanswerTWO widget.
-  TextEditingController? choicesTHREEanswerTWOController;
-  String? Function(BuildContext, String?)?
-      choicesTHREEanswerTWOControllerValidator;
-  // State field(s) for choicesTHREEanswerTHREE widget.
-  TextEditingController? choicesTHREEanswerTHREEController;
-  String? Function(BuildContext, String?)?
-      choicesTHREEanswerTHREEControllerValidator;
-  DateTime? datePicked2;
-  // State field(s) for PlacePicker widget.
-  var placePickerValue2 = FFPlace();
   // State field(s) for choicesFOURanswerONE widget.
   TextEditingController? choicesFOURanswerONEController;
   String? Function(BuildContext, String?)?
@@ -123,37 +108,19 @@ class CreatePollModel extends FlutterFlowModel {
   TextEditingController? choicesFOURanswerFOURController;
   String? Function(BuildContext, String?)?
       choicesFOURanswerFOURControllerValidator;
-  DateTime? datePicked3;
+  DateTime? datePicked;
   // State field(s) for PlacePicker widget.
-  var placePickerValue3 = FFPlace();
-  // State field(s) for choicesTWOanswerONE widget.
-  TextEditingController? choicesTWOanswerONEController2;
-  String? Function(BuildContext, String?)?
-      choicesTWOanswerONEController2Validator;
-  // State field(s) for choicesTWOanswerTWO widget.
-  TextEditingController? choicesTWOanswerTWOController2;
-  String? Function(BuildContext, String?)?
-      choicesTWOanswerTWOController2Validator;
-  DateTime? datePicked4;
-  // State field(s) for PlacePicker widget.
-  var placePickerValue4 = FFPlace();
+  var placePickerValue = FFPlace();
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}
 
   void dispose() {
-    choicesTWOanswerONEController1?.dispose();
-    choicesTWOanswerTWOController1?.dispose();
-    choicesTHREEanswerONEController?.dispose();
-    choicesTHREEanswerTWOController?.dispose();
-    choicesTHREEanswerTHREEController?.dispose();
     choicesFOURanswerONEController?.dispose();
     choicesFOURanswerTWOController?.dispose();
     choicesFOURanswerTHREEController?.dispose();
     choicesFOURanswerFOURController?.dispose();
-    choicesTWOanswerONEController2?.dispose();
-    choicesTWOanswerTWOController2?.dispose();
   }
 
   /// Action blocks are added here.

@@ -32,7 +32,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
   late HomePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  LatLng? currentUserLocationValue;
   var hasIconTriggered = false;
   final animationsMap = {
     'iconOnActionTriggerAnimation': AnimationInfo(
@@ -1932,7 +1931,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                                   },
                                                                                                   child: FFButtonWidget(
                                                                                                     onPressed: () async {
-                                                                                                      currentUserLocationValue = await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
                                                                                                       if (currentUserEmailVerified == true) {
                                                                                                         if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
                                                                                                           return;
@@ -1940,13 +1938,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
 
                                                                                                         await socialFeedUserPostsRecord.reference.update({
                                                                                                           'votes4': FieldValue.arrayUnion([currentUserReference]),
+                                                                                                          'timeVoted': FieldValue.arrayUnion([getCurrentTimestamp]),
                                                                                                         });
 
-                                                                                                        await LocationVotesRecord.collection.doc().set(createLocationVotesRecordData(
-                                                                                                              userPost: containerUserPostsRecord?.reference,
+                                                                                                        await VotesRecord.collection.doc().set(createVotesRecordData(
+                                                                                                              poll: socialFeedUserPostsRecord.reference,
+                                                                                                              timeVoted: getCurrentTimestamp,
+                                                                                                              voteChoice: 4,
                                                                                                               voter: currentUserReference,
-                                                                                                              voteLocation: currentUserLocationValue,
-                                                                                                              voteAnswer: 4,
                                                                                                             ));
                                                                                                       } else {
                                                                                                         ScaffoldMessenger.of(context).showSnackBar(
@@ -2044,7 +2043,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                                   },
                                                                                                   child: FFButtonWidget(
                                                                                                     onPressed: () async {
-                                                                                                      currentUserLocationValue = await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
                                                                                                       if (currentUserEmailVerified == true) {
                                                                                                         if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
                                                                                                           return;
@@ -2052,13 +2050,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
 
                                                                                                         await socialFeedUserPostsRecord.reference.update({
                                                                                                           'votes2': FieldValue.arrayUnion([currentUserReference]),
+                                                                                                          'timeVoted': FieldValue.arrayUnion([getCurrentTimestamp]),
                                                                                                         });
 
-                                                                                                        await LocationVotesRecord.collection.doc().set(createLocationVotesRecordData(
-                                                                                                              userPost: containerUserPostsRecord?.reference,
+                                                                                                        await VotesRecord.collection.doc().set(createVotesRecordData(
+                                                                                                              poll: socialFeedUserPostsRecord.reference,
+                                                                                                              timeVoted: getCurrentTimestamp,
+                                                                                                              voteChoice: 2,
                                                                                                               voter: currentUserReference,
-                                                                                                              voteLocation: currentUserLocationValue,
-                                                                                                              voteAnswer: 2,
                                                                                                             ));
                                                                                                       } else {
                                                                                                         ScaffoldMessenger.of(context).showSnackBar(
@@ -2157,7 +2156,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                                   },
                                                                                                   child: FFButtonWidget(
                                                                                                     onPressed: () async {
-                                                                                                      currentUserLocationValue = await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
                                                                                                       if (currentUserEmailVerified == true) {
                                                                                                         if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
                                                                                                           return;
@@ -2165,13 +2163,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
 
                                                                                                         await socialFeedUserPostsRecord.reference.update({
                                                                                                           'votes1': FieldValue.arrayUnion([currentUserReference]),
+                                                                                                          'timeVoted': FieldValue.arrayUnion([getCurrentTimestamp]),
                                                                                                         });
 
-                                                                                                        await LocationVotesRecord.collection.doc().set(createLocationVotesRecordData(
-                                                                                                              userPost: containerUserPostsRecord?.reference,
+                                                                                                        await VotesRecord.collection.doc().set(createVotesRecordData(
+                                                                                                              poll: socialFeedUserPostsRecord.reference,
+                                                                                                              timeVoted: getCurrentTimestamp,
+                                                                                                              voteChoice: 1,
                                                                                                               voter: currentUserReference,
-                                                                                                              voteLocation: currentUserLocationValue,
-                                                                                                              voteAnswer: 1,
                                                                                                             ));
                                                                                                       } else {
                                                                                                         ScaffoldMessenger.of(context).showSnackBar(
@@ -2271,7 +2270,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                                     },
                                                                                                     child: FFButtonWidget(
                                                                                                       onPressed: () async {
-                                                                                                        currentUserLocationValue = await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
                                                                                                         if (currentUserEmailVerified == true) {
                                                                                                           if (socialFeedUserPostsRecord.votes1.contains(currentUserReference) || socialFeedUserPostsRecord.votes2.contains(currentUserReference) || socialFeedUserPostsRecord.votes3.contains(currentUserReference) || socialFeedUserPostsRecord.votes4.contains(currentUserReference)) {
                                                                                                             return;
@@ -2279,13 +2277,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
 
                                                                                                           await socialFeedUserPostsRecord.reference.update({
                                                                                                             'votes3': FieldValue.arrayUnion([currentUserReference]),
+                                                                                                            'timeVoted': FieldValue.arrayUnion([getCurrentTimestamp]),
                                                                                                           });
 
-                                                                                                          await LocationVotesRecord.collection.doc().set(createLocationVotesRecordData(
-                                                                                                                userPost: containerUserPostsRecord?.reference,
+                                                                                                          await VotesRecord.collection.doc().set(createVotesRecordData(
+                                                                                                                poll: socialFeedUserPostsRecord.reference,
+                                                                                                                timeVoted: getCurrentTimestamp,
+                                                                                                                voteChoice: 3,
                                                                                                                 voter: currentUserReference,
-                                                                                                                voteLocation: currentUserLocationValue,
-                                                                                                                voteAnswer: 3,
                                                                                                               ));
                                                                                                           return;
                                                                                                         } else {
@@ -2474,22 +2473,28 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                               width: 40.0,
                                                                               height: 40.0,
                                                                               decoration: BoxDecoration(),
-                                                                              child: AutoSizeText(
-                                                                                socialFeedUserPostsRecord.expiry != null
-                                                                                    ? dateTimeFormat(
-                                                                                        'relative',
-                                                                                        socialFeedUserPostsRecord.expiry!,
-                                                                                        locale: FFLocalizations.of(context).languageShortCode ?? FFLocalizations.of(context).languageCode,
-                                                                                      )
-                                                                                    : socialFeedUserPostsRecord.nullExpiry,
-                                                                                textAlign: TextAlign.start,
-                                                                                maxLines: 2,
-                                                                                style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                      fontFamily: 'Lexend Deca',
-                                                                                      color: FlutterFlowTheme.of(context).primary,
-                                                                                      fontSize: socialFeedUserPostsRecord.expiry != null ? 11.0 : 25.0,
-                                                                                      fontWeight: FontWeight.normal,
-                                                                                    ),
+                                                                              child: Column(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                children: [
+                                                                                  AutoSizeText(
+                                                                                    socialFeedUserPostsRecord.expiry != null
+                                                                                        ? dateTimeFormat(
+                                                                                            'relative',
+                                                                                            socialFeedUserPostsRecord.expiry!,
+                                                                                            locale: FFLocalizations.of(context).languageShortCode ?? FFLocalizations.of(context).languageCode,
+                                                                                          )
+                                                                                        : socialFeedUserPostsRecord.nullExpiry,
+                                                                                    textAlign: TextAlign.start,
+                                                                                    maxLines: 2,
+                                                                                    style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                          fontFamily: 'Lexend Deca',
+                                                                                          color: FlutterFlowTheme.of(context).primary,
+                                                                                          fontSize: socialFeedUserPostsRecord.expiry != null ? 11.0 : 25.0,
+                                                                                          fontWeight: FontWeight.normal,
+                                                                                        ),
+                                                                                  ),
+                                                                                ],
                                                                               ),
                                                                             ),
                                                                           ],
@@ -2647,7 +2652,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         ),
                                                         onPressed: () async {
                                                           context.pushNamed(
-                                                            'postDev',
+                                                            'postDetails',
                                                             queryParameters: {
                                                               'postReference':
                                                                   serializeParam(
