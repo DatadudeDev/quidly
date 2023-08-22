@@ -67,6 +67,35 @@ class GetURLCall {
       );
 }
 
+class AutoCompleteCall {
+  static Future<ApiCallResponse> call({
+    String? poll = '',
+  }) {
+    final body = '''
+{
+  "user_input": "${poll}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'autoComplete',
+      apiUrl: 'https://api2.datadude.dev/autocomplete',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  static dynamic autocomplete(dynamic response) => getJsonField(
+        response,
+        r'''$.autocomplete''',
+      );
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

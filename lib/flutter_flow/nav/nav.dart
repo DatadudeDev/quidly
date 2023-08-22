@@ -3,16 +3,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow_theme.dart';
 import '/backend/backend.dart';
 
 import '../../auth/base_auth_user_provider.dart';
 
-import '../../index.dart';
-import '../../main.dart';
-import '../lat_lng.dart';
-import '../place.dart';
+import '/index.dart';
+import '/main.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/lat_lng.dart';
+import '/flutter_flow/place.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
@@ -116,9 +116,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'profilePage',
           path: '/profilePage',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'profilePage')
-              : ProfilePageWidget(),
+          builder: (context, params) => ProfilePageWidget(),
         ),
         FFRoute(
           name: 'createStory',
@@ -129,18 +127,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'createPost',
           path: '/createPost',
           builder: (context, params) => CreatePostWidget(),
-        ),
-        FFRoute(
-          name: 'postDetails',
-          path: '/postDetails',
-          asyncParams: {
-            'userRecord': getDoc(['users'], UsersRecord.fromSnapshot),
-          },
-          builder: (context, params) => PostDetailsWidget(
-            postReference: params.getParam('postReference',
-                ParamType.DocumentReference, false, ['userPosts']),
-            userRecord: params.getParam('userRecord', ParamType.Document),
-          ),
         ),
         FFRoute(
           name: 'storyDetails',
@@ -166,14 +152,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ChangePasswordWidget(),
         ),
         FFRoute(
-          name: 'viewProfilePageOther',
-          path: '/viewProfilePageOther',
-          asyncParams: {
-            'userDetails': getDoc(['users'], UsersRecord.fromSnapshot),
-          },
-          builder: (context, params) => ViewProfilePageOtherWidget(
-            userDetails: params.getParam('userDetails', ParamType.Document),
-          ),
+          name: 'profileDev',
+          path: '/profileDev',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'profileDev')
+              : ProfileDevWidget(),
         ),
         FFRoute(
           name: 'chatPage',
@@ -218,6 +201,64 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'search',
           path: '/search',
           builder: (context, params) => SearchWidget(),
+        ),
+        FFRoute(
+          name: 'searchCopy',
+          path: '/searchCopy',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'searchCopy')
+              : SearchCopyWidget(),
+        ),
+        FFRoute(
+          name: 'PinCode',
+          path: '/pinCode',
+          builder: (context, params) => PinCodeWidget(),
+        ),
+        FFRoute(
+          name: 'postDetails',
+          path: '/postDetails',
+          requireAuth: true,
+          asyncParams: {
+            'userRecord': getDoc(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => PostDetailsWidget(
+            postReference: params.getParam('postReference',
+                ParamType.DocumentReference, false, ['userPosts']),
+            userRecord: params.getParam('userRecord', ParamType.Document),
+            pieDefault1: params.getParam('pieDefault1', ParamType.int),
+          ),
+        ),
+        FFRoute(
+          name: 'postDev',
+          path: '/postDev',
+          asyncParams: {
+            'userRecord': getDoc(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => PostDevWidget(
+            postReference: params.getParam('postReference',
+                ParamType.DocumentReference, false, ['userPosts']),
+            userRecord: params.getParam('userRecord', ParamType.Document),
+          ),
+        ),
+        FFRoute(
+          name: 'profileOtherUser',
+          path: '/profileOtherUser',
+          asyncParams: {
+            'userDetails': getDoc(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => ProfileOtherUserWidget(
+            userDetails: params.getParam('userDetails', ParamType.Document),
+          ),
+        ),
+        FFRoute(
+          name: 'profileOther',
+          path: '/profileOther',
+          asyncParams: {
+            'userDetails': getDoc(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => ProfileOtherWidget(
+            userDetails: params.getParam('userDetails', ParamType.Document),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

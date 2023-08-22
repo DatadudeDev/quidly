@@ -7,95 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1033004220873:android:70bf1c21bcacb378fa2818",
-        "android_client_info": {
-          "package_name": "com.datadude.quid"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1033004220873-ks8mscr85qvumritkftg7u96ed35p3s1.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.datadude.quid",
-            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
-          }
-        },
-        {
-          "client_id": "1033004220873-ki5opuolp6uujlt9n3nijeu2va7il3pu.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAEOJN4qYtvqCuhvsXmH2WJGkRuuHXfK0o"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1033004220873-ki5opuolp6uujlt9n3nijeu2va7il3pu.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "1033004220873-2ie2orqk5ohoj0uh07anv414k1hto3c3.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.datadudedev.quid"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1033004220873:android:0947e016f40b5464fa2818",
-        "android_client_info": {
-          "package_name": "com.datadudedev.quid"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1033004220873-ii6f2hkccehv71vrj8qfk44a48idf12e.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.datadudedev.quid",
-            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
-          }
-        },
-        {
-          "client_id": "1033004220873-ki5opuolp6uujlt9n3nijeu2va7il3pu.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAEOJN4qYtvqCuhvsXmH2WJGkRuuHXfK0o"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1033004220873-ki5opuolp6uujlt9n3nijeu2va7il3pu.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "1033004220873-2ie2orqk5ohoj0uh07anv414k1hto3c3.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.datadudedev.quid"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1033004220873:android:9669a129555479cdfa2818",
+        "mobilesdk_app_id": "1:1033004220873:android:89865d22c12645a0fa2818",
         "android_client_info": {
           "package_name": "dev.datadude.quid"
         }
@@ -110,7 +22,7 @@
           }
         },
         {
-          "client_id": "1033004220873-ki5opuolp6uujlt9n3nijeu2va7il3pu.apps.googleusercontent.com",
+          "client_id": "1033004220873-gppd635467m4imuq6ui531rlersff2j3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -123,7 +35,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1033004220873-ki5opuolp6uujlt9n3nijeu2va7il3pu.apps.googleusercontent.com",
+              "client_id": "1033004220873-gppd635467m4imuq6ui531rlersff2j3.apps.googleusercontent.com",
               "client_type": 3
             },
             {
@@ -146,6 +58,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1033004220873-rjm2t4tsre83418orak2hmrqbopap1fc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.datadude.quid2",
+            "certificate_hash": "678ea0c209e31cea4d8b20c68380a24c31df3fdf"
+          }
+        },
+        {
           "client_id": "1033004220873-sc98d3jd01rdfk07pf2kuuv3apsbtvii.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -154,7 +74,7 @@
           }
         },
         {
-          "client_id": "1033004220873-ki5opuolp6uujlt9n3nijeu2va7il3pu.apps.googleusercontent.com",
+          "client_id": "1033004220873-gppd635467m4imuq6ui531rlersff2j3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -167,7 +87,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1033004220873-ki5opuolp6uujlt9n3nijeu2va7il3pu.apps.googleusercontent.com",
+              "client_id": "1033004220873-gppd635467m4imuq6ui531rlersff2j3.apps.googleusercontent.com",
               "client_type": 3
             },
             {

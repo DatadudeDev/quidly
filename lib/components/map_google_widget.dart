@@ -39,6 +39,7 @@ class _MapGoogleWidgetState extends State<MapGoogleWidget> {
 
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -141,7 +142,7 @@ class _MapGoogleWidgetState extends State<MapGoogleWidget> {
                   initialZoom: 3.0,
                   allowInteraction: true,
                   allowZoom: true,
-                  showZoomControls: false,
+                  showZoomControls: true,
                   showLocation: false,
                   showCompass: false,
                   showMapToolbar: false,

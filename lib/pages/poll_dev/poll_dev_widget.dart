@@ -23,6 +23,8 @@ class _PollDevWidgetState extends State<PollDevWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => PollDevModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -33,6 +33,8 @@ class _PostMenuWidgetState extends State<PostMenuWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => PostMenuModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -64,7 +66,8 @@ class _PostMenuWidgetState extends State<PostMenuWidget> {
                     FFButtonWidget(
                       onPressed: () async {
                         await widget.postParameters!.reference.delete();
-                        Navigator.pop(context);
+
+                        context.pushNamed('homePage');
                       },
                       text: 'Delete Post',
                       options: FFButtonOptions(
@@ -109,7 +112,7 @@ class _PostMenuWidgetState extends State<PostMenuWidget> {
                           },
                         );
                       },
-                      text: 'Report Post',
+                      text: 'Report',
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 60.0,

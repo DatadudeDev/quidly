@@ -27,6 +27,7 @@ class _SearchWidgetState extends State<SearchWidget> {
     _model = createModel(context, () => SearchModel());
 
     _model.textController ??= TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -120,7 +121,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                     autofocus: true,
                     obscureText: false,
                     decoration: InputDecoration(
-                      labelText: 'Search all articles...',
+                      labelText: 'Search all questions...',
                       labelStyle: FlutterFlowTheme.of(context).labelMedium,
                       hintStyle: FlutterFlowTheme.of(context).labelMedium,
                       enabledBorder: OutlineInputBorder(

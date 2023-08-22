@@ -29,6 +29,8 @@ class _EditUserProfileWidgetState extends State<EditUserProfileWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => EditUserProfileModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

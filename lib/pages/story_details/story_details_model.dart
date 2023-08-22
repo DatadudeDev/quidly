@@ -1,5 +1,4 @@
 import '/backend/backend.dart';
-import '/components/comments/comments_widget.dart';
 import '/components/delete_story/delete_story_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_media_display.dart';
@@ -12,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
 
 class StoryDetailsModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.

@@ -116,66 +116,6 @@ class UserPostsRecord extends FirestoreRecord {
   LatLng? get pollLocation => _pollLocation;
   bool hasPollLocation() => _pollLocation != null;
 
-  // "countVotes1" field.
-  int? _countVotes1;
-  int get countVotes1 => _countVotes1 ?? 0;
-  bool hasCountVotes1() => _countVotes1 != null;
-
-  // "countVotes2" field.
-  int? _countVotes2;
-  int get countVotes2 => _countVotes2 ?? 0;
-  bool hasCountVotes2() => _countVotes2 != null;
-
-  // "countVotes3" field.
-  int? _countVotes3;
-  int get countVotes3 => _countVotes3 ?? 0;
-  bool hasCountVotes3() => _countVotes3 != null;
-
-  // "countVotes4" field.
-  int? _countVotes4;
-  int get countVotes4 => _countVotes4 ?? 0;
-  bool hasCountVotes4() => _countVotes4 != null;
-
-  // "popVotes1" field.
-  int? _popVotes1;
-  int get popVotes1 => _popVotes1 ?? 0;
-  bool hasPopVotes1() => _popVotes1 != null;
-
-  // "popVotes2" field.
-  int? _popVotes2;
-  int get popVotes2 => _popVotes2 ?? 0;
-  bool hasPopVotes2() => _popVotes2 != null;
-
-  // "popVotes3" field.
-  int? _popVotes3;
-  int get popVotes3 => _popVotes3 ?? 0;
-  bool hasPopVotes3() => _popVotes3 != null;
-
-  // "popVotes4" field.
-  int? _popVotes4;
-  int get popVotes4 => _popVotes4 ?? 0;
-  bool hasPopVotes4() => _popVotes4 != null;
-
-  // "percentVotes1" field.
-  String? _percentVotes1;
-  String get percentVotes1 => _percentVotes1 ?? '';
-  bool hasPercentVotes1() => _percentVotes1 != null;
-
-  // "percentVotes2" field.
-  String? _percentVotes2;
-  String get percentVotes2 => _percentVotes2 ?? '';
-  bool hasPercentVotes2() => _percentVotes2 != null;
-
-  // "percentVotes3" field.
-  String? _percentVotes3;
-  String get percentVotes3 => _percentVotes3 ?? '';
-  bool hasPercentVotes3() => _percentVotes3 != null;
-
-  // "percentVotes4" field.
-  String? _percentVotes4;
-  String get percentVotes4 => _percentVotes4 ?? '';
-  bool hasPercentVotes4() => _percentVotes4 != null;
-
   // "intPercentVotes" field.
   List<int>? _intPercentVotes;
   List<int> get intPercentVotes => _intPercentVotes ?? const [];
@@ -206,6 +146,236 @@ class UserPostsRecord extends FirestoreRecord {
   int get totalVotes4 => _totalVotes4 ?? 0;
   bool hasTotalVotes4() => _totalVotes4 != null;
 
+  // "category" field.
+  String? _category;
+  String get category => _category ?? '';
+  bool hasCategory() => _category != null;
+
+  // "subcategory" field.
+  List<String>? _subcategory;
+  List<String> get subcategory => _subcategory ?? const [];
+  bool hasSubcategory() => _subcategory != null;
+
+  // "isTrending" field.
+  String? _isTrending;
+  String get isTrending => _isTrending ?? '';
+  bool hasIsTrending() => _isTrending != null;
+
+  // "engagementScore" field.
+  int? _engagementScore;
+  int get engagementScore => _engagementScore ?? 0;
+  bool hasEngagementScore() => _engagementScore != null;
+
+  // "popVotesMale" field.
+  int? _popVotesMale;
+  int get popVotesMale => _popVotesMale ?? 0;
+  bool hasPopVotesMale() => _popVotesMale != null;
+
+  // "popVotesFemale" field.
+  int? _popVotesFemale;
+  int get popVotesFemale => _popVotesFemale ?? 0;
+  bool hasPopVotesFemale() => _popVotesFemale != null;
+
+  // "intPercentVotesFemale" field.
+  List<int>? _intPercentVotesFemale;
+  List<int> get intPercentVotesFemale => _intPercentVotesFemale ?? const [];
+  bool hasIntPercentVotesFemale() => _intPercentVotesFemale != null;
+
+  // "intPercentVotesMale" field.
+  List<int>? _intPercentVotesMale;
+  List<int> get intPercentVotesMale => _intPercentVotesMale ?? const [];
+  bool hasIntPercentVotesMale() => _intPercentVotesMale != null;
+
+  // "intPercentVotes1" field.
+  List<int>? _intPercentVotes1;
+  List<int> get intPercentVotes1 => _intPercentVotes1 ?? const [];
+  bool hasIntPercentVotes1() => _intPercentVotes1 != null;
+
+  // "intPercentVotes2" field.
+  List<int>? _intPercentVotes2;
+  List<int> get intPercentVotes2 => _intPercentVotes2 ?? const [];
+  bool hasIntPercentVotes2() => _intPercentVotes2 != null;
+
+  // "intPercentVotes3" field.
+  List<int>? _intPercentVotes3;
+  List<int> get intPercentVotes3 => _intPercentVotes3 ?? const [];
+  bool hasIntPercentVotes3() => _intPercentVotes3 != null;
+
+  // "intPercentVotes4" field.
+  List<int>? _intPercentVotes4;
+  List<int> get intPercentVotes4 => _intPercentVotes4 ?? const [];
+  bool hasIntPercentVotes4() => _intPercentVotes4 != null;
+
+  // "votesMale1" field.
+  List<int>? _votesMale1;
+  List<int> get votesMale1 => _votesMale1 ?? const [];
+  bool hasVotesMale1() => _votesMale1 != null;
+
+  // "votesMale2" field.
+  List<int>? _votesMale2;
+  List<int> get votesMale2 => _votesMale2 ?? const [];
+  bool hasVotesMale2() => _votesMale2 != null;
+
+  // "votesMale3" field.
+  List<int>? _votesMale3;
+  List<int> get votesMale3 => _votesMale3 ?? const [];
+  bool hasVotesMale3() => _votesMale3 != null;
+
+  // "votesMale4" field.
+  List<int>? _votesMale4;
+  List<int> get votesMale4 => _votesMale4 ?? const [];
+  bool hasVotesMale4() => _votesMale4 != null;
+
+  // "votesFemale1" field.
+  List<int>? _votesFemale1;
+  List<int> get votesFemale1 => _votesFemale1 ?? const [];
+  bool hasVotesFemale1() => _votesFemale1 != null;
+
+  // "votesFemale2" field.
+  List<int>? _votesFemale2;
+  List<int> get votesFemale2 => _votesFemale2 ?? const [];
+  bool hasVotesFemale2() => _votesFemale2 != null;
+
+  // "votesFemale3" field.
+  List<int>? _votesFemale3;
+  List<int> get votesFemale3 => _votesFemale3 ?? const [];
+  bool hasVotesFemale3() => _votesFemale3 != null;
+
+  // "votesFemale4" field.
+  List<int>? _votesFemale4;
+  List<int> get votesFemale4 => _votesFemale4 ?? const [];
+  bool hasVotesFemale4() => _votesFemale4 != null;
+
+  // "totalVotesMale" field.
+  int? _totalVotesMale;
+  int get totalVotesMale => _totalVotesMale ?? 0;
+  bool hasTotalVotesMale() => _totalVotesMale != null;
+
+  // "totalVotesFemale" field.
+  int? _totalVotesFemale;
+  int get totalVotesFemale => _totalVotesFemale ?? 0;
+  bool hasTotalVotesFemale() => _totalVotesFemale != null;
+
+  // "totalVotesMale1" field.
+  int? _totalVotesMale1;
+  int get totalVotesMale1 => _totalVotesMale1 ?? 0;
+  bool hasTotalVotesMale1() => _totalVotesMale1 != null;
+
+  // "totalVotesMale2" field.
+  int? _totalVotesMale2;
+  int get totalVotesMale2 => _totalVotesMale2 ?? 0;
+  bool hasTotalVotesMale2() => _totalVotesMale2 != null;
+
+  // "totalVotesMale3" field.
+  int? _totalVotesMale3;
+  int get totalVotesMale3 => _totalVotesMale3 ?? 0;
+  bool hasTotalVotesMale3() => _totalVotesMale3 != null;
+
+  // "totalVotesMale4" field.
+  int? _totalVotesMale4;
+  int get totalVotesMale4 => _totalVotesMale4 ?? 0;
+  bool hasTotalVotesMale4() => _totalVotesMale4 != null;
+
+  // "totalVotesFemale1" field.
+  int? _totalVotesFemale1;
+  int get totalVotesFemale1 => _totalVotesFemale1 ?? 0;
+  bool hasTotalVotesFemale1() => _totalVotesFemale1 != null;
+
+  // "totalVotesFemale2" field.
+  int? _totalVotesFemale2;
+  int get totalVotesFemale2 => _totalVotesFemale2 ?? 0;
+  bool hasTotalVotesFemale2() => _totalVotesFemale2 != null;
+
+  // "totalVotesFemale3" field.
+  int? _totalVotesFemale3;
+  int get totalVotesFemale3 => _totalVotesFemale3 ?? 0;
+  bool hasTotalVotesFemale3() => _totalVotesFemale3 != null;
+
+  // "totalVotesFemale4" field.
+  int? _totalVotesFemale4;
+  int get totalVotesFemale4 => _totalVotesFemale4 ?? 0;
+  bool hasTotalVotesFemale4() => _totalVotesFemale4 != null;
+
+  // "lineVotes1" field.
+  List<int>? _lineVotes1;
+  List<int> get lineVotes1 => _lineVotes1 ?? const [];
+  bool hasLineVotes1() => _lineVotes1 != null;
+
+  // "lineDates" field.
+  List<int>? _lineDates;
+  List<int> get lineDates => _lineDates ?? const [];
+  bool hasLineDates() => _lineDates != null;
+
+  // "lineVotes2" field.
+  List<int>? _lineVotes2;
+  List<int> get lineVotes2 => _lineVotes2 ?? const [];
+  bool hasLineVotes2() => _lineVotes2 != null;
+
+  // "lineVotes3" field.
+  List<int>? _lineVotes3;
+  List<int> get lineVotes3 => _lineVotes3 ?? const [];
+  bool hasLineVotes3() => _lineVotes3 != null;
+
+  // "lineVotes4" field.
+  List<int>? _lineVotes4;
+  List<int> get lineVotes4 => _lineVotes4 ?? const [];
+  bool hasLineVotes4() => _lineVotes4 != null;
+
+  // "lineVotesMale" field.
+  List<int>? _lineVotesMale;
+  List<int> get lineVotesMale => _lineVotesMale ?? const [];
+  bool hasLineVotesMale() => _lineVotesMale != null;
+
+  // "lineVotesMale1" field.
+  List<int>? _lineVotesMale1;
+  List<int> get lineVotesMale1 => _lineVotesMale1 ?? const [];
+  bool hasLineVotesMale1() => _lineVotesMale1 != null;
+
+  // "lineVotesMale2" field.
+  List<int>? _lineVotesMale2;
+  List<int> get lineVotesMale2 => _lineVotesMale2 ?? const [];
+  bool hasLineVotesMale2() => _lineVotesMale2 != null;
+
+  // "lineVotesMale3" field.
+  List<int>? _lineVotesMale3;
+  List<int> get lineVotesMale3 => _lineVotesMale3 ?? const [];
+  bool hasLineVotesMale3() => _lineVotesMale3 != null;
+
+  // "lineVotesMale4" field.
+  List<int>? _lineVotesMale4;
+  List<int> get lineVotesMale4 => _lineVotesMale4 ?? const [];
+  bool hasLineVotesMale4() => _lineVotesMale4 != null;
+
+  // "lineVotesFemale" field.
+  List<int>? _lineVotesFemale;
+  List<int> get lineVotesFemale => _lineVotesFemale ?? const [];
+  bool hasLineVotesFemale() => _lineVotesFemale != null;
+
+  // "lineVotesFemale1" field.
+  List<int>? _lineVotesFemale1;
+  List<int> get lineVotesFemale1 => _lineVotesFemale1 ?? const [];
+  bool hasLineVotesFemale1() => _lineVotesFemale1 != null;
+
+  // "lineVotesFemale2" field.
+  List<int>? _lineVotesFemale2;
+  List<int> get lineVotesFemale2 => _lineVotesFemale2 ?? const [];
+  bool hasLineVotesFemale2() => _lineVotesFemale2 != null;
+
+  // "lineVotesFemale3" field.
+  List<int>? _lineVotesFemale3;
+  List<int> get lineVotesFemale3 => _lineVotesFemale3 ?? const [];
+  bool hasLineVotesFemale3() => _lineVotesFemale3 != null;
+
+  // "lineVotesFemale4" field.
+  List<int>? _lineVotesFemale4;
+  List<int> get lineVotesFemale4 => _lineVotesFemale4 ?? const [];
+  bool hasLineVotesFemale4() => _lineVotesFemale4 != null;
+
+  // "timeVoted" field.
+  List<DateTime>? _timeVoted;
+  List<DateTime> get timeVoted => _timeVoted ?? const [];
+  bool hasTimeVoted() => _timeVoted != null;
+
   void _initializeFields() {
     _postUser = snapshotData['postUser'] as DocumentReference?;
     _timePosted = snapshotData['timePosted'] as DateTime?;
@@ -227,24 +397,58 @@ class UserPostsRecord extends FirestoreRecord {
     _nullExpiry = snapshotData['nullExpiry'] as String?;
     _locationEnforced = snapshotData['locationEnforced'] as bool?;
     _pollLocation = snapshotData['pollLocation'] as LatLng?;
-    _countVotes1 = castToType<int>(snapshotData['countVotes1']);
-    _countVotes2 = castToType<int>(snapshotData['countVotes2']);
-    _countVotes3 = castToType<int>(snapshotData['countVotes3']);
-    _countVotes4 = castToType<int>(snapshotData['countVotes4']);
-    _popVotes1 = castToType<int>(snapshotData['popVotes1']);
-    _popVotes2 = castToType<int>(snapshotData['popVotes2']);
-    _popVotes3 = castToType<int>(snapshotData['popVotes3']);
-    _popVotes4 = castToType<int>(snapshotData['popVotes4']);
-    _percentVotes1 = snapshotData['percentVotes1'] as String?;
-    _percentVotes2 = snapshotData['percentVotes2'] as String?;
-    _percentVotes3 = snapshotData['percentVotes3'] as String?;
-    _percentVotes4 = snapshotData['percentVotes4'] as String?;
     _intPercentVotes = getDataList(snapshotData['intPercentVotes']);
     _labelPercentVotes = getDataList(snapshotData['labelPercentVotes']);
     _totalVotes1 = castToType<int>(snapshotData['totalVotes1']);
     _totalVotes2 = castToType<int>(snapshotData['totalVotes2']);
     _totalVotes3 = castToType<int>(snapshotData['totalVotes3']);
     _totalVotes4 = castToType<int>(snapshotData['totalVotes4']);
+    _category = snapshotData['category'] as String?;
+    _subcategory = getDataList(snapshotData['subcategory']);
+    _isTrending = snapshotData['isTrending'] as String?;
+    _engagementScore = castToType<int>(snapshotData['engagementScore']);
+    _popVotesMale = castToType<int>(snapshotData['popVotesMale']);
+    _popVotesFemale = castToType<int>(snapshotData['popVotesFemale']);
+    _intPercentVotesFemale = getDataList(snapshotData['intPercentVotesFemale']);
+    _intPercentVotesMale = getDataList(snapshotData['intPercentVotesMale']);
+    _intPercentVotes1 = getDataList(snapshotData['intPercentVotes1']);
+    _intPercentVotes2 = getDataList(snapshotData['intPercentVotes2']);
+    _intPercentVotes3 = getDataList(snapshotData['intPercentVotes3']);
+    _intPercentVotes4 = getDataList(snapshotData['intPercentVotes4']);
+    _votesMale1 = getDataList(snapshotData['votesMale1']);
+    _votesMale2 = getDataList(snapshotData['votesMale2']);
+    _votesMale3 = getDataList(snapshotData['votesMale3']);
+    _votesMale4 = getDataList(snapshotData['votesMale4']);
+    _votesFemale1 = getDataList(snapshotData['votesFemale1']);
+    _votesFemale2 = getDataList(snapshotData['votesFemale2']);
+    _votesFemale3 = getDataList(snapshotData['votesFemale3']);
+    _votesFemale4 = getDataList(snapshotData['votesFemale4']);
+    _totalVotesMale = castToType<int>(snapshotData['totalVotesMale']);
+    _totalVotesFemale = castToType<int>(snapshotData['totalVotesFemale']);
+    _totalVotesMale1 = castToType<int>(snapshotData['totalVotesMale1']);
+    _totalVotesMale2 = castToType<int>(snapshotData['totalVotesMale2']);
+    _totalVotesMale3 = castToType<int>(snapshotData['totalVotesMale3']);
+    _totalVotesMale4 = castToType<int>(snapshotData['totalVotesMale4']);
+    _totalVotesFemale1 = castToType<int>(snapshotData['totalVotesFemale1']);
+    _totalVotesFemale2 = castToType<int>(snapshotData['totalVotesFemale2']);
+    _totalVotesFemale3 = castToType<int>(snapshotData['totalVotesFemale3']);
+    _totalVotesFemale4 = castToType<int>(snapshotData['totalVotesFemale4']);
+    _lineVotes1 = getDataList(snapshotData['lineVotes1']);
+    _lineDates = getDataList(snapshotData['lineDates']);
+    _lineVotes2 = getDataList(snapshotData['lineVotes2']);
+    _lineVotes3 = getDataList(snapshotData['lineVotes3']);
+    _lineVotes4 = getDataList(snapshotData['lineVotes4']);
+    _lineVotesMale = getDataList(snapshotData['lineVotesMale']);
+    _lineVotesMale1 = getDataList(snapshotData['lineVotesMale1']);
+    _lineVotesMale2 = getDataList(snapshotData['lineVotesMale2']);
+    _lineVotesMale3 = getDataList(snapshotData['lineVotesMale3']);
+    _lineVotesMale4 = getDataList(snapshotData['lineVotesMale4']);
+    _lineVotesFemale = getDataList(snapshotData['lineVotesFemale']);
+    _lineVotesFemale1 = getDataList(snapshotData['lineVotesFemale1']);
+    _lineVotesFemale2 = getDataList(snapshotData['lineVotesFemale2']);
+    _lineVotesFemale3 = getDataList(snapshotData['lineVotesFemale3']);
+    _lineVotesFemale4 = getDataList(snapshotData['lineVotesFemale4']);
+    _timeVoted = getDataList(snapshotData['timeVoted']);
   }
 
   static CollectionReference get collection =>
@@ -296,22 +500,25 @@ Map<String, dynamic> createUserPostsRecordData({
   String? nullExpiry,
   bool? locationEnforced,
   LatLng? pollLocation,
-  int? countVotes1,
-  int? countVotes2,
-  int? countVotes3,
-  int? countVotes4,
-  int? popVotes1,
-  int? popVotes2,
-  int? popVotes3,
-  int? popVotes4,
-  String? percentVotes1,
-  String? percentVotes2,
-  String? percentVotes3,
-  String? percentVotes4,
   int? totalVotes1,
   int? totalVotes2,
   int? totalVotes3,
   int? totalVotes4,
+  String? category,
+  String? isTrending,
+  int? engagementScore,
+  int? popVotesMale,
+  int? popVotesFemale,
+  int? totalVotesMale,
+  int? totalVotesFemale,
+  int? totalVotesMale1,
+  int? totalVotesMale2,
+  int? totalVotesMale3,
+  int? totalVotesMale4,
+  int? totalVotesFemale1,
+  int? totalVotesFemale2,
+  int? totalVotesFemale3,
+  int? totalVotesFemale4,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -329,22 +536,25 @@ Map<String, dynamic> createUserPostsRecordData({
       'nullExpiry': nullExpiry,
       'locationEnforced': locationEnforced,
       'pollLocation': pollLocation,
-      'countVotes1': countVotes1,
-      'countVotes2': countVotes2,
-      'countVotes3': countVotes3,
-      'countVotes4': countVotes4,
-      'popVotes1': popVotes1,
-      'popVotes2': popVotes2,
-      'popVotes3': popVotes3,
-      'popVotes4': popVotes4,
-      'percentVotes1': percentVotes1,
-      'percentVotes2': percentVotes2,
-      'percentVotes3': percentVotes3,
-      'percentVotes4': percentVotes4,
       'totalVotes1': totalVotes1,
       'totalVotes2': totalVotes2,
       'totalVotes3': totalVotes3,
       'totalVotes4': totalVotes4,
+      'category': category,
+      'isTrending': isTrending,
+      'engagementScore': engagementScore,
+      'popVotesMale': popVotesMale,
+      'popVotesFemale': popVotesFemale,
+      'totalVotesMale': totalVotesMale,
+      'totalVotesFemale': totalVotesFemale,
+      'totalVotesMale1': totalVotesMale1,
+      'totalVotesMale2': totalVotesMale2,
+      'totalVotesMale3': totalVotesMale3,
+      'totalVotesMale4': totalVotesMale4,
+      'totalVotesFemale1': totalVotesFemale1,
+      'totalVotesFemale2': totalVotesFemale2,
+      'totalVotesFemale3': totalVotesFemale3,
+      'totalVotesFemale4': totalVotesFemale4,
     }.withoutNulls,
   );
 
@@ -377,24 +587,59 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e1?.nullExpiry == e2?.nullExpiry &&
         e1?.locationEnforced == e2?.locationEnforced &&
         e1?.pollLocation == e2?.pollLocation &&
-        e1?.countVotes1 == e2?.countVotes1 &&
-        e1?.countVotes2 == e2?.countVotes2 &&
-        e1?.countVotes3 == e2?.countVotes3 &&
-        e1?.countVotes4 == e2?.countVotes4 &&
-        e1?.popVotes1 == e2?.popVotes1 &&
-        e1?.popVotes2 == e2?.popVotes2 &&
-        e1?.popVotes3 == e2?.popVotes3 &&
-        e1?.popVotes4 == e2?.popVotes4 &&
-        e1?.percentVotes1 == e2?.percentVotes1 &&
-        e1?.percentVotes2 == e2?.percentVotes2 &&
-        e1?.percentVotes3 == e2?.percentVotes3 &&
-        e1?.percentVotes4 == e2?.percentVotes4 &&
         listEquality.equals(e1?.intPercentVotes, e2?.intPercentVotes) &&
         listEquality.equals(e1?.labelPercentVotes, e2?.labelPercentVotes) &&
         e1?.totalVotes1 == e2?.totalVotes1 &&
         e1?.totalVotes2 == e2?.totalVotes2 &&
         e1?.totalVotes3 == e2?.totalVotes3 &&
-        e1?.totalVotes4 == e2?.totalVotes4;
+        e1?.totalVotes4 == e2?.totalVotes4 &&
+        e1?.category == e2?.category &&
+        listEquality.equals(e1?.subcategory, e2?.subcategory) &&
+        e1?.isTrending == e2?.isTrending &&
+        e1?.engagementScore == e2?.engagementScore &&
+        e1?.popVotesMale == e2?.popVotesMale &&
+        e1?.popVotesFemale == e2?.popVotesFemale &&
+        listEquality.equals(
+            e1?.intPercentVotesFemale, e2?.intPercentVotesFemale) &&
+        listEquality.equals(e1?.intPercentVotesMale, e2?.intPercentVotesMale) &&
+        listEquality.equals(e1?.intPercentVotes1, e2?.intPercentVotes1) &&
+        listEquality.equals(e1?.intPercentVotes2, e2?.intPercentVotes2) &&
+        listEquality.equals(e1?.intPercentVotes3, e2?.intPercentVotes3) &&
+        listEquality.equals(e1?.intPercentVotes4, e2?.intPercentVotes4) &&
+        listEquality.equals(e1?.votesMale1, e2?.votesMale1) &&
+        listEquality.equals(e1?.votesMale2, e2?.votesMale2) &&
+        listEquality.equals(e1?.votesMale3, e2?.votesMale3) &&
+        listEquality.equals(e1?.votesMale4, e2?.votesMale4) &&
+        listEquality.equals(e1?.votesFemale1, e2?.votesFemale1) &&
+        listEquality.equals(e1?.votesFemale2, e2?.votesFemale2) &&
+        listEquality.equals(e1?.votesFemale3, e2?.votesFemale3) &&
+        listEquality.equals(e1?.votesFemale4, e2?.votesFemale4) &&
+        e1?.totalVotesMale == e2?.totalVotesMale &&
+        e1?.totalVotesFemale == e2?.totalVotesFemale &&
+        e1?.totalVotesMale1 == e2?.totalVotesMale1 &&
+        e1?.totalVotesMale2 == e2?.totalVotesMale2 &&
+        e1?.totalVotesMale3 == e2?.totalVotesMale3 &&
+        e1?.totalVotesMale4 == e2?.totalVotesMale4 &&
+        e1?.totalVotesFemale1 == e2?.totalVotesFemale1 &&
+        e1?.totalVotesFemale2 == e2?.totalVotesFemale2 &&
+        e1?.totalVotesFemale3 == e2?.totalVotesFemale3 &&
+        e1?.totalVotesFemale4 == e2?.totalVotesFemale4 &&
+        listEquality.equals(e1?.lineVotes1, e2?.lineVotes1) &&
+        listEquality.equals(e1?.lineDates, e2?.lineDates) &&
+        listEquality.equals(e1?.lineVotes2, e2?.lineVotes2) &&
+        listEquality.equals(e1?.lineVotes3, e2?.lineVotes3) &&
+        listEquality.equals(e1?.lineVotes4, e2?.lineVotes4) &&
+        listEquality.equals(e1?.lineVotesMale, e2?.lineVotesMale) &&
+        listEquality.equals(e1?.lineVotesMale1, e2?.lineVotesMale1) &&
+        listEquality.equals(e1?.lineVotesMale2, e2?.lineVotesMale2) &&
+        listEquality.equals(e1?.lineVotesMale3, e2?.lineVotesMale3) &&
+        listEquality.equals(e1?.lineVotesMale4, e2?.lineVotesMale4) &&
+        listEquality.equals(e1?.lineVotesFemale, e2?.lineVotesFemale) &&
+        listEquality.equals(e1?.lineVotesFemale1, e2?.lineVotesFemale1) &&
+        listEquality.equals(e1?.lineVotesFemale2, e2?.lineVotesFemale2) &&
+        listEquality.equals(e1?.lineVotesFemale3, e2?.lineVotesFemale3) &&
+        listEquality.equals(e1?.lineVotesFemale4, e2?.lineVotesFemale4) &&
+        listEquality.equals(e1?.timeVoted, e2?.timeVoted);
   }
 
   @override
@@ -419,24 +664,58 @@ class UserPostsRecordDocumentEquality implements Equality<UserPostsRecord> {
         e?.nullExpiry,
         e?.locationEnforced,
         e?.pollLocation,
-        e?.countVotes1,
-        e?.countVotes2,
-        e?.countVotes3,
-        e?.countVotes4,
-        e?.popVotes1,
-        e?.popVotes2,
-        e?.popVotes3,
-        e?.popVotes4,
-        e?.percentVotes1,
-        e?.percentVotes2,
-        e?.percentVotes3,
-        e?.percentVotes4,
         e?.intPercentVotes,
         e?.labelPercentVotes,
         e?.totalVotes1,
         e?.totalVotes2,
         e?.totalVotes3,
-        e?.totalVotes4
+        e?.totalVotes4,
+        e?.category,
+        e?.subcategory,
+        e?.isTrending,
+        e?.engagementScore,
+        e?.popVotesMale,
+        e?.popVotesFemale,
+        e?.intPercentVotesFemale,
+        e?.intPercentVotesMale,
+        e?.intPercentVotes1,
+        e?.intPercentVotes2,
+        e?.intPercentVotes3,
+        e?.intPercentVotes4,
+        e?.votesMale1,
+        e?.votesMale2,
+        e?.votesMale3,
+        e?.votesMale4,
+        e?.votesFemale1,
+        e?.votesFemale2,
+        e?.votesFemale3,
+        e?.votesFemale4,
+        e?.totalVotesMale,
+        e?.totalVotesFemale,
+        e?.totalVotesMale1,
+        e?.totalVotesMale2,
+        e?.totalVotesMale3,
+        e?.totalVotesMale4,
+        e?.totalVotesFemale1,
+        e?.totalVotesFemale2,
+        e?.totalVotesFemale3,
+        e?.totalVotesFemale4,
+        e?.lineVotes1,
+        e?.lineDates,
+        e?.lineVotes2,
+        e?.lineVotes3,
+        e?.lineVotes4,
+        e?.lineVotesMale,
+        e?.lineVotesMale1,
+        e?.lineVotesMale2,
+        e?.lineVotesMale3,
+        e?.lineVotesMale4,
+        e?.lineVotesFemale,
+        e?.lineVotesFemale1,
+        e?.lineVotesFemale2,
+        e?.lineVotesFemale3,
+        e?.lineVotesFemale4,
+        e?.timeVoted
       ]);
 
   @override

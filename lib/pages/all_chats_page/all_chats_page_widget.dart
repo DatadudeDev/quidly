@@ -25,6 +25,8 @@ class _AllChatsPageWidgetState extends State<AllChatsPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => AllChatsPageModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

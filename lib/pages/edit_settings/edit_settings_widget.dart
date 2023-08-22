@@ -67,6 +67,8 @@ class _EditSettingsWidgetState extends State<EditSettingsWidget>
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

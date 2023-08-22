@@ -28,6 +28,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
     _model.emailController ??= TextEditingController();
     _model.passwordController ??= TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -62,14 +63,17 @@ class _LoginWidgetState extends State<LoginWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [],
             ),
-            Text(
-              'Quidly',
-              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                    fontFamily: 'Roboto Mono',
-                    color: Colors.black,
-                    fontSize: 100.0,
-                    fontStyle: FontStyle.italic,
-                  ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+              child: Text(
+                'Quidly',
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'Roboto Mono',
+                      color: Colors.black,
+                      fontSize: 100.0,
+                      fontStyle: FontStyle.italic,
+                    ),
+              ),
             ),
             Container(
               width: double.infinity,

@@ -27,6 +27,8 @@ class _IsUsernameWidgetState extends State<IsUsernameWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => IsUsernameModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

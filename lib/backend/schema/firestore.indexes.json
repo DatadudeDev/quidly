@@ -1,29 +1,15 @@
 {
   "indexes": [
     {
-      "collectionGroup": "postComments",
+      "collectionGroup": "chats",
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "post",
-          "order": "ASCENDING"
+          "fieldPath": "users",
+          "arrayConfig": "CONTAINS"
         },
         {
-          "fieldPath": "timePosted",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "storyComments",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "storyAssociation",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "timePosted",
+          "fieldPath": "last_message_time",
           "order": "DESCENDING"
         }
       ]
@@ -43,15 +29,15 @@
       ]
     },
     {
-      "collectionGroup": "chats",
+      "collectionGroup": "postComments",
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "users",
-          "arrayConfig": "CONTAINS"
+          "fieldPath": "post",
+          "order": "ASCENDING"
         },
         {
-          "fieldPath": "last_message_time",
+          "fieldPath": "timePosted",
           "order": "DESCENDING"
         }
       ]
